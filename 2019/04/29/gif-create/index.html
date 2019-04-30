@@ -79,17 +79,22 @@
 
 
 
-<meta name="description" content="首先，介绍一下PIL中的基本概念。PIL中所涉及的基本概念有如下几个：通道（bands）、模式（mode）、尺寸（size）、坐标系统（coordinate system）、调色板（palette）、信息（info）和滤波器（filters）。 1、  通道每张图片都是由一个或者多个数据通道构成。PIL允许在单张图片中合成相同维数和深度的多个通道。 以RGB图像为例，每张图片都是由三个数据通道构成">
+<meta name="description" content="首先，介绍一下PIL中的基本概念。PIL中所涉及的基本概念有如下几个：通道（bands）、模式（mode）、尺寸（size）、坐标系统（coordinate system）、调色板（palette）、信息（info）和滤波器（filters）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PIL库里的基本知识概念">
 <meta property="og:url" content="http://yoursite.com/2019/04/29/gif-create/index.html">
 <meta property="og:site_name" content="zzm99">
-<meta property="og:description" content="首先，介绍一下PIL中的基本概念。PIL中所涉及的基本概念有如下几个：通道（bands）、模式（mode）、尺寸（size）、坐标系统（coordinate system）、调色板（palette）、信息（info）和滤波器（filters）。 1、  通道每张图片都是由一个或者多个数据通道构成。PIL允许在单张图片中合成相同维数和深度的多个通道。 以RGB图像为例，每张图片都是由三个数据通道构成">
+<meta property="og:description" content="首先，介绍一下PIL中的基本概念。PIL中所涉及的基本概念有如下几个：通道（bands）、模式（mode）、尺寸（size）、坐标系统（coordinate system）、调色板（palette）、信息（info）和滤波器（filters）。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-30T01:22:22.396Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/gif-create/a.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/gif-create/b.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/gif-create/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/gif-create/11.jpg">
+<meta property="og:updated_time" content="2019-04-30T15:15:53.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PIL库里的基本知识概念">
-<meta name="twitter:description" content="首先，介绍一下PIL中的基本概念。PIL中所涉及的基本概念有如下几个：通道（bands）、模式（mode）、尺寸（size）、坐标系统（coordinate system）、调色板（palette）、信息（info）和滤波器（filters）。 1、  通道每张图片都是由一个或者多个数据通道构成。PIL允许在单张图片中合成相同维数和深度的多个通道。 以RGB图像为例，每张图片都是由三个数据通道构成">
+<meta name="twitter:description" content="首先，介绍一下PIL中的基本概念。PIL中所涉及的基本概念有如下几个：通道（bands）、模式（mode）、尺寸（size）、坐标系统（coordinate system）、调色板（palette）、信息（info）和滤波器（filters）。">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/29/gif-create/a.jpg">
 
 
 
@@ -414,6 +419,7 @@
 
       
         <h2 id="首先，介绍一下PIL中的基本概念。"><a href="#首先，介绍一下PIL中的基本概念。" class="headerlink" title="首先，介绍一下PIL中的基本概念。"></a>首先，介绍一下<strong>PIL</strong>中的基本概念。</h2><p>PIL中所涉及的基本概念有如下几个：<strong>通道（bands）</strong>、<strong>模式（mode）</strong>、<strong>尺寸（size）</strong>、<strong>坐标系统（coordinate system）</strong>、<strong>调色板（palette）</strong>、<strong>信息（info）</strong>和<strong>滤波器（filters）</strong>。</p>
+<a id="more"></a>
 <h3 id="1、-通道"><a href="#1、-通道" class="headerlink" title="1、  通道"></a><strong>1、  通道</strong></h3><p>每张图片都是由一个或者多个数据通道构成。PIL允许在单张图片中合成相同维数和深度的多个通道。</p>
 <p>以RGB图像为例，每张图片都是由三个数据通道构成，分别为R、G和B通道。而对于灰度图像，则只有一个通道。</p>
 <p>对于一张图片的通道数量和名称，可以通过方法getbands()来获取。方法getbands()是Image模块的方法，它会返回一个字符串元组（tuple）。该元组将包括每一个通道的名称。</p>
@@ -478,302 +484,104 @@
 <p>含义：打开并确认给定的图像文件。这个是一个<strong>懒操作</strong>；该函数只会读文件头，而<strong>真实的图像数据直到试图处理该数据才会从文件读取（调用load()方法将强行加载图像数据）</strong>。如果变量mode被设置，那必须是“r”。</p>
 <p>用户可以使用一个字符串（表示文件名称的字符串）或者文件对象作为变量file的值。文件对象必须实现read()，seek()和tell()方法，并且以二进制模式打开。</p>
 <p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">&gt;&gt;&gt;im= Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;im.show()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im= Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test.jpg"</span>, <span class="string">"r"</span>)</span><br><span class="line">&gt;&gt;&gt;im.show()</span><br></pre></td></tr></table></figure></p>
-<p>3、  Blend</p>
-<p>定义：Image.blend(image1,image2, alpha) ⇒ image</p>
-<p>含义：使用给定的两张图像及透明度变量alpha，插值出一张新的图像。这两张图像必须有一样的尺寸和模式。</p>
-<p>合成公式为：out = image1 <em>(1.0 - alpha) + image2 </em> alpha</p>
+<p><img src="a.jpg" alt="open-show"><br><img src="b.jpg" alt="open-show"></p>
+<h3 id="3、-Blend"><a href="#3、-Blend" class="headerlink" title="3、  Blend"></a>3、  Blend</h3><p>定义：Image.blend(image1,image2, alpha) ⇒ image</p>
+<p>含义：使用给定的两张图像及<strong>透明度变量alpha</strong>，插值出一张新的图像。<strong>这两张图像必须有一样的尺寸和模式。</strong></p>
+<p>合成公式为：<strong>out = image1 <em>(1.0 - alpha) + image2 </em> alpha</strong></p>
 <p>如果变量alpha为0.0，将返回第一张图像的拷贝。如果变量alpha为1.0，将返回第二张图像的拷贝。对变量alpha的值没有限制。</p>
-<p>例子：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>from PIL import Image</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im01 =Image.open(“D:\Code\Python\test\img\test01.jpg”)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im02 =Image.open(“D:\Code\Python\test\img\test02.jpg”)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im =Image.blend(im01, im02, 0.3)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im.show()</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;im02 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test02.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;im =Image.blend(im01, im02, <span class="number">0.3</span>)</span><br><span class="line">&gt;&gt;&gt;im.show()</span><br></pre></td></tr></table></figure></p>
 <p>Test01.jpg和test02.jpg两张图像size都为1024x768，mode为“RGB”。它们按照第一张70%的透明度，第二张30%的透明度，合成为一张。</p>
-<p>4、  Composite</p>
-<p>定义：Image.composite(image1,image2, mask) ⇒ image</p>
-<p>含义：使用给定的两张图像及mask图像作为透明度，插值出一张新的图像。变量mask图像的模式可以为“1”，“L”或者“RGBA”。所有图像必须有相同的尺寸。</p>
-<p>例子：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>from PIL import Image</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im01 =Image.open(“D:\Code\Python\test\img\test01.jpg”)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im02 =Image.open(“D:\Code\Python\test\img\test02.jpg”)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>r,g,b = im01.split()</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>g.mode</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>‘L’</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>g.size</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>(1024, 768)</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im= Image.composite(im01, im02, g)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im.show()</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>5、  Eval</p>
-<p>定义：Image.eval(image,function) ⇒ image</p>
-<p>含义：使用变量function对应的函数（该函数应该有一个参数）处理变量image所代表图像中的每一个像素点。如果变量image所代表图像有多个通道，那变量function对应的函数作用于每一个通道。注意：变量function对每个像素只处理一次，所以不能使用随机组件和其他生成器。</p>
-<p>例子：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>from PIL import Image</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im01 = Image.open(“D:\Code\Python\test\img\test01.jpg”)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>deffun(x):</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<pre><code>return x * 0.5
-</code></pre><blockquote>
-<blockquote>
-<blockquote>
-<p>im_eval = Image.eval(im01, fun)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im_eval.show()</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im01.show()</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>图像im01如下图：</p>
-<p>图像im_eval如下图：</p>
+<h3 id="4、-Composite"><a href="#4、-Composite" class="headerlink" title="4、  Composite"></a>4、  Composite</h3><p>定义：Image.composite(image1,image2, mask) ⇒ image</p>
+<p>含义：使用给定的两张图像及<strong>mask图像作为透明度</strong>，插值出一张新的图像。变量mask图像的模式可以为“1”，“L”或者“RGBA”。<strong>所有图像必须有相同的尺寸。</strong></p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;im02 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test02.jpg"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;r,g,b = im01.split()</span><br><span class="line">&gt;&gt;&gt;g.mode</span><br><span class="line"><span class="string">'L'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g.size</span><br><span class="line">(<span class="number">1024</span>, <span class="number">768</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im= Image.composite(im01, im02, g)</span><br><span class="line">&gt;&gt;&gt;im.show()</span><br></pre></td></tr></table></figure></p>
+<h3 id="5、-Eval"><a href="#5、-Eval" class="headerlink" title="5、  Eval"></a>5、  Eval</h3><p>定义：Image.eval(image,function) ⇒ image</p>
+<p>含义：使用变量function对应的函数（该函数应该有一个参数）<strong>处理变量image所代表图像中的每一个像素点</strong>。如果变量image所代表图像有多个通道，那变量function对应的函数<strong>作用于每一个通道</strong>。注意：变量function对每个像素只处理一次，所以不能使用随机组件和其他生成器。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">&gt;&gt;&gt;im01 = Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;<span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(x)</span>:</span></span><br><span class="line">         <span class="keyword">return</span> x * <span class="number">0.5</span></span><br><span class="line">&gt;&gt;&gt;im_eval = Image.eval(im01, fun)</span><br><span class="line">&gt;&gt;&gt;im_eval.show()</span><br><span class="line">&gt;&gt;&gt;im01.show()</span><br></pre></td></tr></table></figure></p>
+<p>图像im01如下图：<br><img src="1.jpg" alt="1"></p>
+<p>图像im_eval如下图：<br><img src="11.jpg" alt="2"></p>
 <p>图像im_eval与im01比较，其像素值均为im01的一半，则其亮度自然也会比im01暗一些。</p>
-<p>6、  Frombuffer</p>
-<p>定义：Image.frombuffer(mode,size, data) ⇒ image</p>
+<h3 id="6、-Frombuffer"><a href="#6、-Frombuffer" class="headerlink" title="6、  Frombuffer"></a>6、  Frombuffer</h3><p>定义：Image.frombuffer(mode,size, data) ⇒ image</p>
 <p>  Image.frombuffer(mode, size,data, decoder, parameters) ⇒ image</p>
-<p>含义：（New in PIL 1.1.4）使用标准的“raw”解码器，从字符串或者buffer对象中的像素数据产生一个图像存储。对于一些模式，这个图像存储与原始的buffer（这意味着对原始buffer对象的改变体现在图像本身）共享内存。并非所有的模式都可以共享内存；支持的模式有“L”，“RGBX”，“RGBA”和“CMYK”。对于其他模式，这个函数与fromstring()函数一致。</p>
-<p>注意：版本1.1.6及其以下，这个函数的默认情况与函数fromstring()不同。这有可能在将来的版本中改变，所以为了最大的可移植性，当使用“raw”解码器时，推荐用户写出所有的参数，如下所示：</p>
-<p>im =Image.frombuffer(mode, size, data, “raw”, mode, 0, 1)</p>
-<p>函数Image.frombuffer(mode,size, data, decoder, parameters)与函数fromstring()的调用一致。</p>
-<p>例子： </p>
-<p>7、  Fromstring</p>
-<p>定义：Image.fromstring(mode,size, data) ⇒ image</p>
+<p>含义：（New in PIL 1.1.4）使用标准的“raw”解码器，<strong>从字符串或者buffer对象中的像素数据产生一个图像存储</strong>。<strong>对于一些模式，这个图像存储与原始的buffer（这意味着对原始buffer对象的改变体现在图像本身）共享内存</strong>。<strong>并非所有的模式都可以共享内存</strong>；支持的模式有“L”，“RGBX”，“RGBA”和“CMYK”。对于其他模式，这个函数与fromstring()函数一致。</p>
+<p>注意：版本1.1.6及其以下，这个函数的默认情况与函数fromstring()不同。这有可能在将来的版本中改变，所以为了最大的可移植性，当使用“raw”解码器时，推荐用户写出所有的参数，如下所示：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">im=Image.frombuffer(mode, size, data, <span class="string">"raw"</span>, mode, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">函数Image.frombuffer(mode,size, data, decoder, parameters)与函数fromstring()的调用一致。</span><br></pre></td></tr></table></figure></p>
+<h3 id="7、-Fromstring"><a href="#7、-Fromstring" class="headerlink" title="7、  Fromstring"></a>7、  Fromstring</h3><p>定义：Image.fromstring(mode,size, data) ⇒ image</p>
 <p>  Image.fromstring(mode, size,data, decoder, parameters) ⇒ image</p>
 <p>含义：函数Image.fromstring(mode,size, data)，使用标准的“raw”解码器，从字符串中的像素数据产生一个图像存储。</p>
 <p>函数Image.fromstring(mode,size, data, decoder, parameters)也一样，但是允许用户使用PIL支持的任何像素解码器。更多信息可以参考：Writing YourOwn File Decoder.</p>
-<p>注意：这个函数只对像素数据进行解码，而不是整个图像。如果用户的字符串包含整个图像，可以将该字符串包裹在StringIO对象中，使用函数open()来加载。</p>
-<p>例子：</p>
-<p>8、  Merge</p>
-<p>定义：Image.merge(mode,bands) ⇒ image</p>
+<p><strong>注意：这个函数只对像素数据进行解码，而不是整个图像。如果用户的字符串包含整个图像，可以将该字符串包裹在StringIO对象中，使用函数open()来加载。</strong></p>
+<h3 id="8、-Merge"><a href="#8、-Merge" class="headerlink" title="8、  Merge"></a>8、  Merge</h3><p>定义：Image.merge(mode,bands) ⇒ image</p>
 <p>含义：使用一些单通道图像，创建一个新的图像。变量bands为一个图像的元组或者列表，每个通道的模式由变量mode描述。所有通道必须有相同的尺寸。</p>
 <p>变量mode与变量bands的关系：</p>
 <p>len(ImageMode.getmode(mode).bands)= len(bands)</p>
-<p>例子：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>from PIL import Image</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im01 = Image.open(“D:\Code\Python\test\img\test01.jpg”)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im02 = Image.open(“D:\Code\Python\test\img\test02.jpg”)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>r1,g1,b1 = im01.split()</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>r2,g2,b2 = im02.split()</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>r1.mode</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>‘L’</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>r1.size</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>(1024, 768)</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>g1.mode</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>‘L’</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>g1.size</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>(1024, 768)</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>r2.mode</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>‘L’</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>g2.size</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>(1024, 768)</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>imgs=[r1,g2,b2]</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>len(ImageMode.getmode(“RGB”).bands)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>3</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>len(imgs)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>3</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im_merge = Image.merge(“RGB”, imgs)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>im_merge.show()</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>图像im_merge如下所示：</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">&gt;&gt;&gt;im01 = Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;im02 = Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test02.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;r1,g1,b1 = im01.split()</span><br><span class="line">&gt;&gt;&gt;r2,g2,b2 = im02.split()</span><br><span class="line">&gt;&gt;&gt;r1.mode</span><br><span class="line"><span class="string">'L'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;r1.size</span><br><span class="line">(<span class="number">1024</span>, <span class="number">768</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;g1.mode</span><br><span class="line"><span class="string">'L'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;g1.size</span><br><span class="line">(<span class="number">1024</span>, <span class="number">768</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;r2.mode</span><br><span class="line"><span class="string">'L'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;g2.size</span><br><span class="line">(<span class="number">1024</span>, <span class="number">768</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;imgs=[r1,g2,b2]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;len(ImageMode.getmode(<span class="string">"RGB"</span>).bands)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;len(imgs)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im_merge = Image.merge(<span class="string">"RGB"</span>, imgs)</span><br><span class="line">&gt;&gt;&gt;im_merge.show()</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、Image类的方法"><a href="#三、Image类的方法" class="headerlink" title="三、Image类的方法"></a>三、Image类的方法</h2><p><strong>除非另作说明，Image类的所有方法都将返回一个Image类的新实例，这个实例对应于结果图像。</strong></p>
+<h3 id="1、-Convert"><a href="#1、-Convert" class="headerlink" title="1、  Convert"></a>1、  Convert</h3><p>定义1：im.convert(mode)⇒ image</p>
+<p>含义1：将当前图像转换为其他模式，并且返回新的图像。</p>
+<p>当从一个调色板图像转换时，这个方法通过这个调色板来转换像素。如果不对变量mode赋值，该方法将会选择一种模式，在没有调色板的情况下，使得图像和调色板中的所有信息都可以被表示出来。</p>
+<p>当从一个颜色图像转换为黑白图像时，PIL库使用ITU-R601-2 luma转换公式：</p>
+<p>L = R <em> 299/1000 + G </em> 587/1000 + B * 114/1000</p>
+<p>当转换为2位图像（模式“1”）时，源图像首先被转换为黑白图像。结果数据中大于127的值被设置为白色，其他的设置为黑色；这样图像会出现抖动。如果要使用其他阈值，更改阈值127，可以使用方法point()。为了去掉图像抖动现象，可以使用dither选项。</p>
+<p>例子1：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01 = Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.mode</span><br><span class="line"></span><br><span class="line"><span class="string">'RGB'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im_c = im01.convert(<span class="string">"L"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im_c.mode</span><br><span class="line"></span><br><span class="line"><span class="string">'L'</span></span><br><span class="line"></span><br><span class="line">将“RGB”模式的im01图像，转换为“L”模式的im_c图像。</span><br><span class="line"></span><br><span class="line">定义<span class="number">2</span>：im.convert(“P”,**options) ⇒ image</span><br><span class="line"></span><br><span class="line">含义<span class="number">2</span>：这个与第一个方法定义一样，但是当“RGB”图像转换为<span class="number">8</span>位调色板图像时能更好的处理。可供选择的选项为：</span><br><span class="line"></span><br><span class="line">Dither=. 控制颜色抖动。默认是FLOYDSTEINBERG，与邻近的像素一起承担错误。不使能该功能，则赋值为NONE。</span><br><span class="line"></span><br><span class="line">Palette=. 控制调色板的产生。默认是WEB，这是标准的<span class="number">216</span>色的“web palette”。要使用优化的调色板，则赋值为ADAPTIVE。</span><br><span class="line"></span><br><span class="line">Colors=. 当选项palette为ADAPTIVE时，控制用于调色板的颜色数目。默认是最大值，即<span class="number">256</span>种颜色。</span><br><span class="line"></span><br><span class="line">例子<span class="number">2</span>：</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">定义<span class="number">3</span>：im.convert(mode,matrix) ⇒ image</span><br><span class="line"></span><br><span class="line">含义<span class="number">3</span>：使用转换矩阵将一个“RGB”图像转换为“L”或者“RGB”图像。变量matrix为<span class="number">4</span>或者<span class="number">16</span>元组。</span><br><span class="line"></span><br><span class="line">例子<span class="number">3</span>：下面的例子将一个RGB图像（根据ITU-R709线性校准，使用D65亮度）转换到CIE XYZ颜色空间：</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.mode</span><br><span class="line"></span><br><span class="line"><span class="string">'RGB'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;rgb2xyz = (</span><br><span class="line"></span><br><span class="line">             <span class="number">0.412453</span>,<span class="number">0.357580</span>, <span class="number">0.180423</span>, <span class="number">0</span>,</span><br><span class="line"></span><br><span class="line">                       <span class="number">0.212671</span>,<span class="number">0.715160</span>, <span class="number">0.072169</span>, <span class="number">0</span>,</span><br><span class="line"></span><br><span class="line">                       <span class="number">0.019334</span>,<span class="number">0.119193</span>, <span class="number">0.950227</span>, <span class="number">0</span> )</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im_c3 = im01.convert(<span class="string">"L"</span>, rgb2xyz)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im_c3.show()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im_c3.mode</span><br><span class="line"></span><br><span class="line"><span class="string">'L'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="2、-Copy"><a href="#2、-Copy" class="headerlink" title="2、  Copy"></a>2、  Copy</h3><p>定义：im.copy() ⇒ image</p>
+<p>含义：<strong>拷贝这个图像</strong>。如果用户想粘贴一些数据到这张图，可以使用这个方法，但是原始图像不会受到影响。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;im_copy = im01.copy()</span><br></pre></td></tr></table></figure></p>
+<p>图像im_copy和im01完全一样。</p>
+<h3 id="3、-Crop"><a href="#3、-Crop" class="headerlink" title="3、  Crop"></a>3、  Crop</h3><p>定义：im.crop(box) ⇒ image</p>
+<p>含义：从当前的图像中返回一个矩形区域的拷贝。变量box是一个四元组，定义了左、上、右和下的像素坐标。</p>
+<p>这是一个懒操作。对源图像的改变可能或者可能不体现在裁减下来的图像中。为了获取一个分离的拷贝，对裁剪的拷贝调用方法load()。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;box= [<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>]</span><br><span class="line">&gt;&gt;&gt;im_crop = im01.crop(box)</span><br><span class="line">&gt;&gt;&gt;im_crop.mode</span><br><span class="line"><span class="string">'RGB'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im_crop.size</span><br><span class="line">(<span class="number">100</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="4、-Draft"><a href="#4、-Draft" class="headerlink" title="4、  Draft"></a>4、  Draft</h3><p>定义：im.draft(mode,size)</p>
+<p>含义：配置图像文件加载器，使得返回一个与给定的模式和尺寸尽可能匹配的图像的版本。例如，用户可以使用这个方法，在加载一个彩色JPEG图像时将其转换为灰色图像，或者从一个PCD文件中提取一个128x192的版本。</p>
+<p>注意：这个方法会适时地修改图像对象（精确地说，它会重新配置文件的读取器）。如果图像已经被加载，那这个方法就没有作用了。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;im01.size</span><br><span class="line">(<span class="number">1024</span>, <span class="number">768</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.mode</span><br><span class="line"><span class="string">'RGB'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.draft(<span class="string">"L"</span>, (<span class="number">100</span>,<span class="number">100</span>))</span><br><span class="line">&lt;PIL.JpegImagePlugin.JpegImageFileimage mode=L size=<span class="number">128</span>x96 at <span class="number">0x3B69230</span>&gt;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.size</span><br><span class="line">(<span class="number">128</span>, <span class="number">96</span>)</span><br><span class="line">&gt;&gt;&gt;im01.mode</span><br><span class="line"><span class="string">'L'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="5、-Filter"><a href="#5、-Filter" class="headerlink" title="5、  Filter"></a>5、  Filter</h3><p>定义：im.filter(filter) ⇒ image</p>
+<p>含义：返回一个使用给定滤波器处理过的图像的拷贝。可用滤波器需要参考ImageFilter模块。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im_filter = im01.filter(ImageFilter.BLUR)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im_filter.show()</span><br></pre></td></tr></table></figure></p>
+<p>图像im_filter比im01变得有些模糊了。</p>
+<h3 id="6、-Fromstring"><a href="#6、-Fromstring" class="headerlink" title="6、  Fromstring"></a>6、  Fromstring</h3><p>定义：im.fromstring(data)</p>
+<p>  im.fromstring(data, decoder,parameters)</p>
+<p>含义：与函数fromstring()一样，但是这个方法会将data加载到当前的图像中。</p>
+<h3 id="7、-Getbands"><a href="#7、-Getbands" class="headerlink" title="7、  Getbands"></a>7、  Getbands</h3><p>定义：im.getbands()⇒ tuple of strings</p>
+<p>含义：返回包括每个通道名称的元组。例如，对于RGB图像将返回（“R”，“G”，“B”）。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.getbands()</span><br><span class="line"></span><br><span class="line">(<span class="string">'R'</span>, <span class="string">'G'</span>, <span class="string">'B'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="8、-Getbbox"><a href="#8、-Getbbox" class="headerlink" title="8、  Getbbox"></a>8、  Getbbox</h3><p>定义：im.getbbox() ⇒ 4-tuple or None</p>
+<p>含义：计算图像非零区域的包围盒。这个包围盒是一个4元组，定义了左、上、右和下像素坐标。如果图像是空的，这个方法将返回空。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01 = Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.getbbox()</span><br><span class="line"></span><br><span class="line">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1024</span>,<span class="number">768</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="9、-Getcolors"><a href="#9、-Getcolors" class="headerlink" title="9、  Getcolors"></a>9、  Getcolors</h3><p>定义：im.getcolors() ⇒ a list of(count, color) tuples or None</p>
+<p>  im.getcolors(maxcolors) ⇒ a list of (count, color) tuples or None</p>
+<p>含义：（New in 1.1.5）返回一个（count，color）元组的无序list，其中count是对应颜色在图像中出现的次数。</p>
+<p>如果变量maxcolors的值被超过，该方法将停止计算并返回空。变量maxcolors默认值为256。为了保证用户可以获取图像中的所有颜色，you can pass in size[0]*size[1]（请确保有足够的内存做这件事）。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01= Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.getcolors()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.getcolors(<span class="number">256</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;ls= im01.getcolors(<span class="number">255</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;len(ls)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">Traceback (mostrecent call last):</span><br><span class="line"></span><br><span class="line">  File <span class="string">"&lt;pyshell#201&gt;"</span>, line <span class="number">1</span>,<span class="keyword">in</span> &lt;module&gt;</span><br><span class="line"></span><br><span class="line">    len(ls)</span><br><span class="line"></span><br><span class="line">TypeError:object of type <span class="string">'NoneType'</span> has no len()</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">不知道为什么图像im01.getcolors()返回为空，这个后续需要进一步研究。</span><br></pre></td></tr></table></figure></p>
+<h3 id="10、-Getdata"><a href="#10、-Getdata" class="headerlink" title="10、 Getdata"></a>10、 Getdata</h3><p>定义：im.getdata() ⇒ sequence</p>
+<p>含义：以<strong>包含像素值的sequence对象形式返回图像的内容</strong>。这个sequence对象是扁平的，以便第一行的值直接跟在第零行的值后面，等等。</p>
+<p>注意：这个方法返回的sequence对象是PIL内部数据类型，它只支持某些sequence操作，包括迭代和基础sequence访问。使用list(im.getdata())，将它转换为普通的sequence。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;seq= im01.getdata()</span><br><span class="line">&gt;&gt;&gt;seq0 = list(seq)</span><br><span class="line">&gt;&gt;&gt;seq[<span class="number">0</span>]</span><br><span class="line">(<span class="number">11</span>, <span class="number">113</span>, <span class="number">198</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;seq[<span class="number">2</span>]</span><br><span class="line">(<span class="number">9</span>, <span class="number">111</span>, <span class="number">196</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;seq0[<span class="number">0</span>]</span><br><span class="line">(<span class="number">11</span>, <span class="number">113</span>, <span class="number">198</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;seq0[<span class="number">2</span>]</span><br><span class="line">(<span class="number">9</span>, <span class="number">111</span>, <span class="number">196</span>)</span><br><span class="line"></span><br><span class="line">Sequence对象的每一个元素对应一个像素点的R、G和B三个值。</span><br></pre></td></tr></table></figure></p>
+<h3 id="11、Getextrema"><a href="#11、Getextrema" class="headerlink" title="11、Getextrema"></a>11、Getextrema</h3><p>定义：im.getextrema() ⇒ 2-tuple</p>
+<p>含义：返回一个2元组，包括该图像中的最小和最大值。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01 = Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.getextrema()</span><br><span class="line"></span><br><span class="line">((<span class="number">0</span>, <span class="number">255</span>), (<span class="number">0</span>,<span class="number">255</span>), (<span class="number">0</span>, <span class="number">255</span>))</span><br><span class="line"></span><br><span class="line">该方法返回了R/G/B三个通道的最小和最大值的<span class="number">2</span>元组。</span><br></pre></td></tr></table></figure></p>
+<h3 id="12、Getpixel"><a href="#12、Getpixel" class="headerlink" title="12、Getpixel"></a>12、Getpixel</h3><p>定义：im.getpixel(xy) ⇒ value or tuple</p>
+<p>含义：返回<strong>给定位置的像素值</strong>。如果图像为多通道，则返回一个元组。</p>
+<p>注意：该方法执行比较慢；如果用户需要使用python处理图像中较大部分数据，可以使用像素访问对象（见load），或者方法getdata()。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.getpixel((<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">(<span class="number">11</span>, <span class="number">113</span>, <span class="number">198</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01.getpixel((<span class="number">1</span>,<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">(<span class="number">10</span>, <span class="number">112</span>, <span class="number">197</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;r,g,b = im01.split()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;r.getpixel((<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line"><span class="number">11</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="13、Histogram"><a href="#13、Histogram" class="headerlink" title="13、Histogram"></a>13、Histogram</h3><p>定义1：im.histogram()⇒ list</p>
+<p>含义1：返回一个图像的直方图。这个直方图是关于像素数量的list，图像中的每个像素值对应一个成员。如果图像有多个通道，所有通道的直方图会连接起来（例如，“RGB”图像的直方图有768个值）。</p>
+<p>二值图像（模式为“1”）当作灰度图像（模式为“L”）处理。</p>
+<p>例子1：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;ls= im01.histogram()</span><br><span class="line">&gt;&gt;&gt;len(ls)</span><br><span class="line"><span class="number">768</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;ls[<span class="number">0</span>]</span><br><span class="line"><span class="number">359</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;ls[<span class="number">256</span>]</span><br><span class="line"><span class="number">295</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;ls[<span class="number">767</span>]</span><br><span class="line"><span class="number">109953</span></span><br><span class="line"></span><br><span class="line">图像im01为RGB图像，所以有<span class="number">768</span>项。</span><br></pre></td></tr></table></figure></p>
+<p>定义2：im.histogram(mask)⇒ list</p>
+<p>含义2：返回图像中模板图像非零地方的直方图。模板图像与处理图像的尺寸必须相同，并且要么是二值图像（模式为“1”），要么为灰度图像（模式为“L”）。</p>
+<p>例子2：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">&gt;&gt;&gt;im01 =Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line">&gt;&gt;&gt;r,g,b = im01.split()</span><br><span class="line">&gt;&gt;&gt;r.mode</span><br><span class="line"><span class="string">'L'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;ls= im01.histogram(r)</span><br><span class="line">&gt;&gt;&gt;len(ls)</span><br><span class="line"><span class="number">768</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;ls[<span class="number">0</span>]</span><br><span class="line"><span class="number">0</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;ls[<span class="number">256</span>]</span><br><span class="line"><span class="number">248</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;ls[<span class="number">767</span>]</span><br><span class="line"><span class="number">109953</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="14、Load"><a href="#14、Load" class="headerlink" title="14、Load"></a>14、Load</h3><p>定义：im.load()</p>
+<p>含义：为图像分配内存并从文件中加载它（或者从源图像，对于懒操作）。正常情况下，用户不需要调用这个方法，因为在第一次访问图像时，Image类会自动地加载打开的图像。</p>
+<p>（New in 1.1.6）在1.1.6及以后的版本，方法load()返回一个用于读取和修改像素的像素访问对象。这个访问对象像一个二维队列，如：</p>
+<p>pix = im.load()</p>
+<p>print pix[x, y]</p>
+<p>pix[x, y] =value</p>
+<p>通过这个对象访问比方法getpixel()和putpixel()快很多。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01 = Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;pix= im01.load()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;pix[<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">(<span class="number">11</span>, <span class="number">113</span>, <span class="number">198</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="15、Offset"><a href="#15、Offset" class="headerlink" title="15、Offset"></a>15、Offset</h3><p>定义：im.offset(xoffset,yoffset) ⇒ image</p>
+<p>含义：（不赞成）返回按照给定位置的偏移对应的图像的拷贝。数据延续到图像的边缘。如果变量yoffset没有赋值，将假设其与变量xoffset一样。</p>
+<p>不赞成使用这个方法，在PIL 1.2版本中去掉该方法。新的代码将使用ImageChops模块中的offset()函数。</p>
+<p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;im01 = Image.open(<span class="string">"D:\\Code\\Python\\test\\img\\test01.jpg"</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;img= im01.offset(<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">Traceback (mostrecent call last):</span><br><span class="line"></span><br><span class="line">  File <span class="string">"&lt;pyshell#38&gt;"</span>, line <span class="number">1</span>,<span class="keyword">in</span> &lt;module&gt;</span><br><span class="line"></span><br><span class="line">    img = im01.offset(<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  File<span class="string">"C:\Python27\lib\site-packages\PIL\Image.py"</span>, line <span class="number">1246</span>, <span class="keyword">in</span> offset</span><br><span class="line"></span><br><span class="line">    <span class="string">"Please call ImageChops.offset()instead."</span>)</span><br><span class="line"></span><br><span class="line">Exception:offset() has been removed. Please call ImageChops.offset() instead.</span><br><span class="line"></span><br><span class="line">由此可见，该版本中已经去掉了方法offset()。</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -935,7 +743,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先，介绍一下PIL中的基本概念。"><span class="nav-number">1.</span> <span class="nav-text">首先，介绍一下PIL中的基本概念。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-通道"><span class="nav-number">1.1.</span> <span class="nav-text">1、  通道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、-模式"><span class="nav-number">1.2.</span> <span class="nav-text">2、  模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、-尺寸"><span class="nav-number">1.3.</span> <span class="nav-text">3、  尺寸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、-坐标系统"><span class="nav-number">1.4.</span> <span class="nav-text">4、  坐标系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、-调色板"><span class="nav-number">1.5.</span> <span class="nav-text">5、  调色板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、-信息"><span class="nav-number">1.6.</span> <span class="nav-text">6、  信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、-滤波器"><span class="nav-number">1.7.</span> <span class="nav-text">7、  滤波器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接着，说说PIL中的Image模块"><span class="nav-number">2.</span> <span class="nav-text">接着，说说PIL中的Image模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Image类的属性"><span class="nav-number">3.</span> <span class="nav-text">一、Image类的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-Format"><span class="nav-number">3.1.</span> <span class="nav-text">1、  Format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、-Mode"><span class="nav-number">3.2.</span> <span class="nav-text">2、  Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、-Size"><span class="nav-number">3.3.</span> <span class="nav-text">3、  Size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、-Palette"><span class="nav-number">3.4.</span> <span class="nav-text">4、  Palette</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、-Info"><span class="nav-number">3.5.</span> <span class="nav-text">5、  Info</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Image类的函数"><span class="nav-number">4.</span> <span class="nav-text">二、Image类的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-New"><span class="nav-number">4.1.</span> <span class="nav-text">1、  New</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、-Open"><span class="nav-number">4.2.</span> <span class="nav-text">2、  Open</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先，介绍一下PIL中的基本概念。"><span class="nav-number">1.</span> <span class="nav-text">首先，介绍一下PIL中的基本概念。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-通道"><span class="nav-number">1.1.</span> <span class="nav-text">1、  通道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、-模式"><span class="nav-number">1.2.</span> <span class="nav-text">2、  模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、-尺寸"><span class="nav-number">1.3.</span> <span class="nav-text">3、  尺寸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、-坐标系统"><span class="nav-number">1.4.</span> <span class="nav-text">4、  坐标系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、-调色板"><span class="nav-number">1.5.</span> <span class="nav-text">5、  调色板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、-信息"><span class="nav-number">1.6.</span> <span class="nav-text">6、  信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、-滤波器"><span class="nav-number">1.7.</span> <span class="nav-text">7、  滤波器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接着，说说PIL中的Image模块"><span class="nav-number">2.</span> <span class="nav-text">接着，说说PIL中的Image模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Image类的属性"><span class="nav-number">3.</span> <span class="nav-text">一、Image类的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-Format"><span class="nav-number">3.1.</span> <span class="nav-text">1、  Format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、-Mode"><span class="nav-number">3.2.</span> <span class="nav-text">2、  Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、-Size"><span class="nav-number">3.3.</span> <span class="nav-text">3、  Size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、-Palette"><span class="nav-number">3.4.</span> <span class="nav-text">4、  Palette</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、-Info"><span class="nav-number">3.5.</span> <span class="nav-text">5、  Info</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Image类的函数"><span class="nav-number">4.</span> <span class="nav-text">二、Image类的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-New"><span class="nav-number">4.1.</span> <span class="nav-text">1、  New</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、-Open"><span class="nav-number">4.2.</span> <span class="nav-text">2、  Open</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、-Blend"><span class="nav-number">4.3.</span> <span class="nav-text">3、  Blend</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、-Composite"><span class="nav-number">4.4.</span> <span class="nav-text">4、  Composite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、-Eval"><span class="nav-number">4.5.</span> <span class="nav-text">5、  Eval</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、-Frombuffer"><span class="nav-number">4.6.</span> <span class="nav-text">6、  Frombuffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、-Fromstring"><span class="nav-number">4.7.</span> <span class="nav-text">7、  Fromstring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、-Merge"><span class="nav-number">4.8.</span> <span class="nav-text">8、  Merge</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Image类的方法"><span class="nav-number">5.</span> <span class="nav-text">三、Image类的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、-Convert"><span class="nav-number">5.1.</span> <span class="nav-text">1、  Convert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、-Copy"><span class="nav-number">5.2.</span> <span class="nav-text">2、  Copy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、-Crop"><span class="nav-number">5.3.</span> <span class="nav-text">3、  Crop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、-Draft"><span class="nav-number">5.4.</span> <span class="nav-text">4、  Draft</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、-Filter"><span class="nav-number">5.5.</span> <span class="nav-text">5、  Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、-Fromstring"><span class="nav-number">5.6.</span> <span class="nav-text">6、  Fromstring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、-Getbands"><span class="nav-number">5.7.</span> <span class="nav-text">7、  Getbands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、-Getbbox"><span class="nav-number">5.8.</span> <span class="nav-text">8、  Getbbox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、-Getcolors"><span class="nav-number">5.9.</span> <span class="nav-text">9、  Getcolors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、-Getdata"><span class="nav-number">5.10.</span> <span class="nav-text">10、 Getdata</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11、Getextrema"><span class="nav-number">5.11.</span> <span class="nav-text">11、Getextrema</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12、Getpixel"><span class="nav-number">5.12.</span> <span class="nav-text">12、Getpixel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13、Histogram"><span class="nav-number">5.13.</span> <span class="nav-text">13、Histogram</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14、Load"><span class="nav-number">5.14.</span> <span class="nav-text">14、Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15、Offset"><span class="nav-number">5.15.</span> <span class="nav-text">15、Offset</span></a></li></ol></li></ol></div>
             
 
           </div>
