@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/touxiang.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="初遇json&amp;amp;爬取某宝商品信息JSON是什么  json是轻量级的文本数据交换格式，符合json的格式的字符串叫json字符串，其格式就像python中字符串化后的字典，有时字典中还杂着列表字典，但是里面的数据都被双引号包着，下面是一个例子1234567&amp;apos;&amp;#123;&amp;quot;Africa&amp;quot;: [&amp;#123; &amp;quot;name&amp;quot;:&amp;quot;蜜獾&amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习爬虫Part4">
+<meta property="og:url" content="http://yoursite.com/2019/05/05/StudyPachong4/index.html">
+<meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="初遇json&amp;amp;爬取某宝商品信息JSON是什么  json是轻量级的文本数据交换格式，符合json的格式的字符串叫json字符串，其格式就像python中字符串化后的字典，有时字典中还杂着列表字典，但是里面的数据都被双引号包着，下面是一个例子1234567&amp;apos;&amp;#123;&amp;quot;Africa&amp;quot;: [&amp;#123; &amp;quot;name&amp;quot;:&amp;quot;蜜獾&amp;quo">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/05/05/StudyPachong4/1.jpg">
+<meta property="og:updated_time" content="2019-05-05T08:29:15.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习爬虫Part4">
+<meta name="twitter:description" content="初遇json&amp;amp;爬取某宝商品信息JSON是什么  json是轻量级的文本数据交换格式，符合json的格式的字符串叫json字符串，其格式就像python中字符串化后的字典，有时字典中还杂着列表字典，但是里面的数据都被双引号包着，下面是一个例子1234567&amp;apos;&amp;#123;&amp;quot;Africa&amp;quot;: [&amp;#123; &amp;quot;name&amp;quot;:&amp;quot;蜜獾&amp;quo">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/05/StudyPachong4/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/05/StudyPachong4/">
+
+
+
+
+
+  <title>学习爬虫Part4 | zzm99</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <a href="https://github.com/zzm99/zzm99.github.io"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_white_ffffff.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1" align="left"></a>
+  
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zzm99</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/StudyPachong4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学习爬虫Part4</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-05T14:14:14+08:00">
+                2019-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/学习爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">学习爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/学习爬虫/从零开始爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">从零开始爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="初遇json-amp-爬取某宝商品信息"><a href="#初遇json-amp-爬取某宝商品信息" class="headerlink" title="初遇json&amp;爬取某宝商品信息"></a>初遇json&amp;爬取某宝商品信息</h1><h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>  json是轻量级的文本数据交换格式，符合json的格式的字符串叫json字符串，其格式就像python中字符串化后的字典，有时字典中还杂着列表字典，但是里面的数据都被双引号包着，下面是一个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&apos;&#123;&quot;Africa&quot;: [</span><br><span class="line">&#123; &quot;name&quot;:&quot;蜜獾&quot; , &quot;nickname&quot;:&quot;平头哥&quot; &#125;, </span><br><span class="line">&#123; &quot;name&quot;:&quot;虫子&quot; , &quot;nickname&quot;:&quot;小辣条&quot; &#125;, </span><br><span class="line">&#123; &quot;name&quot;:&quot;毒蛇&quot; , &quot;nickname&quot;:&quot;大面筋&quot; &#125;</span><br><span class="line">            ]</span><br><span class="line"> &#125;&apos;</span><br><span class="line">#这是理想化的数据，实际上看到的json是不分行堆在一起，而且更多时候用unicode编码取代中文</span><br></pre></td></tr></table></figure></p>
+<p>  而且为了能更好的传输各种语言，json对非英语的字符串进行了Unicode编码，于是我们直接看到的json数据通常都是带着\uxxxx的字符串而不会带着中文，json数据还会堆在一起不换行，给我们的分析带来了困难，不过我们有json 模块让它转回中文，更有一个 <a href="https://www.bejson.com/" target="_blank" rel="noopener">https://www.bejson.com/</a> 把它转回中文同时排版，分析json数据时多用这个工具。<br><a id="more"></a></p>
+<h3 id="在哪"><a href="#在哪" class="headerlink" title="在哪"></a>在哪</h3><p>  有时F12源码中能看到完整的信息，request回来后就残缺到没有价值，这就说明网页使用了动态或者ajax技术，而这些技术所加载的信息，就有json的身影。为了顺利爬取目标，我们需要找到json数据。</p>
+<ul>
+<li>json数据有时会直接出在对原链接request的结果中，作为信息等待被加载到网页中</li>
+<li>有时会存在于独立的链接里，需要捉包获取链接再打开获得（而且这种链接的构造很重要）</li>
+</ul>
+<h2 id="json-模块"><a href="#json-模块" class="headerlink" title="json 模块"></a>json 模块</h2><p>  JSON是JavaScript原生格式，所以在JavaScript中处理JSON数据不需要任何特殊的API或工具包。而像python，需要json模块，python自带。</p>
+<p>  json 模块提供了一种很简单的方式来编码和解码JSON数据，实现了JSON数据(字符串)和python对象(字典)的相互转换。</p>
+<p>主要两个方法及常用参数：</p>
+<ul>
+<li>json.dumps(obj,ensure_ascii=True): 将一个字典（obj）转换为JSON编码的字符串，ensure_ascii默认为True，全部是ascii字符，中文会以unicode编码形式显示如\u597d；设置为False时保持中文</li>
+<li>json.loads(s,encoding=): 将一个JSON编码的字符串（s）转换回字典,如果传入的json字符串的编码不是UTF-8的话，需要用encoding指定字符编码</li>
+</ul>
+<p>如果你要处理的是文件而不是字符串/字典，你可以使用 json.dump() 和 json.load() 来编码和解码JSON数据。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编码成json数据写入，data是字典</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data.json'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    json.dump(data, f)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取json数据并解码，data是字典</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data.json'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = json.load(f)</span><br><span class="line">另：requests对象的json()方法也可以把json数据转为字典，dict = r.json(encoding=)</span><br></pre></td></tr></table></figure></p>
+<h2 id="以下实战代码已无法成功运行（淘宝要求先登陆后搜索，成功运行代码见另一篇博客）"><a href="#以下实战代码已无法成功运行（淘宝要求先登陆后搜索，成功运行代码见另一篇博客）" class="headerlink" title="以下实战代码已无法成功运行（淘宝要求先登陆后搜索，成功运行代码见另一篇博客）"></a>以下实战代码已无法成功运行（淘宝要求先登陆后搜索，成功运行代码见另一篇博客）</h2><h2 id="实战：简单爬取淘宝商品信息"><a href="#实战：简单爬取淘宝商品信息" class="headerlink" title="实战：简单爬取淘宝商品信息"></a>实战：简单爬取淘宝商品信息</h2><p>  爬虫领域内json的知识知道这些就行，那么马上来个实战了解一下怎样提取json中的数据，加深对json的认识吧，正好可以拿某宝来试手，商品的json数据直接出在对原链接request的结果中，不用捉包。（然而大多数json数据不会这样出现，这里选择某宝方便展示）</p>
+<h3 id="构造链接（重要）"><a href="#构造链接（重要）" class="headerlink" title="构造链接（重要）"></a>构造链接（重要）</h3><p>重要，但这也是要培养的能力，在这里只详细讲一次思路，以后靠自己分析</p>
+<p>  构造链接的原则是尽可能多的相关参数，尽可能少的无关参数，网址中?之后用&amp;连起来的赋值关系就是那些参数，这些参数会传到服务器中，服务器根据它们来返回数据。爬虫中，页数，排序，日期等这类的参数是关键。我们要动态的修改这些参数来构造链接，观察能力很重要。还有构造链接时要多requests下来测试哪些是相关参数，哪些参数是无关紧要的，不是只看浏览器就行的</p>
+<p>  先进入官网搜索一件商品，这里以GTX1060为例，第一次出现的链接如下，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;https://s.taobao.com/search?initiative_id=tbindexz_20170306&amp;ie=utf8&amp;spm=a21bo.2017.201856-taobao-item.2&amp;sourceId=tb.index&amp;search_type=item&amp;ssid=s5-e&amp;commend=all&amp;imgfile=&amp;q=GTX1060&amp;suggest=history_1&amp;_input_charset=utf-8&amp;wq=GTX&amp;suggest_query=GTX&amp;source=suggest&apos;</span><br></pre></td></tr></table></figure></p>
+<p>  <br>很长是吧，能大约的看到日期，商品名之类的参数，但是大部分参数都看不懂，我们假设部分参数是不影响爬取结果的，于是我们来继续按下看看有什么变化，当再次按下搜索键</p>
+<p> 链接变短了,在按多几下都是这个链接了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;https://s.taobao.com/search?q=GTX1060&amp;imgfile=&amp;js=1&amp;stats_click=search_radio_all%3A1&amp;initiative_id=staobaoz_20180428&amp;ie=utf8&apos;#初步结构</span><br></pre></td></tr></table></figure></p>
+<p>  为了确保泛用性，我们换个商品再搜索，发现链接除q参数（商品名）改变外，其他一模一样，由此我们初步确定了链接结构，q参数是商品名，initiative_id是当天日期，其他不用变</p>
+<p>  但我们的还要有翻页和排序的功能没实现，链接里也看不到和它们有关的参数，因此我们要继续按来引相关参数出来，点击排序那排按钮</p>
+<p>  发现又多了一个sort参数，不同的排序方式对应不同的值，有default（默认综合排序），sale-desc（按销量），renqi-desc（按人气）等</p>
+<p>  按下一页，又多了bcoffset，p4ppushleft，s三个参数，经测试只有s参数有用，其他两个都不影响爬取结果（直接去掉），s是页数相关参数，值是44的倍数（因为每页加载44件商品），第一页0，第二页44，第三页88……</p>
+<p>  到此就捕捉到q，initiative_id，sort，s等参数了，如果想增加其它相关参数，就自己到处按捣鼓吧，下面就这4个参数进行构造，可以format格式化，也可以将参数通过requests.get()的params参数传入，下面选择格式化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#使用格式化输出，传四个字符串变量进去</span><br><span class="line">url = &apos;https://s.taobao.com/search?q=&#123;name&#125;&amp;imgfile=&amp;js=1&amp;stats_click=search_radio_all%3A1&amp;initiative_id=&#123;date&#125;&amp;ie=utf8&amp;s=&#123;num&#125;&amp;sort=&#123;sort&#125;&apos;.format(name=,date=,num=,sort=)</span><br></pre></td></tr></table></figure>
+<p>剩下的就是整合到循环进行多页爬取了，代码最后贴上，下面在看看json数据怎样提取。</p>
+<h3 id="json数据分析-amp-提取"><a href="#json数据分析-amp-提取" class="headerlink" title="json数据分析&amp;提取"></a>json数据分析&amp;提取</h3><p>先拿一个链接requests下来保存到txt看看先，打开后看到一大堆又字典又列表的东西，仔细一看这货是符合json格式的字符串，里面有我们要的信息。</p>
+<p>我们知道json数据本质是字符串，也可以用json.load()转化为字典，这样的话就有两种提取信息的方法</p>
+<p>直接用正则对字符串匹配，缺点是当json存在\uxxxx的unicode编码时你会得到\uxxxx而不是中文，然而还是有办法绕过编码问题——可以通过str(json.load())得到字典（已解码回中文）后再强转为字符串再匹配，但是要注意单引号问题</p>
+<p>转为字典后逐层索引下去，缺点是当结构过于复杂时，索引也比较麻烦。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> date</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">taobao</span><span class="params">(keyword,pages,select_type,date_)</span>:</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'user-agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36'</span>&#125;</span><br><span class="line">    url = <span class="string">'https://s.taobao.com/search?q=&#123;&#125;&amp;imgfile=&amp;js=1&amp;stats_click=search_radio_all%3A1&amp;initiative_id=&#123;&#125;&amp;ie=utf8&amp;sort=&#123;&#125;'</span>.format(keyword, date_, selections[select_type])</span><br><span class="line">    titles=[];item_ids=[];prices=[];locations=[];sales=[];seller_ids=[];store_names=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(pages):</span><br><span class="line">        r = requests.get(url+<span class="string">'&amp;s=&#123;&#125;'</span>.format(str(i*<span class="number">44</span>)),headers=headers,)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        data = re.search(<span class="string">r'g_page_config = (.+);'</span>,r.text)<span class="comment">#捕捉json字符串</span></span><br><span class="line">        data = json.loads(data.group(<span class="number">1</span>),encoding=<span class="string">'utf-8'</span>)<span class="comment">#json转dict</span></span><br><span class="line">        <span class="keyword">for</span> auction <span class="keyword">in</span> data[<span class="string">'mods'</span>][<span class="string">'itemlist'</span>][<span class="string">'data'</span>][<span class="string">'auctions'</span>]:</span><br><span class="line">            titles.append(auction[<span class="string">'raw_title'</span>])<span class="comment">#商品名</span></span><br><span class="line">            item_ids.append(auction[<span class="string">'nid'</span>])<span class="comment">#商品id</span></span><br><span class="line">            prices.append(auction[<span class="string">'view_price'</span>])<span class="comment">#价格</span></span><br><span class="line">            locations.append(auction[<span class="string">'item_loc'</span>])<span class="comment">#货源</span></span><br><span class="line">            sales.append(auction[<span class="string">'view_sales'</span>])<span class="comment">#卖出数量</span></span><br><span class="line">            seller_ids.append(auction[<span class="string">'user_id'</span>]) <span class="comment">#商家id</span></span><br><span class="line">            store_names.append(auction[<span class="string">'nick'</span>])<span class="comment">#店铺名</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#正则实现</span></span><br><span class="line">        <span class="string">'''titles.extend(re.findall(r'"raw_title":"(.+?)"',r.text,re.I)) </span></span><br><span class="line"><span class="string">        item_ids.extend( re.findall(r'"nid":"(.+?)"',r.text,re.I))</span></span><br><span class="line"><span class="string">        prices.extend(re.findall(r'"view_price":"([^"]+)"',r.text,re.I)) </span></span><br><span class="line"><span class="string">        locations.extend(re.findall(r'"item_loc":"([^"]+)"',r.text,re.I))</span></span><br><span class="line"><span class="string">        sales.extend(re.findall(r'"view_sales":"([^"]+)"',r.text,re.I)) </span></span><br><span class="line"><span class="string">        seller_ids.extend(re.findall(r'"user_id":"([^"]+)"',r.text,re.I)) </span></span><br><span class="line"><span class="string">        store_names.extend(re.findall(r'"nick":"([^"]+)"',r.text,re.I)) '''</span></span><br><span class="line">    <span class="comment">#单纯打印出来看</span></span><br><span class="line">    <span class="keyword">print</span> (len(titles),len(item_ids),len(prices),len(locations),len(sales),len(seller_ids),len(store_names))</span><br><span class="line">    print(titles)</span><br><span class="line">    print(item_ids)</span><br><span class="line">    print(prices)</span><br><span class="line">    print(locations)</span><br><span class="line">    print(sales)</span><br><span class="line">    print(seller_ids)</span><br><span class="line">    print(store_names)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">selections = &#123;<span class="string">'0'</span>:<span class="string">'default'</span>,</span><br><span class="line">              <span class="string">'1'</span>:<span class="string">'renqi-desc'</span>,</span><br><span class="line">              <span class="string">'2'</span>:<span class="string">'sale-desc'</span>&#125;</span><br><span class="line">keyword = input(<span class="string">'输入商品名\n'</span>)</span><br><span class="line">pages = int(input(<span class="string">'爬多少页\n'</span>))</span><br><span class="line">date_ =  <span class="string">'staobaoz_'</span> + str(date.today()).replace(<span class="string">'-'</span>,<span class="string">''</span>)</span><br><span class="line"><span class="keyword">if</span> input(<span class="string">'yes/no  for 改排序方式,默认综合'</span>)==<span class="string">'yes'</span>:</span><br><span class="line">    select_type = input(<span class="string">'输入1按人气，输入2按销量'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    select_type = <span class="string">'0'</span></span><br><span class="line">taobao(keyword,pages,select_type,date_)</span><br></pre></td></tr></table></figure>
+<p>补充：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">'https://s.taobao.com/search?q=GTX1060&amp;imgfile=&amp;js=1&amp;stats_click=search_radio_all%3A1&amp;initiative_id=staobaoz_20180428&amp;ie=utf8'</span></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span> : <span class="string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36'</span>&#125;</span><br><span class="line">r =requests.get(url, headers=headers)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'taobao.txt'</span>,<span class="string">'w'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(r.text)</span><br></pre></td></tr></table></figure>
+<p>结果为：<br><img src="1.jpg" alt="1"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/05/StudyPachong3/" rel="next" title="学习爬虫Part3">
+                <i class="fa fa-chevron-left"></i> 学习爬虫Part3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/05/StudyPachong5/" rel="prev" title="学习爬虫Part5">
+                学习爬虫Part5 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="zzm99">
+            
+              <p class="site-author-name" itemprop="name">zzm99</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初遇json-amp-爬取某宝商品信息"><span class="nav-number">1.</span> <span class="nav-text">初遇json&amp;爬取某宝商品信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON"><span class="nav-number">1.1.</span> <span class="nav-text">JSON</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#是什么"><span class="nav-number">1.1.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在哪"><span class="nav-number">1.1.2.</span> <span class="nav-text">在哪</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json-模块"><span class="nav-number">1.2.</span> <span class="nav-text">json 模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以下实战代码已无法成功运行（淘宝要求先登陆后搜索，成功运行代码见另一篇博客）"><span class="nav-number">1.3.</span> <span class="nav-text">以下实战代码已无法成功运行（淘宝要求先登陆后搜索，成功运行代码见另一篇博客）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实战：简单爬取淘宝商品信息"><span class="nav-number">1.4.</span> <span class="nav-text">实战：简单爬取淘宝商品信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造链接（重要）"><span class="nav-number">1.4.1.</span> <span class="nav-text">构造链接（重要）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#json数据分析-amp-提取"><span class="nav-number">1.4.2.</span> <span class="nav-text">json数据分析&amp;提取</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzm99</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+<script type="text/javascript" color="0,0,0" opacity="0.4" zindex="-1" count="300" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+	
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/click.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
