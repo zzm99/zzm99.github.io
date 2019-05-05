@@ -79,14 +79,21 @@
 
 
 
+<meta name="description" content="动态爬取解决方案 之 手动分析动态的标志进入一个网页，鼠标到处点，滑轮上下滚，各种框框各种信息都蹦出来了，但是网页链接没变过，网页也没重新刷新过 比如：逛网页版的网易云音乐的评论时，无论评论翻到第几页，网址也不会改变；逛知乎时，鼠标不停往下滚，只要下面还有回答，就会不断的加载出来，同样网址也不会改变 类似这样能不转跳不刷新就能加载新信息的网页，就是用了动态加载。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习爬虫Part5">
 <meta property="og:url" content="http://yoursite.com/2019/05/05/StudyPachong5/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="动态爬取解决方案 之 手动分析动态的标志进入一个网页，鼠标到处点，滑轮上下滚，各种框框各种信息都蹦出来了，但是网页链接没变过，网页也没重新刷新过 比如：逛网页版的网易云音乐的评论时，无论评论翻到第几页，网址也不会改变；逛知乎时，鼠标不停往下滚，只要下面还有回答，就会不断的加载出来，同样网址也不会改变 类似这样能不转跳不刷新就能加载新信息的网页，就是用了动态加载。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-05T07:05:52.703Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/05/StudyPachong5/5aef16b082d06_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/05/StudyPachong5/643822977-5aef19f2b7d85_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/05/StudyPachong5/2055961537-5aef1bc50efbc_articlex.png">
+<meta property="og:updated_time" content="2019-05-05T09:17:30.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习爬虫Part5">
+<meta name="twitter:description" content="动态爬取解决方案 之 手动分析动态的标志进入一个网页，鼠标到处点，滑轮上下滚，各种框框各种信息都蹦出来了，但是网页链接没变过，网页也没重新刷新过 比如：逛网页版的网易云音乐的评论时，无论评论翻到第几页，网址也不会改变；逛知乎时，鼠标不停往下滚，只要下面还有回答，就会不断的加载出来，同样网址也不会改变 类似这样能不转跳不刷新就能加载新信息的网页，就是用了动态加载。">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/05/StudyPachong5/5aef16b082d06_articlex.png">
 
 
 
@@ -143,9 +150,9 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
-    
+    <!--
     <a href="https://github.com/zzm99/zzm99.github.io"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_white_ffffff.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1" align="left"></a>
-  
+    -->
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
@@ -399,7 +406,25 @@
       
 
       
-        
+        <h1 id="动态爬取解决方案-之-手动分析"><a href="#动态爬取解决方案-之-手动分析" class="headerlink" title="动态爬取解决方案 之 手动分析"></a>动态爬取解决方案 之 手动分析</h1><h2 id="动态的标志"><a href="#动态的标志" class="headerlink" title="动态的标志"></a>动态的标志</h2><p>进入一个网页，鼠标到处点，滑轮上下滚，各种框框各种信息都蹦出来了，但是网页链接没变过，网页也没重新刷新过</p>
+<p>比如：逛网页版的网易云音乐的评论时，无论评论翻到第几页，网址也不会改变；逛知乎时，鼠标不停往下滚，只要下面还有回答，就会不断的加载出来，同样网址也不会改变</p>
+<p>类似这样能不转跳不刷新就能加载新信息的网页，就是用了<strong>动态加载</strong>。<br><a id="more"></a></p>
+<h2 id="分析什么"><a href="#分析什么" class="headerlink" title="分析什么"></a>分析什么</h2><p>首先记住——所有信息在理论上都可以通过请求（链接）获得<br>然后记住——有些请求需要提交参数，检查headers什么的来防爬<br>附加一点——大多数动态加载的信息，通常都是json数据        </p>
+<p>有了这些指引提示我们就能描绘出大概的分析思路        </p>
+<ul>
+<li>首先我们要找到json数据请求链接，通过F12捉包获得，这种包属于xhr或js里            </li>
+<li>然后我们通过分析多个json数据的请求链接的参数，规律，推出所有链接的结构</li>
+<li>如果json数据是一个post包，我们还要分析要post的参数的内容，规律（加密的另谈）</li>
+<li>分析服务器是否检查请求的headers，如是，需要哪些额外headers（指user-agent外）</li>
+</ul>
+<p>完成以上四步通常就能获得目标json数据，剩下的就是分析json数据本身，把目标提取出来</p>
+<h2 id="引导实例"><a href="#引导实例" class="headerlink" title="引导实例"></a>引导实例</h2><p>以某宝为例，随便搜一个商品进去。打开F12，换到Network捉js的包，点到评论那里，很快就弹出很多个包，逐个查看其response，很快就确定了目标包，然后评论换页，捉多几个供链接分析用。<br><img src="5aef16b082d06_articlex.png" alt="1"></p>
+<p>这是一个包的请求链接<br><img src="643822977-5aef19f2b7d85_articlex.png" alt="1"></p>
+<p>通过对比刚才捉到的多个包的链接，和多次试验性发送请求，我们可以分析出链接结构——ua（包括ua）之后参数是不影响请求结果的，currentPageNum是评论页数，auctionNumId是商品id，userNumId可以不要，这样就足以构造所有json数据的请求链接，至于一些决定排序的参数这里就不再多分析。</p>
+<p>多次试验后发现这个请求链接不需要提交数据，headers加个user-agent就可以返回数据</p>
+<p>但是taobao返回的json数据有坑，注意一下<br><img src="2055961537-5aef1bc50efbc_articlex.png" alt="1"></p>
+<p>然后提取json数据，这样动态问题就解决了，可以完整的写出爬虫。jd评价的爬取和淘宝类似。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">headers = &#123;</span><br><span class="line">            <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36'</span></span><br><span class="line">                   &#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ids</span><span class="params">(keyword,psort)</span>:</span></span><br><span class="line">    ids = []</span><br><span class="line">    pages = int(input(<span class="string">"爬商品前几页,每页30个商品"</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,pages+<span class="number">1</span>):</span><br><span class="line">        url = <span class="string">'https://search.jd.com/Search?keyword=&#123;&#125;&amp;enc=utf-8&amp;qrst=1&amp;rt=1&amp;stop=1&amp;vt=2&amp;psort=&#123;&#125;&amp;click=0&amp;page=&#123;&#125;&amp;s=&#123;&#125;'</span>.format(keyword,psort,str(i*<span class="number">2</span><span class="number">-1</span>),str(<span class="number">60</span>*i<span class="number">-59</span>))</span><br><span class="line">        r = requests.get(url,headers=headers)</span><br><span class="line">        response = r.content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        ids.extend(re.findall(<span class="string">r'li data-sku="(\d+)"'</span>,response))</span><br><span class="line">    print(len(ids),ids)</span><br><span class="line">    <span class="keyword">if</span> input(<span class="string">'是否只爬前几件商品yes/no'</span>)==<span class="string">'yes'</span>:</span><br><span class="line">        nums = int(input(<span class="string">'只爬前n件商品,n&lt;=&#123;&#125;'</span>.format(len(ids))))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        nums = len(ids)</span><br><span class="line">    <span class="keyword">return</span> ids,nums</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_comment</span><span class="params">(ids_and_nums)</span>:</span></span><br><span class="line">    pages = int(input(<span class="string">'爬评论的前几页,10个评论每页'</span>))</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> range(ids_and_nums[<span class="number">1</span>]):</span><br><span class="line">        comments = [];types = [];scores = []</span><br><span class="line">        f.write(<span class="string">'https://item.jd.com/&#123;&#125;.html '</span>.format(ids_and_nums[<span class="number">0</span>][num])+<span class="string">'\n\n'</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(pages):</span><br><span class="line">            url = <span class="string">'https://club.jd.com/productpage/p-&#123;&#125;-s-0-t-1-p-&#123;&#125;.html'</span>.format(ids_and_nums[<span class="number">0</span>][num],str(i))</span><br><span class="line">            r = requests.get(url,headers=headers)</span><br><span class="line">            <span class="keyword">for</span> each <span class="keyword">in</span> r.json()[<span class="string">'comments'</span>]:</span><br><span class="line">                f.write(<span class="string">'得分：&#123;&#125;\n'</span>.format(<span class="string">'*'</span> *int(each[<span class="string">'score'</span>])))</span><br><span class="line">                f.write(<span class="string">'评论：'</span>+each[<span class="string">'content'</span>]+<span class="string">'\n'</span>)</span><br><span class="line">                f.write(<span class="string">'类型：'</span>+each[<span class="string">'productColor'</span>]+<span class="string">'\n\n'</span>)</span><br><span class="line">                <span class="comment">#列表储存，需要时使用</span></span><br><span class="line">                <span class="comment">#comments.append(each['content'])</span></span><br><span class="line">                <span class="comment">#types.append(each['productColor'])</span></span><br><span class="line">                <span class="comment">#scores.append(each['score'])</span></span><br><span class="line">        f.write(<span class="string">'\n\n\n\n'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">keyword = input(<span class="string">"请输入商品名"</span>)</span><br><span class="line">psort = input(<span class="string">"请输入排序的数字代号，0：默认综合 3：按销量 4：按评论"</span>)</span><br><span class="line">ids_and_nums=get_ids(keyword,psort)</span><br><span class="line"><span class="keyword">with</span> open(keyword+<span class="string">'.txt'</span>,<span class="string">'w'</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    get_comment(ids_and_nums)</span><br><span class="line"></span><br><span class="line"><span class="comment">#通用json，但是只按时间排序</span></span><br><span class="line"><span class="comment">#https://club.jd.com/productpage/p-1982079424-s-0-t-1-p-0.html</span></span><br><span class="line"><span class="comment">#通用json但是只按推荐排序</span></span><br><span class="line"><span class="comment">#https://sclub.jd.com/comment/productPageComments.action?productId=3281156&amp;score=0&amp;sortType=5&amp;page=1&amp;pageSize=10&amp;isShadowSku=0&amp;rid=0&amp;fold=1</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -432,6 +457,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/05/StudyPachong6/" rel="prev" title="学习爬虫Part6">
+                学习爬虫Part6 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -483,8 +512,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -501,7 +539,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -546,6 +584,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#动态爬取解决方案-之-手动分析"><span class="nav-number">1.</span> <span class="nav-text">动态爬取解决方案 之 手动分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#动态的标志"><span class="nav-number">1.1.</span> <span class="nav-text">动态的标志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析什么"><span class="nav-number">1.2.</span> <span class="nav-text">分析什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引导实例"><span class="nav-number">1.3.</span> <span class="nav-text">引导实例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1090,11 +1144,7 @@
 
   
 
-  
 
-<script type="text/javascript" color="0,0,0" opacity="0.4" zindex="-1" count="300" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-
-	
   <!-- 页面点击小红心 -->
   <script type="text/javascript" src="/js/src/click.js"></script>
 
