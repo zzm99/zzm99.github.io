@@ -559,39 +559,17 @@
 
       
         
-          
-            <p>Given n non-negative integers representing the histogram’s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.</p>
-<p><img src="histogram.png" alt="1"></p>
-<p>Above is a histogram where width of each bar is 1, given height = [2,1,5,6,2,3].</p>
-<p><img src="histogram_area.png" alt="2"></p>
-<p>The largest rectangle is shown in the shaded area, which has area = 10 unit.</p>
-<p>Example:</p>
-<p>Input: [2,1,5,6,2,3]<br>Output: 10</p>
-<hr>
-<p>首先，如果栈是空的，那么索引i入栈。那么第一个i=0就进去吧。注意栈内保存的是索引，不是高度。然后i++。</p>
-<p><img src="17192556-87c3c19d702f4f7d80f9151e3abf3839.png" alt="3"></p>
-<p>然后继续，当i=1的时候，发现h[i]小于了栈内的元素，于是出栈。（由此可以想到，哦，看来stack里面只存放height单调递增的索引）</p>
-<p>这时候stack为空，所以面积的计算是h[t] * i。t是刚刚弹出的stack顶元素。也就是蓝色部分的面积。</p>
-<p><img src="17193427-72afd2effb414859b8a8357f2af576d7.png" alt="3"></p>
-<p>继续。这时候stack为空了，继续入栈。注意到只要是连续递增的序列，我们都要keep pushing，直到我们遇到了i=4，h[i]=2小于了栈顶的元素。</p>
-<p><img src="17194005-14511ed367484101a307e4c00c953048.png" alt="3"></p>
-<p>这时候开始计算矩形面积。首先弹出栈顶元素，t=3。即下图绿色部分。</p>
-<p><img src="17194440-81492510db734653a8ac3f334f1e58e7.png" alt="3"></p>
-<p>接下来注意到栈顶的（索引指向的）元素还是大于当前i指向的元素，于是出栈，并继续计算面积，紫色部分。</p>
-<p><img src="17194943-e96e6e654b744b70bd35602691dae7d6.png" alt="3"></p>
-<p>最后，栈顶的（索引指向的）元素小于了当前i指向的元素，循环继续，入栈并推动i前进。直到我们再次遇到下降的元素，也就是我们最后人为添加的dummy元素0.</p>
-<p><img src="17195453-d757bf1ba1ac44d08f71e9ac1d87a654.png" alt="3"></p>
-<p>同理，我们计算栈内的面积。由于当前i是最小元素，所以所有的栈内元素都要被弹出并参与面积计算。</p>
-<p><img src="17195959-3aec6aaeb9534632a0350a045aedbf2b.png" alt="4"></p>
-<p>注意我们在计算面积的时候已经更新过了maxArea。</p>
-<p>总结下，我们可以看到，stack中总是保持递增的元素的索引，然后当遇到较小的元素后，依次出栈并计算栈中bar能围成的面积，直到栈中元素小于当前元素。</p>
-<p>这个弹栈的过程也是维持程序不变量的方法啊：栈内元素一定是要比当前i指向的元素小的。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Max</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">return</span> a &gt; b ? a : b;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;height)</span> </span>&#123;</span><br><span class="line">    	height.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> maxArea = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; height.size())&#123;</span><br><span class="line">            <span class="keyword">if</span>(stk.empty() || height[stk.top()] &lt;= height[i])&#123;</span><br><span class="line">                stk.push(i++);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> t = stk.top();</span><br><span class="line">				stk.pop();</span><br><span class="line">                maxArea = Max(maxArea, height[t] * (stk.empty() ? i : i - stk.top() - <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxArea;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-          
+          <p>Given n non-negative integers representing the histogram’s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/05/leetcode-84/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
