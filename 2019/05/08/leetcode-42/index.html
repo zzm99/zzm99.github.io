@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.  The above elevation map is represented by array">
+<meta name="description" content="Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.">
 <meta name="keywords" content="leetcode,Stack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode-42-Trapping Rain Water">
 <meta property="og:url" content="http://yoursite.com/2019/05/08/leetcode-42/index.html">
 <meta property="og:site_name" content="zzm99">
-<meta property="og:description" content="Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.  The above elevation map is represented by array">
+<meta property="og:description" content="Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/05/08/leetcode-42/rainwatertrap.png">
-<meta property="og:updated_time" content="2019-05-08T09:06:58.844Z">
+<meta property="og:updated_time" content="2019-05-08T10:03:02.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-42-Trapping Rain Water">
-<meta name="twitter:description" content="Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.  The above elevation map is represented by array">
+<meta name="twitter:description" content="Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.">
 <meta name="twitter:image" content="http://yoursite.com/2019/05/08/leetcode-42/rainwatertrap.png">
 
 
@@ -417,7 +417,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  83
+                  1.1k
                 </span>
               
 
@@ -433,7 +433,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  5
                 </span>
               
             </div>
@@ -454,11 +454,22 @@
       
 
       
-        <p>Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.</p>
-<p><img src="rainwatertrap.png" alt="1"></p>
+        <p>Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.<br><a id="more"></a><br><img src="rainwatertrap.png" alt="1"></p>
 <p>The above elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped. Thanks Marcos for contributing this image!</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Example:</span><br><span class="line"></span><br><span class="line">Input: [0,1,0,2,1,0,1,3,2,1,2,1]</span><br><span class="line">Output: 6</span><br></pre></td></tr></table></figure>
-
+<h3 id="动态规划："><a href="#动态规划：" class="headerlink" title="动态规划："></a>动态规划：</h3><p>将每一个位置点左侧的最大高度存起来，然后将每个位置点右侧的最大高度存起来，这样，该位置的最大存水量为min(maxleft[i], maxright[i])-height[i] 得到，最后将所有位置相加即可，为了提高空间复杂度方面的性能，我们只需要将所有位置对应的左侧最大高度存在一个数组中，然后每算出一个右侧最大高度，就将该位置对应的存水量算出来，接着进行下一位的计算。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(height.size(), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> maxleft = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;height.size(); ++i) &#123;</span><br><span class="line">            dp[i] = maxleft;</span><br><span class="line">            maxleft = max(height[i], maxleft);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> maxright = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=height.size()<span class="number">-1</span>; i&gt;=<span class="number">0</span>; --i) &#123;</span><br><span class="line">            dp[i] = min(dp[i], maxright);</span><br><span class="line">            maxright = max(maxright, height[i]);</span><br><span class="line">            <span class="keyword">if</span> (dp[i]-height[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                res += (dp[i]-height[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="two-pointer"><a href="#two-pointer" class="headerlink" title="two pointer:"></a>two pointer:</h3><ol>
+<li>加入水后，图片的高度整体是从左右两边往中间的一个最高点单向增大的，所以这就给了我们一个很好的解题思路。先找到整张图的最高点，并记录它所在的位置，然后依次从左右两端往最该点遍历，遍历时记录左边遍历过的位置的最高点的值，当到达位置的实际高度小于我们记录的最高值，则表明此处有积水，由于宽度都是1，所以我们总积水的体积可以直接加上在此处实际高度与记录的最高高度的差值。当左右遍历完成后，所得结果及时总的积水体积。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size = height.size();   <span class="comment">//得到容器的大小 </span></span><br><span class="line">        <span class="keyword">if</span>(size &lt;= <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">-1</span>, maxi = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; size; ++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(height[i] &gt; max)&#123;</span><br><span class="line">                max = height[i];    <span class="comment">//找到最高点，并记录最高点所在的位置 </span></span><br><span class="line">                maxi = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>, nowheight=height[<span class="number">0</span>];          <span class="comment">//从左开始遍历 </span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; maxi;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nowheight &lt;height[j]) nowheight = height[j];  <span class="comment">//记录遍历过的点的最大值 </span></span><br><span class="line">            <span class="keyword">else</span> result += (nowheight - height[j]);          <span class="comment">//最大值与现在值得差值即为此处积水 </span></span><br><span class="line">        &#125;</span><br><span class="line">        nowheight = height[size<span class="number">-1</span>];                          <span class="comment">//从右开始遍历，方法与从左开始遍历一样 </span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = size<span class="number">-1</span>;k &gt; maxi;k--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nowheight &lt; height[k]) nowheight = height[k];</span><br><span class="line">            <span class="keyword">else</span> result += (nowheight - height[k]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>原理同上，但不用分开两次遍历，两边头同时开始，左小于右左一直进行，知道左大于等于右，右进行，然后右大于等于左，左进行，循环，最终到达左到右过程的最高点。</li>
+</ol>
+<p>So, we can say that if there is a larger bar at one end (say right), we are assured that the water trapped would be dependant on height of bar in current direction (from left to right). As soon as we find the bar at other end (right) is smaller, we start iterating in opposite direction (from right to left). We must maintain left_max and right_max during the iteration, but now we can do it in one iteration using 2 pointers, switching between the two.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = height.size() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left_max = <span class="number">0</span>, right_max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">if</span> (height[left] &lt; height[right]) &#123;</span><br><span class="line">            height[left] &gt;= left_max ? (left_max = height[left]) : ans += (left_max - height[left]);</span><br><span class="line">            ++left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            height[right] &gt;= right_max ? (right_max = height[right]) : ans += (right_max - height[right]);</span><br><span class="line">            --right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack:"></a>Stack:</h3><p>We keep a stack and iterate over the array. We add the index of the bar to the stack if bar is smaller than or equal to the bar at top of stack, which means that the current bar is bounded by the previous bar in the stack. If we found a bar longer than that at the top, we are sure that the bar at the top of the stack is bounded by the current bar and a previous bar in the stack, hence, we can pop it and add resulting trapped water to ans.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>, current = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">    <span class="keyword">while</span> (current &lt; height.size()) &#123;</span><br><span class="line">        <span class="keyword">while</span> (!st.empty() &amp;&amp; height[current] &gt; height[st.top()]) &#123;</span><br><span class="line">            <span class="keyword">int</span> top = st.top();</span><br><span class="line">            st.pop();</span><br><span class="line">            <span class="keyword">if</span> (st.empty())</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">int</span> distance = current - st.top() - <span class="number">1</span>; <span class="comment">//注意distance的作用</span></span><br><span class="line">            <span class="keyword">int</span> bounded_height = min(height[current], height[st.top()]) - height[top];</span><br><span class="line">            ans += distance * bounded_height;</span><br><span class="line">        &#125;</span><br><span class="line">        st.push(current++);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -586,8 +597,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -660,6 +680,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态规划："><span class="nav-number">1.</span> <span class="nav-text">动态规划：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#two-pointer"><span class="nav-number">2.</span> <span class="nav-text">two pointer:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">3.</span> <span class="nav-text">Stack:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -694,7 +730,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">41.3k</span>
+    <span title="Site words total count">42.3k</span>
   
 </div>
 

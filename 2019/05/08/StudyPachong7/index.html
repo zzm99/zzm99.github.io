@@ -87,10 +87,10 @@
 <meta property="og:description" content="模拟登录，cookie的使用某些网站，登录和没登录，用户的权限是不一样的，帐号登录之后才能获取更多的信息。更有甚者一上来就是登录界面，不登录就不给你进去。爬取目标不用登录固然是好，但需要时也没办法啊，这时如果还想爬取信息，就必须让爬虫学会登录。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/05/08/StudyPachong7/1.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/05/08/StudyPachong7/chrome-f12.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/08/StudyPachong7/1768281937-5b5b35871275e_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/08/StudyPachong7/chrome-f12.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/08/StudyPachong7/chrome-f12-2.png">
-<meta property="og:updated_time" content="2019-05-08T08:57:42.103Z">
+<meta property="og:updated_time" content="2019-05-08T09:25:45.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习爬虫Part7">
 <meta name="twitter:description" content="模拟登录，cookie的使用某些网站，登录和没登录，用户的权限是不一样的，帐号登录之后才能获取更多的信息。更有甚者一上来就是登录界面，不登录就不给你进去。爬取目标不用登录固然是好，但需要时也没办法啊，这时如果还想爬取信息，就必须让爬虫学会登录。">
@@ -461,12 +461,12 @@
 <p>注意：并不是说学会这几种方法你就完全掌握了模拟登录，加密，验证系统也可能成为模拟登录的头号劲敌，如果查遍全网都没得到满意的答案，selenium大佬也被识别了，那估计是没救了</p>
 <h3 id="从浏览器获取"><a href="#从浏览器获取" class="headerlink" title="从浏览器获取"></a>从浏览器获取</h3><p>这是最简单也是最容易见效的方法，在浏览器上登录并进行足够多操作后便能得到足量的cookie，打开F12捉包观其headers即可</p>
 <p><img src="1.jpg" alt="1"></p>
-<h3 id="插入关于谷歌浏览器F12抓包分析的知识："><a href="#插入关于谷歌浏览器F12抓包分析的知识：" class="headerlink" title="插入关于谷歌浏览器F12抓包分析的知识："></a>插入关于谷歌浏览器F12抓包分析的知识：</h3><p>打开Chrome自带的开发者工具，开发者工具会出现在浏览器网页的左侧或者是下面（可调整），它的样子就是这样的：</p>
-<p><img src="chrome-f12.png" alt="1"></p>
 <p><img src="1768281937-5b5b35871275e_articlex.png" alt="4"></p>
 <p>图中上方的set-cookie是响应cookie，也就是服务器要保存在客户端的cookie；下方的cookie则是要提交给服务器的cookie，也是我们的目标，让requests使用这个cookie有两种方法，一是原封不动把cookie字符串放入headers字典中提交，二是把cookie字符串变成字典再由cookies参数提交，转换方法如下。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cookie_to_dict</span><span class="params">(cookie)</span>:</span></span><br><span class="line">    cookie_dict = &#123;&#125;</span><br><span class="line">    items = cookie.split(<span class="string">';'</span>)</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">        key = item.split(<span class="string">'='</span>)[<span class="number">0</span>].replace(<span class="string">' '</span>, <span class="string">''</span>)</span><br><span class="line">        value = item.split(<span class="string">'='</span>)[<span class="number">1</span>]</span><br><span class="line">        cookie_dict[key] = value</span><br><span class="line">    <span class="keyword">return</span> cookie_dict</span><br></pre></td></tr></table></figure>
 <p>这种直接获取的方法缺点也很明显，就是不能追踪set-cookie并更新，原来的cookie一旦失效，就要重新手动获取</p>
+<h3 id="插入关于谷歌浏览器F12抓包分析的知识："><a href="#插入关于谷歌浏览器F12抓包分析的知识：" class="headerlink" title="插入关于谷歌浏览器F12抓包分析的知识："></a>插入关于谷歌浏览器F12抓包分析的知识：</h3><p>打开Chrome自带的开发者工具，开发者工具会出现在浏览器网页的左侧或者是下面（可调整），它的样子就是这样的：</p>
+<p><img src="chrome-f12.png" alt="1"></p>
 <h4 id="谷歌Chrome抓包-1-最上面一行菜单"><a href="#谷歌Chrome抓包-1-最上面一行菜单" class="headerlink" title="谷歌Chrome抓包:1. 最上面一行菜单"></a>谷歌Chrome抓包:1. 最上面一行菜单</h4><ul>
 <li>左上角箭头 用来点击查看网页的元素</li>
 <li>第二个手机、平板图标是用来模拟移动端显示网页</li>
@@ -555,8 +555,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/08/StudyPachong9/" rel="prev" title="学习爬虫Part8">
-                学习爬虫Part8 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/08/StudyPachong9/" rel="prev" title="学习爬虫Part9">
+                学习爬虫Part9 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -745,7 +745,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">41.3k</span>
+    <span title="Site words total count">42.3k</span>
   
 </div>
 
