@@ -79,14 +79,21 @@
 
 
 
+<meta name="description" content="动态爬取解决方案 之 selenium 通过驱动浏览器获得的解析JavaScript的能力">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习爬虫Part6">
 <meta property="og:url" content="http://yoursite.com/2019/05/05/StudyPachong6/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="动态爬取解决方案 之 selenium 通过驱动浏览器获得的解析JavaScript的能力">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-05T09:17:29.333Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/05/StudyPachong6/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/05/StudyPachong6/gg.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/05/StudyPachong6/2.jpg">
+<meta property="og:updated_time" content="2019-05-08T07:41:44.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习爬虫Part6">
+<meta name="twitter:description" content="动态爬取解决方案 之 selenium 通过驱动浏览器获得的解析JavaScript的能力">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/05/StudyPachong6/1.jpg">
 
 
 
@@ -411,7 +418,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  2.2k
                 </span>
               
 
@@ -427,7 +434,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  8
                 </span>
               
             </div>
@@ -448,7 +455,54 @@
       
 
       
-        
+        <h1 id="动态爬取解决方案-之-selenium"><a href="#动态爬取解决方案-之-selenium" class="headerlink" title="动态爬取解决方案 之 selenium"></a>动态爬取解决方案 之 selenium</h1><blockquote>
+<p>通过驱动浏览器获得的解析JavaScript的能力<br><a id="more"></a><br><strong>pip安装 pip install selenium</strong></p>
+</blockquote>
+<p>驱动按需选择：</p>
+<ul>
+<li>chrome （内核版本要对应）<a href="https://npm.taobao.org/mirrors/chromedriver/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/chromedriver/</a></li>
+<li>firefox </li>
+<li>IE </li>
+<li>下载好后把解压得到的驱动放到设置了环境变量的路径下就行了，如果你的python设置了环境变量，应该丢到python目录下就行了。</li>
+</ul>
+<p><a href="https://selenium-python-docs-zh.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener">https://selenium-python-docs-zh.readthedocs.io/zh_CN/latest/</a>  selenium中文教程</p>
+<h2 id="简单测试"><a href="#简单测试" class="headerlink" title="简单测试"></a>简单测试</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line"><span class="comment">#其他浏览器把Chrome换名就行</span></span><br><span class="line"><span class="comment">#option = webdriver.ChromeOptions()</span></span><br><span class="line"><span class="comment">#option.set_headless() 设置无头浏览器，就是隐藏界面后台运行</span></span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome() <span class="comment">#创建driver实例</span></span><br><span class="line"><span class="comment">#driver = webdriver.Chrome(chrome_options=option)  创建实例并载入option</span></span><br><span class="line"></span><br><span class="line">url = <span class="string">'https://www.baidu.com'</span></span><br><span class="line">driver.get(url)</span><br><span class="line"><span class="comment">#driver.maximize_window() 最大化窗口</span></span><br><span class="line"><span class="comment">#driver.set_window_size(width,height) 设置窗口大小</span></span><br><span class="line"></span><br><span class="line">print(driver.page_source) <span class="comment">#打印网页源码</span></span><br><span class="line"><span class="comment">#driver.quit() # 关闭浏览器</span></span><br></pre></td></tr></table></figure>
+<p><img src="1.jpg" alt="1"></p>
+<h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><p><strong>selenium提供多种方法对元素进行定位，返回WebElement对象，而上面提到的driver就相当于最大的WebElement对象</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#以下都是单次定位，返回第一个定位到的。如果想多次定位，给element加个s就行，返回的是符合元素的列表</span></span><br><span class="line">element = driver.find_element_by_id() <span class="comment"># 通过标签的id定位，接收id属性值</span></span><br><span class="line"></span><br><span class="line">driver.find_element_by_name() <span class="comment"># 通过标签的name定位，接收name属性值</span></span><br><span class="line"></span><br><span class="line">driver.find_element_by_xpath() <span class="comment"># 通过xpath定位，接收xpath表达式</span></span><br><span class="line"></span><br><span class="line">driver.find_element_by_link_text() <span class="comment"># 通过标签的完全文本定位，接收完整的文本</span></span><br><span class="line"></span><br><span class="line">driver.find_element_by_partial_link_text() <span class="comment"># 通过标签的部分文本定位，接收部分文本</span></span><br><span class="line"></span><br><span class="line">driver.find_element_by_tag_name() <span class="comment"># 通过标签名定位，接收标签名</span></span><br><span class="line"></span><br><span class="line">driver.find_element_by_class_name() <span class="comment"># 通过标签的class定位，接收class属性值</span></span><br><span class="line"></span><br><span class="line">driver.find_element_by_css_selector() <span class="comment"># 通过css选择器定位，接收其语法</span></span><br><span class="line"><span class="comment">#返回的WebElement对象可以继续往下定位</span></span><br></pre></td></tr></table></figure>
+<p>除了上面这些公有的方法，还有2个私有的方法来帮助页面对象的定位。 这两个方法就是 find_element 和 find_elements，需要导入By类辅助，接收一个By类属性及其对应语法/值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line">driver.find_element(By.XPATH,<span class="string">'//a[text()="dark"]'</span>)</span><br><span class="line">driver.find_elements(By.XPATH,<span class="string">'//a[text()="dark"]'</span>)</span><br><span class="line"><span class="string">'''By类有以下属性</span></span><br><span class="line"><span class="string">ID = "id"</span></span><br><span class="line"><span class="string">XPATH = "xpath"</span></span><br><span class="line"><span class="string">LINK_TEXT = "link text"</span></span><br><span class="line"><span class="string">PARTIAL_LINK_TEXT = "partial link text"</span></span><br><span class="line"><span class="string">NAME = "name"</span></span><br><span class="line"><span class="string">TAG_NAME = "tag_name"</span></span><br><span class="line"><span class="string">CLASS_NAME = "class name"</span></span><br><span class="line"><span class="string">CSS_SELECTOR = "css selector"</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<h2 id="frame切换"><a href="#frame切换" class="headerlink" title="frame切换"></a>frame切换</h2><p>很多人在用selenium会遇到所见非所得，或者定位页面元素的时候会定位不到的问题，这种情况很有可能是frame在搞鬼，必须切换到相应frame中再进行定位。如果遇到以上问题，第一时间F12看下你所要的信息是否在frame标签里面。<br>frame标签有frameset、frame、iframe三种，frameset跟其他普通标签没有区别，不会影响到正常的定位，而frame与iframe对selenium定位而言是一样的。</p>
+<h3 id="selenium提供了4种方法定位iframe并切换进去："><a href="#selenium提供了4种方法定位iframe并切换进去：" class="headerlink" title="selenium提供了4种方法定位iframe并切换进去："></a>selenium提供了4种方法定位iframe并切换进去：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#对于&lt;iframe name="frame1" id="dark"&gt;.....&lt;/iframe&gt;</span></span><br><span class="line">driver.switch_to_frame(<span class="number">0</span>)  <span class="comment"># 用frame的index来定位，第一个是0，以此类推</span></span><br><span class="line">driver.switch_to_frame(<span class="string">"frame1"</span>)  <span class="comment"># 用name来定位</span></span><br><span class="line">driver.switch_to_frame(<span class="string">"dark"</span>)  <span class="comment"># 用id来定位</span></span><br><span class="line">driver.switch_to_frame(driver.find_element_by_tag_name(<span class="string">"iframe"</span>))  <span class="comment"># 用WebElement对象来定位</span></span><br></pre></td></tr></table></figure>
+<p>通常通过id和name就能实现，无此属性时可以通过WebElement对象，即用find_element系列方法所取得的对象来定位。如果你确定每个目标frame都是固定第几个，那也可以用index定位</p>
+<p>切到frame中之后，就不能继续操作主文档的元素了，这时如果想操作主文档内容，则需切回主文档。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.switch_to_default_content()</span><br></pre></td></tr></table></figure>
+<h3 id="嵌套frame的切换"><a href="#嵌套frame的切换" class="headerlink" title="嵌套frame的切换:"></a>嵌套frame的切换:</h3><p>如果frame里包着frame而你要的frame是后者，那么需要一层一层切换进去，切换方法四选一</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">driver.switch_to_frame(&quot;frame1&quot;)</span><br><span class="line">driver.switch_to_frame(&quot;frame2&quot;)</span><br></pre></td></tr></table></figure>
+<p>如果想回去上一个父frame，用driver.switch_to.parent_frame()</p>
+<h2 id="window-切换"><a href="#window-切换" class="headerlink" title="window 切换"></a>window 切换</h2><p>有时候点开一个链接就会弹出一个新窗口，如果要对其操作就要切换过去，方法和frame的切换差不多，但只接收window_handle（相当于窗口的名字）来进行切换。driver.switch_to_window(“windowName”)</p>
+<p>切换前最好保存之前的handle和所有的handles以便于来回切换。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">current_window = driver.current_window_handle  <span class="comment"># 获取当前窗口handle name</span></span><br><span class="line">all_windows = driver.window_handles  <span class="comment"># 获取所有窗口handle name</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果window不是当前window，则切换到该window，即切换到新窗口</span></span><br><span class="line"><span class="keyword">for</span> window <span class="keyword">in</span> all_windows:</span><br><span class="line">    <span class="keyword">if</span> window != current_window:</span><br><span class="line">        driver.switch_to_window(window)</span><br><span class="line">        <span class="comment">#....</span></span><br><span class="line">driver.switch_to_window(current_window)  <span class="comment"># 返回之前的窗口</span></span><br><span class="line">driver.close()  <span class="comment"># 窗口的关闭用close()</span></span><br></pre></td></tr></table></figure>
+<h2 id="页面交互"><a href="#页面交互" class="headerlink" title="页面交互"></a>页面交互</h2><p>常用的页面交互有点击，输入文本等。交互的原则是 <strong>先定位，后交互</strong> ，比如你F12找到了某个文本框或某个可点击项的标签，那就先定位到那，再用以下的交互方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.common.keys <span class="keyword">import</span> Keys</span><br><span class="line"><span class="comment"># 首先定位到某个文本框或某个可点击项（如超链接，按钮）,</span></span><br><span class="line">element = driver.find_element_by_xpath(<span class="string">'//a[text()="dark"]'</span>)</span><br><span class="line"></span><br><span class="line">element.send_keys(<span class="string">"some text"</span>)  <span class="comment"># 往文本框输入文本</span></span><br><span class="line"><span class="comment">#element.send_keys("some text", Keys.ARROW_DOWN)  可以使用 Keys 类来模拟输入方向键</span></span><br><span class="line">element.clear()  <span class="comment"># 清空文本框</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#element.click() 如果此元素可点击，可用click()方法</span></span><br></pre></td></tr></table></figure>
+<p>要注意的一点是，不是定位到就必定能交互，有时候目标会被网页弹出来的东西覆盖，导致无法交互，所以要确保页面干净无覆盖</p>
+<h2 id="上下拉滚动"><a href="#上下拉滚动" class="headerlink" title="上下拉滚动"></a>上下拉滚动</h2><p>selenium可以执行js，下拉滚动可以通过此实现，因此就算不懂js也可以记一些有用的js代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#driver.execute_script('js_str')</span></span><br><span class="line">driver.execute_script(<span class="string">'window.scrollTo(0,10000)'</span>)  <span class="comment"># 移动到指定坐标</span></span><br><span class="line">driver.execute_script(<span class="string">'window.scrollBy(0,10000)'</span>)  <span class="comment"># 相对当前坐标移动</span></span><br><span class="line">driver.execute_script(<span class="string">'window.scrollTo(0, document.body.scrollHeight)'</span>)  <span class="comment"># 相对当前坐标移动</span></span><br></pre></td></tr></table></figure>
+<h2 id="等待"><a href="#等待" class="headerlink" title="等待"></a>等待</h2><p>现在不少web都都有使用ajax技术，即异步加载，有时候你要的东西都还没加载到你就去定位了，就会抛出异常。为了避免此等状况，必须要待其加载一段时间后再进行后面的操作。</p>
+<p>最粗暴的方法就是使用time.sleep()，这很笨，因为你还要设置合适的时间，而不同网站加载的速度有异，容易造成时间的浪费。所以最好还是使用selenium提供的两种等待方法</p>
+<h3 id="显式Waits"><a href="#显式Waits" class="headerlink" title="显式Waits"></a>显式Waits</h3><p>显式Waits允许你设置一个加载时间的上限和一个条件，每隔0.5s就判断一下所设条件，条件成立就继续执行下面的代码，如果过了时间上限还是没有成立，默认抛出NoSuchElementException 异常。这种相对智能的等待方法能最大化地节省时间，应该优先选择使用</p>
+<p>selenium提供了多种expected_conditions（EC）来设置条件，但是要注意有定位时EC的方法接收的是定位信息的元组(locator_tuple)而不是两个参数，正确用法如 EC.presence_of_element_located((By.ID,”dark”))<br>这个条件检测是否有id=’dark’的元素</p>
+<p>selenium提供的EC有以下方法，意思如其名</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">title_is(str)</span><br><span class="line">title_contains(str)</span><br><span class="line">presence_of_element_located(locator_tuple)</span><br><span class="line">visibility_of_element_located(locator_tuple) <span class="comment"># 判断某个元素是否可见</span></span><br><span class="line">visibility_of(WebElement) <span class="comment"># 同上，传参不同</span></span><br><span class="line">presence_of_all_elements_located(locator_tuple)</span><br><span class="line">text_to_be_present_in_element(str) <span class="comment"># 判断某个元素中的text是否包含了指定字符串</span></span><br><span class="line">text_to_be_present_in_element_value(str) <span class="comment"># 判断某个元素中的value属性是否包含了预期的字符串</span></span><br><span class="line">frame_to_be_available_and_switch_to_it</span><br><span class="line">invisibility_of_element_located(locator_tuple)</span><br><span class="line">element_to_be_clickable(locator_tuple)</span><br><span class="line">staleness_of(WebElement) <span class="comment"># 等待某个元素从的移除</span></span><br><span class="line">element_to_be_selected(WebElement)</span><br><span class="line">element_located_to_be_selected(locator_tuple)</span><br><span class="line">element_selection_state_to_be(WebElement)</span><br><span class="line">element_located_selection_state_to_be(locator_tuple)</span><br><span class="line">alert_is_present() <span class="comment"># 判断页面上是否存在alert</span></span><br></pre></td></tr></table></figure>
+<p><strong>使用上通常搭配try语句</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support.ui <span class="keyword">import</span> WebDriverWait <span class="comment"># 导入显式等待</span></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support <span class="keyword">import</span> expected_conditions <span class="keyword">as</span> EC <span class="comment"># 导入EC</span></span><br><span class="line"><span class="keyword">from</span> selenium.common.exceptions <span class="keyword">import</span> NoSuchElementException</span><br><span class="line"></span><br><span class="line"><span class="comment"># WebDriverWait(driver,time).until(EC) 显式waits</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    element = WebDriverWait(driver,<span class="number">10</span>).until(EC.presence_of_element_located((By.ID,<span class="string">"myDynamicElement"</span>)))</span><br><span class="line">    </span><br><span class="line"><span class="keyword">except</span> NoSuchElementException:</span><br><span class="line">    <span class="comment">#.....</span></span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">     driver.quit()</span><br></pre></td></tr></table></figure>
+<h2 id="隐式等待"><a href="#隐式等待" class="headerlink" title="隐式等待"></a>隐式等待</h2><p>隐式等待是在尝试定位某个元素的时候，如果没能成功，就等待固定长度的时间，默认0秒。一旦设置了隐式等待时间，它的作用范围就是Webdriver对象实例的整个生命周期。</p>
+<p>driver.implicitly_wait(10)</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>这是用selenium几分钟弄出来的网易云音乐单曲评论爬虫，而且还模拟了评论翻页，还截了图。没提取信息，提取的时候可以用BeautifulSoup或正则提取，</p>
+<p>短短二十行就能做到这种程度（而且不少还是import的），足以见得selenium强大。如果要手动分析，你还要分析js加密算法，写上n倍的代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> selenium.common.exceptions <span class="keyword">import</span> NoSuchElementException, TimeoutException</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support <span class="keyword">import</span> expected_conditions <span class="keyword">as</span> EC</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support.ui <span class="keyword">import</span> WebDriverWait</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.maximize_window()</span><br><span class="line">driver.get(<span class="string">"http://music.163.com/#/song?id=31877470"</span>)</span><br><span class="line">driver.switch_to_frame(<span class="string">"contentFrame"</span>)</span><br><span class="line">time.sleep(<span class="number">5</span>)</span><br><span class="line">driver.execute_script(<span class="string">'window.scrollTo(0, document.body.scrollHeight)'</span>)</span><br><span class="line">driver.save_screenshot(<span class="string">'D://代码//pyselenium//gg.png'</span>)  <span class="comment"># 截图</span></span><br><span class="line">b = driver.find_element_by_xpath(<span class="string">"//a[starts-with(@class,'zbtn znxt')]"</span>)</span><br><span class="line">b.click()</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    WebDriverWait(driver, <span class="number">10</span>).until(EC.presence_of_element_located((By.XPATH,<span class="string">"//a[@data-type='reply']"</span>)))</span><br><span class="line">    print(driver.page_source)</span><br><span class="line"><span class="keyword">except</span> NoSuchElementException:</span><br><span class="line">    print(<span class="string">'OMG'</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">        driver.quit()</span><br></pre></td></tr></table></figure>
+<p><img src="gg.png" alt="2"><br><img src="2.jpg" alt="2"></p>
+
       
     </div>
     
@@ -568,8 +622,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -586,7 +649,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -597,7 +660,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -608,7 +671,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -641,6 +704,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#动态爬取解决方案-之-selenium"><span class="nav-number">1.</span> <span class="nav-text">动态爬取解决方案 之 selenium</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单测试"><span class="nav-number">1.1.</span> <span class="nav-text">简单测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定位"><span class="nav-number">1.2.</span> <span class="nav-text">定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#frame切换"><span class="nav-number">1.3.</span> <span class="nav-text">frame切换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#selenium提供了4种方法定位iframe并切换进去："><span class="nav-number">1.3.1.</span> <span class="nav-text">selenium提供了4种方法定位iframe并切换进去：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套frame的切换"><span class="nav-number">1.3.2.</span> <span class="nav-text">嵌套frame的切换:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#window-切换"><span class="nav-number">1.4.</span> <span class="nav-text">window 切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面交互"><span class="nav-number">1.5.</span> <span class="nav-text">页面交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上下拉滚动"><span class="nav-number">1.6.</span> <span class="nav-text">上下拉滚动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#等待"><span class="nav-number">1.7.</span> <span class="nav-text">等待</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显式Waits"><span class="nav-number">1.7.1.</span> <span class="nav-text">显式Waits</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐式等待"><span class="nav-number">1.8.</span> <span class="nav-text">隐式等待</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">1.9.</span> <span class="nav-text">最后</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -676,7 +755,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">37.2k</span>
+    <span title="Site words total count">41.3k</span>
   
 </div>
 
