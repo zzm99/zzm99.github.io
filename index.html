@@ -474,6 +474,917 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/10/sqlitestudy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/10/sqlitestudy/" itemprop="url">sqlite入门学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-10T19:26:10+08:00">
+                2019-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/sqlite/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlite</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/10/sqlitestudy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/10/sqlitestudy/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  7.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  33
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="Chapter-1"><a href="#Chapter-1" class="headerlink" title="Chapter 1"></a>Chapter 1</h1><h2 id="SQLite-命令"><a href="#SQLite-命令" class="headerlink" title="SQLite 命令"></a>SQLite 命令</h2><p>与关系数据库进行交互的标准 SQLite 命令类似于 SQL。命令包括 <strong>CREATE、SELECT、INSERT、UPDATE、DELETE 和 DROP</strong>。这些命令基于它们的操作性质可分为以下几种：</p>
+<h3 id="DDL-数据定义语言DDL-数据定义语言"><a href="#DDL-数据定义语言DDL-数据定义语言" class="headerlink" title="DDL - 数据定义语言DDL - 数据定义语言"></a>DDL - 数据定义语言DDL - 数据定义语言</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CREATE</td>
+<td>创建一个新的表，一个表的视图，或者数据库中的其他对象。</td>
+</tr>
+<tr>
+<td>ALTER</td>
+<td>修改数据库中的某个已有的数据库对象，比如一个表。</td>
+</tr>
+<tr>
+<td>DROP</td>
+<td>删除整个表，或者表的视图，或者数据库中的其他对象。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="DML-数据操作语言"><a href="#DML-数据操作语言" class="headerlink" title="DML - 数据操作语言"></a>DML - 数据操作语言</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INSERT</td>
+<td>创建一条记录。</td>
+</tr>
+<tr>
+<td>UPDATE</td>
+<td>修改记录。</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>删除记录。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="DQL-数据查询语言"><a href="#DQL-数据查询语言" class="headerlink" title="DQL - 数据查询语言"></a>DQL - 数据查询语言</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SELECT</td>
+<td>从一个或多个表中检索某些记录。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Chapter-2"><a href="#Chapter-2" class="headerlink" title="Chapter 2"></a>Chapter 2</h1><h2 id="SQLite-命令-1"><a href="#SQLite-命令-1" class="headerlink" title="SQLite 命令"></a>SQLite 命令</h2><p>本章将向您讲解 SQLite 编程人员所使用的简单却有用的命令。这些命令被称为 <strong>SQLite 的点命令</strong>，这些命令的不同之处在于它们<strong>不以分号 ; 结束</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ sqlite3</span><br><span class="line">SQLite version 3.3.6</span><br><span class="line">Enter &quot;.help&quot; for instructions</span><br><span class="line">sqlite&gt;</span><br><span class="line"></span><br><span class="line">如需获取可用的点命令的清单，可以在任何时候输入 &quot;.help&quot;。</span><br><span class="line"></span><br><span class="line">sqlite&gt;.help</span><br><span class="line">上面的命令会显示各种重要的 SQLite 点命令的列表</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">让我们尝试使用 .show 命令，来查看 SQLite 命令提示符的默认设置。</span><br><span class="line"></span><br><span class="line">sqlite&gt;.show</span><br><span class="line">     echo: off</span><br><span class="line">         eqp: off</span><br><span class="line">     explain: auto</span><br><span class="line">     headers: off</span><br><span class="line">        mode: list</span><br><span class="line">   nullvalue: &quot;&quot;</span><br><span class="line">      output: stdout</span><br><span class="line">colseparator: &quot;|&quot;</span><br><span class="line">rowseparator: &quot;\n&quot;</span><br><span class="line">       stats: off</span><br><span class="line">       width:</span><br><span class="line">    filename: :memory:</span><br><span class="line">sqlite&gt;</span><br><span class="line"></span><br><span class="line">确保 sqlite&gt; 提示符与点命令之间没有空格，否则将无法正常工作。</span><br></pre></td></tr></table></figure>
+<h2 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h2><p>可以使用下列的点命令来格式化输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.header on</span><br><span class="line">sqlite&gt;.mode column</span><br><span class="line">sqlite&gt;.timer on</span><br><span class="line">sqlite&gt;</span><br></pre></td></tr></table></figure>
+<p>上面设置将产生如下格式的输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br><span class="line">CPU Time: user 0.000000 sys 0.000000</span><br></pre></td></tr></table></figure>
+<h2 id="sqlite-master-表格"><a href="#sqlite-master-表格" class="headerlink" title="sqlite_master 表格"></a>sqlite_master 表格</h2><p>主表中保存数据库表的关键信息，并把它命名为 sqlite_master。如要查看表概要，可按如下操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.schema sqlite_master</span><br><span class="line">这将产生如下结果：</span><br><span class="line"></span><br><span class="line">CREATE TABLE sqlite_master (</span><br><span class="line">  type text,</span><br><span class="line">  name text,</span><br><span class="line">  tbl_name text,</span><br><span class="line">  rootpage integer,</span><br><span class="line">  sql text</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h1 id="Chapter-3"><a href="#Chapter-3" class="headerlink" title="Chapter 3"></a>Chapter 3</h1><h2 id="SQLite-语法"><a href="#SQLite-语法" class="headerlink" title="SQLite 语法"></a>SQLite 语法</h2><h3 id="大小写敏感性"><a href="#大小写敏感性" class="headerlink" title="大小写敏感性"></a>大小写敏感性</h3><p>有个重要的点值得注意，SQLite 是不区分大小写的，但也有一些命令是大小写敏感的，比如 GLOB 和 glob 在 SQLite 的语句中有不同的含义。</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>SQLite 注释是附加的注释，可以在 SQLite 代码中添加注释以增加其可读性，他们可以出现在任何空白处，包括在表达式内和其他 SQL 语句的中间，但它们不能嵌套。</p>
+<p>SQL 注释以两个连续的 “-“ 字符（ASCII 0x2d）开始，并扩展至下一个换行符（ASCII 0x0a）或直到输入结束，以先到者为准。</p>
+<p>您也可以使用 C 风格的注释，以 “/<em>“ 开始，并扩展至下一个 “</em>/“ 字符对或直到输入结束，以先到者为准。SQLite的注释可以跨越多行。</p>
+<ul>
+<li>sqlite&gt;.help – 这是一个简单的注释</li>
+</ul>
+<h3 id="SQLite-语句"><a href="#SQLite-语句" class="headerlink" title="SQLite 语句"></a>SQLite 语句</h3><p>所有的 SQLite 语句可以以任何关键字开始，如<strong> SELECT、INSERT、UPDATE、DELETE、ALTER、DROP</strong> 等，<strong>所有的语句以分号（;）</strong>结束。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br></pre></td><td class="code"><pre><span class="line">SQLite ANALYZE 语句：</span><br><span class="line"></span><br><span class="line">ANALYZE;</span><br><span class="line">or</span><br><span class="line">ANALYZE database_name;</span><br><span class="line">or</span><br><span class="line">ANALYZE database_name.table_name;</span><br><span class="line"></span><br><span class="line">SQLite AND/OR 子句：</span><br><span class="line"></span><br><span class="line">SELECT column1, column2....columnN</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  CONDITION-1 &#123;AND|OR&#125; CONDITION-2;</span><br><span class="line"></span><br><span class="line">SQLite ALTER TABLE 语句：</span><br><span class="line"></span><br><span class="line">ALTER TABLE table_name ADD COLUMN column_def...;</span><br><span class="line"></span><br><span class="line">SQLite ALTER TABLE 语句（Rename）：</span><br><span class="line"></span><br><span class="line">ALTER TABLE table_name RENAME TO new_table_name;</span><br><span class="line"></span><br><span class="line">SQLite ATTACH DATABASE 语句：</span><br><span class="line"></span><br><span class="line">ATTACH DATABASE &apos;DatabaseName&apos; As &apos;Alias-Name&apos;;</span><br><span class="line"></span><br><span class="line">SQLite BEGIN TRANSACTION 语句：</span><br><span class="line"></span><br><span class="line">BEGIN;</span><br><span class="line">or</span><br><span class="line">BEGIN EXCLUSIVE TRANSACTION;</span><br><span class="line"></span><br><span class="line">SQLite BETWEEN 子句：</span><br><span class="line"></span><br><span class="line">SELECT column1, column2....columnN</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  column_name BETWEEN val-1 AND val-2;</span><br><span class="line"></span><br><span class="line">SQLite COMMIT 语句：</span><br><span class="line"></span><br><span class="line">COMMIT;</span><br><span class="line"></span><br><span class="line">SQLite CREATE INDEX 语句：</span><br><span class="line"></span><br><span class="line">CREATE INDEX index_name</span><br><span class="line">ON table_name ( column_name COLLATE NOCASE );</span><br><span class="line"></span><br><span class="line">SQLite CREATE UNIQUE INDEX 语句：</span><br><span class="line"></span><br><span class="line">CREATE UNIQUE INDEX index_name</span><br><span class="line">ON table_name ( column1, column2,...columnN);</span><br><span class="line"></span><br><span class="line">SQLite CREATE TABLE 语句：</span><br><span class="line"></span><br><span class="line">CREATE TABLE table_name(</span><br><span class="line">   column1 datatype,</span><br><span class="line">   column2 datatype,</span><br><span class="line">   column3 datatype,</span><br><span class="line">   .....</span><br><span class="line">   columnN datatype,</span><br><span class="line">   PRIMARY KEY( one or more columns )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">SQLite CREATE TRIGGER 语句：</span><br><span class="line"></span><br><span class="line">CREATE TRIGGER database_name.trigger_name </span><br><span class="line">BEFORE INSERT ON table_name FOR EACH ROW</span><br><span class="line">BEGIN </span><br><span class="line">   stmt1; </span><br><span class="line">   stmt2;</span><br><span class="line">   ....</span><br><span class="line">END;</span><br><span class="line"></span><br><span class="line">SQLite CREATE VIEW 语句：</span><br><span class="line"></span><br><span class="line">CREATE VIEW database_name.view_name  AS</span><br><span class="line">SELECT statement....;</span><br><span class="line"></span><br><span class="line">SQLite CREATE VIRTUAL TABLE 语句：</span><br><span class="line"></span><br><span class="line">CREATE VIRTUAL TABLE database_name.table_name USING weblog( access.log );</span><br><span class="line">or</span><br><span class="line">CREATE VIRTUAL TABLE database_name.table_name USING fts3( );</span><br><span class="line"></span><br><span class="line">SQLite COMMIT TRANSACTION 语句：</span><br><span class="line"></span><br><span class="line">COMMIT;</span><br><span class="line"></span><br><span class="line">SQLite COUNT 子句：</span><br><span class="line"></span><br><span class="line">SELECT COUNT(column_name)</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  CONDITION;</span><br><span class="line"></span><br><span class="line">SQLite DELETE 语句：</span><br><span class="line"></span><br><span class="line">DELETE FROM table_name</span><br><span class="line">WHERE  &#123;CONDITION&#125;;</span><br><span class="line"></span><br><span class="line">SQLite DETACH DATABASE 语句：</span><br><span class="line"></span><br><span class="line">DETACH DATABASE &apos;Alias-Name&apos;;</span><br><span class="line"></span><br><span class="line">SQLite DISTINCT 子句：</span><br><span class="line"></span><br><span class="line">SELECT DISTINCT column1, column2....columnN</span><br><span class="line">FROM   table_name;</span><br><span class="line"></span><br><span class="line">SQLite DROP INDEX 语句：</span><br><span class="line"></span><br><span class="line">DROP INDEX database_name.index_name;</span><br><span class="line"></span><br><span class="line">SQLite DROP TABLE 语句：</span><br><span class="line"></span><br><span class="line">DROP TABLE database_name.table_name;</span><br><span class="line"></span><br><span class="line">SQLite DROP VIEW 语句：</span><br><span class="line"></span><br><span class="line">DROP VIEW view_name;</span><br><span class="line"></span><br><span class="line">SQLite DROP TRIGGER 语句：</span><br><span class="line"></span><br><span class="line">DROP TRIGGER trigger_name</span><br><span class="line"></span><br><span class="line">SQLite EXISTS 子句：</span><br><span class="line"></span><br><span class="line">SELECT column1, column2....columnN</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  column_name EXISTS (SELECT * FROM   table_name );</span><br><span class="line"></span><br><span class="line">SQLite EXPLAIN 语句：</span><br><span class="line"></span><br><span class="line">EXPLAIN INSERT statement...;</span><br><span class="line">or </span><br><span class="line">EXPLAIN QUERY PLAN SELECT statement...;</span><br><span class="line"></span><br><span class="line">SQLite GLOB 子句：</span><br><span class="line"></span><br><span class="line">SELECT column1, column2....columnN</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  column_name GLOB &#123; PATTERN &#125;;</span><br><span class="line"></span><br><span class="line">SQLite GROUP BY 子句：</span><br><span class="line"></span><br><span class="line">SELECT SUM(column_name)</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  CONDITION</span><br><span class="line">GROUP BY column_name;</span><br><span class="line"></span><br><span class="line">SQLite HAVING 子句：</span><br><span class="line"></span><br><span class="line">SELECT SUM(column_name)</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  CONDITION</span><br><span class="line">GROUP BY column_name</span><br><span class="line">HAVING (arithematic function condition);</span><br><span class="line"></span><br><span class="line">SQLite INSERT INTO 语句：</span><br><span class="line"></span><br><span class="line">INSERT INTO table_name( column1, column2....columnN)</span><br><span class="line">VALUES ( value1, value2....valueN);</span><br><span class="line"></span><br><span class="line">SQLite IN 子句：</span><br><span class="line"></span><br><span class="line">SELECT column1, column2....columnN</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  column_name IN (val-1, val-2,...val-N);</span><br><span class="line"></span><br><span class="line">SQLite Like 子句：</span><br><span class="line"></span><br><span class="line">SELECT column1, column2....columnN</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  column_name LIKE &#123; PATTERN &#125;;</span><br><span class="line"></span><br><span class="line">SQLite NOT IN 子句：</span><br><span class="line"></span><br><span class="line">SELECT column1, column2....columnN</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  column_name NOT IN (val-1, val-2,...val-N);</span><br><span class="line"></span><br><span class="line">SQLite ORDER BY 子句：</span><br><span class="line"></span><br><span class="line">SELECT column1, column2....columnN</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  CONDITION</span><br><span class="line">ORDER BY column_name &#123;ASC|DESC&#125;;</span><br><span class="line"></span><br><span class="line">SQLite PRAGMA 语句：</span><br><span class="line"></span><br><span class="line">PRAGMA pragma_name;</span><br><span class="line"></span><br><span class="line">For example:</span><br><span class="line">PRAGMA page_size;</span><br><span class="line">PRAGMA cache_size = 1024;</span><br><span class="line">PRAGMA table_info(table_name);</span><br><span class="line"></span><br><span class="line">SQLite RELEASE SAVEPOINT 语句：</span><br><span class="line"></span><br><span class="line">RELEASE savepoint_name;</span><br><span class="line"></span><br><span class="line">SQLite REINDEX 语句：</span><br><span class="line"></span><br><span class="line">REINDEX collation_name;</span><br><span class="line">REINDEX database_name.index_name;</span><br><span class="line">REINDEX database_name.table_name;</span><br><span class="line"></span><br><span class="line">SQLite ROLLBACK 语句：</span><br><span class="line"></span><br><span class="line">ROLLBACK;</span><br><span class="line">or</span><br><span class="line">ROLLBACK TO SAVEPOINT savepoint_name;</span><br><span class="line"></span><br><span class="line">SQLite SAVEPOINT 语句：</span><br><span class="line"></span><br><span class="line">SAVEPOINT savepoint_name;</span><br><span class="line"></span><br><span class="line">SQLite SELECT 语句：</span><br><span class="line"></span><br><span class="line">SELECT column1, column2....columnN</span><br><span class="line">FROM   table_name;</span><br><span class="line"></span><br><span class="line">SQLite UPDATE 语句：</span><br><span class="line"></span><br><span class="line">UPDATE table_name</span><br><span class="line">SET column1 = value1, column2 = value2....columnN=valueN</span><br><span class="line">[ WHERE  CONDITION ];</span><br><span class="line"></span><br><span class="line">SQLite VACUUM 语句：</span><br><span class="line"></span><br><span class="line">VACUUM;</span><br><span class="line">SQLite WHERE 子句：</span><br><span class="line">SELECT column1, column2....columnN</span><br><span class="line">FROM   table_name</span><br><span class="line">WHERE  CONDITION;</span><br></pre></td></tr></table></figure>
+<h1 id="Chapter-4"><a href="#Chapter-4" class="headerlink" title="Chapter 4"></a>Chapter 4</h1><h2 id="SQLite-数据类型"><a href="#SQLite-数据类型" class="headerlink" title="SQLite 数据类型"></a>SQLite 数据类型</h2><p>SQLite 数据类型是一个用来指定任何对象的数据类型的属性。SQLite 中的每一列，每个变量和表达式都有相关的数据类型。</p>
+<p>您可以在创建表的同时使用这些数据类型。SQLite 使用一个更普遍的动态类型系统。在 SQLite 中，值的数据类型与值本身是相关的，而不是与它的容器相关。</p>
+<h2 id="SQLite-存储类"><a href="#SQLite-存储类" class="headerlink" title="SQLite 存储类"></a>SQLite 存储类</h2><p>每个存储在 SQLite 数据库中的值都具有以下存储类之一：</p>
+<table>
+<thead>
+<tr>
+<th>存储类</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NULL</td>
+<td>值是一个 NULL 值。</td>
+</tr>
+<tr>
+<td>INTEGER</td>
+<td>值是一个带符号的整数，根据值的大小存储在 1、2、3、4、6 或 8 字节中</td>
+</tr>
+<tr>
+<td>REAL</td>
+<td>值是一个浮点值，存储为 8 字节的 IEEE 浮点数字。</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>值是一个文本字符串，使用数据库编码（UTF-8、UTF-16BE 或 UTF-16LE）存储。</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>值是一个 blob 数据，完全根据它的输入存储。</td>
+</tr>
+</tbody>
+</table>
+<p>SQLite 的存储类稍微比数据类型更普遍。INTEGER 存储类，例如，包含 6 种不同的不同长度的整数数据类型。</p>
+<h2 id="SQLite-亲和-Affinity-类型"><a href="#SQLite-亲和-Affinity-类型" class="headerlink" title="SQLite 亲和(Affinity)类型"></a>SQLite 亲和(Affinity)类型</h2><p>SQLite支持列的亲和类型概念。任何列仍然可以存储任何类型的数据，当数据插入时，该字段的数据将会优先采用亲缘类型作为该值的存储方式。SQLite目前的版本支持以下五种亲缘类型：</p>
+<ol>
+<li>亲和类型    描述</li>
+<li>TEXT    数值型数据在被插入之前，需要先被转换为文本格式，之后再插入到目标字段中。</li>
+<li>NUMERIC    当文本数据被插入到亲缘性为NUMERIC的字段中时，如果转换操作不会导致数据信息丢失以及完全可逆，那么SQLite就会将该文本数据转换为INTEGER或REAL类型的数据，如果转换失败，SQLite仍会以TEXT方式存储该数据。对于NULL或BLOB类型的新数据，SQLite将不做任何转换，直接以NULL或BLOB的方式存储该数据。需要额外说明的是，对于浮点格式的常量文本，如”30000.0”，如果该值可以转换为INTEGER同时又不会丢失数值信息，那么SQLite就会将其转换为INTEGER的存储方式。</li>
+<li>INTEGER    对于亲缘类型为INTEGER的字段，其规则等同于NUMERIC，唯一差别是在执行CAST表达式时。</li>
+<li>REAL    其规则基本等同于NUMERIC，唯一的差别是不会将”30000.0”这样的文本数据转换为INTEGER存储方式。</li>
+<li>NONE    不做任何的转换，直接以该数据所属的数据类型进行存储。</li>
+</ol>
+<h2 id="SQLite-亲和类型-Affinity-及类型名称"><a href="#SQLite-亲和类型-Affinity-及类型名称" class="headerlink" title="SQLite 亲和类型(Affinity)及类型名称"></a>SQLite 亲和类型(Affinity)及类型名称</h2><p>下表列出了当创建 SQLite3 表时可使用的各种数据类型名称，同时也显示了相应的亲和类型：</p>
+<p><strong>亲和类型:</strong>INTEGER<br><strong>数据类型:</strong></p>
+<ul>
+<li>INT</li>
+<li>INTEGER</li>
+<li>TINYINT</li>
+<li>SMALLINT</li>
+<li>MEDIUMINT</li>
+<li>BIGINT</li>
+<li>UNSIGNED BIG INT</li>
+<li>INT2</li>
+<li>INT8</li>
+</ul>
+<p><strong>亲和类型:</strong>TEXT<br><strong>数据类型:</strong></p>
+<ul>
+<li>CHARACTER(20)</li>
+<li>VARCHAR(255)</li>
+<li>VARYING CHARACTER(255)</li>
+<li>NCHAR(55)</li>
+<li>NATIVE CHARACTER(70)</li>
+<li>NVARCHAR(100)</li>
+<li>TEXT</li>
+<li>CLOB</li>
+</ul>
+<p><strong>亲和类型:</strong>NONE<br><strong>数据类型:</strong></p>
+<ul>
+<li>BLOB</li>
+<li>no datatype specified</li>
+</ul>
+<p><strong>亲和类型:</strong>REAL<br><strong>数据类型:</strong></p>
+<ul>
+<li>REAL</li>
+<li>DOUBLE</li>
+<li>DOUBLE PRECISION</li>
+<li>FLOAT</li>
+</ul>
+<p><strong>亲和类型:</strong>NUMERIC<br><strong>数据类型:</strong></p>
+<ul>
+<li>NUMERIC</li>
+<li>DECIMAL(10,5)</li>
+<li>BOOLEAN</li>
+<li>DATE</li>
+<li>DATETIME</li>
+</ul>
+<h2 id="Boolean-数据类型"><a href="#Boolean-数据类型" class="headerlink" title="Boolean 数据类型"></a>Boolean 数据类型</h2><p>SQLite 没有单独的 Boolean 存储类。相反，布尔值被存储为整数 0（false）和 1（true）。</p>
+<h2 id="Date-与-Time-数据类型"><a href="#Date-与-Time-数据类型" class="headerlink" title="Date 与 Time 数据类型"></a>Date 与 Time 数据类型</h2><p>SQLite 没有一个单独的用于存储日期和/或时间的存储类，但 SQLite 能够把日期和时间存储为 TEXT、REAL 或 INTEGER 值。</p>
+<ol>
+<li>存储类    日期格式</li>
+<li>TEXT    格式为 “YYYY-MM-DD HH:MM:SS.SSS” 的日期。</li>
+<li>REAL    从公元前 4714 年 11 月 24 日格林尼治时间的正午开始算起的天数。</li>
+<li>INTEGER    从 1970-01-01 00:00:00 UTC 算起的秒数。</li>
+</ol>
+<p>您可以以任何上述格式来存储日期和时间，并且可以使用内置的日期和时间函数来自由转换不同格式。</p>
+<h1 id="Chapter-5"><a href="#Chapter-5" class="headerlink" title="Chapter 5"></a>Chapter 5</h1><h2 id="SQLite-创建数据库"><a href="#SQLite-创建数据库" class="headerlink" title="SQLite 创建数据库"></a>SQLite 创建数据库</h2><p>SQLite 的 sqlite3 命令被用来创建新的 SQLite 数据库。您不需要任何特殊的权限即可创建一个数据。</p>
+<p>语法<br>sqlite3 命令的基本语法如下：</p>
+<p><strong>$sqlite3 DatabaseName.db</strong></p>
+<p>通常情况下，数据库名称在 RDBMS 内应该是唯一的。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>如果您想创建一个新的数据库 &lt; testDB.db &gt;，SQLITE3 语句如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$sqlite3 testDB.db</span><br><span class="line">SQLite version 3.7.15.2 2013-01-09 11:53:05</span><br><span class="line">Enter &quot;.help&quot; for instructions</span><br><span class="line">Enter SQL statements terminated with a &quot;;&quot;</span><br><span class="line">sqlite&gt;</span><br></pre></td></tr></table></figure></p>
+<p>上面的命令将在<strong>当前目录</strong>下创建一个文件 testDB.db。该文件将被 SQLite 引擎用作数据库。如果您已经注意到 sqlite3 命令在成功创建数据库文件之后，将提供一个 sqlite&gt; 提示符。</p>
+<p>一旦数据库被创建，您就可以使用 SQLite 的 .databases 命令来<strong>检查它是否在数据库列表中</strong>，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.databases</span><br><span class="line">seq  name             file</span><br><span class="line">---  ---------------  ----------------------</span><br><span class="line">0    main             /home/sqlite/testDB.db</span><br></pre></td></tr></table></figure></p>
+<p>您可以使用 SQLite .quit 命令退出 sqlite 提示符，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.quit</span><br><span class="line">$</span><br></pre></td></tr></table></figure></p>
+<h2 id="dump-命令"><a href="#dump-命令" class="headerlink" title=".dump 命令"></a>.dump 命令</h2><p>您可以在命令提示符中使用 <strong>SQLite .dump</strong> 点命令来<strong>导出完整的数据库在一个文本文件</strong>中，如下所示：</p>
+<p><strong>$sqlite3 testDB.db .dump &gt; testDB.sql</strong></p>
+<p>上面的命令将转换整个 testDB.db 数据库的内容到 SQLite 的语句中，并将其转储到 ASCII 文本文件 testDB.sql 中。您可以通过简单的方式从生成的 testDB.sql 恢复，如下所示：</p>
+<p><strong>$sqlite3 testDB.db &lt; testDB.sql</strong></p>
+<h1 id="Chapter-6"><a href="#Chapter-6" class="headerlink" title="Chapter 6"></a>Chapter 6</h1><h2 id="SQLite-附加数据库"><a href="#SQLite-附加数据库" class="headerlink" title="SQLite 附加数据库"></a>SQLite 附加数据库</h2><p>假设这样一种情况，当在<strong>同一时间有多个数据库可用，您想使用其中的任何一个</strong>。SQLite 的<strong> ATTACH DATABASE</strong> 语句是用来选择一个特定的数据库，使用该命令后，所有的 SQLite 语句将在附加的数据库下执行。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>SQLite 的 ATTACH DATABASE 语句的基本语法如下：</p>
+<p><strong>ATTACH DATABASE ‘DatabaseName’ As ‘Alias-Name’;</strong><br>如果数据库尚未被创建，上面的命令将创建一个数据库，如果数据库已存在，则把数据库文件名称与逻辑数据库 ‘Alias-Name’ 绑定在一起。</p>
+<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><p>如果想附加一个现有的数据库 testDB.db，则 ATTACH DATABASE 语句将如下所示：</p>
+<p><strong>sqlite&gt; ATTACH DATABASE ‘testDB.db’ as ‘test’;</strong><br>使用 SQLite .database 命令来显示附加的数据库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .database</span><br><span class="line">seq  name             file</span><br><span class="line">---  ---------------  ----------------------</span><br><span class="line">0    main             /home/sqlite/testDB.db</span><br><span class="line">2    test             /home/sqlite/testDB.db</span><br></pre></td></tr></table></figure></p>
+<p>数据库名称 main 和 temp 被保留用于主数据库和存储临时表及其他临时数据对象的数据库。这两个数据库名称可用于每个数据库连接，且不应该被用于附加，否则将得到一个警告消息，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;  ATTACH DATABASE &apos;testDB.db&apos; as &apos;TEMP&apos;;</span><br><span class="line">Error: database TEMP is already in use</span><br><span class="line">sqlite&gt;  ATTACH DATABASE &apos;testDB.db&apos; as &apos;main&apos;;</span><br><span class="line">Error: database main is already in use；</span><br></pre></td></tr></table></figure></p>
+<h1 id="Chapter-7"><a href="#Chapter-7" class="headerlink" title="Chapter 7"></a>Chapter 7</h1><h2 id="SQLite-分离数据库"><a href="#SQLite-分离数据库" class="headerlink" title="SQLite 分离数据库"></a>SQLite 分离数据库</h2><p>SQLite的 DETACH DTABASE 语句是用来把命名数据库从一个数据库连接分离和游离出来，连接是之前使用 ATTACH 语句附加的。如果同一个数据库文件已经被附加上多个别名，DETACH 命令将只断开给定名称的连接，而其余的仍然有效。您无法分离 main 或 temp 数据库。</p>
+<ul>
+<li>如果数据库是在内存中或者是临时数据库，则该数据库将被摧毁，且内容将会丢失。</li>
+</ul>
+<h2 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h2><p>SQLite 的 DETACH DATABASE ‘Alias-Name’ 语句的基本语法如下：</p>
+<p><strong>DETACH DATABASE ‘Alias-Name’;</strong></p>
+<p>在这里，’Alias-Name’ 与您之前使用 ATTACH 语句附加数据库时所用到的别名相同。</p>
+<h2 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h2><p>假设在前面的章节中您已经创建了一个数据库，并给它附加了 ‘test’ 和 ‘currentDB’，使用 .database 命令，我们可以看到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.databases</span><br><span class="line">seq  name             file</span><br><span class="line">---  ---------------  ----------------------</span><br><span class="line">0    main             /home/sqlite/testDB.db</span><br><span class="line">2    test             /home/sqlite/testDB.db</span><br><span class="line">3    currentDB        /home/sqlite/testDB.db</span><br></pre></td></tr></table></figure></p>
+<p>现在，让我们尝试把 ‘currentDB’ 从 testDB.db 中分离出来，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; DETACH DATABASE &apos;currentDB&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>现在，如果检查当前附加的数据库，您会发现，testDB.db 仍与 ‘test’ 和 ‘main’ 保持连接。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.databases</span><br><span class="line">seq  name             file</span><br><span class="line">---  ---------------  ----------------------</span><br><span class="line">0    main             /home/sqlite/testDB.db</span><br><span class="line">2    test             /home/sqlite/testDB.db</span><br></pre></td></tr></table></figure></p>
+<h1 id="Chapter-8"><a href="#Chapter-8" class="headerlink" title="Chapter 8"></a>Chapter 8</h1><h2 id="SQLite-创建表"><a href="#SQLite-创建表" class="headerlink" title="SQLite 创建表"></a>SQLite 创建表</h2><p>SQLite 的 <strong>CREATE TABLE</strong> 语句用于在任何给定的数据库创建一个新表。创建基本表，涉及到命名表、定义列及每一列的数据类型。</p>
+<h2 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h2><p>CREATE TABLE 语句的基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE database_name.table_name(</span><br><span class="line">   column1 datatype  PRIMARY KEY(one or more columns),</span><br><span class="line">   column2 datatype,</span><br><span class="line">   column3 datatype,</span><br><span class="line">   .....</span><br><span class="line">   columnN datatype,</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>CREATE TABLE 是告诉数据库系统创建一个新表的关键字。CREATE TABLE 语句后跟着表的唯一的名称或标识。您也可以选择指定带有 table_name 的 database_name。</p>
+<h2 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h2><p>下面是一个实例，它创建了一个 COMPANY 表，ID 作为主键，NOT NULL 的约束表示在表中创建纪录时这些字段不能为 NULL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; CREATE TABLE COMPANY(</span><br><span class="line">   ID INT PRIMARY KEY     NOT NULL,</span><br><span class="line">   NAME           TEXT    NOT NULL,</span><br><span class="line">   AGE            INT     NOT NULL,</span><br><span class="line">   ADDRESS        CHAR(50),</span><br><span class="line">   SALARY         REAL</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>让我们再创建一个表，我们将在随后章节的练习中使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; CREATE TABLE DEPARTMENT(</span><br><span class="line">   ID INT PRIMARY KEY      NOT NULL,</span><br><span class="line">   DEPT           CHAR(50) NOT NULL,</span><br><span class="line">   EMP_ID         INT      NOT NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>您可以使用 SQLIte 命令中的 .tables 命令来验证表是否已成功创建，该命令用于列出附加数据库中的所有表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.tables</span><br><span class="line">COMPANY     DEPARTMENT</span><br></pre></td></tr></table></figure></p>
+<p>在这里，可以看到我们刚创建的两张表 COMPANY、 DEPARTMENT。</p>
+<p>您可以使用 SQLite .schema 命令得到表的完整信息，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.schema COMPANY</span><br><span class="line">CREATE TABLE COMPANY(</span><br><span class="line">   ID INT PRIMARY KEY     NOT NULL,</span><br><span class="line">   NAME           TEXT    NOT NULL,</span><br><span class="line">   AGE            INT     NOT NULL,</span><br><span class="line">   ADDRESS        CHAR(50),</span><br><span class="line">   SALARY         REAL</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<h1 id="Chapter-9"><a href="#Chapter-9" class="headerlink" title="Chapter 9"></a>Chapter 9</h1><h2 id="SQLite-删除表"><a href="#SQLite-删除表" class="headerlink" title="SQLite 删除表"></a>SQLite 删除表</h2><p>SQLite 的 DROP TABLE 语句用来删除表定义及其所有相关数据、索引、触发器、约束和该表的权限规范。</p>
+<p><strong>使用此命令时要特别注意，因为一旦一个表被删除，表中所有信息也将永远丢失。</strong></p>
+<h2 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h2><p>DROP TABLE 语句的基本语法如下。您可以选择指定带有表名的数据库名称，如下所示：</p>
+<p><strong>DROP TABLE database_name.table_name;</strong></p>
+<h2 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h2><p>让我们先确认 COMPANY 表已经存在，然后我们将其从数据库中删除。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.tables</span><br><span class="line">COMPANY       test.COMPANY</span><br></pre></td></tr></table></figure></p>
+<p>这意味着 COMPANY 表已存在数据库中，接下来让我们把它从数据库中删除，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;DROP TABLE COMPANY;</span><br><span class="line">sqlite&gt;</span><br></pre></td></tr></table></figure></p>
+<p>现在，如果尝试 .TABLES 命令，那么将无法找到 COMPANY 表了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.tables</span><br><span class="line">sqlite&gt;</span><br></pre></td></tr></table></figure></p>
+<p>显示结果为空，意味着已经成功从数据库删除表。</p>
+<h1 id="Chapter-10"><a href="#Chapter-10" class="headerlink" title="Chapter 10"></a>Chapter 10</h1><h2 id="SQLite-Insert-语句"><a href="#SQLite-Insert-语句" class="headerlink" title="SQLite Insert 语句"></a>SQLite Insert 语句</h2><p>SQLite 的 INSERT INTO 语句用于<strong>向数据库的某个表中添加新的数据行</strong>。</p>
+<h2 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h2><p>INSERT INTO 语句有两种基本语法，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO TABLE_NAME [(column1, column2, column3,...columnN)]  </span><br><span class="line">VALUES (value1, value2, value3,...valueN);</span><br></pre></td></tr></table></figure></p>
+<p>在这里，column1, column2,…columnN 是要插入数据的表中的列的名称。</p>
+<p>如果要为表中的所有列添加值，您也可以不需要在 SQLite 查询中指定列名称。但要确保值的顺序与列在表中的顺序一致。SQLite 的 INSERT INTO 语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO TABLE_NAME VALUES (value1,value2,value3,...valueN);</span><br></pre></td></tr></table></figure></p>
+<h2 id="实例-5"><a href="#实例-5" class="headerlink" title="实例"></a>实例</h2><p>假设您已经在 testDB.db 中创建了 COMPANY表，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; CREATE TABLE COMPANY(</span><br><span class="line">   ID INT PRIMARY KEY     NOT NULL,</span><br><span class="line">   NAME           TEXT    NOT NULL,</span><br><span class="line">   AGE            INT     NOT NULL,</span><br><span class="line">   ADDRESS        CHAR(50),</span><br><span class="line">   SALARY         REAL</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>现在，下面的语句将在 COMPANY 表中创建六个记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES (1, &apos;Paul&apos;, 32, &apos;California&apos;, 20000.00 );</span><br><span class="line"></span><br><span class="line">INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES (2, &apos;Allen&apos;, 25, &apos;Texas&apos;, 15000.00 );</span><br><span class="line"></span><br><span class="line">INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES (3, &apos;Teddy&apos;, 23, &apos;Norway&apos;, 20000.00 );</span><br><span class="line"></span><br><span class="line">INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES (4, &apos;Mark&apos;, 25, &apos;Rich-Mond &apos;, 65000.00 );</span><br><span class="line"></span><br><span class="line">INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES (5, &apos;David&apos;, 27, &apos;Texas&apos;, 85000.00 );</span><br><span class="line"></span><br><span class="line">INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES (6, &apos;Kim&apos;, 22, &apos;South-Hall&apos;, 45000.00 );</span><br></pre></td></tr></table></figure></p>
+<p>也可以使用第二种语法在 COMPANY 表中创建一个记录，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO COMPANY VALUES (7, &apos;James&apos;, 24, &apos;Houston&apos;, 10000.00 );</span><br></pre></td></tr></table></figure></p>
+<p>上面的所有语句将在 COMPANY 表中创建下列记录。下一章会教您如何从一个表中显示所有这些记录。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用一个表来填充另一个表"><a href="#使用一个表来填充另一个表" class="headerlink" title="使用一个表来填充另一个表"></a>使用一个表来填充另一个表</h2><p>可以通过在一个有一组字段的表上使用 <strong>select</strong> 语句，填充数据到另一个表中。下面是语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO first_table_name [(column1, column2, ... columnN)] </span><br><span class="line">   SELECT column1, column2, ...columnN </span><br><span class="line">   FROM second_table_name</span><br><span class="line">   [WHERE condition];</span><br></pre></td></tr></table></figure></p>
+<h1 id="Chapter-11"><a href="#Chapter-11" class="headerlink" title="Chapter 11"></a>Chapter 11</h1><h2 id="SQLite-Select-语句"><a href="#SQLite-Select-语句" class="headerlink" title="SQLite Select 语句"></a>SQLite Select 语句</h2><p>SQLite 的 SELECT 语句用于从 SQLite 数据库表中获取数据，以结果表的形式返回数据。这些结果表也被称为结果集。</p>
+<h2 id="语法-5"><a href="#语法-5" class="headerlink" title="语法"></a>语法</h2><p>SQLite 的 SELECT 语句的基本语法如下：</p>
+<p><strong>SELECT column1, column2, columnN FROM table_name;</strong><br>在这里，column1, column2…是表的字段，他们的值即是您要获取的。如果您想获取所有可用的字段，那么可以使用下面的语法：</p>
+<p><strong>SELECT * FROM table_name;</strong></p>
+<h2 id="实例-6"><a href="#实例-6" class="headerlink" title="实例"></a>实例</h2><p>假设 COMPANY 表有以下记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br></pre></td></tr></table></figure></p>
+<p>下面是一个实例，使用 SELECT 语句获取并显示所有这些记录。在这里，前三个命令被用来设置正确格式化的输出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.header on</span><br><span class="line">sqlite&gt;.mode column</span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY;</span><br></pre></td></tr></table></figure></p>
+<p>最后，将得到以下的结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br></pre></td></tr></table></figure></p>
+<p>如果只想获取 COMPANY 表中指定的字段，则使用下面的查询：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT ID, NAME, SALARY FROM COMPANY;</span><br></pre></td></tr></table></figure></p>
+<p>上面的查询会产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME        SALARY</span><br><span class="line">----------  ----------  ----------</span><br><span class="line">1           Paul        20000.0</span><br><span class="line">2           Allen       15000.0</span><br><span class="line">3           Teddy       20000.0</span><br><span class="line">4           Mark        65000.0</span><br><span class="line">5           David       85000.0</span><br><span class="line">6           Kim         45000.0</span><br><span class="line">7           James       10000.0</span><br></pre></td></tr></table></figure></p>
+<p>设置输出列的宽度<br>有时，由于要显示的列的默认宽度导致 .mode column，这种情况下，输出被截断。此时，您可以使用 .width num, num…. 命令设置显示列的宽度，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt;.width 10, 20, 10</span><br><span class="line">sqlite&gt;SELECT * FROM COMPANY;</span><br></pre></td></tr></table></figure></p>
+<p>上面的 .width 命令设置第一列的宽度为 10，第二列的宽度为 20，第三列的宽度为 10。因此上述 SELECT 语句将得到以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME                  AGE         ADDRESS     SALARY</span><br><span class="line">----------  --------------------  ----------  ----------  ----------</span><br><span class="line">1           Paul                  32          California  20000.0</span><br><span class="line">2           Allen                 25          Texas       15000.0</span><br><span class="line">3           Teddy                 23          Norway      20000.0</span><br><span class="line">4           Mark                  25          Rich-Mond   65000.0</span><br><span class="line">5           David                 27          Texas       85000.0</span><br><span class="line">6           Kim                   22          South-Hall  45000.0</span><br><span class="line">7           James                 24          Houston     10000.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="Schema-信息"><a href="#Schema-信息" class="headerlink" title="Schema 信息"></a>Schema 信息</h2><p>因为所有的点命令只在 SQLite 提示符中可用，所以当您进行带有 SQLite 的编程时，您要使用下面的带有 sqlite_master 表的 SELECT 语句来列出所有在数据库中创建的表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT tbl_name FROM sqlite_master WHERE type = &apos;table&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>假设在 testDB.db 中已经存在唯一的 COMPANY 表，则将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tbl_name</span><br><span class="line">----------</span><br><span class="line">COMPANY</span><br></pre></td></tr></table></figure></p>
+<p>您可以列出关于 COMPANY 表的完整信息，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT sql FROM sqlite_master WHERE type = &apos;table&apos; AND tbl_name = &apos;COMPANY&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>假设在 testDB.db 中已经存在唯一的 COMPANY 表，则将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE COMPANY(</span><br><span class="line">   ID INT PRIMARY KEY     NOT NULL,</span><br><span class="line">   NAME           TEXT    NOT NULL,</span><br><span class="line">   AGE            INT     NOT NULL,</span><br><span class="line">   ADDRESS        CHAR(50),</span><br><span class="line">   SALARY         REAL</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h1 id="Chapter-12"><a href="#Chapter-12" class="headerlink" title="Chapter 12"></a>Chapter 12</h1><h2 id="SQLite-运算符"><a href="#SQLite-运算符" class="headerlink" title="SQLite 运算符"></a>SQLite 运算符</h2><h2 id="SQLite-运算符是什么？"><a href="#SQLite-运算符是什么？" class="headerlink" title="SQLite 运算符是什么？"></a>SQLite 运算符是什么？</h2><p>运算符是一个<strong>保留字或字符</strong>，主要用于 SQLite 语句的 <strong>WHERE</strong> 子句中执行操作，如<strong>比较和算术运算</strong>。</p>
+<p><strong>运算符用于指定 SQLite 语句中的条件</strong>，并在语句中<strong>连接多个条件</strong>。</p>
+<p><strong>1. 算术运算符</strong><br><strong>2. 比较运算符</strong><br><strong>3. 逻辑运算符</strong><br><strong>4. 位运算符</strong></p>
+<h2 id="SQLite-算术运算符"><a href="#SQLite-算术运算符" class="headerlink" title="SQLite 算术运算符"></a>SQLite 算术运算符</h2><ol>
+<li>“+”    加法  把运算符两边的值相加    a + b 将得到 30</li>
+<li>“-”    减法  左操作数减去右操作数    a - b 将得到 -10</li>
+<li>“<em>”    乘法  把运算符两边的值相乘    a </em> b 将得到 200</li>
+<li>“/”    除法  左操作数除以右操作数    b / a 将得到 2</li>
+<li>“%”    取模  左操作数除以右操作数后得到的余数    b % a will give 0</li>
+</ol>
+<h2 id="实例-7"><a href="#实例-7" class="headerlink" title="实例"></a>实例</h2><p>下面是 SQLite 算术运算符的简单实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .mode line</span><br><span class="line">sqlite&gt; select 10 + 20;</span><br><span class="line">10 + 20 = 30</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sqlite&gt; select 10 - 20;</span><br><span class="line">10 - 20 = -10</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sqlite&gt; select 10 * 20;</span><br><span class="line">10 * 20 = 200</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sqlite&gt; select 10 / 5;</span><br><span class="line">10 / 5 = 2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sqlite&gt; select 12 %  5;</span><br><span class="line">12 %  5 = 2</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-比较运算符"><a href="#SQLite-比较运算符" class="headerlink" title="SQLite 比较运算符"></a>SQLite 比较运算符</h2><ol>
+<li><strong>==</strong>    检查两个操作数的值是否相等，如果相等则条件为真。    (a == b) 不为真。</li>
+<li><strong>=</strong>    检查两个操作数的值是否相等，如果相等则条件为真。    (a = b) 不为真。</li>
+<li><strong>!=</strong>    检查两个操作数的值是否相等，如果不相等则条件为真。    (a != b) 为真。</li>
+<li><strong>&lt;&gt;</strong>    检查两个操作数的值是否相等，如果不相等则条件为真。    (a &lt;&gt; b) 为真。</li>
+<li><strong>&gt;</strong>    检查左操作数的值是否大于右操作数的值，如果是则条件为真。    (a &gt; b) 不为真。</li>
+<li><strong>&lt;</strong>    检查左操作数的值是否小于右操作数的值，如果是则条件为真。    (a &lt; b) 为真。</li>
+<li><strong>&gt;=</strong>    检查左操作数的值是否大于等于右操作数的值，如果是则条件为真。    (a &gt;= b) 不为真。</li>
+<li><strong>&lt;=</strong>    检查左操作数的值是否小于等于右操作数的值，如果是则条件为真。    (a &lt;= b) 为真。</li>
+<li><strong>!&lt;</strong>    检查左操作数的值是否不小于右操作数的值，如果是则条件为真。    (a !&lt; b) 为假。</li>
+<li><strong>!&gt;</strong>    检查左操作数的值是否不大于右操作数的值，如果是则条件为真。    (a !&gt; b) 为真。</li>
+</ol>
+<h2 id="实例-8"><a href="#实例-8" class="headerlink" title="实例"></a>实例</h2><p>假设 COMPANY 表有以下记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br></pre></td></tr></table></figure></p>
+<p>下面的实例演示了各种 SQLite 比较运算符的用法。</p>
+<p>WHERE 子句是用来设置 SELECT 语句的条件语句。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">下面的 SELECT 语句列出了 SALARY 大于 50,000.00 的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY WHERE SALARY &gt; 50000;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">下面的 SELECT 语句列出了 SALARY 等于 20,000.00 的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt;  SELECT * FROM COMPANY WHERE SALARY = 20000;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">下面的 SELECT 语句列出了 SALARY 不等于 20,000.00 的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt;  SELECT * FROM COMPANY WHERE SALARY != 20000;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br><span class="line">下面的 SELECT 语句列出了 SALARY 不等于 20,000.00 的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY WHERE SALARY &lt;&gt; 20000;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br><span class="line">下面的 SELECT 语句列出了 SALARY 大于等于 65,000.00 的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY WHERE SALARY &gt;= 65000;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-逻辑运算符"><a href="#SQLite-逻辑运算符" class="headerlink" title="SQLite 逻辑运算符"></a>SQLite 逻辑运算符</h2><ol>
+<li>AND    AND 运算符允许在一个 SQL 语句的 WHERE 子句中的多个条件的存在。</li>
+<li>BETWEEN    BETWEEN 运算符用于在给定最小值和最大值范围内的一系列值中搜索值。</li>
+<li>EXISTS    EXISTS 运算符用于在满足一定条件的指定表中搜索行的存在。</li>
+<li>IN    IN 运算符用于把某个值与一系列指定列表的值进行比较。</li>
+<li>NOT IN    IN 运算符的对立面，用于把某个值与不在一系列指定列表的值进行比较。</li>
+<li>LIKE    LIKE 运算符用于把某个值与使用通配符运算符的相似值进行比较。</li>
+<li>GLOB    GLOB 运算符用于把某个值与使用通配符运算符的相似值进行比较。GLOB 与 LIKE 不同之处在于，它是大小写敏感的。</li>
+<li>NOT    NOT 运算符是所用的逻辑运算符的对立面。比如 NOT EXISTS、NOT BETWEEN、NOT IN，等等。它是否定运算符。</li>
+<li>OR    OR 运算符用于结合一个 SQL 语句的 WHERE 子句中的多个条件。</li>
+<li>IS NULL    NULL 运算符用于把某个值与 NULL 值进行比较。</li>
+<li>IS    IS 运算符与 = 相似。</li>
+<li>IS NOT    IS NOT 运算符与 != 相似。</li>
+<li>||    连接两个不同的字符串，得到一个新的字符串。</li>
+<li>UNIQUE    UNIQUE 运算符搜索指定表中的每一行，确保唯一性（无重复）。</li>
+</ol>
+<h2 id="实例-9"><a href="#实例-9" class="headerlink" title="实例"></a>实例</h2><p>假设 COMPANY 表有以下记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br></pre></td></tr></table></figure></p>
+<p>下面的实例演示了 SQLite 逻辑运算符的用法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">下面的 SELECT 语句列出了 AGE 大于等于 25 且工资大于等于 65000.00 的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY WHERE AGE &gt;= 25 AND SALARY &gt;= 65000;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">下面的 SELECT 语句列出了 AGE 大于等于 25 或工资大于等于 65000.00 的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY WHERE AGE &gt;= 25 OR SALARY &gt;= 65000;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">下面的 SELECT 语句列出了 AGE 不为 NULL 的所有记录，结果显示所有的记录，意味着没有一个记录的 AGE 等于 NULL：</span><br><span class="line"></span><br><span class="line">sqlite&gt;  SELECT * FROM COMPANY WHERE AGE IS NOT NULL;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br><span class="line">下面的 SELECT 语句列出了 NAME 以 &apos;Ki&apos; 开始的所有记录，&apos;Ki&apos; 之后的字符不做限制：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY WHERE NAME LIKE &apos;Ki%&apos;;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">下面的 SELECT 语句列出了 NAME 以 &apos;Ki&apos; 开始的所有记录，&apos;Ki&apos; 之后的字符不做限制：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY WHERE NAME GLOB &apos;Ki*&apos;;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">下面的 SELECT 语句列出了 AGE 的值为 25 或 27 的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY WHERE AGE IN ( 25, 27 );</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">下面的 SELECT 语句列出了 AGE 的值既不是 25 也不是 27 的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY WHERE AGE NOT IN ( 25, 27 );</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br><span class="line">下面的 SELECT 语句列出了 AGE 的值在 25 与 27 之间的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY WHERE AGE BETWEEN 25 AND 27;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">下面的 SELECT 语句使用 SQL 子查询，子查询查找 SALARY &gt; 65000 的带有 AGE 字段的所有记录，后边的 WHERE 子句与 EXISTS 运算符一起使用，列出了外查询中的 AGE 存在于子查询返回的结果中的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT AGE FROM COMPANY </span><br><span class="line">        WHERE EXISTS (SELECT AGE FROM COMPANY WHERE SALARY &gt; 65000);</span><br><span class="line">AGE</span><br><span class="line">----------</span><br><span class="line">32</span><br><span class="line">25</span><br><span class="line">23</span><br><span class="line">25</span><br><span class="line">27</span><br><span class="line">22</span><br><span class="line">24</span><br><span class="line">下面的 SELECT 语句使用 SQL 子查询，子查询查找 SALARY &gt; 65000 的带有 AGE 字段的所有记录，后边的 WHERE 子句与 &gt; 运算符一起使用，列出了外查询中的 AGE 大于子查询返回的结果中的年龄的所有记录：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT * FROM COMPANY </span><br><span class="line">        WHERE AGE &gt; (SELECT AGE FROM COMPANY WHERE SALARY &gt; 65000);</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-位运算符"><a href="#SQLite-位运算符" class="headerlink" title="SQLite 位运算符"></a>SQLite 位运算符</h2><p>位运算符作用于位，并逐位执行操作。</p>
+<h2 id="实例-10"><a href="#实例-10" class="headerlink" title="实例"></a>实例</h2><p>下面的实例演示了 SQLite 位运算符的用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; .mode line</span><br><span class="line">sqlite&gt; select 60 | 13;</span><br><span class="line">60 | 13 = 61</span><br><span class="line"></span><br><span class="line">sqlite&gt; select 60 &amp; 13;</span><br><span class="line">60 &amp; 13 = 12</span><br><span class="line"></span><br><span class="line">sqlite&gt;  select  (~60);</span><br><span class="line">(~60) = -61</span><br><span class="line"></span><br><span class="line">sqlite&gt;  select  (60 &lt;&lt; 2);</span><br><span class="line">(60 &lt;&lt; 2) = 240</span><br><span class="line"></span><br><span class="line">sqlite&gt;  select  (60 &gt;&gt; 2);</span><br><span class="line">(60 &gt;&gt; 2) = 15</span><br></pre></td></tr></table></figure></p>
+<h1 id="Chapter-13"><a href="#Chapter-13" class="headerlink" title="Chapter 13"></a>Chapter 13</h1><h2 id="SQLite-表达式"><a href="#SQLite-表达式" class="headerlink" title="SQLite 表达式"></a>SQLite 表达式</h2><p>表达式是一个或多个值、运算符和计算值的SQL函数的组合。</p>
+<p>SQL 表达式与公式类似，都写在查询语言中。</p>
+<h2 id="语法-6"><a href="#语法-6" class="headerlink" title="语法"></a>语法</h2><p>假设 SELECT 语句的基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT column1, column2, columnN </span><br><span class="line">FROM table_name </span><br><span class="line">WHERE [CONDITION | EXPRESSION];</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-布尔表达式"><a href="#SQLite-布尔表达式" class="headerlink" title="SQLite - 布尔表达式"></a>SQLite - 布尔表达式</h2><p>SQLite 的布尔表达式在匹配单个值的基础上获取数据。语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT column1, column2, columnN </span><br><span class="line">FROM table_name </span><br><span class="line">WHERE SINGLE VALUE MATCHING EXPRESSION;</span><br></pre></td></tr></table></figure></p>
+<p>假设 COMPANY 表有以下记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br></pre></td></tr></table></figure></p>
+<p>下面的实例演示了 SQLite 布尔表达式的用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT * FROM COMPANY WHERE SALARY = 10000;</span><br><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">4           James        24          Houston   10000.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-数值表达式"><a href="#SQLite-数值表达式" class="headerlink" title="SQLite - 数值表达式"></a>SQLite - 数值表达式</h2><h2 id="这些表达式用来执行查询中的任何数学运算。语法如下："><a href="#这些表达式用来执行查询中的任何数学运算。语法如下：" class="headerlink" title="这些表达式用来执行查询中的任何数学运算。语法如下："></a>这些表达式用来执行查询中的任何数学运算。语法如下：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT numerical_expression as  OPERATION_NAME</span><br><span class="line">[FROM table_name WHERE CONDITION] ;</span><br></pre></td></tr></table></figure>
+<p>在这里，numerical_expression 用于数学表达式或任何公式。下面的实例演示了 SQLite 数值表达式的用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT (15 + 6) AS ADDITION</span><br><span class="line">ADDITION = 21</span><br></pre></td></tr></table></figure></p>
+<p>有几个内置的函数，比如 avg()、sum()、count()，等等，执行被称为对一个表或一个特定的表列的汇总数据计算。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT COUNT(*) AS &quot;RECORDS&quot; FROM COMPANY; </span><br><span class="line">RECORDS = 7</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-日期表达式"><a href="#SQLite-日期表达式" class="headerlink" title="SQLite - 日期表达式"></a>SQLite - 日期表达式</h2><p>日期表达式返回当前系统日期和时间值，这些表达式将被用于各种数据操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT CURRENT_TIMESTAMP;</span><br><span class="line">2019-05-10 14:07:56</span><br></pre></td></tr></table></figure></p>
+<p>current_timestamp 得到的时间，时区不对，要想得到本地时间，试试下面这个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select datetime(&apos;now&apos;,&apos;localtime&apos;);</span><br><span class="line">2019-05-10 22:10:44</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/09/leetcode-301/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/09/leetcode-301/" itemprop="url">leetcode-301-Remove Invalid Parentheses</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-09T22:02:29+08:00">
+                2019-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/Array/" itemprop="url" rel="index">
+                    <span itemprop="name">Array</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/09/leetcode-301/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/09/leetcode-301/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  252
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/09/leetcode-301/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/09/leetcode-297/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/09/leetcode-297/" itemprop="url">leetcode-297-Serialize and Deserialize Binary Tree</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-09T21:42:31+08:00">
+                2019-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/Tree/" itemprop="url" rel="index">
+                    <span itemprop="name">Tree</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/09/leetcode-297/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/09/leetcode-297/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  318
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.</p>
+<p>Design an algorithm to serialize and deserialize a binary tree. There is no restriction on how your serialization/deserialization algorithm should work. You just need to ensure that a binary tree can be serialized to a string and this string can be deserialized to the original tree structure.<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/09/leetcode-297/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/09/leetcode-128/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1695,633 +2606,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/07/leetcode-312/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/07/leetcode-312/" itemprop="url">leetcode-312-Burst Balloons</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-07T11:02:33+08:00">
-                2019-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
-                    <span itemprop="name">top-100-liked-questions</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/Array/" itemprop="url" rel="index">
-                    <span itemprop="name">Array</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/07/leetcode-312/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/07/leetcode-312/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  493
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number on it represented by array nums. You are asked to burst all the balloons. If the you burst balloon i you will get nums[left] <em> nums[i] </em> nums[right] coins. Here left and right are adjacent indices of i. After the burst, the left and right then becomes adjacent.<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/07/leetcode-312/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/06/leetcode-72/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/06/leetcode-72/" itemprop="url">leetcode-72-Edit Distance</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-06T23:44:16+08:00">
-                2019-05-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
-                    <span itemprop="name">top-100-liked-questions</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/String/" itemprop="url" rel="index">
-                    <span itemprop="name">String</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/06/leetcode-72/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/06/leetcode-72/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  887
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2.<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/06/leetcode-72/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/06/leetcode-152/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/06/leetcode-152/" itemprop="url">leetcode-152-Maximum Product Subarray</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-06T23:27:34+08:00">
-                2019-05-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
-                    <span itemprop="name">top-100-liked-questions</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/Array/" itemprop="url" rel="index">
-                    <span itemprop="name">Array</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/06/leetcode-152/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/06/leetcode-152/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  540
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.<br>求连续子数组最大乘积。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/06/leetcode-152/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2374,7 +2658,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2385,7 +2669,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2464,7 +2748,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">45.1k</span>
+    <span title="Site words total count">53.3k</span>
   
 </div>
 
