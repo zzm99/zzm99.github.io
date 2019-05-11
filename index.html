@@ -580,7 +580,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  23k
+                  26.6k
                 </span>
               
 
@@ -596,7 +596,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  99
+                  115
                 </span>
               
             </div>
@@ -1454,6 +1454,164 @@
 <h2 id="实例-37"><a href="#实例-37" class="headerlink" title="实例"></a>实例</h2><p>假设要创建的 COMPANY 表如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; CREATE TABLE COMPANY(</span><br><span class="line">   ID INTEGER PRIMARY KEY   AUTOINCREMENT,</span><br><span class="line">   NAME           TEXT      NOT NULL,</span><br><span class="line">   AGE            INT       NOT NULL,</span><br><span class="line">   ADDRESS        CHAR(50),</span><br><span class="line">   SALARY         REAL</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
 <p>现在，向 COMPANY 表插入以下记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES ( &apos;Paul&apos;, 32, &apos;California&apos;, 20000.00 );</span><br><span class="line"></span><br><span class="line">INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES (&apos;Allen&apos;, 25, &apos;Texas&apos;, 15000.00 );</span><br><span class="line"></span><br><span class="line">INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES (&apos;Teddy&apos;, 23, &apos;Norway&apos;, 20000.00 );</span><br><span class="line"></span><br><span class="line">INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES ( &apos;Mark&apos;, 25, &apos;Rich-Mond &apos;, 65000.00 );</span><br><span class="line"></span><br><span class="line">INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES ( &apos;David&apos;, 27, &apos;Texas&apos;, 85000.00 );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES ( &apos;Kim&apos;, 22, &apos;South-Hall&apos;, 45000.00 );</span><br><span class="line"></span><br><span class="line">INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)</span><br><span class="line">VALUES ( &apos;James&apos;, 24, &apos;Houston&apos;, 10000.00 );</span><br></pre></td></tr></table></figure></p>
 <p>这将向 COMPANY 表插入 7 个元组，此时 COMPANY 表的记录如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br></pre></td></tr></table></figure></p>
+<h1 id="Chapter-39"><a href="#Chapter-39" class="headerlink" title="Chapter 39"></a>Chapter 39</h1><h2 id="SQLite-注入"><a href="#SQLite-注入" class="headerlink" title="SQLite 注入"></a>SQLite 注入</h2><p>如果您的站点允许用户通过网页输入，并将输入内容插入到 SQLite 数据库中，这个时候您就面临着一个被称为 SQL 注入的安全问题。本章节将向您讲解如何防止这种情况的发生，<strong>确保脚本和 SQLite 语句的安全</strong>。</p>
+<p>注入通常在请求用户输入时发生，比如需要用户输入姓名，但用户却输入了一个 SQLite 语句，而这语句就会在不知不觉中在数据库上运行。</p>
+<p>永远不要相信用户提供的数据，所以只处理通过验证的数据，这项规则是通过模式匹配来完成的。在下面的实例中，用户名 username 被限制为字母数字字符或者下划线，长度必须在 8 到 20 个字符之间 - 请根据需要修改这些规则。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (preg_match(&quot;/^\w&#123;8,20&#125;$/&quot;, $_GET[&apos;username&apos;], $matches))&#123;</span><br><span class="line">   $db = new SQLiteDatabase(&apos;filename&apos;);</span><br><span class="line">   $result = @$db-&gt;query(&quot;SELECT * FROM users WHERE username=$matches[0]&quot;);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">   echo &quot;username not accepted&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>为了演示这个问题，假设考虑此摘录：To demonstrate the problem, consider this excerpt:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$name = &quot;Qadir&apos;; DELETE FROM users;&quot;;</span><br><span class="line">@$db-&gt;query(&quot;SELECT * FROM users WHERE username=&apos;&#123;$name&#125;&apos;&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>函数调用是为了从用户表中检索 name 列与用户指定的名称相匹配的记录。正常情况下，$name 只包含字母数字字符或者空格，比如字符串 ilia。但在这里，向 $name 追加了一个全新的查询，这个对数据库的调用将会造成灾难性的问题：注入的 DELETE 查询会删除 users 的所有记录。</p>
+<p>虽然已经存在有不允许查询堆叠或在单个函数调用中执行多个查询的数据库接口，如果尝试堆叠查询，则会调用失败，但 SQLite 和 PostgreSQL 里仍进行堆叠查询，即执行在一个字符串中提供的所有查询，这会导致严重的安全问题。</p>
+<h2 id="防止-SQL-注入"><a href="#防止-SQL-注入" class="headerlink" title="防止 SQL 注入"></a>防止 SQL 注入</h2><p>在脚本语言中，比如 PERL 和 PHP，您可以巧妙地处理所有的转义字符。编程语言 PHP 提供了字符串函数 SQLite3::escapeString($string) 和 sqlite_escape_string() 来转义对于 SQLite 来说比较特殊的输入字符。</p>
+<p>注意：使用函数 sqlite_escape_string() 的 PHP 版本要求为 PHP 5 &lt; 5.4.0。</p>
+<p>更高版本 PHP 5 &gt;= 5.3.0, PHP 7 使用以上函数:</p>
+<p>SQLite3::escapeString($string);//$string为要转义的字符串</p>
+<p>以下方式在最新版本的 PHP 中不支持：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (get_magic_quotes_gpc()) </span><br><span class="line">&#123;</span><br><span class="line">  $name = sqlite_escape_string($name);</span><br><span class="line">&#125;</span><br><span class="line">$result = @$db-&gt;query(&quot;SELECT * FROM users WHERE username=&apos;&#123;$name&#125;&apos;&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>虽然编码使得插入数据变得安全，但是它会呈现简单的文本比较，在查询中，对于包含二进制数据的列，LIKE 子句是不可用的。</p>
+<p>请注意，addslashes() 不应该被用在 SQLite 查询中引用字符串，它会在检索数据时导致奇怪的结果。</p>
+<h1 id="Chapter-40"><a href="#Chapter-40" class="headerlink" title="Chapter 40"></a>Chapter 40</h1><h2 id="SQLite-Explain（解释）"><a href="#SQLite-Explain（解释）" class="headerlink" title="SQLite Explain（解释）"></a>SQLite Explain（解释）</h2><p>在 SQLite 语句之前，可以使用 “EXPLAIN” 关键字或 “EXPLAIN QUERY PLAN” 短语，用于描述表的细节。</p>
+<p>如果省略了 EXPLAIN 关键字或短语，任何的修改都会引起 SQLite 语句的查询行为，并返回有关 SQLite 语句如何操作的信息。</p>
+<p><strong>来自 EXPLAIN 和 EXPLAIN QUERY PLAN 的输出只用于交互式分析和排除故障。</strong></p>
+<p>输出格式的细节可能会随着 SQLite 版本的不同而有所变化。</p>
+<p><strong>应用程序不应该使用 EXPLAIN 或 EXPLAIN QUERY PLAN，因为其确切的行为是可变的且只有部分会被记录。</strong></p>
+<h2 id="语法-29"><a href="#语法-29" class="headerlink" title="语法"></a>语法</h2><p>EXPLAIN 的语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN [SQLite Query]</span><br></pre></td></tr></table></figure></p>
+<p>EXPLAIN QUERY PLAN 的语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN  QUERY PLAN [SQLite Query]</span><br></pre></td></tr></table></figure></p>
+<h2 id="实例-38"><a href="#实例-38" class="headerlink" title="实例"></a>实例</h2><p>假设 COMPANY 表有以下记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br></pre></td></tr></table></figure></p>
+<p>现在，让我们检查 SELECT 语句中的 Explain 使用：</p>
+<p><code>sqlite&gt; EXPLAIN SELECT *  FROM COMPANY  WHERE Salary &gt;= 20000;</code><br>这将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">addr        opcode      p1          p2          p3</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">0           Goto        0           19</span><br><span class="line">1           Integer     0           0</span><br><span class="line">2           OpenRead    0           8</span><br><span class="line">3           SetNumColu  0           5</span><br><span class="line">4           Rewind      0           17</span><br><span class="line">5           Column      0           4</span><br><span class="line">6           RealAffini  0           0</span><br><span class="line">7           Integer     20000       0</span><br><span class="line">8           Lt          357         16          collseq(BI</span><br><span class="line">9           Rowid       0           0</span><br><span class="line">10          Column      0           1</span><br><span class="line">11          Column      0           2</span><br><span class="line">12          Column      0           3</span><br><span class="line">13          Column      0           4</span><br><span class="line">14          RealAffini  0           0</span><br><span class="line">15          Callback    5           0</span><br><span class="line">16          Next        0           5</span><br><span class="line">17          Close       0           0</span><br><span class="line">18          Halt        0           0</span><br><span class="line">19          Transactio  0           0</span><br><span class="line">20          VerifyCook  0           38</span><br><span class="line">21          Goto        0           1</span><br><span class="line">22          Noop        0           0</span><br></pre></td></tr></table></figure></p>
+<p>现在，让我们检查 SELECT 语句中的 Explain Query Plan 使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SQLite&gt; EXPLAIN QUERY PLAN SELECT * FROM COMPANY WHERE Salary &gt;= 20000;</span><br><span class="line">order       from        detail</span><br><span class="line">----------  ----------  -------------</span><br><span class="line">0           0           TABLE COMPANY</span><br></pre></td></tr></table></figure></p>
+<h1 id="Chapter-41"><a href="#Chapter-41" class="headerlink" title="Chapter 41"></a>Chapter 41</h1><h2 id="SQLite-Vacuum"><a href="#SQLite-Vacuum" class="headerlink" title="SQLite Vacuum"></a>SQLite Vacuum</h2><p>VACUUM 命令通过复制主数据库中的内容到一个临时数据库文件，然后清空主数据库，并从副本中重新载入原始的数据库文件。<strong>这消除了空闲页，把表中的数据排列为连续的，另外会清理数据库文件结构。</strong></p>
+<p>如果表中没有明确的整型主键（INTEGER PRIMARY KEY），VACUUM 命令可能会改变表中条目的行 ID（ROWID）。VACUUM 命令只适用于主数据库，附加的数据库文件是不可能使用 VACUUM 命令。</p>
+<p>如果有一个活动的事务，VACUUM 命令就会失败。VACUUM 命令是一个用于内存数据库的任何操作。由于 VACUUM 命令从头开始重新创建数据库文件，所以 VACUUM 也可以用于修改许多数据库特定的配置参数。</p>
+<h2 id="手动-VACUUM"><a href="#手动-VACUUM" class="headerlink" title="手动 VACUUM"></a>手动 VACUUM</h2><p>下面是在命令提示符中对整个数据库发出 VACUUM 命令的语法：</p>
+<p><code>$sqlite3 database_name &quot;VACUUM;&quot;</code><br>您也可以在 SQLite 提示符中运行 VACUUM，如下所示：</p>
+<p><code>sqlite&gt; VACUUM;</code><br>您也可以在特定的表上运行 VACUUM，如下所示：</p>
+<p><code>sqlite&gt; VACUUM table_name;</code></p>
+<h2 id="自动-VACUUM（Auto-VACUUM）"><a href="#自动-VACUUM（Auto-VACUUM）" class="headerlink" title="自动 VACUUM（Auto-VACUUM）"></a>自动 VACUUM（Auto-VACUUM）</h2><p>SQLite 的 Auto-VACUUM 与 VACUUM 不大一样，它只是把空闲页移到数据库末尾，从而减小数据库大小。通过这样做，它可以明显地把数据库碎片化，而 VACUUM 则是反碎片化。所以 Auto-VACUUM 只会让数据库更小。</p>
+<p>在 SQLite 提示符中，您可以通过下面的编译运行，启用/禁用 SQLite 的 Auto-VACUUM：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; PRAGMA auto_vacuum = NONE;  -- 0 means disable auto vacuum</span><br><span class="line">sqlite&gt; PRAGMA auto_vacuum = INCREMENTAL;  -- 1 means enable incremental vacuum</span><br><span class="line">sqlite&gt; PRAGMA auto_vacuum = FULL;  -- 2 means enable full auto vacuum</span><br></pre></td></tr></table></figure></p>
+<p>您可以从命令提示符中运行下面的命令来检查 auto-vacuum 设置：</p>
+<p><code>$sqlite3 database_name &quot;PRAGMA auto_vacuum;&quot;</code></p>
+<h1 id="Chapter-41-1"><a href="#Chapter-41-1" class="headerlink" title="Chapter 41"></a>Chapter 41</h1><h2 id="SQLite-日期-amp-时间"><a href="#SQLite-日期-amp-时间" class="headerlink" title="SQLite 日期 &amp; 时间"></a>SQLite 日期 &amp; 时间</h2><p>SQLite 支持以下五个日期和时间函数：</p>
+<ul>
+<li>序号    函数    实例</li>
+<li>1    date(timestring, modifier, modifier, …)    以 YYYY-MM-DD 格式返回日期。</li>
+<li>2    time(timestring, modifier, modifier, …)    以 HH:MM:SS 格式返回时间。</li>
+<li>3    datetime(timestring, modifier, modifier, …)    以 YYYY-MM-DD HH:MM:SS 格式返回。</li>
+<li>4    julianday(timestring, modifier, modifier, …)    这将返回从格林尼治时间的公元前 4714 年 11 月 24 日正午算起的天数。</li>
+<li>5    strftime(format, timestring, modifier, modifier, …)    这将根据第一个参数指定的格式字符串返回格式化的日期。具体格式见下边讲解。<br>上述五个日期和时间函数把时间字符串作为参数。时间字符串后跟零个或多个 modifier 修饰符。strftime() 函数也可以把格式字符串 format 作为其第一个参数。下面将为您详细讲解不同类型的时间字符串和修饰符。</li>
+</ul>
+<h2 id="时间字符串"><a href="#时间字符串" class="headerlink" title="时间字符串"></a>时间字符串</h2><p>一个时间字符串可以采用下面任何一种格式：</p>
+<ul>
+<li>序号    时间字符串    实例</li>
+<li>1    YYYY-MM-DD    2010-12-30</li>
+<li>2    YYYY-MM-DD HH:MM    2010-12-30 12:10</li>
+<li>3    YYYY-MM-DD HH:MM:SS.SSS    2010-12-30 12:10:04.100</li>
+<li>4    MM-DD-YYYY HH:MM    30-12-2010 12:10</li>
+<li>5    HH:MM    12:10</li>
+<li>6    YYYY-MM-DDTHH:MM    2010-12-30 12:10</li>
+<li>7    HH:MM:SS    12:10:01</li>
+<li>8    YYYYMMDD HHMMSS    20101230 121001</li>
+<li>9    now    2013-05-07</li>
+<li>您可以使用 “T” 作为分隔日期和时间的文字字符。</li>
+</ul>
+<h2 id="修饰符（Modifier）"><a href="#修饰符（Modifier）" class="headerlink" title="修饰符（Modifier）"></a>修饰符（Modifier）</h2><p>时间字符串后边可跟着零个或多个的修饰符，这将改变有上述五个函数返回的日期和/或时间。任何上述五大功能返回时间。修饰符应从左到右使用，下面列出了可在 SQLite 中使用的修饰符：</p>
+<ul>
+<li><p>NNN days</p>
+</li>
+<li><p>NNN hours</p>
+</li>
+<li><p>NNN minutes</p>
+</li>
+<li><p>NNN.NNNN seconds</p>
+</li>
+<li><p>NNN months</p>
+</li>
+<li><p>NNN years</p>
+</li>
+<li><p>start of month</p>
+</li>
+<li><p>start of year</p>
+</li>
+<li><p>start of day</p>
+</li>
+<li><p>weekday N</p>
+</li>
+<li><p>unixepoch</p>
+</li>
+<li><p>localtime</p>
+</li>
+<li><p>utc</p>
+</li>
+</ul>
+<h2 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h2><p>SQLite 提供了非常方便的函数 strftime() 来格式化任何日期和时间。您可以使用以下的替换来格式化日期和时间：</p>
+<ul>
+<li>替换    描述</li>
+<li>%d    一月中的第几天，01-31</li>
+<li>%f    带小数部分的秒，SS.SSS</li>
+<li>%H    小时，00-23</li>
+<li>%j    一年中的第几天，001-366</li>
+<li>%J    儒略日数，DDDD.DDDD</li>
+<li>%m    月，00-12</li>
+<li>%M    分，00-59</li>
+<li>%s    从 1970-01-01 算起的秒数</li>
+<li>%S    秒，00-59</li>
+<li>%w    一周中的第几天，0-6 (0 is Sunday)</li>
+<li>%W    一年中的第几周，01-53</li>
+<li>%Y    年，YYYY</li>
+<li>%%    % symbol</li>
+</ul>
+<h2 id="实例-39"><a href="#实例-39" class="headerlink" title="实例"></a>实例</h2><p>现在让我们使用 SQLite 提示符尝试不同的实例。</p>
+<p><strong>下面是计算当前日期：</strong></p>
+<p><strong>sqlite&gt; SELECT date(‘now’);</strong></p>
+<p>2013-05-07</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">下面是计算当前月份的最后一天：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT date(&apos;now&apos;,&apos;start of month&apos;,&apos;+1 month&apos;,&apos;-1 day&apos;);</span><br><span class="line">2013-05-31</span><br><span class="line">下面是计算给定 UNIX 时间戳 1092941466 的日期和时间：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT datetime(1092941466, &apos;unixepoch&apos;);</span><br><span class="line">2004-08-19 18:51:06</span><br><span class="line">下面是计算给定 UNIX 时间戳 1092941466 相对本地时区的日期和时间：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT datetime(1092941466, &apos;unixepoch&apos;, &apos;localtime&apos;);</span><br><span class="line">2004-08-19 11:51:06</span><br><span class="line">下面是计算当前的 UNIX 时间戳：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT strftime(&apos;%s&apos;,&apos;now&apos;);</span><br><span class="line">1367926057</span><br><span class="line">下面是计算美国&quot;独立宣言&quot;签署以来的天数：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT julianday(&apos;now&apos;) - julianday(&apos;1776-07-04&apos;);</span><br><span class="line">86504.4775830326</span><br><span class="line">下面是计算从 2004 年某一特定时刻以来的秒数：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT strftime(&apos;%s&apos;,&apos;now&apos;) - strftime(&apos;%s&apos;,&apos;2004-01-01 02:34:56&apos;);</span><br><span class="line">295001572</span><br><span class="line">下面是计算当年 10 月的第一个星期二的日期：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT date(&apos;now&apos;,&apos;start of year&apos;,&apos;+9 months&apos;,&apos;weekday 2&apos;);</span><br><span class="line">2013-10-01</span><br><span class="line">下面是计算从 UNIX 纪元算起的以秒为单位的时间（类似 strftime(&apos;%s&apos;,&apos;now&apos;) ，不同的是这里有包括小数部分）：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT (julianday(&apos;now&apos;) - 2440587.5)*86400.0;</span><br><span class="line">1367926077.12598</span><br><span class="line">在 UTC 与本地时间值之间进行转换，当格式化日期时，使用 utc 或 localtime 修饰符，如下所示：</span><br><span class="line"></span><br><span class="line">sqlite&gt; SELECT time(&apos;12:00&apos;, &apos;localtime&apos;);</span><br><span class="line">05:00:00</span><br><span class="line">sqlite&gt;  SELECT time(&apos;12:00&apos;, &apos;utc&apos;);</span><br><span class="line">19:00:00</span><br></pre></td></tr></table></figure>
+<h1 id="Chapter-42"><a href="#Chapter-42" class="headerlink" title="Chapter 42"></a>Chapter 42</h1><h2 id="SQLite-常用函数"><a href="#SQLite-常用函数" class="headerlink" title="SQLite 常用函数"></a>SQLite 常用函数</h2><p>SQLite 有许多内置函数用于处理字符串或数字数据。下面列出了一些有用的 SQLite 内置函数，且所有函数都是大小写不敏感，这意味着您可以使用这些函数的小写形式或大写形式或混合形式。欲了解更多详情，请查看 SQLite 的官方文档：</p>
+<ul>
+<li>序号    函数 &amp; 描述</li>
+<li>1    SQLite COUNT 函数</li>
+<li>SQLite COUNT 聚集函数是用来计算一个数据库表中的行数。</li>
+<li>2    SQLite MAX 函数</li>
+<li>SQLite MAX 聚合函数允许我们选择某列的最大值。</li>
+<li>3    SQLite MIN 函数</li>
+<li>SQLite MIN 聚合函数允许我们选择某列的最小值。</li>
+<li>4    SQLite AVG 函数</li>
+<li>SQLite AVG 聚合函数计算某列的平均值。</li>
+<li>5    SQLite SUM 函数</li>
+<li>SQLite SUM 聚合函数允许为一个数值列计算总和。</li>
+<li>6    SQLite RANDOM 函数</li>
+<li>SQLite RANDOM 函数返回一个介于 -9223372036854775808 和 +9223372036854775807 之间的伪随机整数。</li>
+<li>7    SQLite ABS 函数</li>
+<li>SQLite ABS 函数返回数值参数的绝对值。</li>
+<li>8    SQLite UPPER 函数</li>
+<li>SQLite UPPER 函数把字符串转换为大写字母。</li>
+<li>9    SQLite LOWER 函数</li>
+<li>SQLite LOWER 函数把字符串转换为小写字母。</li>
+<li>10    SQLite LENGTH 函数</li>
+<li>SQLite LENGTH 函数返回字符串的长度。</li>
+<li>11    SQLite sqlite_version 函数</li>
+<li>SQLite sqlite_version 函数返回 SQLite 库的版本。</li>
+</ul>
+<p>在我们开始讲解这些函数实例之前，先假设 COMPANY 表有以下记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ID          NAME        AGE         ADDRESS     SALARY</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">1           Paul        32          California  20000.0</span><br><span class="line">2           Allen       25          Texas       15000.0</span><br><span class="line">3           Teddy       23          Norway      20000.0</span><br><span class="line">4           Mark        25          Rich-Mond   65000.0</span><br><span class="line">5           David       27          Texas       85000.0</span><br><span class="line">6           Kim         22          South-Hall  45000.0</span><br><span class="line">7           James       24          Houston     10000.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-COUNT-函数"><a href="#SQLite-COUNT-函数" class="headerlink" title="SQLite COUNT 函数"></a>SQLite COUNT 函数</h2><p>SQLite COUNT 聚集函数是用来计算一个数据库表中的行数。下面是实例：</p>
+<p><code>sqlite&gt; SELECT count(*) FROM COMPANY;</code><br>上面的 SQLite SQL 语句将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">count(*)</span><br><span class="line">----------</span><br><span class="line">7</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-MAX-函数"><a href="#SQLite-MAX-函数" class="headerlink" title="SQLite MAX 函数"></a>SQLite MAX 函数</h2><p>SQLite MAX 聚合函数允许我们选择某列的最大值。下面是实例：</p>
+<p><code>sqlite&gt; SELECT max(salary) FROM COMPANY;</code><br>上面的 SQLite SQL 语句将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">max(salary)</span><br><span class="line">-----------</span><br><span class="line">85000.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-MIN-函数"><a href="#SQLite-MIN-函数" class="headerlink" title="SQLite MIN 函数"></a>SQLite MIN 函数</h2><p>SQLite MIN 聚合函数允许我们选择某列的最小值。下面是实例：</p>
+<p><code>sqlite&gt; SELECT min(salary) FROM COMPANY;</code><br>上面的 SQLite SQL 语句将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">min(salary)</span><br><span class="line">-----------</span><br><span class="line">10000.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-AVG-函数"><a href="#SQLite-AVG-函数" class="headerlink" title="SQLite AVG 函数"></a>SQLite AVG 函数</h2><p>SQLite AVG 聚合函数计算某列的平均值。下面是实例：</p>
+<p><code>sqlite&gt; SELECT avg(salary) FROM COMPANY;</code><br>上面的 SQLite SQL 语句将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">avg(salary)</span><br><span class="line">----------------</span><br><span class="line">37142.8571428572</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-SUM-函数"><a href="#SQLite-SUM-函数" class="headerlink" title="SQLite SUM 函数"></a>SQLite SUM 函数</h2><p>SQLite SUM 聚合函数允许为一个数值列计算总和。下面是实例：</p>
+<p><code>sqlite&gt; SELECT sum(salary) FROM COMPANY;</code><br>上面的 SQLite SQL 语句将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sum(salary)</span><br><span class="line">-----------</span><br><span class="line">260000.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-RANDOM-函数"><a href="#SQLite-RANDOM-函数" class="headerlink" title="SQLite RANDOM 函数"></a>SQLite RANDOM 函数</h2><p>SQLite RANDOM 函数返回一个介于 -9223372036854775808 和 +9223372036854775807 之间的伪随机整数。下面是实例：</p>
+<p><code>sqlite&gt; SELECT random() AS Random;</code><br>上面的 SQLite SQL 语句将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Random</span><br><span class="line">-------------------</span><br><span class="line">5876796417670984050</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-ABS-函数"><a href="#SQLite-ABS-函数" class="headerlink" title="SQLite ABS 函数"></a>SQLite ABS 函数</h2><p>SQLite ABS 函数返回数值参数的绝对值。下面是实例：</p>
+<p><code>sqlite&gt; SELECT abs(5), abs(-15), abs(NULL), abs(0), abs(&quot;ABC&quot;);</code><br>上面的 SQLite SQL 语句将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">abs(5)      abs(-15)    abs(NULL)   abs(0)      abs(&quot;ABC&quot;)</span><br><span class="line">----------  ----------  ----------  ----------  ----------</span><br><span class="line">5           15                      0           0.0</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-UPPER-函数"><a href="#SQLite-UPPER-函数" class="headerlink" title="SQLite UPPER 函数"></a>SQLite UPPER 函数</h2><p>SQLite UPPER 函数把字符串转换为大写字母。下面是实例：</p>
+<p><code>sqlite&gt; SELECT upper(name) FROM COMPANY;</code><br>上面的 SQLite SQL 语句将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">upper(name)</span><br><span class="line">-----------</span><br><span class="line">PAUL</span><br><span class="line">ALLEN</span><br><span class="line">TEDDY</span><br><span class="line">MARK</span><br><span class="line">DAVID</span><br><span class="line">KIM</span><br><span class="line">JAMES</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-LOWER-函数"><a href="#SQLite-LOWER-函数" class="headerlink" title="SQLite LOWER 函数"></a>SQLite LOWER 函数</h2><p>SQLite LOWER 函数把字符串转换为小写字母。下面是实例：</p>
+<p><code>sqlite&gt; SELECT lower(name) FROM COMPANY;</code><br>上面的 SQLite SQL 语句将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">lower(name)</span><br><span class="line">-----------</span><br><span class="line">paul</span><br><span class="line">allen</span><br><span class="line">teddy</span><br><span class="line">mark</span><br><span class="line">david</span><br><span class="line">kim</span><br><span class="line">james</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-LENGTH-函数"><a href="#SQLite-LENGTH-函数" class="headerlink" title="SQLite LENGTH 函数"></a>SQLite LENGTH 函数</h2><p>SQLite LENGTH 函数返回字符串的长度。下面是实例：</p>
+<p><code>sqlite&gt; SELECT name, length(name) FROM COMPANY;</code><br>上面的 SQLite SQL 语句将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NAME        length(name)</span><br><span class="line">----------  ------------</span><br><span class="line">Paul        4</span><br><span class="line">Allen       5</span><br><span class="line">Teddy       5</span><br><span class="line">Mark        4</span><br><span class="line">David       5</span><br><span class="line">Kim         3</span><br><span class="line">James       5</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQLite-sqlite-version-函数"><a href="#SQLite-sqlite-version-函数" class="headerlink" title="SQLite sqlite_version 函数"></a>SQLite sqlite_version 函数</h2><p>SQLite sqlite_version 函数返回 SQLite 库的版本。下面是实例：</p>
+<p><code>sqlite&gt; SELECT sqlite_version() AS &#39;SQLite Version&#39;;</code><br>上面的 SQLite SQL 语句将产生以下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQLite Version</span><br><span class="line">--------------</span><br><span class="line">3.6.20</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -3284,7 +3442,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">68.6k</span>
+    <span title="Site words total count">72.2k</span>
   
 </div>
 
