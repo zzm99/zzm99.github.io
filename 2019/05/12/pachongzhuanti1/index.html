@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/touxiang.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="反爬 1、设置爬取速度，由于爬虫发送请求的速度比较快，会对服务器造成一定的影响，尽可能控制爬取速度，做到文明爬取  2、重启路由器。并不是指物理上的插拔路由器，而是指模拟路由器重启时发送的表单。登陆自己的路由器，一般路由器会提供重启路由器的选项，根据路由器的重启特点进行模拟，如果觉得模拟请求麻烦，那就通过selenium+chromedriver直接点击重启，前提是路由器本身是获得动态IP的  3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="反爬、保存cookie、代理IP设置、添加头信息、处理验证码、异常处理">
+<meta property="og:url" content="http://yoursite.com/2019/05/12/pachongzhuanti1/index.html">
+<meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="反爬 1、设置爬取速度，由于爬虫发送请求的速度比较快，会对服务器造成一定的影响，尽可能控制爬取速度，做到文明爬取  2、重启路由器。并不是指物理上的插拔路由器，而是指模拟路由器重启时发送的表单。登陆自己的路由器，一般路由器会提供重启路由器的选项，根据路由器的重启特点进行模拟，如果觉得模拟请求麻烦，那就通过selenium+chromedriver直接点击重启，前提是路由器本身是获得动态IP的  3">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-12T13:40:21.509Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="反爬、保存cookie、代理IP设置、添加头信息、处理验证码、异常处理">
+<meta name="twitter:description" content="反爬 1、设置爬取速度，由于爬虫发送请求的速度比较快，会对服务器造成一定的影响，尽可能控制爬取速度，做到文明爬取  2、重启路由器。并不是指物理上的插拔路由器，而是指模拟路由器重启时发送的表单。登陆自己的路由器，一般路由器会提供重启路由器的选项，根据路由器的重启特点进行模拟，如果觉得模拟请求麻烦，那就通过selenium+chromedriver直接点击重启，前提是路由器本身是获得动态IP的  3">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/12/pachongzhuanti1/">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "29501955"
+    });
+  daovoice('update');
+  </script>
+
+  <title>反爬、保存cookie、代理IP设置、添加头信息、处理验证码、异常处理 | zzm99</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zzm99</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/12/pachongzhuanti1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">反爬、保存cookie、代理IP设置、添加头信息、处理验证码、异常处理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-12T20:11:00+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/学习爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">学习爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/学习爬虫/爬虫专题/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫专题</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/12/pachongzhuanti1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/12/pachongzhuanti1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="反爬"><a href="#反爬" class="headerlink" title="反爬"></a>反爬</h1><ul>
+<li><p>1、设置爬取速度，由于爬虫发送请求的速度比较快，会对服务器造成一定的影响，尽可能控制爬取速度，做到文明爬取</p>
+</li>
+<li><p>2、重启路由器。并不是指物理上的插拔路由器，而是指模拟路由器重启时发送的表单。登陆自己的路由器，一般路由器会提供重启路由器的选项，根据路由器的重启特点进行模拟，如果觉得模拟请求麻烦，那就通过selenium+chromedriver直接点击重启，前提是路由器本身是获得动态IP的</p>
+</li>
+<li><p>3、设置请求代理，不过代理不是非常稳定，并且有一部分代理不是真正的高匿代理，只是它自己这么写</p>
+</li>
+<li><p>4、多主机策略，这种策略目前看来比较可靠，一般一些网站会部署许多服务器，而我们在本机上ping网站，由于宽带运营商的原因，往往只能访问到固定的一个服务器，</p>
+</li>
+<li><p>5、频繁更改user-agent</p>
+</li>
+<li><p>6、有些网站对于某些IP地址不会做过多限制，例如学校里的公网IP，因为学校人数多，访问量大没什么奇怪</p>
+<a id="more"></a>
+<h1 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h1></li>
+</ul>
+<h2 id="cookie的保存："><a href="#cookie的保存：" class="headerlink" title="cookie的保存："></a>cookie的保存：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">"https://fanyi.baidu.com"</span></span><br><span class="line">res = requests.get(url)</span><br><span class="line"><span class="keyword">print</span> (res.cookies)</span><br><span class="line"><span class="keyword">print</span> (type(res.cookies))</span><br><span class="line"></span><br><span class="line">&lt;RequestsCookieJar[&lt;Cookie BAIDUID=<span class="number">97E2826</span>E058F7A3229BBBC916659EA82:FG=<span class="number">1</span> <span class="keyword">for</span> .baidu.com/&gt;, &lt;Cookie locale=zh <span class="keyword">for</span> .baidu.com/&gt;]&gt;</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">requests</span>.<span class="title">cookies</span>.<span class="title">RequestsCookieJar</span>'&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="cookie的读入："><a href="#cookie的读入：" class="headerlink" title="cookie的读入："></a>cookie的读入：</h2><ol>
+<li><p>自定义一个cookies字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res=requests.get(<span class="string">"https://cloud.flyme.cn/browser/index.jsp"</span>,cookies=cookies)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从网页复制后存入txt文件后读入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f=open(<span class="string">r'test.txt'</span>,<span class="string">'r'</span>)<span class="comment">#打开所保存的cookies内容文件</span></span><br><span class="line">cookies=&#123;&#125;<span class="comment">#初始化cookies字典变量</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f.read().split(<span class="string">';'</span>):   <span class="comment">#按照字符：进行划分读取</span></span><br><span class="line">    <span class="comment">#其设置为1就会把字符串拆分成2份</span></span><br><span class="line">    name,value=line.strip().split(<span class="string">'='</span>,<span class="number">1</span>)</span><br><span class="line">    cookies[name]=value  <span class="comment">#为字典cookies添加内容</span></span><br><span class="line">res=requests.get(<span class="string">"https://cloud.flyme.cn/browser/index.jsp"</span>,cookies=cookies)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个RequestCookieJar类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> requests.cookies <span class="keyword">import</span> RequestsCookieJar</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">url = <span class="string">"http://fanyi.baidu.com/v2transapi"</span></span><br><span class="line"> </span><br><span class="line">cookie_jar = RequestsCookieJar()</span><br><span class="line">cookie_jar.set(<span class="string">"BAIDUID"</span>, <span class="string">"B1CCDD4B4BC886BF99364C72C8AE1C01:FG=1"</span>, domain=<span class="string">"baidu.com"</span>)</span><br><span class="line"> </span><br><span class="line">res = requests.get(url, cookies=cookie_jar)</span><br><span class="line"><span class="keyword">print</span> res.status_code</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="代理ip设置："><a href="#代理ip设置：" class="headerlink" title="代理ip设置："></a>代理ip设置：</h1><h2 id="获取一个ip："><a href="#获取一个ip：" class="headerlink" title="获取一个ip："></a>获取一个ip：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># IP地址取自国内髙匿代理IP网站：http://www.xicidaili.com/nn/</span></span><br><span class="line"><span class="comment"># 仅仅爬取首页IP地址就足够一般使用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ip_list</span><span class="params">(url, headers)</span>:</span></span><br><span class="line">    web_data = requests.get(url, headers=headers)</span><br><span class="line">    soup = BeautifulSoup(web_data.text, <span class="string">'lxml'</span>)</span><br><span class="line">    ips = soup.find_all(<span class="string">'tr'</span>)</span><br><span class="line">    ip_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(ips)):</span><br><span class="line">        ip_info = ips[i]</span><br><span class="line">        tds = ip_info.find_all(<span class="string">'td'</span>)</span><br><span class="line">        ip_list.append(tds[<span class="number">1</span>].text + <span class="string">':'</span> + tds[<span class="number">2</span>].text)</span><br><span class="line">    <span class="keyword">return</span> ip_list</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_random_ip</span><span class="params">(ip_list)</span>:</span></span><br><span class="line">    proxy_list = []</span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> ip_list:</span><br><span class="line">        proxy_list.append(<span class="string">'http://'</span> + ip)</span><br><span class="line">    proxy_ip = random.choice(proxy_list)</span><br><span class="line">    proxies = &#123;<span class="string">'http'</span>: proxy_ip&#125;</span><br><span class="line">    <span class="keyword">return</span> proxies</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    url = <span class="string">'http://www.xicidaili.com/nn/'</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'</span></span><br><span class="line">    &#125;</span><br><span class="line">    ip_list = get_ip_list(url, headers=headers)</span><br><span class="line">    proxies = get_random_ip(ip_list)</span><br><span class="line">    print(proxies)</span><br></pre></td></tr></table></figure>
+<p><code>{&#39;http&#39;: &#39;http://112.85.131.198:9999&#39;}</code></p>
+<ul>
+<li>函数get_ip_list(url, headers)传入url和headers，最后返回一个IP列表，列表的元素类似42.84.226.65:8888格式，这个列表包括国内髙匿代理IP网站首页所有IP地址和端口。</li>
+<li>函数get_random_ip(ip_list)传入第一个函数得到的列表，返回一个随机的proxies，这个proxies可以传入到requests的get方法中，这样就可以做到每次运行都使用不同的IP访问被爬取的网站，有效地避免了真实IP被封的风险。proxies的格式是一个字典：{‘http’: ‘<a href="http://42.84.226.65:8888‘}。" target="_blank" rel="noopener">http://42.84.226.65:8888‘}。</a></li>
+</ul>
+<h2 id="使用IP代理："><a href="#使用IP代理：" class="headerlink" title="使用IP代理："></a>使用IP代理：</h2><p>运行上面的代码会得到一个随机的proxies，把它直接传入requests的get方法中即可。</p>
+<p><code>web_data = requests.get(url, headers=headers, proxies=proxies)</code></p>
+<h2 id="精装版："><a href="#精装版：" class="headerlink" title="精装版："></a>精装版：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"> </span><br><span class="line">proxies = &#123;</span><br><span class="line">  <span class="string">"https"</span>: <span class="string">"http://41.118.132.69:4433"</span></span><br><span class="line">&#125;</span><br><span class="line">r = requests.post(<span class="string">"http://httpbin.org/post"</span>, proxies=proxies)</span><br><span class="line"><span class="keyword">print</span> r.text</span><br></pre></td></tr></table></figure>
+<h1 id="添加头信息："><a href="#添加头信息：" class="headerlink" title="添加头信息："></a>添加头信息：</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"> </span><br><span class="line">payload = &#123;<span class="string">'key1'</span>: <span class="string">'value1'</span>, <span class="string">'key2'</span>: <span class="string">'value2'</span>&#125;</span><br><span class="line">headers = &#123;<span class="string">'content-type'</span>: <span class="string">'application/json'</span>&#125;</span><br><span class="line">r = requests.get(<span class="string">"http://httpbin.org/get"</span>, params=payload, headers=headers)</span><br><span class="line"><span class="keyword">print</span> r.url</span><br></pre></td></tr></table></figure>
+<p>常用浏览器头部信息：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">user_agent = [</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; InfoPath.3; rv:11.0) like Gecko"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"</span>,</span><br><span class="line">    <span class="string">"Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11"</span>,</span><br><span class="line">    <span class="string">"Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Maxthon 2.0)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; TencentTraveler 4.0)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; The World)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Avant Browser)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (iPad; U; CPU OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Linux; U; Android 2.3.7; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"</span>,</span><br><span class="line">    <span class="string">"MQQBrowser/26 Mozilla/5.0 (Linux; U; Android 2.3.7; zh-cn; MB200 Build/GRJ22; CyanogenMod-7) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"</span>,</span><br><span class="line">    <span class="string">"Opera/9.80 (Android 2.3.4; Linux; Opera Mobi/build-1107180945; U; en-GB) Presto/2.8.149 Version/11.10"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (BlackBerry; U; BlackBerry 9800; en) AppleWebKit/534.1+ (KHTML, like Gecko) Version/6.0.0.337 Mobile Safari/534.1+"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.0; U; en-US) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/233.70 Safari/534.6 TouchPad/1.0"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (SymbianOS/9.4; Series60/5.0 NokiaN97-1/20.0.019; Profile/MIDP-2.1 Configuration/CLDC-1.1) AppleWebKit/525 (KHTML, like Gecko) BrowserNG/7.1.18124"</span>,</span><br><span class="line">    <span class="string">"Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; HTC; Titan)"</span>,</span><br><span class="line">    <span class="string">"UCWEB7.0.2.37/28/999"</span>,</span><br><span class="line">    <span class="string">"NOKIA5700/ UCWEB7.0.2.37/28/999"</span>,</span><br><span class="line">    <span class="string">"Openwave/ UCWEB7.0.2.37/28/999"</span>,</span><br><span class="line">    <span class="string">"Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/999"</span>,</span><br><span class="line">    <span class="comment"># iPhone 6：</span></span><br><span class="line">	<span class="string">"Mozilla/6.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/8.0 Mobile/10A5376e Safari/8536.25"</span>,</span><br><span class="line"></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>: random.choice(user_agent)&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机获取一个请求头</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_user_agent</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> random.choice(USER_AGENTS)</span><br></pre></td></tr></table></figure></p>
+<h1 id="异常处理："><a href="#异常处理：" class="headerlink" title="异常处理："></a>异常处理：</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHTMLText</span><span class="params">(url)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        r = requests.get(url,timeout = <span class="number">30</span>)</span><br><span class="line">        r.raise_for_status()</span><br><span class="line">        r.encoding = r.apparent_encoding</span><br><span class="line">        <span class="keyword">return</span> r.text</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">         <span class="keyword">return</span><span class="string">""</span></span><br></pre></td></tr></table></figure>
+<h1 id="处理验证码："><a href="#处理验证码：" class="headerlink" title="处理验证码："></a>处理验证码：</h1><h2 id="1-输入式验证码"><a href="#1-输入式验证码" class="headerlink" title="1.输入式验证码"></a>1.输入式验证码</h2><p>这种验证码主要是通过用户输入图片中的字母、数字、汉字等进行验证。</p>
+<p>解决思路：这种是最简单的一种，只要识别出里面的内容，然后填入到输入框中即可。这种识别技术叫OCR，这里我们推荐使用Python的第三方库，tesserocr。对于没有什么背影影响的验证码，直接通过这个库来识别就可以。但是对于有嘈杂的背景的验证码这种，直接识别识别率会很低，遇到这种我们就得需要先处理一下图片，先对图片进行灰度化，然后再进行二值化，再去识别，这样识别率会大大提高。</p>
+<h2 id="2-滑动式验证码"><a href="#2-滑动式验证码" class="headerlink" title="2.滑动式验证码"></a>2.滑动式验证码</h2><p>这种是将备选碎片直线滑动到正确的位置</p>
+<p>解决思路：对于这种验证码就比较复杂一点，但也是有相应的办法。我们直接想到的就是模拟人去拖动验证码的行为，点击按钮，然后看到了缺口  的位置，最后把拼图拖到缺口位置处完成验证。</p>
+<p>第一步：点击按钮。然后我们发现，在你没有点击按钮的时候那个缺口和拼图是没有出现的，点击后才出现，这为我们找到缺口的位置提供了灵感。</p>
+<p>第二步：拖到缺口位置。我们知道拼图应该拖到缺口处，但是这个距离如果用数值来表示？通过我们第一步观察到的现象，我们可以找到缺口的位置。这里我们可以比较两张图的像素，设置一个基准值，如果某个位置的差值超过了基准值，那我们就找到了这两张图片不一样的位置，当然我们是从那块拼图的右侧开始并且从左到右，找到第一个不一样的位置时就结束，这是的位置应该是缺口的left，所以我们使用selenium拖到这个位置即可。这里还有个疑问就是如何能自动的保存这两张图？这里我们可以先找到这个标签，然后获取它的location和size，然后 top，bottom，left，right = location[‘y’] ,location[‘y’]+size[‘height’]+ location[‘x’] + size[‘width’]  ,然后截图，最后抠图填入这四个位置就行。具体的使用可以查看selenium文档，点击按钮前抠张图，点击后再抠张图。最后拖动的时候要需要模拟人的行为，先加速然后减速。因为这种验证码有行为特征检测，人是不可能做到一直匀速的，否则它就判定为是机器在拖动，这样就无法通过验证了。</p>
+<h2 id="3-点击式的图文验证-和-图标选择"><a href="#3-点击式的图文验证-和-图标选择" class="headerlink" title="3.点击式的图文验证 和  图标选择"></a>3.点击式的图文验证 和  图标选择</h2><p>图文验证：通过文字提醒用户点击图中相同字的位置进行验证。</p>
+<p>图标选择： 给出一组图片，按要求点击其中一张或者多张。借用万物识别的难度阻挡机器。</p>
+<p>这两种原理相似，只不过是一个是给出文字，点击图片中的文字，一个是给出图片，点出内容相同的图片。</p>
+<p>这两种没有特别好的方法，只能借助第三方识别接口来识别出相同的内容，推荐一个超级鹰，把验证码发过去，会返回相应的点击坐标。</p>
+<p>然后再使用selenium模拟点击即可。具体怎么获取图片和上面方法一样。</p>
+<h2 id="4-宫格验证码"><a href="#4-宫格验证码" class="headerlink" title="4.宫格验证码"></a>4.宫格验证码</h2><p>这种就很棘手，每一次出现的都不一样，但是也会出现一样的。而且拖动顺序都不一样。</p>
+<p>但是我们发现不一样的验证码个数是有限的，这里采用模版匹配的方法。我觉得就好像暴力枚举，把所有出现的验证码保存下来，然后挑出不一样的验证码，按照拖动顺序命名，我们从左到右上下到下，设为1,2,3,4。上图的滑动顺序为4,3,2,1所以我们命名4_3_2_1.png，这里得手动搞。当验证码出现的时候，用我们保存的图片一一枚举，与出现这种比较像素。如果匹配上了，拖动顺序就为4,3,2,1。然后使用selenium模拟即可。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate? comment?</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="zzm99 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.jpg" alt="zzm99 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/12/leetcode-399/" rel="next" title="leetcode-399-Evaluate Division">
+                <i class="fa fa-chevron-left"></i> leetcode-399-Evaluate Division
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/12/pachongzhuanti2/" rel="prev" title="提取数据的方法">
+                提取数据的方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="zzm99">
+            
+              <p class="site-author-name" itemprop="name">zzm99</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zzm99" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#反爬"><span class="nav-number">1.</span> <span class="nav-text">反爬</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie"><span class="nav-number">2.</span> <span class="nav-text">cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie的保存："><span class="nav-number">2.1.</span> <span class="nav-text">cookie的保存：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie的读入："><span class="nav-number">2.2.</span> <span class="nav-text">cookie的读入：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代理ip设置："><span class="nav-number">3.</span> <span class="nav-text">代理ip设置：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取一个ip："><span class="nav-number">3.1.</span> <span class="nav-text">获取一个ip：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用IP代理："><span class="nav-number">3.2.</span> <span class="nav-text">使用IP代理：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#精装版："><span class="nav-number">3.3.</span> <span class="nav-text">精装版：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加头信息："><span class="nav-number">4.</span> <span class="nav-text">添加头信息：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理："><span class="nav-number">5.</span> <span class="nav-text">异常处理：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理验证码："><span class="nav-number">6.</span> <span class="nav-text">处理验证码：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-输入式验证码"><span class="nav-number">6.1.</span> <span class="nav-text">1.输入式验证码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-滑动式验证码"><span class="nav-number">6.2.</span> <span class="nav-text">2.滑动式验证码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-点击式的图文验证-和-图标选择"><span class="nav-number">6.3.</span> <span class="nav-text">3.点击式的图文验证 和  图标选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-宫格验证码"><span class="nav-number">6.4.</span> <span class="nav-text">4.宫格验证码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzm99</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">82k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'tCb3SA6mqeAq2F28wecWLXyU-gzGzoHsz',
+        appKey: 'xqRqUNcwfzn1jIhCov5sNS9G',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/click.js"></script>
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":0.8,"hHeadPos":0.5,"vHeadPos":0.5,"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"superSample":2,"width":300,"height":500,"position":"left","hOffset":0,"vOffset":0},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.9,"opacityOnHover":0.9},"log":false});</script></body>
+</html>
