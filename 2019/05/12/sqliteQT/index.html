@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/touxiang.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本节介绍在qt中使用sqlite的一些基本操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在QT中如何使用sqlite？">
+<meta property="og:url" content="http://yoursite.com/2019/05/12/sqliteQT/index.html">
+<meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="本节介绍在qt中使用sqlite的一些基本操作。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/sqliteQT/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/sqliteQT/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/sqliteQT/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/sqliteQT/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/sqliteQT/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/sqliteQT/6.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/sqliteQT/7.jpg">
+<meta property="og:updated_time" content="2019-05-12T06:47:58.469Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在QT中如何使用sqlite？">
+<meta name="twitter:description" content="本节介绍在qt中使用sqlite的一些基本操作。">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/12/sqliteQT/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/12/sqliteQT/">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "29501955"
+    });
+  daovoice('update');
+  </script>
+
+  <title>在QT中如何使用sqlite？ | zzm99</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zzm99</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/12/sqliteQT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在QT中如何使用sqlite？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-12T14:22:06+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/sqlite/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlite</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/12/sqliteQT/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/12/sqliteQT/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  20
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="本节介绍在qt中使用sqlite的一些基本操作。"><a href="#本节介绍在qt中使用sqlite的一些基本操作。" class="headerlink" title=" 本节介绍在qt中使用sqlite的一些基本操作。"></a><strong> 本节介绍在qt中使用sqlite的一些基本操作。</strong></h2><a id="more"></a>
+<p>pro文件中添加：<br><code>QT       += core sql</code></p>
+<p>main.cpp中可以适当添加常用的库：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlDatabase&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QStringList&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQuery&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlError&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<h2 id="一个简单的实战demo："><a href="#一个简单的实战demo：" class="headerlink" title="一个简单的实战demo："></a>一个简单的实战demo：</h2><h3 id="widget-h"><a href="#widget-h" class="headerlink" title="widget.h:"></a>widget.h:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> WIDGET_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WIDGET_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QWidget&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Ui &#123;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span> :</span> <span class="keyword">public</span> QWidget</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Widget</span><span class="params">(QWidget *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SHOW</span><span class="params">()</span></span>;</span><br><span class="line">    ~Widget();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_tableView_clicked</span><span class="params">(<span class="keyword">const</span> QModelIndex &amp;index)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_lineEdit_textChanged</span><span class="params">(<span class="keyword">const</span> QString &amp;arg1)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_comboBox_currentTextChanged</span><span class="params">(<span class="keyword">const</span> QString &amp;arg1)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Ui::Widget *ui;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// WIDGET_H</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="main-cpp"><a href="#main-cpp" class="headerlink" title="main.cpp:"></a>main.cpp:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"widget.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlDatabase&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QStringList&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQuery&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlError&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加数据库驱动</span></span><br><span class="line">    QSqlDatabase db = QSqlDatabase::addDatabase(<span class="string">"QSQLITE"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//设置数据库名称</span></span><br><span class="line">    db.setDatabaseName(<span class="string">"./testDB.db"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(db.open())</span><br><span class="line">    &#123;</span><br><span class="line">        qDebug()&lt;&lt;<span class="string">"open success"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        qDebug()&lt;&lt;<span class="string">"open failed"</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Widget w;</span><br><span class="line">    w.show();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="widget-cpp"><a href="#widget-cpp" class="headerlink" title="widget.cpp:"></a>widget.cpp:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"widget.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ui_widget.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QSqlQueryModel&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QString&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QSettings&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QProcess&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QMutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QWaitCondition&gt;</span></span></span><br><span class="line"></span><br><span class="line">Widget::Widget(QWidget *parent) :</span><br><span class="line">    QWidget(parent),</span><br><span class="line">    ui(<span class="keyword">new</span> Ui::Widget)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</span><br><span class="line">    init();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Widget::init()</span><br><span class="line">&#123;</span><br><span class="line">    QSqlQueryModel *model=<span class="keyword">new</span> QSqlQueryModel;</span><br><span class="line">    model-&gt;setQuery(<span class="string">"SELECT name FROM company"</span>);</span><br><span class="line">    ui-&gt;tableView-&gt;setModel(model);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Widget::SHOW()</span><br><span class="line">&#123;</span><br><span class="line">    QVariant currentData = ui-&gt;tableView-&gt;currentIndex().data();</span><br><span class="line">    QSqlQueryModel * modell = <span class="keyword">new</span> QSqlQueryModel;</span><br><span class="line">    QString sqll;</span><br><span class="line">    sqll = <span class="string">"select ADDRESS from COMPANY where NAME = '"</span>+currentData.toString()+<span class="string">"'"</span>;</span><br><span class="line">    modell-&gt;setQuery(sqll);</span><br><span class="line">    QModelIndex indexl = modell-&gt;index(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    QString word = indexl.data().toString();</span><br><span class="line">    ui-&gt;textEdit-&gt;setText(word);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget::~Widget()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> ui;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Widget::on_tableView_clicked(<span class="keyword">const</span> QModelIndex &amp;index)</span><br><span class="line">&#123;</span><br><span class="line">    SHOW();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Widget::on_lineEdit_textChanged(<span class="keyword">const</span> QString &amp;arg1)</span><br><span class="line">&#123;</span><br><span class="line">    QSqlQueryModel *model=<span class="keyword">new</span> QSqlQueryModel;</span><br><span class="line">    QString a,b;</span><br><span class="line">    b=ui-&gt;lineEdit-&gt;text();</span><br><span class="line">    a=<span class="string">"select NAME from COMPANY where NAME LIKE '%"</span>+b+<span class="string">"%'"</span>;</span><br><span class="line">    model-&gt;setQuery(a);</span><br><span class="line">    ui-&gt;tableView-&gt;setModel(model);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Widget::on_comboBox_currentTextChanged(<span class="keyword">const</span> QString &amp;arg1)</span><br><span class="line">&#123;</span><br><span class="line">    QSqlQueryModel *model=<span class="keyword">new</span> QSqlQueryModel;</span><br><span class="line">    QString a,b;</span><br><span class="line">    b = ui-&gt;comboBox-&gt;currentText();</span><br><span class="line">    a=<span class="string">"select NAME from COMPANY where AGE LIKE '"</span>+b+<span class="string">"%'"</span>;</span><br><span class="line">    model-&gt;setQuery(a);</span><br><span class="line">    ui-&gt;tableView-&gt;setModel(model);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ui图："><a href="#ui图：" class="headerlink" title="ui图："></a>ui图：</h3><p><img src="1.jpg" alt="1"></p>
+<h3 id="db文件："><a href="#db文件：" class="headerlink" title="db文件："></a>db文件：</h3><p><img src="2.jpg" alt="2"></p>
+<h3 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h3><p>comboBox的功能是 选择表中AGE开头为数字多少的， 然后下面的lineedit的功能是 输入随机字母 可以匹配含有对应字母的name， 然后点击下面viewtable的对应格子， 可以右边显示对应name的address</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意:"></a>注意:</h3><p>qmake之后要在build的文件夹中手动复制进去原先项目文件里的db文件，否则build里的db并非我们想用的，而是新建的。</p>
+<p><img src="3.png" alt="3"></p>
+<hr>
+<h2 id="下面展示一些qt——sqlite常用的代码："><a href="#下面展示一些qt——sqlite常用的代码：" class="headerlink" title="下面展示一些qt——sqlite常用的代码："></a>下面展示一些qt——sqlite常用的代码：</h2><hr>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QCoreApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlDatabase&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QStringList&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQuery&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlError&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QCoreApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*查看qt支持的数据库驱动</span></span><br><span class="line"><span class="comment">    qDebug() &lt;&lt; "Available drivers:";</span></span><br><span class="line"><span class="comment">    QStringList drivers = QSqlDatabase::drivers();</span></span><br><span class="line"><span class="comment">    foreach(QString driver, drivers)</span></span><br><span class="line"><span class="comment">        qDebug() &lt;&lt; driver;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加数据库驱动</span></span><br><span class="line">    QSqlDatabase db = QSqlDatabase::addDatabase(<span class="string">"QSQLITE"</span>,<span class="string">"Connection_Name"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//设置数据库名称</span></span><br><span class="line">    db.setDatabaseName(<span class="string">"sqlitedata.db"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//法1：</span></span><br><span class="line">    <span class="comment">//打开数据库</span></span><br><span class="line">    <span class="keyword">if</span>(!db.open())</span><br><span class="line">    &#123;</span><br><span class="line">        qDebug() &lt;&lt; <span class="string">"Connect to Sqlite error: "</span> &lt;&lt; db.lastError().text();</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">128</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//以下执行相关sql语句：</span></span><br><span class="line">    <span class="function">QSqlQuery <span class="title">query</span><span class="params">(db)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//新建student表，id设置为主键，还有一个name项</span></span><br><span class="line">    query.exec(<span class="string">"create table student(id int primary key,name varchar)"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//向表中插入3条记录</span></span><br><span class="line">    query.exec(<span class="string">"insert into student values(1,'xiaogang')"</span>);</span><br><span class="line">    query.exec(<span class="string">"insert into student values(2,'xiaoming')"</span>);</span><br><span class="line">    query.exec(<span class="string">"insert into student values(3,'xiaohong')"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//查找表中id &gt;=2 的记录的id项和name项的值</span></span><br><span class="line">    query.exec(<span class="string">"select id,name from student where id &gt;= 2"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//query.next()指向查找到的第一条记录，然后每次后移一条记录</span></span><br><span class="line">    <span class="keyword">while</span>(query.next())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//query.value(0)是id的值，将其转换为int型</span></span><br><span class="line">        <span class="keyword">int</span> value0 = query.value(<span class="number">0</span>).toInt();</span><br><span class="line">        QString value1 = query.value(<span class="number">1</span>).toString();</span><br><span class="line">        <span class="comment">//输出两个值</span></span><br><span class="line">        qDebug() &lt;&lt; value0 &lt;&lt; value1 ;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*法2</span></span><br><span class="line"><span class="comment">        // 3. 打开数据库连接，成功返回 true，不成功则程序退出</span></span><br><span class="line"><span class="comment">        if (!db.open()) &#123;</span></span><br><span class="line"><span class="comment">            qDebug() &lt;&lt; "Connect to Sqlite error: " &lt;&lt; db.lastError().text();</span></span><br><span class="line"><span class="comment">            exit(128);</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        // 4. 在数据库中创建表</span></span><br><span class="line"><span class="comment">        QSqlQuery createTableQuery(db);</span></span><br><span class="line"><span class="comment">        QString sql("CREATE TABLE user("</span></span><br><span class="line"><span class="comment">                    "id integer primary key autoincrement, "</span></span><br><span class="line"><span class="comment">                    "username text not null, "</span></span><br><span class="line"><span class="comment">                    "password text not null, "</span></span><br><span class="line"><span class="comment">                    "email text, "</span></span><br><span class="line"><span class="comment">                    "mobile text)");</span></span><br><span class="line"><span class="comment">        createTableQuery.exec(sql);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        // 5. 向表中插入一条数据</span></span><br><span class="line"><span class="comment">        QSqlQuery insertQuery(db);</span></span><br><span class="line"><span class="comment">        insertQuery.exec("INSERT INTO user (username, password) VALUES ('Alice', 'passw0rd')");</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        // 6. 查询刚才插入的数据</span></span><br><span class="line"><span class="comment">        QSqlQuery selectQuery(db);</span></span><br><span class="line"><span class="comment">        selectQuery.exec("SELECT id, username, password FROM user");</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        while (selectQuery.next()) &#123;</span></span><br><span class="line"><span class="comment">            qDebug() &lt;&lt; QString("Id: %1, Username: %2, Password: %3")</span></span><br><span class="line"><span class="comment">                        .arg(selectQuery.value("id").toInt())</span></span><br><span class="line"><span class="comment">                        .arg(selectQuery.value("username").toString())</span></span><br><span class="line"><span class="comment">                        .arg(selectQuery.value("password").toString());</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>connection.h:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> CONNECTION_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONNECTION_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMessageBox&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlDatabase&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQuery&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">createConnection</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QSqlDatabase db = QSqlDatabase::addDatabase(<span class="string">"QSQLITE"</span>);</span><br><span class="line">    db.setDatabaseName(<span class="string">":memory:"</span>);</span><br><span class="line">    <span class="keyword">if</span> (!db.open()) &#123;</span><br><span class="line">       QMessageBox::critical(<span class="number">0</span>, qApp-&gt;tr(<span class="string">"Cannot open database"</span>),</span><br><span class="line">           qApp-&gt;tr(<span class="string">"Unable to establisha database connection."</span></span><br><span class="line">                     ), QMessageBox::Cancel);</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">QSqlQuery <span class="title">query</span><span class="params">(db)</span></span>;</span><br><span class="line">    query.exec(<span class="string">"create table student (id int primary key, "</span></span><br><span class="line">               <span class="string">"name varchar(20))"</span>);</span><br><span class="line">    query.exec(<span class="string">"insert into student values(0, 'first')"</span>);</span><br><span class="line">    query.exec(<span class="string">"insert into student values(1, 'second')"</span>);</span><br><span class="line">    query.exec(<span class="string">"insert into student values(2, 'third')"</span>);</span><br><span class="line">    query.exec(<span class="string">"insert into student values(3, 'fourth')"</span>);</span><br><span class="line">    query.exec(<span class="string">"insert into student values(4, 'fifth')"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// CONNECTION_H</span></span></span><br></pre></td></tr></table></figure></p>
+<p>mainwindow.h:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MAINWINDOW_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAINWINDOW_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMainWindow&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Ui &#123;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span> :</span> <span class="keyword">public</span> QMainWindow</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">MainWindow</span><span class="params">(QWidget *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    ~MainWindow();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_pushButton_clicked</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Ui::MainWindow *ui;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// MAINWINDOW_H</span></span></span><br></pre></td></tr></table></figure></p>
+<p>main.cpp:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"connection.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!createConnection())</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    MainWindow w;</span><br><span class="line">    w.show();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>mainwindow.cpp:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ui_mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQuery&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlRecord&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlError&gt;</span></span></span><br><span class="line">MainWindow::MainWindow(QWidget *parent) :</span><br><span class="line">    QMainWindow(parent),</span><br><span class="line">    ui(<span class="keyword">new</span> Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MainWindow::~MainWindow()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> ui;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::on_pushButton_clicked()</span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        QSqlQuery query;</span></span><br><span class="line"><span class="comment">        query.exec("select * from student");</span></span><br><span class="line"><span class="comment">        while(query.next())</span></span><br><span class="line"><span class="comment">        &#123;</span></span><br><span class="line"><span class="comment">           qDebug() &lt;&lt; query.value(0).toInt()</span></span><br><span class="line"><span class="comment">                                          &lt;&lt; query.value(1).toString();</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        QSqlQuery query;</span></span><br><span class="line"><span class="comment">        query.exec("select * from student");</span></span><br><span class="line"><span class="comment">        qDebug() &lt;&lt; "exec next() :";</span></span><br><span class="line"><span class="comment">        //开始就先执行一次next()函数，那么query指向结果集的第一条记录</span></span><br><span class="line"><span class="comment">        if(query.next())</span></span><br><span class="line"><span class="comment">        &#123;</span></span><br><span class="line"><span class="comment">           //获取query所指向的记录在结果集中的编号</span></span><br><span class="line"><span class="comment">           int rowNum = query.at();</span></span><br><span class="line"><span class="comment">           //获取每条记录中属性（即列）的个数</span></span><br><span class="line"><span class="comment">           int columnNum = query.record().count();</span></span><br><span class="line"><span class="comment">           //获取"name"属性所在列的编号，列从左向右编号，最左边的编号为0</span></span><br><span class="line"><span class="comment">           int fieldNo = query.record().indexOf("name");</span></span><br><span class="line"><span class="comment">           //获取id属性的值，并转换为int型</span></span><br><span class="line"><span class="comment">           int id = query.value(0).toInt();</span></span><br><span class="line"><span class="comment">           //获取name属性的值</span></span><br><span class="line"><span class="comment">           QString name = query.value(fieldNo).toString();</span></span><br><span class="line"><span class="comment">           //将结果输出</span></span><br><span class="line"><span class="comment">           qDebug() &lt;&lt; "rowNum is : " &lt;&lt; rowNum</span></span><br><span class="line"><span class="comment">                     &lt;&lt; " id is : " &lt;&lt; id</span></span><br><span class="line"><span class="comment">                     &lt;&lt; " name is : " &lt;&lt; name</span></span><br><span class="line"><span class="comment">                     &lt;&lt; " columnNum is : " &lt;&lt; columnNum;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    //定位到结果集中编号为2的记录，即第三条记录，因为第一条记录的编号为0</span></span><br><span class="line"><span class="comment">        qDebug() &lt;&lt; "exec seek(2) :";</span></span><br><span class="line"><span class="comment">        if(query.seek(2))</span></span><br><span class="line"><span class="comment">        &#123;</span></span><br><span class="line"><span class="comment">           qDebug() &lt;&lt; "rowNum is : " &lt;&lt; query.at()</span></span><br><span class="line"><span class="comment">                     &lt;&lt; " id is : " &lt;&lt; query.value(0).toInt()</span></span><br><span class="line"><span class="comment">                     &lt;&lt; " name is : " &lt;&lt; query.value(1).toString();</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        //定位到结果集中最后一条记录</span></span><br><span class="line"><span class="comment">        qDebug() &lt;&lt; "exec last() :";</span></span><br><span class="line"><span class="comment">        if(query.last())</span></span><br><span class="line"><span class="comment">        &#123;</span></span><br><span class="line"><span class="comment">           qDebug() &lt;&lt; "rowNum is : " &lt;&lt; query.at()</span></span><br><span class="line"><span class="comment">                     &lt;&lt; " id is : " &lt;&lt; query.value(0).toInt()</span></span><br><span class="line"><span class="comment">                     &lt;&lt; " name is : " &lt;&lt; query.value(1).toString();</span></span><br><span class="line"><span class="comment">        &#125; */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        QSqlQuery query;</span></span><br><span class="line"><span class="comment">        int id = ui-&gt;spinBox-&gt;value();</span></span><br><span class="line"><span class="comment">        query.exec(QString("select name from student where id =%1").arg(id));</span></span><br><span class="line"><span class="comment">        query.next();</span></span><br><span class="line"><span class="comment">        QString name = query.value(0).toString();</span></span><br><span class="line"><span class="comment">        qDebug() &lt;&lt; name;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        QSqlQuery query;</span></span><br><span class="line"><span class="comment">        query.prepare("insert into student (id, name) "</span></span><br><span class="line"><span class="comment">                      "values (:id, :name)");</span></span><br><span class="line"><span class="comment">        query.bindValue(0, 5);</span></span><br><span class="line"><span class="comment">        query.bindValue(1, "sixth");</span></span><br><span class="line"><span class="comment">        query.exec();</span></span><br><span class="line"><span class="comment">        query.exec("select * from student");</span></span><br><span class="line"><span class="comment">        query.last();</span></span><br><span class="line"><span class="comment">        int id = query.value(0).toInt();</span></span><br><span class="line"><span class="comment">        QString name = query.value(1).toString();</span></span><br><span class="line"><span class="comment">        qDebug() &lt;&lt; id &lt;&lt; name;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        QSqlQuery query;</span><br><span class="line">        query.prepare(<span class="string">"select name from student where id = ?"</span>);</span><br><span class="line">        <span class="keyword">int</span> id = ui-&gt;spinBox-&gt;value();</span><br><span class="line">        query.addBindValue(id);</span><br><span class="line">        query.exec();</span><br><span class="line">        query.next();</span><br><span class="line">        qDebug() &lt;&lt; query.value(<span class="number">0</span>).toString();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      <span class="comment">/*</span></span><br><span class="line"><span class="comment">        QSqlQuery q;</span></span><br><span class="line"><span class="comment">        q.prepare("insert into student values (?, ?)");</span></span><br><span class="line"><span class="comment">        QVariantList ints;</span></span><br><span class="line"><span class="comment">        ints &lt;&lt; 10 &lt;&lt; 11 &lt;&lt; 12 &lt;&lt; 13;</span></span><br><span class="line"><span class="comment">        q.addBindValue(ints);</span></span><br><span class="line"><span class="comment">        QVariantList names;</span></span><br><span class="line"><span class="comment">        // 最后一个是空字符串，应与前面的格式相同</span></span><br><span class="line"><span class="comment">            names &lt;&lt; "xiaoming" &lt;&lt; "xiaoliang"</span></span><br><span class="line"><span class="comment">                          &lt;&lt; "xiaogang" &lt;&lt; QVariant(QVariant::String);</span></span><br><span class="line"><span class="comment">        q.addBindValue(names);</span></span><br><span class="line"><span class="comment">        if (!q.execBatch()) //进行批处理，如果出错就输出错误</span></span><br><span class="line"><span class="comment">           qDebug() &lt;&lt; q.lastError();</span></span><br><span class="line"><span class="comment">        //下面输出整张表</span></span><br><span class="line"><span class="comment">        QSqlQuery query;</span></span><br><span class="line"><span class="comment">        query.exec("select * from student");</span></span><br><span class="line"><span class="comment">        while(query.next())</span></span><br><span class="line"><span class="comment">        &#123;</span></span><br><span class="line"><span class="comment">           int id = query.value(0).toInt();</span></span><br><span class="line"><span class="comment">           QString name = query.value(1).toString();</span></span><br><span class="line"><span class="comment">           qDebug() &lt;&lt; id &lt;&lt; name;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="4.jpg" alt="4"></p>
+<hr>
+<p>connection.h:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> CONNECTION_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONNECTION_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlDatabase&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQuery&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">createConnection</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QSqlDatabase db = QSqlDatabase::addDatabase(<span class="string">"QSQLITE"</span>);</span><br><span class="line">    db.setDatabaseName(<span class="string">"database.db"</span>);</span><br><span class="line">    <span class="keyword">if</span>(!db.open()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    QSqlQuery query;</span><br><span class="line">    query.exec(<span class="string">"create table student (id int primary key, name vchar)"</span>);</span><br><span class="line">    query.exec(<span class="string">"insert into student values (0,'yafei0')"</span>);</span><br><span class="line">    query.exec(<span class="string">"insert into student values (1,'yafei1')"</span>);</span><br><span class="line">    query.exec(<span class="string">"insert into student values (2,'yafei2')"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// CONNECTION_H</span></span></span><br></pre></td></tr></table></figure></p>
+<p>mainwindow.h:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MAINWINDOW_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAINWINDOW_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMainWindow&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Ui &#123;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span> :</span> <span class="keyword">public</span> QMainWindow</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">MainWindow</span><span class="params">(QWidget *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    ~MainWindow();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_pushButton_clicked</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Ui::MainWindow *ui;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// MAINWINDOW_H</span></span></span><br></pre></td></tr></table></figure></p>
+<p>mysqlquerymodel.h:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MYSQLQUERYMODEL_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MYSQLQUERYMODEL_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQueryModel&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySqlQueryModel</span> :</span> <span class="keyword">public</span> QSqlQueryModel</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">setName</span><span class="params">(<span class="keyword">int</span> studentId, <span class="keyword">const</span> QString &amp;name)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MySqlQueryModel() = <span class="keyword">default</span>;</span><br><span class="line">    MySqlQueryModel(QObject *parent);</span><br><span class="line">    Qt::<span class="function">ItemFlags <span class="title">flags</span><span class="params">(<span class="keyword">const</span> QModelIndex &amp;index)</span> <span class="keyword">const</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">setData</span><span class="params">(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keyword">const</span> QVariant &amp;value, <span class="keyword">int</span> role)</span></span>;</span><br><span class="line">    <span class="function">QVariant <span class="title">data</span><span class="params">(<span class="keyword">const</span> QModelIndex &amp;item, <span class="keyword">int</span> role=Qt::DisplayRole)</span> <span class="keyword">const</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// MYSQLQUERYMODEL_H</span></span></span><br></pre></td></tr></table></figure></p>
+<p>main.cpp:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"connection.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">     <span class="keyword">if</span>(!createConnection())</span><br><span class="line">          <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">     MainWindow w;</span><br><span class="line">     w.show();</span><br><span class="line">     <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>mainwindow.cpp:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ui_mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQueryModel&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QTableView&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlRecord&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QModelIndex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQuery&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mysqlquerymodel.h"</span></span></span><br><span class="line"></span><br><span class="line">MainWindow::MainWindow(QWidget *parent) :</span><br><span class="line">    QMainWindow(parent),</span><br><span class="line">    ui(<span class="keyword">new</span> Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MainWindow::~MainWindow()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> ui;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">void MainWindow::on_pushButton_clicked()</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    QSqlQueryModel *model = new QSqlQueryModel;</span></span><br><span class="line"><span class="comment">    model-&gt;setQuery("select * from student");</span></span><br><span class="line"><span class="comment">    model-&gt;setHeaderData(0, Qt::Horizontal, tr("id"));</span></span><br><span class="line"><span class="comment">    model-&gt;setHeaderData(1, Qt::Horizontal, tr("name"));</span></span><br><span class="line"><span class="comment">    QTableView *view = new QTableView;</span></span><br><span class="line"><span class="comment">    view-&gt;setModel(model);</span></span><br><span class="line"><span class="comment">    view-&gt;show();</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    int column= model-&gt;columnCount(); //获得列数</span></span><br><span class="line"><span class="comment">    int row = model-&gt;rowCount();    // 获得行数</span></span><br><span class="line"><span class="comment">    QSqlRecord record = model-&gt;record(1); //获得一条记录</span></span><br><span class="line"><span class="comment">    QModelIndex index = model-&gt;index(1,1);   //获得一条记录的一个属性的值</span></span><br><span class="line"><span class="comment">    qDebug() &lt;&lt; "column num is:" &lt;&lt; column &lt;&lt; endl</span></span><br><span class="line"><span class="comment">            &lt;&lt; "row num is:" &lt;&lt; row &lt;&lt; endl</span></span><br><span class="line"><span class="comment">            &lt;&lt;"the second record is:" &lt;&lt; record &lt;&lt; endl</span></span><br><span class="line"><span class="comment">            &lt;&lt; "the data of index(1,1) is:"&lt;&lt; index.data();</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">void MainWindow::on_pushButton_clicked()</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    QSqlQueryModel *model = new QSqlQueryModel;</span></span><br><span class="line"><span class="comment">    model-&gt;setQuery("select * from student");</span></span><br><span class="line"><span class="comment">    model-&gt;setHeaderData(0, Qt::Horizontal, tr("id"));</span></span><br><span class="line"><span class="comment">    model-&gt;setHeaderData(1, Qt::Horizontal, tr("name"));</span></span><br><span class="line"><span class="comment">    QTableView *view = new QTableView;</span></span><br><span class="line"><span class="comment">    view-&gt;setModel(model);</span></span><br><span class="line"><span class="comment">    QSqlQuery query = model-&gt;query();</span></span><br><span class="line"><span class="comment">    query.exec("insert into student values (10,'yafei10')");</span></span><br><span class="line"><span class="comment">    query.exec("insert into student values (20,'yafei20')");</span></span><br><span class="line"><span class="comment">    model-&gt;setQuery("select * from student"); //再次查询整张表</span></span><br><span class="line"><span class="comment">    view-&gt;show(); //再次进行显示</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::on_pushButton_clicked()</span><br><span class="line">&#123;</span><br><span class="line">    QSqlQueryModel *model = <span class="keyword">new</span> QSqlQueryModel;</span><br><span class="line">    model-&gt;setQuery(<span class="string">"select * from student"</span>);</span><br><span class="line">    model-&gt;setHeaderData(<span class="number">0</span>, Qt::Horizontal, tr(<span class="string">"id"</span>));</span><br><span class="line">    model-&gt;setHeaderData(<span class="number">1</span>, Qt::Horizontal, tr(<span class="string">"name"</span>));</span><br><span class="line">    QTableView *view = <span class="keyword">new</span> QTableView;</span><br><span class="line">    view-&gt;setModel(model);</span><br><span class="line">    view-&gt;show();</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建自己模型的对象</span></span><br><span class="line">    MySqlQueryModel *myModel = <span class="keyword">new</span> MySqlQueryModel;    myModel-&gt;setQuery(<span class="string">"select * from student"</span>);</span><br><span class="line">    myModel-&gt;setHeaderData(<span class="number">0</span>, Qt::Horizontal, tr(<span class="string">"id"</span>));</span><br><span class="line">    myModel-&gt;setHeaderData(<span class="number">1</span>, Qt::Horizontal, tr(<span class="string">"name"</span>));</span><br><span class="line">    QTableView *view1 = <span class="keyword">new</span> QTableView;</span><br><span class="line">    view1-&gt;setWindowTitle(<span class="string">"mySqlQueryModel"</span>); <span class="comment">//修改窗口标题</span></span><br><span class="line">    view1-&gt;setModel(myModel);</span><br><span class="line">    view1-&gt;show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>mysqlquerymodel.cpp:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mysqlquerymodel.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQuery&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QColor&gt;</span></span></span><br><span class="line"></span><br><span class="line">MySqlQueryModel::MySqlQueryModel(QObject *parent) :</span><br><span class="line">    QSqlQueryModel(parent)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Qt::ItemFlags MySqlQueryModel::flags(</span><br><span class="line">       <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span> <span class="comment">//返回表格是否可更改的标志</span></span><br><span class="line">&#123;</span><br><span class="line">    Qt::ItemFlags flags = QSqlQueryModel::flags(index);</span><br><span class="line">    <span class="keyword">if</span> (index.column() == <span class="number">1</span>) <span class="comment">//第二个属性可更改</span></span><br><span class="line">       flags |= Qt::ItemIsEditable;</span><br><span class="line">    <span class="keyword">return</span> flags;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MySqlQueryModel::setData(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keyword">const</span> QVariant &amp;value, <span class="keyword">int</span> <span class="comment">/* role */</span>)</span><br><span class="line">       <span class="comment">//添加数据</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (index.column() &lt; <span class="number">1</span> || index.column() &gt; <span class="number">2</span>)</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">   QModelIndex primaryKeyIndex = QSqlQueryModel::index(index.row(), <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> id = data(primaryKeyIndex).toInt(); <span class="comment">//获取id号</span></span><br><span class="line">    clear();</span><br><span class="line">    <span class="keyword">bool</span> ok;</span><br><span class="line">    <span class="keyword">if</span> (index.column() == <span class="number">1</span>) <span class="comment">//第二个属性可更改</span></span><br><span class="line">       ok = setName(id, value.toString());</span><br><span class="line">    refresh();</span><br><span class="line">    <span class="keyword">return</span> ok;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MySqlQueryModel::refresh() <span class="comment">//更新显示</span></span><br><span class="line">&#123;</span><br><span class="line">    setQuery(<span class="string">"select * from student"</span>);</span><br><span class="line">    setHeaderData(<span class="number">0</span>, Qt::Horizontal, QObject::tr(<span class="string">"id"</span>));</span><br><span class="line">    setHeaderData(<span class="number">1</span>, Qt::Horizontal, QObject::tr(<span class="string">"name"</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加name属性的值</span></span><br><span class="line"><span class="keyword">bool</span> MySqlQueryModel::setName(<span class="keyword">int</span> studentId, <span class="keyword">const</span> QString &amp;name)</span><br><span class="line">&#123;</span><br><span class="line">    QSqlQuery query;</span><br><span class="line">    query.prepare(<span class="string">"update student set name = ? where id = ?"</span>);</span><br><span class="line">    query.addBindValue(name);</span><br><span class="line">    query.addBindValue(studentId);</span><br><span class="line">    <span class="keyword">return</span> query.exec();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//更改数据显示样式</span></span><br><span class="line">QVariant MySqlQueryModel::data(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keyword">int</span> role) <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">QVariant value = QSqlQueryModel::data(index, role);</span><br><span class="line"></span><br><span class="line"><span class="comment">//第一个属性的字体颜色为红色</span></span><br><span class="line">    <span class="keyword">if</span> (role == Qt::TextColorRole &amp;&amp; index.column() == <span class="number">0</span>)</span><br><span class="line">       <span class="keyword">return</span> qVariantFromValue(QColor(Qt::red));</span><br><span class="line"><span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="5.png" alt="5"></p>
+<hr>
+<p>connection.h:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> CONNECTION_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONNECTION_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlDatabase&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQuery&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">createConnection</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QSqlDatabase db = QSqlDatabase::addDatabase(<span class="string">"QSQLITE"</span>);</span><br><span class="line">    db.setDatabaseName(<span class="string">"database.db"</span>);</span><br><span class="line">    <span class="keyword">if</span>(!db.open()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    QSqlQuery query;</span><br><span class="line">    query.exec(QString(</span><br><span class="line">      <span class="string">"create table student (id int primary key, name vchar)"</span>));</span><br><span class="line">    query.exec(QString(<span class="string">"insert into student values (0,'刘明')"</span>));</span><br><span class="line">    query.exec(QString(<span class="string">"insert into student values (1,'陈刚')"</span>));</span><br><span class="line">    query.exec(QString(<span class="string">"insert into student values (2,'王红')"</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// CONNECTION_H</span></span></span><br></pre></td></tr></table></figure></p>
+<p>mainwindow.h:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MAINWINDOW_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAINWINDOW_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMainWindow&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlTableModel&gt;</span></span></span><br><span class="line"><span class="keyword">namespace</span> Ui &#123;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span> :</span> <span class="keyword">public</span> QMainWindow</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">MainWindow</span><span class="params">(QWidget *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    ~MainWindow();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_pushButton_clicked</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_pushButton_2_clicked</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_pushButton_7_clicked</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_pushButton_8_clicked</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_pushButton_5_clicked</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_pushButton_6_clicked</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_pushButton_4_clicked</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on_pushButton_3_clicked</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Ui::MainWindow *ui;</span><br><span class="line">    QSqlTableModel *model;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// MAINWINDOW_H</span></span></span><br></pre></td></tr></table></figure></p>
+<p>main.cpp:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"connection.h"</span></span></span><br><span class="line"><span class="comment">//#include &lt;QTextCodec&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"><span class="comment">//    QTextCodec::setCodecForTr(QTextCodec::codecForName("utf8"));</span></span><br><span class="line"><span class="comment">//    QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale());</span></span><br><span class="line">    <span class="comment">//QTextCodec这玩意从QT5就被删掉了</span></span><br><span class="line">    <span class="keyword">if</span>(!createConnection())</span><br><span class="line">       <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    MainWindow w;</span><br><span class="line">    w.show();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>mainwindow.cpp:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ui_mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMessageBox&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlError&gt;</span></span></span><br><span class="line"></span><br><span class="line">MainWindow::MainWindow(QWidget *parent) :</span><br><span class="line">    QMainWindow(parent),</span><br><span class="line">    ui(<span class="keyword">new</span> Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</span><br><span class="line">    model = <span class="keyword">new</span> QSqlTableModel(<span class="keyword">this</span>);</span><br><span class="line">    model-&gt;setTable(<span class="string">"student"</span>);</span><br><span class="line">    model-&gt;setEditStrategy(QSqlTableModel::OnManualSubmit);</span><br><span class="line">    model-&gt;select(); <span class="comment">//选取整个表的所有行</span></span><br><span class="line">    <span class="comment">//不显示name属性列,如果这时添加记录，则该属性的值添加不上（下面那段代码的作用）</span></span><br><span class="line">     <span class="comment">//model-&gt;removeColumn(1);</span></span><br><span class="line">    ui-&gt;tableView-&gt;setModel(model);</span><br><span class="line">    <span class="comment">//使其不可编辑（下面那段代码的作用）</span></span><br><span class="line">    <span class="comment">//ui-&gt;tableView-&gt;setEditTriggers(QAbstractItemView::NoEditTriggers);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MainWindow::~MainWindow()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> ui;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::on_pushButton_clicked()</span><br><span class="line">&#123;</span><br><span class="line">        model-&gt;database().transaction(); <span class="comment">//开始事务操作</span></span><br><span class="line">        <span class="keyword">if</span> (model-&gt;submitAll()) &#123;</span><br><span class="line">           model-&gt;database().commit(); <span class="comment">//提交</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">           model-&gt;database().rollback(); <span class="comment">//回滚</span></span><br><span class="line">           QMessageBox::warning(<span class="keyword">this</span>, tr(<span class="string">"tableModel"</span>),</span><br><span class="line">                                 tr(<span class="string">"数据库错误: %1"</span>)</span><br><span class="line">                                 .arg(model-&gt;lastError().text()));</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::on_pushButton_2_clicked()</span><br><span class="line">&#123;</span><br><span class="line">     model-&gt;revertAll();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::on_pushButton_7_clicked()</span><br><span class="line">&#123;</span><br><span class="line">        QString name = ui-&gt;lineEdit-&gt;text();</span><br><span class="line">        <span class="comment">//根据姓名进行筛选</span></span><br><span class="line">        model-&gt;setFilter(QString(<span class="string">"name = '%1'"</span>).arg(name));</span><br><span class="line">        <span class="comment">//显示结果</span></span><br><span class="line">        model-&gt;select();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::on_pushButton_8_clicked()</span><br><span class="line">&#123;</span><br><span class="line">    model-&gt;setTable(<span class="string">"student"</span>);   <span class="comment">//重新关联表</span></span><br><span class="line">    model-&gt;select();   <span class="comment">//这样才能再次显示整个表的内容</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::on_pushButton_5_clicked()</span><br><span class="line">&#123;</span><br><span class="line">    model-&gt;setSort(<span class="number">0</span>, Qt::AscendingOrder); <span class="comment">//id属性即第0列，升序排列</span></span><br><span class="line">    model-&gt;select();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::on_pushButton_6_clicked()</span><br><span class="line">&#123;</span><br><span class="line">    model-&gt;setSort(<span class="number">0</span>, Qt::DescendingOrder);</span><br><span class="line">    model-&gt;select();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::on_pushButton_4_clicked()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//获取选中的行</span></span><br><span class="line">    <span class="keyword">int</span> curRow = ui-&gt;tableView-&gt;currentIndex().row();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除该行</span></span><br><span class="line">    model-&gt;removeRow(curRow);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ok = QMessageBox::warning(<span class="keyword">this</span>,tr(<span class="string">"删除当前行!"</span>),tr(<span class="string">"你确定"</span></span><br><span class="line">                                                 <span class="string">"删除当前行吗？"</span>),</span><br><span class="line">                                  QMessageBox::Yes,QMessageBox::No);</span><br><span class="line">    <span class="keyword">if</span>(ok == QMessageBox::No)</span><br><span class="line">    &#123;</span><br><span class="line">       model-&gt;revertAll(); <span class="comment">//如果不删除，则撤销</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> model-&gt;submitAll(); <span class="comment">//否则提交，在数据库中删除该行</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MainWindow::on_pushButton_3_clicked()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> rowNum = model-&gt;rowCount(); <span class="comment">//获得表的行数</span></span><br><span class="line">    <span class="keyword">int</span> id = <span class="number">10</span>;</span><br><span class="line">    model-&gt;insertRow(rowNum); <span class="comment">//添加一行</span></span><br><span class="line">    model-&gt;setData(model-&gt;index(rowNum,<span class="number">0</span>),id);</span><br><span class="line">    <span class="comment">//model-&gt;submitAll(); //可以直接提交</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="6.jpg" alt="6"></p>
+<hr>
+<p>connection.h:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> CONNECTION_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONNECTION_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlDatabase&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQuery&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">createConnection</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   QSqlDatabase db = QSqlDatabase::addDatabase(<span class="string">"QSQLITE"</span>);</span><br><span class="line">   db.setDatabaseName(<span class="string">"database.db"</span>);</span><br><span class="line">   <span class="keyword">if</span>(!db.open()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">   QSqlQuery query;</span><br><span class="line">   query.exec(<span class="string">"create table student (id int primary key, name vchar,course int)"</span>);</span><br><span class="line">   query.exec(<span class="string">"insert into student values(1,'yafei0',1)"</span>);</span><br><span class="line">   query.exec(<span class="string">"insert into student values(2,'yafei1',1)"</span>);</span><br><span class="line">   query.exec(<span class="string">"insert into student values(3,'yafei2',2)"</span>);</span><br><span class="line"></span><br><span class="line">query.exec(<span class="string">"create table course (id int primarykey, name vchar, teacher vchar)"</span>);</span><br><span class="line">   query.exec(<span class="string">"insert into course values(1,'Math','yafeilinux1')"</span>);</span><br><span class="line">   query.exec(<span class="string">"insert into course values(2,'English','yafeilinux2')"</span>);</span><br><span class="line">   query.exec(<span class="string">"insert into course values(3,'Computer','yafeilinux3')"</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// CONNECTION_H</span></span></span><br></pre></td></tr></table></figure></p>
+<p>mainwindow.h:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MAINWINDOW_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAINWINDOW_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMainWindow&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QSqlRelationalTableModel&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Ui &#123;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span> :</span> <span class="keyword">public</span> QMainWindow</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">MainWindow</span><span class="params">(QWidget *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    ~MainWindow();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Ui::MainWindow *ui;</span><br><span class="line">    QSqlRelationalTableModel *model;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// MAINWINDOW_H</span></span></span><br></pre></td></tr></table></figure></p>
+<p>main.cpp:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"connection.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    <span class="keyword">if</span>(!createConnection()) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    MainWindow w;</span><br><span class="line">    w.show();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>mainwindow.cpp:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ui_mainwindow.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlRelationalDelegate&gt;</span></span></span><br><span class="line"></span><br><span class="line">MainWindow::MainWindow(QWidget *parent) :</span><br><span class="line">    QMainWindow(parent),</span><br><span class="line">    ui(<span class="keyword">new</span> Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</span><br><span class="line">    model = <span class="keyword">new</span> QSqlRelationalTableModel(<span class="keyword">this</span>);</span><br><span class="line">    <span class="comment">//属性变化时写入数据库</span></span><br><span class="line">    model-&gt;setEditStrategy(QSqlTableModel::OnFieldChange);</span><br><span class="line">    model-&gt;setTable(<span class="string">"student"</span>);</span><br><span class="line">    <span class="comment">//将student表的第三个属性设为course表的id属性的外键，</span></span><br><span class="line">    <span class="comment">//并将其显示为course表的name属性的值</span></span><br><span class="line">    model-&gt;setRelation(<span class="number">2</span>,QSqlRelation(<span class="string">"course"</span>,<span class="string">"id"</span>,<span class="string">"name"</span>));</span><br><span class="line">    model-&gt;setHeaderData(<span class="number">0</span>, Qt::Horizontal, QObject::tr(<span class="string">"ID"</span>));</span><br><span class="line">    model-&gt;setHeaderData(<span class="number">1</span>, Qt::Horizontal, QObject::tr(<span class="string">"Name"</span>));</span><br><span class="line">    model-&gt;setHeaderData(<span class="number">2</span>, Qt::Horizontal, QObject::tr(<span class="string">"Course"</span>));</span><br><span class="line">    model-&gt;select();</span><br><span class="line">    ui-&gt;tableView-&gt;setModel(model);</span><br><span class="line">    ui-&gt;tableView-&gt;setItemDelegate(<span class="keyword">new</span> QSqlRelationalDelegate(ui-&gt;tableView));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MainWindow::~MainWindow()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> ui;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="7.jpg" alt="7"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate? comment?</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="zzm99 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.jpg" alt="zzm99 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/12/sqliteCpp/" rel="next" title="sqlite与c++的接口">
+                <i class="fa fa-chevron-left"></i> sqlite与c++的接口
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="zzm99">
+            
+              <p class="site-author-name" itemprop="name">zzm99</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zzm99" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本节介绍在qt中使用sqlite的一些基本操作。"><span class="nav-number">1.</span> <span class="nav-text"> 本节介绍在qt中使用sqlite的一些基本操作。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个简单的实战demo："><span class="nav-number">2.</span> <span class="nav-text">一个简单的实战demo：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#widget-h"><span class="nav-number">2.1.</span> <span class="nav-text">widget.h:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main-cpp"><span class="nav-number">2.2.</span> <span class="nav-text">main.cpp:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#widget-cpp"><span class="nav-number">2.3.</span> <span class="nav-text">widget.cpp:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ui图："><span class="nav-number">2.4.</span> <span class="nav-text">ui图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#db文件："><span class="nav-number">2.5.</span> <span class="nav-text">db文件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能："><span class="nav-number">2.6.</span> <span class="nav-text">功能：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">2.7.</span> <span class="nav-text">注意:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面展示一些qt——sqlite常用的代码："><span class="nav-number">3.</span> <span class="nav-text">下面展示一些qt——sqlite常用的代码：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzm99</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">77.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'tCb3SA6mqeAq2F28wecWLXyU-gzGzoHsz',
+        appKey: 'xqRqUNcwfzn1jIhCov5sNS9G',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/click.js"></script>
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":0.8,"hHeadPos":0.5,"vHeadPos":0.5,"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"superSample":2,"width":300,"height":500,"position":"left","hOffset":0,"vOffset":0},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.9,"opacityOnHover":0.9},"log":false});</script></body>
+</html>
