@@ -79,14 +79,21 @@
 
 
 
+<meta name="description" content="学习python123 https://python123.io/tutorials/word_cloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ciyun">
+<meta property="og:title" content="你不知道的词云">
 <meta property="og:url" content="http://yoursite.com/2019/05/13/ciyun/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="学习python123 https://python123.io/tutorials/word_cloud">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-13T15:15:47.492Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/13/ciyun/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/13/ciyun/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/13/ciyun/ac68bcd.png">
+<meta property="og:updated_time" content="2019-05-14T08:05:45.163Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ciyun">
+<meta name="twitter:title" content="你不知道的词云">
+<meta name="twitter:description" content="学习python123 https://python123.io/tutorials/word_cloud">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/13/ciyun/1.jpg">
 
 
 
@@ -131,7 +138,7 @@
   daovoice('update');
   </script>
 
-  <title>ciyun | zzm99</title>
+  <title>你不知道的词云 | zzm99</title>
   
 
 
@@ -308,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ciyun</h1>
+          <h1 class="post-title" itemprop="name headline">你不知道的词云</h1>
         
 
         <div class="post-meta">
@@ -411,7 +418,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  2.2k
                 </span>
               
 
@@ -427,7 +434,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  8
                 </span>
               
             </div>
@@ -448,7 +455,83 @@
       
 
       
-        
+        <blockquote>
+<p>学习python123 <a href="https://python123.io/tutorials/word_cloud" target="_blank" rel="noopener">https://python123.io/tutorials/word_cloud</a><br><a id="more"></a></p>
+</blockquote>
+<p>PART 1</p>
+<ul>
+<li>当我看到词云时，我在想什么？</li>
+<li>关键问题在哪？</li>
+<li>笨办法</li>
+<li>动手做？</li>
+<li>Wordcloud 探秘</li>
+<li>初窥图像处理一角</li>
+<li>快速重叠检测</li>
+<li>词云布局方法</li>
+<li>着手实现</li>
+<li>明显的缺点</li>
+<li>更好的策略<br>PART 2</li>
+<li>四叉树</li>
+<li>四叉树重叠检测</li>
+<li>矩形螺旋布局</li>
+<li>新的实现</li>
+<li>性能瓶颈</li>
+<li>优化！优化！</li>
+<li>为什么要实现一个新的词云？</li>
+<li>更多字体</li>
+<li>更多颜色</li>
+<li>更多布局方法</li>
+<li>表情包云？</li>
+<li>你能做的更好！</li>
+</ul>
+<h1 id="当我看到词云时，我在想什么？"><a href="#当我看到词云时，我在想什么？" class="headerlink" title="当我看到词云时，我在想什么？"></a>当我看到词云时，我在想什么？</h1><p>当第一眼看到词云时，基于程序员的条件反射，一个大大的「How」字浮现在眼前：它是如何实现的？仔细观察，又发现一些现象。词语之间没有重叠，词语中间的空隙被更小的词语填满，有的词语与词语之间以奇怪的姿势交错在一起。考虑了一会儿，我知道我又一次进入了未知领域，以我所知的方法，似乎没有一个能够轻易解决这个问题。</p>
+<h1 id="关键问题在哪？"><a href="#关键问题在哪？" class="headerlink" title="关键问题在哪？"></a>关键问题在哪？</h1><p>首先，在图片上绘制文字肯定不是难事，虽然我没用 python 画过任何图像，但如果这件事成为难点，那肯定是 python 生态出了问题。同样的，设置文字为不同颜色或不同大小也应该不是难事。文字的位置、颜色、大小看起来都比较随机，这也很简单，random 库就能实现。那最后就剩下一个问题，要如何做到词语之间紧密排布但又没有重叠呢？</p>
+<h1 id="笨办法"><a href="#笨办法" class="headerlink" title="笨办法"></a>笨办法</h1><p>假设先在一张白色的图片 A 上放一个黑色的词语 A，又在另一张同样大小的白色的图片 B 上放一个词语 B，把这两张图片都打印到纸上，整齐的叠在一起，对着阳光看，不就能知道这两个词语有没有重叠了吗？如果重叠，就把词语 B 换一个地方，重新打印对比；不重叠时，记下这个位置，词语 B 打印到图片 A 上……</p>
+<p>似乎不太困难，而且我知道我并不需要把图片打印出来，可以让 python 帮我完成对比的工作。</p>
+<p>图片是由一个一个像素组成的，比如一张 800 × 600 的图片，说明它是由 800 × 600 = 48万 个像素组成。每个像素中保存了一个颜色值，通过对比图片 A 和 B 的每一个像素，如果相同位置上，A 和 B 的像素都为黑色，那就意味这两个词语有重叠。</p>
+<p>虽然还有一些不清楚的地方，不过这确实是一个可行的方案。</p>
+<h1 id="动手做？"><a href="#动手做？" class="headerlink" title="动手做？"></a>动手做？</h1><p>要开始用 python 动手实现了吗？<br>当然不，我们知道 python 有一个 wordcloud 库可以生成词云。</p>
+<p>那要开始介绍 wordcloud 库吗？<br>是也不是。我更关心的是 wordcloud 库如何解决我们的关键问题？</p>
+<p>#Wordcloud 探秘<br>从 Github 上可以轻易的下载到 wordcloud 库的代码。从入口函数开始，粗略的追踪了几个函数的调用，有几个地方引起了我的注意：</p>
+<ol>
+<li>它使用了 Pillow 库，搜索发现这是一个 python 图像处理库。</li>
+<li>它在一个 for word, freq in frequencies 循环中，将单词逐个放到图片上。</li>
+<li>这个循环中，除了对字体进行设置外，还调用了一个 sample_position 方法来寻找放置的位置。&lt;- 这就是我们所要的</li>
+<li>sample_position 很简单，它的实现在 query_integral_image.pyx 文件中，仅有 30 多行，它从图片左上角第一个像素开始，遍历所有像素，检查各个位置能否放置。另外，integral_image 翻译为 积分图。</li>
+</ol>
+<h1 id="初窥图像处理一角"><a href="#初窥图像处理一角" class="headerlink" title="初窥图像处理一角"></a>初窥图像处理一角</h1><p>积分图？听起来似乎很复杂，但理解起来却特别简单。首先，积分图不是一张真实的图片，接下来……看图吧：</p>
+<p><img src="1.jpg" alt="1"></p>
+<p>积分图中，每个单元的值，等于原图此位置左上角所有像素值之和（橙框的值 = 蓝框中所有值之和）。这个性质，能够帮助我们快速判断一个区域内有没有内容。为什么这么说呢？</p>
+<h1 id="快速重叠检测"><a href="#快速重叠检测" class="headerlink" title="快速重叠检测"></a>快速重叠检测</h1><p>如果一个矩形区域内没有内容，说明这个区域内所有像素值之和为零。根据积分图的特征，我们可以进行如下计算：用大矩形所有像素值之和，减去上方和左侧两个矩形像素值之和，再加上左上角小矩形像素值之和，就得到了所求区域内像素值之和。</p>
+<p><img src="2.jpg" alt="2"></p>
+<p>大矩形（绿色）: 6<br>左侧矩形（紫色）: 0<br>上方矩形（青色）: 1<br>左上矩形（橙色）: 0<br>目标矩形（蓝色）: 6 - 0 - 1 + 0 = 5                 </p>
+<p>这样，只需要进行 四次取值和一次运算 就能够判断某区域是否为空，比逐个像素检测快很多。</p>
+<p>每个词语都能够被框在一个矩形中（宽度为 w，高度为 h），我们只需要对图片每个位置 (x,y) 进行计算，如果 (x,y) 到 (x + w - 1, y + h - 1) 这个矩形区域内没有内容，就能够放置这个词语。</p>
+<p>至此，我们知道了词云的第一个关键点：重叠检测方法。</p>
+<h1 id="词云布局方法"><a href="#词云布局方法" class="headerlink" title="词云布局方法"></a>词云布局方法</h1><p>我们已经能够判断新放置的词语是否和其它词语重叠，接下来的问题就是选择一种策略来放置新词语。</p>
+<p>wordcloud 库使用了一个非常简单的布局方法：</p>
+<ol>
+<li>从左上角第一个像素开始，判断在这个位置放置新词语会不会与已放置的内容重叠；</li>
+<li>如果不重叠，将这个位置添加一个列表 list 中；</li>
+<li>遍历图片所有像素，将所有可放置的位置都加到 list 中；</li>
+<li>从 list 中随机选择一个位置放置这个词语。</li>
+</ol>
+<p>这样的方法推翻了我们之前的观测，wordcloud 并没有做任何工作来保证词语之间紧密排布。但这并不困难，只要我们换一种方法：</p>
+<ol>
+<li>选择一个初始位置 P；</li>
+<li>对每一个单词，从位置 P 开始，稍微移动一点点距离，看能不能放下，如果不能，再稍微移动一点距离，直到能够放下。</li>
+</ol>
+<p>不错，就是简单的贪心策略。</p>
+<h1 id="着手实现"><a href="#着手实现" class="headerlink" title="着手实现"></a>着手实现</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageDraw</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageFont</span><br><span class="line"></span><br><span class="line">words = [<span class="string">'发展'</span>, <span class="string">'中国'</span>, <span class="string">'人民'</span>, <span class="string">'建设'</span>, <span class="string">'社会主义'</span>, <span class="string">'坚持'</span>, <span class="string">'党'</span>, <span class="string">'全面'</span>, <span class="string">'国家'</span>, <span class="string">'实现'</span>, <span class="string">'制度'</span>, <span class="string">'推进'</span>, <span class="string">'特色'</span>, <span class="string">'社会'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一张 800×600 的图片</span></span><br><span class="line">img = Image.new(<span class="string">"L"</span>, (<span class="number">800</span>, <span class="number">600</span>))</span><br><span class="line">draw = ImageDraw.Draw(img)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> words:</span><br><span class="line">  <span class="comment"># 选择字体和大小：黑体，大小随机</span></span><br><span class="line">  font_size = random.randint(<span class="number">50</span>,<span class="number">150</span>)</span><br><span class="line">  font = ImageFont.truetype(<span class="string">'C:\Windows\Fonts\SIMHEI.TTF'</span>, font_size)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 计算文字矩形框的大小</span></span><br><span class="line">  box_size = draw.textsize(word, font=font)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 在图片中寻找一个能放下矩形框的位置</span></span><br><span class="line">  x, y = find_position(img, box_size[<span class="number">0</span>], box_size[<span class="number">1</span>])</span><br><span class="line">  <span class="keyword">if</span> x:</span><br><span class="line">    <span class="comment"># 找到一个位置，并绘制上文字</span></span><br><span class="line">    draw.text((x, y), word, fill=<span class="string">"white"</span>, font=font)</span><br><span class="line">img.show()</span><br></pre></td></tr></table></figure>
+<p>关键的确定位置方法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_position</span><span class="params">(img, size_x, size_y)</span>:</span></span><br><span class="line">  <span class="comment"># 计算积分图，cumsum([1,2,3,4]) =&gt; [1,3,6,10]</span></span><br><span class="line">  integral = np.cumsum(np.cumsum(np.asarray(img), axis=<span class="number">1</span>), axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 使用 wordcloud 的布局策略</span></span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">800</span> - size_x):</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">600</span> - size_y):</span><br><span class="line">      <span class="comment"># 检测矩形区域内容是否为空</span></span><br><span class="line">      area = integral[y - <span class="number">1</span>, x - <span class="number">1</span>] + integral[y + size_y - <span class="number">1</span>, x + size_x - <span class="number">1</span>]</span><br><span class="line">      area -= integral[y - <span class="number">1</span>, x + size_x - <span class="number">1</span>] + integral[y + size_y - <span class="number">1</span>, x - <span class="number">1</span>]</span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">not</span> area:</span><br><span class="line">        <span class="keyword">return</span> x, y</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">None</span>, <span class="literal">None</span></span><br></pre></td></tr></table></figure></p>
+<p>至此，我们已经理解 wordcloud 生成词云的基本原理。<br><img src="ac68bcd.png" alt="1"></p>
+<h1 id="明显的缺点"><a href="#明显的缺点" class="headerlink" title="明显的缺点"></a>明显的缺点</h1><p>当词语数量增多时，运行代码，久久未能得出结果。我意识到生成词云是一个需要极大计算量的工作。</p>
+<p>wordcloud 使用了很多使代码变得难以理解的优化策略，并且将 find_position 函数转用 Cython 实现（转换为 C 语言）也在很大程度上说明了这个问题。</p>
+<p>速度问题暂且不提，毕竟生成词云不是我的日常工作。但是通过实现上面的算法，我还发现另一个问题：矩形检测的积分图算法似乎不能很好的支持文字的旋转。</p>
+<p>这件事很好理解，如果将一个单词旋转一定角度，那么它的外接矩形面积必然会比不旋转时候大，这就需要更大的矩形区域来放置这个词语，导致很多实际可以放置的位置却不能放置。</p>
+<p>那么，有没有更好的策略呢？</p>
+<h1 id="更好的策略"><a href="#更好的策略" class="headerlink" title="更好的策略"></a>更好的策略</h1><p>答案是肯定的，包含旋转文字的词云图片并不鲜见。经过一段时间的调查，我们发现，在其它一些语言实现的词云中，使用了不一样的实现方式。</p>
+
       
     </div>
     
@@ -511,8 +594,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/13/weibociyun/" rel="prev" title="weibociyun">
-                weibociyun <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/13/weibociyun/" rel="prev" title="微博 热评 情感分析">
+                微博 热评 情感分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -568,8 +651,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -586,7 +678,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -642,6 +734,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#当我看到词云时，我在想什么？"><span class="nav-number">1.</span> <span class="nav-text">当我看到词云时，我在想什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关键问题在哪？"><span class="nav-number">2.</span> <span class="nav-text">关键问题在哪？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#笨办法"><span class="nav-number">3.</span> <span class="nav-text">笨办法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动手做？"><span class="nav-number">4.</span> <span class="nav-text">动手做？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初窥图像处理一角"><span class="nav-number">5.</span> <span class="nav-text">初窥图像处理一角</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快速重叠检测"><span class="nav-number">6.</span> <span class="nav-text">快速重叠检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#词云布局方法"><span class="nav-number">7.</span> <span class="nav-text">词云布局方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#着手实现"><span class="nav-number">8.</span> <span class="nav-text">着手实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#明显的缺点"><span class="nav-number">9.</span> <span class="nav-text">明显的缺点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更好的策略"><span class="nav-number">10.</span> <span class="nav-text">更好的策略</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -676,7 +784,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">93.3k</span>
+    <span title="Site words total count">99.1k</span>
   
 </div>
 

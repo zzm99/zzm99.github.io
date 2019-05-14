@@ -79,14 +79,20 @@
 
 
 
+<meta name="description" content="python123学习 https://python123.io/tutorials/weibo_sentiment_anlysis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="weibociyun">
+<meta property="og:title" content="微博 热评 情感分析">
 <meta property="og:url" content="http://yoursite.com/2019/05/13/weibociyun/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="python123学习 https://python123.io/tutorials/weibo_sentiment_anlysis">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-13T15:15:52.983Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/13/weibociyun/下载.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/13/weibociyun/afddfa6.png">
+<meta property="og:updated_time" content="2019-05-14T07:45:55.896Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="weibociyun">
+<meta name="twitter:title" content="微博 热评 情感分析">
+<meta name="twitter:description" content="python123学习 https://python123.io/tutorials/weibo_sentiment_anlysis">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/13/weibociyun/下载.png">
 
 
 
@@ -131,7 +137,7 @@
   daovoice('update');
   </script>
 
-  <title>weibociyun | zzm99</title>
+  <title>微博 热评 情感分析 | zzm99</title>
   
 
 
@@ -308,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">weibociyun</h1>
+          <h1 class="post-title" itemprop="name headline">微博 热评 情感分析</h1>
         
 
         <div class="post-meta">
@@ -411,7 +417,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  2.1k
                 </span>
               
 
@@ -427,7 +433,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  8
                 </span>
               
             </div>
@@ -448,7 +454,74 @@
       
 
       
-        
+        <blockquote>
+<p>python123学习 <a href="https://python123.io/tutorials/weibo_sentiment_anlysis" target="_blank" rel="noopener">https://python123.io/tutorials/weibo_sentiment_anlysis</a></p>
+</blockquote>
+<a id="more"></a>
+<h1 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h1><p>想要光明正大又不用冒着被封号的危险拿到微博数据么？想要获悉热门微博下网友评论的情感倾向么？想要知道大家都在使用什么表情么？如果你想，恭喜你，你可以在这个教程里找到你想要的一切元素。</p>
+<p>你将会通过微博开放平台获取微博数据，并通过 Python 中的情感分析库对热门微博评论进行情感分析进而进行可视化展示，同时你也能统计网友常用表情并进行词云化的展示。快来学习吧！</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li>什么是 API，以及为什么要使用它</li>
+<li>注册微博开放平台</li>
+<li>获取微博访问权限</li>
+<li>调用 API 接口获取数据</li>
+<li>整理所需数据</li>
+<li>评论内容预处理</li>
+<li>文本情感分析</li>
+<li>绘制情感分布图</li>
+<li>表情统计</li>
+</ul>
+<h1 id="什么是-API，以及为什么要使用它"><a href="#什么是-API，以及为什么要使用它" class="headerlink" title="什么是 API，以及为什么要使用它"></a>什么是 API，以及为什么要使用它</h1><p>如果你体验过我们的爬虫教程，你一定知道，如果程序要从网页上获取数据（比如微博的评论列表），可以把页面下载下来，再使用选择器和正则表达式一条一条提取数据。</p>
+<p>但很多大型网站提供了另外一种更便捷的方式，如果你想要获得评论列表，那就使用程序，直接调用网站提供的 get_weibo_comments 函数，函数就会以固定的格式，把所有评论信息返回给你。</p>
+<p>网站提供的 get_weibo_comments 这一类函数，就叫做 API。为了方便使用，通常会将这些函数打包库的形式提供给开发者直接使用。</p>
+<h1 id="注册微博开放平台"><a href="#注册微博开放平台" class="headerlink" title="注册微博开放平台"></a>注册微博开放平台</h1><p>为了使用新浪微博提供的 API，我们要先注册成为微博开发者：</p>
+<p>登录 微博开放平台 并注册一个帐号。</p>
+<p>在页面顶部「我的应用」中完成开发者认证。</p>
+<p>在页面顶部「微连接-&gt;其它」中创建一个 应用。</p>
+<p>前往「我的应用-&gt;应用信息-&gt;基本信息」页面，找到 App Key 和 App Secret。App Key 和 App Secret 可以比作开发者的帐号和密码，不要将它发布到任何公开平台中。</p>
+<p>前往「我的应用-&gt;应用信息-&gt;高级信息」下编辑 OAuth2.0 授权设置，「授权回调页、取消授权回调页」两项都设置为 <a href="https://api.weibo.com/oauth2/default.html。" target="_blank" rel="noopener">https://api.weibo.com/oauth2/default.html。</a></p>
+<p>OAuth 2 是一种平台向第三方应用提供服务时的授权方式。和我们使用网站功能需要先登录一样，程序调用网站 API 前也需要先登录。</p>
+<h1 id="获取微博访问权限"><a href="#获取微博访问权限" class="headerlink" title="获取微博访问权限"></a>获取微博访问权限</h1><p>在终端中输入 pip install weibopy 安装 weibopy 库，weibopy 能够帮助我们方便的调用网站提供的 API。</p>
+<p>利用获取到的 App Key 和 App Secret，获取访问 API 的 access_token。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> weibopy <span class="keyword">import</span> WeiboOauth2, WeiboClient</span><br><span class="line"><span class="keyword">import</span> webbrowser</span><br><span class="line"></span><br><span class="line">client_key = <span class="string">'xxxxxxxxx'</span> <span class="comment"># 你的 app key</span></span><br><span class="line">client_secret = <span class="string">'xxxxxxxx'</span> <span class="comment"># 你的 app secret</span></span><br><span class="line">redirect_url = <span class="string">'https://api.weibo.com/oauth2/default.html'</span></span><br><span class="line"></span><br><span class="line">auth = WeiboOauth2(client_key, client_secret, redirect_url)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取认证 code</span></span><br><span class="line">webbrowser.open_new(auth.authorize_url)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在打开的浏览器中完成操作</span></span><br><span class="line"><span class="comment"># 最终会跳转到一个显示 「微博 OAuth2.0」字样的页面</span></span><br><span class="line"><span class="comment"># 从这个页面的 URL 中复制 code= 后的字符串</span></span><br><span class="line"><span class="comment"># URL 类似这样 https://api.weibo.com/oauth2/default.html?code=9c88ff5051d273522700a6b0261f21e6</span></span><br><span class="line"></span><br><span class="line">code = input(<span class="string">'输入 code:'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 code 获取 token</span></span><br><span class="line">token = auth.auth_access(code)</span><br><span class="line"></span><br><span class="line">print(token)</span><br></pre></td></tr></table></figure>
+<p>Access Token 是为了避免多次调用 API 时需要重复输入用户名和密码的一种设计。</p>
+<p>程序登录后获得 Access Token，使用 Access Token 就能在一定时间内免密码使用平台的功能。</p>
+<h1 id="调用-API-接口获取数据"><a href="#调用-API-接口获取数据" class="headerlink" title="调用 API 接口获取数据"></a>调用 API 接口获取数据</h1><p>微博 API 文档 中描述了所有新浪微博提供的数据接口。</p>
+<p>下面是获取某条微博下的评论的过程：</p>
+<p>首先在 API 文档页面找到「获取某条微博的评论列表」这个 API，名称为 comments/show。</p>
+<p>接下来就可以使用这样的方式调用 API：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># token 是刚刚获得的 token，可以一直使用</span></span><br><span class="line">client = WeiboClient(token[<span class="string">'access_token'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># suffix 指定 API 的名称，parmas 是参数，在文档中有详细描述</span></span><br><span class="line">result = client.get(suffix=<span class="string">'comments/show.json'</span>, params=&#123;<span class="string">'id'</span>: <span class="number">4318237070487349</span>, <span class="string">'count'</span>: <span class="number">200</span>, <span class="string">'page'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"></span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+<p>必须的参数只有 id，即需要查询的微博 id。</p>
+<p>微博 id 很容易获得，只要打开一条微博，查看页面的 URL，比如 <a href="https://m.weibo.cn/detail/4321877356979717，后面的那串数字就是这条微博的" target="_blank" rel="noopener">https://m.weibo.cn/detail/4321877356979717，后面的那串数字就是这条微博的</a> id。</p>
+<p>如果没有发生意外，上面的代码将获取到 id 为 4318237070487349 的微博的前 200 条评论内容，并且已经存储为字典形式。</p>
+<h1 id="整理所需数据"><a href="#整理所需数据" class="headerlink" title="整理所需数据"></a>整理所需数据</h1><p>阅读 API 文档中可以发现，comments/show 除了返回评论本身外，还返回了许多额外的数据。有了这些数据，你能够创造更多玩法。</p>
+<p>评论信息：</p>
+<ul>
+<li><p>创建时间、内容、来源<br>评论者信息：</p>
+</li>
+<li><p>用户昵称、性别、注册时间</p>
+</li>
+<li>用户的省市信息</li>
+<li>用户个人描述、博客地址、头像、域名</li>
+<li>用户的粉丝数、关注数、微博数、收藏数<br>下面我们将结合 评论的内容的情感倾向 和 评论者的地理位置 这两个维度数据，进行整理和可视化展示。</li>
+</ul>
+<h1 id="评论内容预处理"><a href="#评论内容预处理" class="headerlink" title="评论内容预处理"></a>评论内容预处理</h1><p>首先，评论包含一些对情感分析无用的干扰内容，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">回复@某某某：</span><br></pre></td></tr></table></figure></p>
+<p>利用正则表达式去除上述的干扰内容：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># 替换为空字符串</span></span><br><span class="line">text = re.sub(<span class="string">'回复.*?:'</span>, <span class="string">''</span>, str(comment[<span class="string">'text'</span>]))</span><br></pre></td></tr></table></figure></p>
+<p>接下来，按地域划分评论内容。</p>
+<p>使用 collections 中的 defaultdict 模块生成字典列表。将各省份的评论列表存入字典中。（字典的键为省份的 id，值为各省评论的列表）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">province_list = defaultdict(list) <span class="comment"># 保存按省划分的评论正文</span></span><br><span class="line">comment_text_list = [] <span class="comment"># 保存所有评论正文</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取「自杀式单身」评论列表</span></span><br><span class="line"><span class="comment"># 共获取 10 页 * 每页最多 200 条评论</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">    result = client.get(suffix=<span class="string">'comments/show.json'</span>, params=&#123;<span class="string">'id'</span>: <span class="number">4322140368509204</span>, <span class="string">'count'</span>: <span class="number">200</span>, <span class="string">'page'</span>: i&#125;)</span><br><span class="line"></span><br><span class="line">    comments = result[<span class="string">'comments'</span>]</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> len(comments):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> comment <span class="keyword">in</span> comments:</span><br><span class="line">        text = re.sub(<span class="string">'回复.*?:'</span>, <span class="string">''</span>, str(comment[<span class="string">'text'</span>]))</span><br><span class="line">        province = comment[<span class="string">'user'</span>][<span class="string">'province'</span>]</span><br><span class="line">        province_list[province].append(text)</span><br><span class="line">        comment_text_list.append(text)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">'已抓取评论 &#123;&#125; 条'</span>.format(len(comment_text_list)))</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+<h1 id="文本情感分析"><a href="#文本情感分析" class="headerlink" title="文本情感分析"></a>文本情感分析</h1><p>在控制台安装 snownlp：pip install snownlp</p>
+<p>使用 snownlp 库可以对文本进行情感分析，它会对每个文本生成一个 0-1 的得分，数值越大，是积极情绪的概率越高。</p>
+<p>情感分析的原理其实很简单：提取一句话中的一些关键词，判断每个关键词对应情感为积极的概率，最后取最大值。</p>
+<p>对各省的评论进行情感分析，并统计积极情绪所占的比例，以便绘制地图。</p>
+<p>由于我们获取的为省份 id 。需要将其转换为对应名称以便绘图。需访问 相应 API 获取 id 和 名称的映射：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取省份列表</span></span><br><span class="line">provinces = &#123;&#125;</span><br><span class="line">results = client.get(suffix=<span class="string">'common/get_province.json'</span>, params=&#123;<span class="string">'country'</span>: <span class="string">'001'</span>&#125;)</span><br><span class="line"><span class="keyword">for</span> prov <span class="keyword">in</span> results:</span><br><span class="line">    <span class="keyword">for</span> code, name <span class="keyword">in</span> prov.items():</span><br><span class="line">        provinces[code] = name</span><br><span class="line">print(provinces)</span><br></pre></td></tr></table></figure>
+<p>接下来就可以开始做情感分析了：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 评论情感分析</span></span><br><span class="line">positives = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> province_code, comments <span class="keyword">in</span> province_list.items():</span><br><span class="line">    sentiment_list = []</span><br><span class="line">    <span class="keyword">for</span> text <span class="keyword">in</span> comments:</span><br><span class="line">        s = SnowNLP(text)</span><br><span class="line">        sentiment_list.append(s.sentiments)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 统计平均情感</span></span><br><span class="line">    positive_number = sum(sentiment_list)</span><br><span class="line">    positive = positive_number / len(sentiment_list) * <span class="number">100</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 按省保存数据, 0010 为国家前缀</span></span><br><span class="line">    province_code = <span class="string">'0010'</span> + str(province_code)</span><br><span class="line">    <span class="keyword">if</span> province_code <span class="keyword">in</span> provinces:</span><br><span class="line">        provice_name = provinces[province_code]</span><br><span class="line">        positives[provice_name] = int(positive)</span><br></pre></td></tr></table></figure></p>
+<h1 id="绘制情感分布图"><a href="#绘制情感分布图" class="headerlink" title="绘制情感分布图"></a>绘制情感分布图</h1><p>在控制台安装 pyecharts 以及中国地图组件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pip install pyecharts</span><br><span class="line">pip install echarts-countries-pypkg</span><br><span class="line">pip install echarts-china-provinces-pypkg</span><br><span class="line"></span><br><span class="line"># 可选</span><br><span class="line">pip install pyecharts-snapshot</span><br></pre></td></tr></table></figure></p>
+<p>绘制地图也非常简单：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘制情感分布图</span></span><br><span class="line">keys = list(positives.keys())</span><br><span class="line">values = list(positives.values())</span><br><span class="line">map = Map(<span class="string">"自杀式单身 情感分析地域图"</span>, width=<span class="number">1200</span>, height=<span class="number">600</span>)</span><br><span class="line">map.add(<span class="string">"积极情感"</span>, keys, values, visual_range=[<span class="number">0</span>, <span class="number">100</span>], maptype=<span class="string">'china'</span>, is_visualmap=<span class="literal">True</span>, is_label_show=<span class="literal">True</span>, visual_text_color=<span class="string">'#000'</span>)</span><br><span class="line">map.render(path=<span class="string">"单身热评分布.html"</span>)</span><br></pre></td></tr></table></figure></p>
+<p><img src="下载.png" alt="1"></p>
+<h1 id="表情统计"><a href="#表情统计" class="headerlink" title="表情统计"></a>表情统计</h1><p>观察表情格式，进行正则匹配。同时使用 collections 中的 Counter 进行统计。代码如下:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collection <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取评论中出现的表情</span></span><br><span class="line">emoji_list = []</span><br><span class="line"><span class="keyword">for</span> comment <span class="keyword">in</span> comment_text_list:</span><br><span class="line">    emojis = re.findall(re.compile(<span class="string">u'(\[.*?\])'</span>, re.S), comment)</span><br><span class="line">    <span class="keyword">if</span> emojis:</span><br><span class="line">        <span class="keyword">for</span> emoji <span class="keyword">in</span> emojis:</span><br><span class="line">            emoji_list.append(emoji)</span><br><span class="line">emoji_dict = Counter(emoji_list)</span><br><span class="line"></span><br><span class="line">print(emoji_dict)</span><br></pre></td></tr></table></figure></p>
+<p><img src="afddfa6.png" alt="1"></p>
+
       
     </div>
     
@@ -501,8 +574,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/13/ciyun/" rel="next" title="ciyun">
-                <i class="fa fa-chevron-left"></i> ciyun
+              <a href="/2019/05/13/ciyun/" rel="next" title="你不知道的词云">
+                <i class="fa fa-chevron-left"></i> 你不知道的词云
               </a>
             
           </div>
@@ -510,6 +583,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/14/pasysuzhaosheng/" rel="prev" title="爬取中大招生网2016~2018年专业分数表">
+                爬取中大招生网2016~2018年专业分数表 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -564,8 +641,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -582,7 +668,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -638,6 +724,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#导读"><span class="nav-number">1.</span> <span class="nav-text">导读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是-API，以及为什么要使用它"><span class="nav-number">3.</span> <span class="nav-text">什么是 API，以及为什么要使用它</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册微博开放平台"><span class="nav-number">4.</span> <span class="nav-text">注册微博开放平台</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取微博访问权限"><span class="nav-number">5.</span> <span class="nav-text">获取微博访问权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调用-API-接口获取数据"><span class="nav-number">6.</span> <span class="nav-text">调用 API 接口获取数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#整理所需数据"><span class="nav-number">7.</span> <span class="nav-text">整理所需数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#评论内容预处理"><span class="nav-number">8.</span> <span class="nav-text">评论内容预处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文本情感分析"><span class="nav-number">9.</span> <span class="nav-text">文本情感分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绘制情感分布图"><span class="nav-number">10.</span> <span class="nav-text">绘制情感分布图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表情统计"><span class="nav-number">11.</span> <span class="nav-text">表情统计</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -672,7 +774,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">93.3k</span>
+    <span title="Site words total count">99.1k</span>
   
 </div>
 
