@@ -79,14 +79,21 @@
 
 
 
+<meta name="description" content="文件和异常在实际开发中，常常需要对程序中的数据进行持久化操作，而实现数据持久化最直接简单的方式就是将数据保存到文件中。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件和异常">
 <meta property="og:url" content="http://yoursite.com/2019/05/16/python1003/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="文件和异常在实际开发中，常常需要对程序中的数据进行持久化操作，而实现数据持久化最直接简单的方式就是将数据保存到文件中。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-16T01:50:46.236Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/16/python1003/Snipaste_2019-05-17_20-46-18.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/16/python1003/Snipaste_2019-05-17_20-48-39">
+<meta property="og:image" content="http://yoursite.com/2019/05/16/python1003/Snipaste_2019-05-17_20-49-20.png">
+<meta property="og:updated_time" content="2019-05-17T12:50:48.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件和异常">
+<meta name="twitter:description" content="文件和异常在实际开发中，常常需要对程序中的数据进行持久化操作，而实现数据持久化最直接简单的方式就是将数据保存到文件中。">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/16/python1003/Snipaste_2019-05-17_20-46-18.png">
 
 
 
@@ -367,7 +374,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  2.1k
                 </span>
               
 
@@ -383,7 +390,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  8
                 </span>
               
             </div>
@@ -404,7 +411,42 @@
       
 
       
-        
+        <h1 id="文件和异常"><a href="#文件和异常" class="headerlink" title="文件和异常"></a>文件和异常</h1><p>在实际开发中，常常需要对程序中的数据进行持久化操作，而实现数据持久化最直接简单的方式就是将数据保存到文件中。</p>
+<a id="more"></a>
+<p>在Python中实现文件的读写操作其实非常简单，通过Python内置的open函数，我们可以指定文件名、操作模式、编码信息等来获得操作文件的对象，接下来就可以对文件进行读写操作了。这里所说的操作模式是指要打开什么样的文件（字符文件还是二进制文件）以及做什么样的操作（读、写还是追加）</p>
+<p><img src="Snipaste_2019-05-17_20-46-18.png" alt="1"></p>
+<h1 id="读写文本文件"><a href="#读写文本文件" class="headerlink" title="读写文本文件"></a>读写文本文件</h1><p>读取文本文件时，需要在使用open函数时指定好带路径的文件名（可以使用相对路径或绝对路径）并将文件模式设置为’r’（如果不指定，默认值也是’r’），然后通过encoding参数指定编码（如果不指定，默认值是None，那么在读取文件时使用的是操作系统默认的编码），如果不能保证保存文件时使用的编码方式与encoding参数指定的编码方式是一致的，那么就可能因无法解码字符而导致读取失败。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    f = open(<span class="string">'致橡树.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">    print(f.read())</span><br><span class="line">    f.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>请注意上面的代码，如果open函数指定的文件并不存在或者无法打开，那么将引发异常状况导致程序崩溃。为了让代码有一定的健壮性和容错性，我们可以使用Python的异常机制对可能在运行时发生状况的代码进行适当的处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    f = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        f = open(<span class="string">'致橡树.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">        print(f.read())</span><br><span class="line">    <span class="keyword">except</span> FileNotFoundError:</span><br><span class="line">        print(<span class="string">'无法打开指定的文件!'</span>)</span><br><span class="line">    <span class="keyword">except</span> LookupError:</span><br><span class="line">        print(<span class="string">'指定了未知的编码!'</span>)</span><br><span class="line">    <span class="keyword">except</span> UnicodeDecodeError:</span><br><span class="line">        print(<span class="string">'读取文件时解码错误!'</span>)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="keyword">if</span> f:</span><br><span class="line">            f.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>在Python中，我们可以将那些在运行时可能会出现状况的代码放在try代码块中，在try代码块的后面可以跟上一个或多个except来捕获可能出现的异常状况。例如在上面读取文件的过程中，文件找不到会引发FileNotFoundError，指定了未知的编码会引发LookupError，而如果读取文件时无法按指定方式解码会引发UnicodeDecodeError，我们在try后面跟上了三个except分别处理这三种不同的异常状况。最后我们使用finally代码块来关闭打开的文件，释放掉程序中获取的外部资源，由于finally块的代码不论程序正常还是异常都会执行到（甚至是调用了sys模块的exit函数退出Python环境，finally块都会被执行，因为exit函数实质上是引发了SystemExit异常），因此我们通常把finally块称为“总是执行代码块”，它最适合用来做释放外部资源的操作。如果不愿意在finally代码块中关闭文件对象释放资源，也可以使用上下文语法，通过with关键字指定文件对象的上下文环境并在离开上下文环境时自动释放文件资源</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'致橡树.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            print(f.read())</span><br><span class="line">    <span class="keyword">except</span> FileNotFoundError:</span><br><span class="line">        print(<span class="string">'无法打开指定的文件!'</span>)</span><br><span class="line">    <span class="keyword">except</span> LookupError:</span><br><span class="line">        print(<span class="string">'指定了未知的编码!'</span>)</span><br><span class="line">    <span class="keyword">except</span> UnicodeDecodeError:</span><br><span class="line">        print(<span class="string">'读取文件时解码错误!'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>除了使用文件对象的read方法读取文件之外，还可以使用for-in循环逐行读取或者用readlines方法将文件按行读取到一个列表容器中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 一次性读取整个文件内容</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'致橡树.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        print(f.read())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 通过for-in循环逐行读取</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'致橡树.txt'</span>, mode=<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">            print(line, end=<span class="string">''</span>)</span><br><span class="line">            time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    print()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取文件按行读取到列表中</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'致橡树.txt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        lines = f.readlines()</span><br><span class="line">    print(lines)</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>要将文本信息写入文件文件也非常简单，在使用open函数时指定好文件名并将文件模式设置为’w’即可。注意如果需要对文件内容进行追加式写入，应该将模式设置为’a’。如果要写入的文件不存在会自动创建文件而不是引发异常。下面的例子演示了如何将1-9999直接的素数分别写入三个文件中（1-99之间的素数保存在a.txt中，100-999之间的素数保存在b.txt中，1000-9999之间的素数保存在c.txt中）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="string">"""判断素数的函数"""</span></span><br><span class="line">    <span class="keyword">assert</span> n &gt; <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> factor <span class="keyword">in</span> range(<span class="number">2</span>, int(sqrt(n)) + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> n % factor == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span> <span class="keyword">if</span> n != <span class="number">1</span> <span class="keyword">else</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    filenames = (<span class="string">'a.txt'</span>, <span class="string">'b.txt'</span>, <span class="string">'c.txt'</span>)</span><br><span class="line">    fs_list = []</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">for</span> filename <span class="keyword">in</span> filenames:</span><br><span class="line">            fs_list.append(open(filename, <span class="string">'w'</span>, encoding=<span class="string">'utf-8'</span>))</span><br><span class="line">        <span class="keyword">for</span> number <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10000</span>):</span><br><span class="line">            <span class="keyword">if</span> is_prime(number):</span><br><span class="line">                <span class="keyword">if</span> number &lt; <span class="number">100</span>:</span><br><span class="line">                    fs_list[<span class="number">0</span>].write(str(number) + <span class="string">'\n'</span>)</span><br><span class="line">                <span class="keyword">elif</span> number &lt; <span class="number">1000</span>:</span><br><span class="line">                    fs_list[<span class="number">1</span>].write(str(number) + <span class="string">'\n'</span>)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    fs_list[<span class="number">2</span>].write(str(number) + <span class="string">'\n'</span>)</span><br><span class="line">    <span class="keyword">except</span> IOError <span class="keyword">as</span> ex:</span><br><span class="line">        print(ex)</span><br><span class="line">        print(<span class="string">'写文件时发生错误!'</span>)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="keyword">for</span> fs <span class="keyword">in</span> fs_list:</span><br><span class="line">            fs.close()</span><br><span class="line">    print(<span class="string">'操作完成!'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h1 id="读写二进制文件"><a href="#读写二进制文件" class="headerlink" title="读写二进制文件"></a>读写二进制文件</h1><p>知道了如何读写文本文件要读写二进制文件也就很简单了，下面的代码实现了复制图片文件的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'guido.jpg'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> fs1:</span><br><span class="line">            data = fs1.read()</span><br><span class="line">            print(type(data))  <span class="comment"># &lt;class 'bytes'&gt;</span></span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'吉多.jpg'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> fs2:</span><br><span class="line">            fs2.write(data)</span><br><span class="line">    <span class="keyword">except</span> FileNotFoundError <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">'指定的文件无法打开.'</span>)</span><br><span class="line">    <span class="keyword">except</span> IOError <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">'读写文件时出现错误.'</span>)</span><br><span class="line">    print(<span class="string">'程序执行结束.'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h1 id="读写JSON文件"><a href="#读写JSON文件" class="headerlink" title="读写JSON文件"></a>读写JSON文件</h1><p>通过上面的讲解，我们已经知道如何将文本数据和二进制数据保存到文件中，那么这里还有一个问题，如果希望把一个列表或者一个字典中的数据保存到文件中又该怎么做呢？答案是将数据以JSON格式进行保存。JSON是“JavaScript Object Notation”的缩写，它本来是JavaScript语言中创建对象的一种字面量语法，现在已经被广泛的应用于跨平台跨语言的数据交换，原因很简单，因为JSON也是纯文本，任何系统任何编程语言处理纯文本都是没有问题的。</p>
+<p>事实上JSON的数据类型和Python的数据类型是很容易找到对应关系的</p>
+<p><img src="Snipaste_2019-05-17_20-48-39" alt="1"></p>
+<p><img src="Snipaste_2019-05-17_20-49-20.png" alt="1"></p>
+<p>使用Python中的json模块就可以将字典或列表以JSON格式保存到文件中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    mydict = &#123;</span><br><span class="line">        <span class="string">'name'</span>: <span class="string">'骆昊'</span>,</span><br><span class="line">        <span class="string">'age'</span>: <span class="number">38</span>,</span><br><span class="line">        <span class="string">'qq'</span>: <span class="number">957658</span>,</span><br><span class="line">        <span class="string">'friends'</span>: [<span class="string">'王大锤'</span>, <span class="string">'白元芳'</span>],</span><br><span class="line">        <span class="string">'cars'</span>: [</span><br><span class="line">            &#123;<span class="string">'brand'</span>: <span class="string">'BYD'</span>, <span class="string">'max_speed'</span>: <span class="number">180</span>&#125;,</span><br><span class="line">            &#123;<span class="string">'brand'</span>: <span class="string">'Audi'</span>, <span class="string">'max_speed'</span>: <span class="number">280</span>&#125;,</span><br><span class="line">            &#123;<span class="string">'brand'</span>: <span class="string">'Benz'</span>, <span class="string">'max_speed'</span>: <span class="number">320</span>&#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'data.json'</span>, <span class="string">'w'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> fs:</span><br><span class="line">            json.dump(mydict, fs)</span><br><span class="line">    <span class="keyword">except</span> IOError <span class="keyword">as</span> e:</span><br><span class="line">        print(e)</span><br><span class="line">    print(<span class="string">'保存数据完成!'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>json模块主要有四个比较重要的函数，分别是：</p>
+<ul>
+<li>dump - 将Python对象按照JSON格式序列化到文件中</li>
+<li>dumps - 将Python对象处理成JSON格式的字符串</li>
+<li>load - 将文件中的JSON数据反序列化成对象</li>
+<li>loads - 将字符串的内容反序列化成Python对象</li>
+</ul>
+<p>这里出现了两个概念，一个叫序列化，一个叫反序列化。自由的百科全书维基百科上对这两个概念是这样解释的：“序列化（serialization）在计算机科学的数据处理中，是指将数据结构或对象状态转换为可以存储或传输的形式，这样在需要的时候能够恢复到原先的状态，而且通过序列化的数据重新获取字节时，可以利用这些字节来产生原始对象的副本（拷贝）。与这个过程相反的动作，即从一系列字节中提取数据结构的操作，就是反序列化（deserialization）”。</p>
+<p>使用requests模块（封装得足够好的第三方网络访问模块）访问网络API获取国内新闻，如何通过json模块解析JSON数据并显示新闻标题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    resp = requests.get(<span class="string">'http://api.tianapi.com/guonei/?key=APIKey&amp;num=10'</span>)</span><br><span class="line">    data_model = json.loads(resp.text)</span><br><span class="line">    <span class="keyword">for</span> news <span class="keyword">in</span> data_model[<span class="string">'newslist'</span>]:</span><br><span class="line">        print(news[<span class="string">'title'</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://github.com/jackfrued/Python-100-Days/blob/master/Day01-15/Day11/%E6%96%87%E4%BB%B6%E5%92%8C%E5%BC%82%E5%B8%B8.md" target="_blank" rel="noopener">https://github.com/jackfrued/Python-100-Days/blob/master/Day01-15/Day11/%E6%96%87%E4%BB%B6%E5%92%8C%E5%BC%82%E5%B8%B8.md</a></p>
+</blockquote>
+
       
     </div>
     
@@ -467,8 +509,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/16/python1004/" rel="prev" title="python1004">
-                python1004 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/16/python1004/" rel="prev" title="字符串和正则表达式">
+                字符串和正则表达式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -524,8 +566,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -598,6 +649,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件和异常"><span class="nav-number">1.</span> <span class="nav-text">文件和异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读写文本文件"><span class="nav-number">2.</span> <span class="nav-text">读写文本文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读写二进制文件"><span class="nav-number">3.</span> <span class="nav-text">读写二进制文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读写JSON文件"><span class="nav-number">4.</span> <span class="nav-text">读写JSON文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -632,7 +699,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">126.9k</span>
+    <span title="Site words total count">129.6k</span>
   
 </div>
 
