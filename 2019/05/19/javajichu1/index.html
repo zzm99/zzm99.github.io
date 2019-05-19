@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/touxiang.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Java 基本数据类型变量就是申请内存来存储值。也就是说，当创建变量的时候，需要在内存中申请空间。 内存管理系统根据变量的类型为变量分配存储空间，分配的空间只能用来储存该类型数据。 通过定义不同类型的变量，可以在内存中储存整数、小数或者字符。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 基本数据类型">
+<meta property="og:url" content="http://yoursite.com/2019/05/19/javajichu1/index.html">
+<meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="Java 基本数据类型变量就是申请内存来存储值。也就是说，当创建变量的时候，需要在内存中申请空间。 内存管理系统根据变量的类型为变量分配存储空间，分配的空间只能用来储存该类型数据。 通过定义不同类型的变量，可以在内存中储存整数、小数或者字符。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-18T16:06:31.795Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 基本数据类型">
+<meta name="twitter:description" content="Java 基本数据类型变量就是申请内存来存储值。也就是说，当创建变量的时候，需要在内存中申请空间。 内存管理系统根据变量的类型为变量分配存储空间，分配的空间只能用来储存该类型数据。 通过定义不同类型的变量，可以在内存中储存整数、小数或者字符。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/19/javajichu1/">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "29501955"
+    });
+  daovoice('update');
+  </script>
+
+  <title>Java 基本数据类型 | zzm99</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zzm99</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/19/javajichu1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java 基本数据类型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-19T00:05:46+08:00">
+                2019-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/基础知识/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/19/javajichu1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/19/javajichu1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Java-基本数据类型"><a href="#Java-基本数据类型" class="headerlink" title="Java 基本数据类型"></a>Java 基本数据类型</h1><p>变量就是申请内存来存储值。也就是说，当创建变量的时候，需要在内存中申请空间。</p>
+<p>内存管理系统根据变量的类型为变量分配存储空间，分配的空间只能用来储存该类型数据。</p>
+<p>通过定义不同类型的变量，可以在内存中储存整数、小数或者字符。<br><a id="more"></a><br>Java 的两大数据类型:</p>
+<ul>
+<li>内置数据类型</li>
+<li>引用数据类型</li>
+</ul>
+<h1 id="内置数据类型"><a href="#内置数据类型" class="headerlink" title="内置数据类型"></a>内置数据类型</h1><p>Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。</p>
+<h2 id="byte："><a href="#byte：" class="headerlink" title="byte："></a>byte：</h2><ul>
+<li>byte 数据类型是8位、有符号的，以二进制补码表示的整数；</li>
+<li>最小值是 -128（-2^7）；</li>
+<li>最大值是 127（2^7-1）；</li>
+<li>默认值是 0；</li>
+<li>byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 变量占用的空间只有 int 类型的四分之一；</li>
+<li>例子：byte a = 100，byte b = -50。</li>
+</ul>
+<h2 id="short："><a href="#short：" class="headerlink" title="short："></a>short：</h2><ul>
+<li>short 数据类型是 16 位、有符号的以二进制补码表示的整数</li>
+<li>最小值是 -32768（-2^15）；</li>
+<li>最大值是 32767（2^15 - 1）；</li>
+<li>Short 数据类型也可以像 byte 那样节省空间。一个short变量是int型变量所占空间的二分之一；</li>
+<li>默认值是 0；</li>
+<li>例子：short s = 1000，short r = -20000。</li>
+</ul>
+<h2 id="int："><a href="#int：" class="headerlink" title="int："></a>int：</h2><ul>
+<li>int 数据类型是32位、有符号的以二进制补码表示的整数；</li>
+<li>最小值是 -2,147,483,648（-2^31）；</li>
+<li>最大值是 2,147,483,647（2^31 - 1）；</li>
+<li>一般地整型变量默认为 int 类型；</li>
+<li>默认值是 0 ；</li>
+<li>例子：int a = 100000, int b = -200000。</li>
+</ul>
+<h2 id="long："><a href="#long：" class="headerlink" title="long："></a>long：</h2><ul>
+<li>long 数据类型是 64 位、有符号的以二进制补码表示的整数；</li>
+<li>最小值是 -9,223,372,036,854,775,808（-2^63）；</li>
+<li>最大值是 9,223,372,036,854,775,807（2^63 -1）；</li>
+<li>这种类型主要使用在需要比较大整数的系统上；</li>
+<li>默认值是 0L；</li>
+<li>例子： long a = 100000L，Long b = -200000L。</li>
+<li>“L”理论上不分大小写，但是若写成”l”容易与数字”1”混淆，不容易分辩。所以最好大写。</li>
+</ul>
+<h2 id="float："><a href="#float：" class="headerlink" title="float："></a>float：</h2><ul>
+<li>float 数据类型是单精度、32位、符合IEEE 754标准的浮点数；</li>
+<li>float 在储存大型浮点数组的时候可节省内存空间；</li>
+<li>默认值是 0.0f；</li>
+<li>浮点数不能用来表示精确的值，如货币；</li>
+<li>例子：float f1 = 234.5f。</li>
+</ul>
+<h2 id="double："><a href="#double：" class="headerlink" title="double："></a>double：</h2><ul>
+<li>double 数据类型是双精度、64 位、符合IEEE 754标准的浮点数；</li>
+<li>浮点数的默认类型为double类型；</li>
+<li>double类型同样不能表示精确的值，如货币；</li>
+<li>默认值是 0.0d；</li>
+<li>例子：double d1 = 123.4。</li>
+</ul>
+<h2 id="boolean："><a href="#boolean：" class="headerlink" title="boolean："></a>boolean：</h2><ul>
+<li>boolean数据类型表示一位的信息；</li>
+<li>只有两个取值：true 和 false；</li>
+<li>这种类型只作为一种标志来记录 true/false 情况；</li>
+<li>默认值是 false；</li>
+<li>例子：boolean one = true。</li>
+</ul>
+<h2 id="char："><a href="#char：" class="headerlink" title="char："></a>char：</h2><ul>
+<li>char类型是一个单一的 16 位 Unicode 字符；</li>
+<li>最小值是 \u0000（即为0）；</li>
+<li>最大值是 \uffff（即为65,535）；</li>
+<li>char 数据类型可以储存任何字符；</li>
+<li>例子：char letter = ‘A’;。</li>
+</ul>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>对于数值类型的基本类型的取值范围，我们无需强制去记忆，因为它们的值都已经以常量的形式定义在对应的包装类中了。请看下面的例子：</p>
+<p>实例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrimitiveTypeTest</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        <span class="comment">// byte  </span></span><br><span class="line">        System.out.println(<span class="string">"基本类型：byte 二进制位数："</span> + Byte.SIZE);  </span><br><span class="line">        System.out.println(<span class="string">"包装类：java.lang.Byte"</span>);  </span><br><span class="line">        System.out.println(<span class="string">"最小值：Byte.MIN_VALUE="</span> + Byte.MIN_VALUE);  </span><br><span class="line">        System.out.println(<span class="string">"最大值：Byte.MAX_VALUE="</span> + Byte.MAX_VALUE);  </span><br><span class="line">        System.out.println();  </span><br><span class="line">  </span><br><span class="line">        <span class="comment">// short  </span></span><br><span class="line">        System.out.println(<span class="string">"基本类型：short 二进制位数："</span> + Short.SIZE);  </span><br><span class="line">        System.out.println(<span class="string">"包装类：java.lang.Short"</span>);  </span><br><span class="line">        System.out.println(<span class="string">"最小值：Short.MIN_VALUE="</span> + Short.MIN_VALUE);  </span><br><span class="line">        System.out.println(<span class="string">"最大值：Short.MAX_VALUE="</span> + Short.MAX_VALUE);  </span><br><span class="line">        System.out.println();  </span><br><span class="line">  </span><br><span class="line">        <span class="comment">// int  </span></span><br><span class="line">        System.out.println(<span class="string">"基本类型：int 二进制位数："</span> + Integer.SIZE);  </span><br><span class="line">        System.out.println(<span class="string">"包装类：java.lang.Integer"</span>);  </span><br><span class="line">        System.out.println(<span class="string">"最小值：Integer.MIN_VALUE="</span> + Integer.MIN_VALUE);  </span><br><span class="line">        System.out.println(<span class="string">"最大值：Integer.MAX_VALUE="</span> + Integer.MAX_VALUE);  </span><br><span class="line">        System.out.println();  </span><br><span class="line">  </span><br><span class="line">        <span class="comment">// long  </span></span><br><span class="line">        System.out.println(<span class="string">"基本类型：long 二进制位数："</span> + Long.SIZE);  </span><br><span class="line">        System.out.println(<span class="string">"包装类：java.lang.Long"</span>);  </span><br><span class="line">        System.out.println(<span class="string">"最小值：Long.MIN_VALUE="</span> + Long.MIN_VALUE);  </span><br><span class="line">        System.out.println(<span class="string">"最大值：Long.MAX_VALUE="</span> + Long.MAX_VALUE);  </span><br><span class="line">        System.out.println();  </span><br><span class="line">  </span><br><span class="line">        <span class="comment">// float  </span></span><br><span class="line">        System.out.println(<span class="string">"基本类型：float 二进制位数："</span> + Float.SIZE);  </span><br><span class="line">        System.out.println(<span class="string">"包装类：java.lang.Float"</span>);  </span><br><span class="line">        System.out.println(<span class="string">"最小值：Float.MIN_VALUE="</span> + Float.MIN_VALUE);  </span><br><span class="line">        System.out.println(<span class="string">"最大值：Float.MAX_VALUE="</span> + Float.MAX_VALUE);  </span><br><span class="line">        System.out.println();  </span><br><span class="line">  </span><br><span class="line">        <span class="comment">// double  </span></span><br><span class="line">        System.out.println(<span class="string">"基本类型：double 二进制位数："</span> + Double.SIZE);  </span><br><span class="line">        System.out.println(<span class="string">"包装类：java.lang.Double"</span>);  </span><br><span class="line">        System.out.println(<span class="string">"最小值：Double.MIN_VALUE="</span> + Double.MIN_VALUE);  </span><br><span class="line">        System.out.println(<span class="string">"最大值：Double.MAX_VALUE="</span> + Double.MAX_VALUE);  </span><br><span class="line">        System.out.println();  </span><br><span class="line">  </span><br><span class="line">        <span class="comment">// char  </span></span><br><span class="line">        System.out.println(<span class="string">"基本类型：char 二进制位数："</span> + Character.SIZE);  </span><br><span class="line">        System.out.println(<span class="string">"包装类：java.lang.Character"</span>);  </span><br><span class="line">        <span class="comment">// 以数值形式而不是字符形式将Character.MIN_VALUE输出到控制台  </span></span><br><span class="line">        System.out.println(<span class="string">"最小值：Character.MIN_VALUE="</span>  </span><br><span class="line">                + (<span class="keyword">int</span>) Character.MIN_VALUE);  </span><br><span class="line">        <span class="comment">// 以数值形式而不是字符形式将Character.MAX_VALUE输出到控制台  </span></span><br><span class="line">        System.out.println(<span class="string">"最大值：Character.MAX_VALUE="</span>  </span><br><span class="line">                + (<span class="keyword">int</span>) Character.MAX_VALUE);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">编译以上代码输出结果如下所示：</span><br><span class="line"></span><br><span class="line">基本类型：byte 二进制位数：8</span><br><span class="line">包装类：java.lang.Byte</span><br><span class="line">最小值：Byte.MIN_VALUE=-128</span><br><span class="line">最大值：Byte.MAX_VALUE=127</span><br><span class="line"></span><br><span class="line">基本类型：short 二进制位数：16</span><br><span class="line">包装类：java.lang.Short</span><br><span class="line">最小值：Short.MIN_VALUE=-32768</span><br><span class="line">最大值：Short.MAX_VALUE=32767</span><br><span class="line"></span><br><span class="line">基本类型：int 二进制位数：32</span><br><span class="line">包装类：java.lang.Integer</span><br><span class="line">最小值：Integer.MIN_VALUE=-2147483648</span><br><span class="line">最大值：Integer.MAX_VALUE=2147483647</span><br><span class="line"></span><br><span class="line">基本类型：long 二进制位数：64</span><br><span class="line">包装类：java.lang.Long</span><br><span class="line">最小值：Long.MIN_VALUE=-9223372036854775808</span><br><span class="line">最大值：Long.MAX_VALUE=9223372036854775807</span><br><span class="line"></span><br><span class="line">基本类型：float 二进制位数：32</span><br><span class="line">包装类：java.lang.Float</span><br><span class="line">最小值：Float.MIN_VALUE=1.4E-45</span><br><span class="line">最大值：Float.MAX_VALUE=3.4028235E38</span><br><span class="line"></span><br><span class="line">基本类型：double 二进制位数：64</span><br><span class="line">包装类：java.lang.Double</span><br><span class="line">最小值：Double.MIN_VALUE=4.9E-324</span><br><span class="line">最大值：Double.MAX_VALUE=1.7976931348623157E308</span><br><span class="line"></span><br><span class="line">基本类型：char 二进制位数：16</span><br><span class="line">包装类：java.lang.Character</span><br><span class="line">最小值：Character.MIN_VALUE=0</span><br><span class="line">最大值：Character.MAX_VALUE=65535</span><br></pre></td></tr></table></figure></p>
+<p>Float和Double的最小值和最大值都是以科学记数法的形式输出的，结尾的”E+数字”表示E之前的数字要乘以10的多少次方。比如3.14E3就是3.14 × 103 =3140，3.14E-3 就是 3.14 x 10-3 =0.00314。</p>
+<p><strong>实际上，JAVA中还存在另外一种基本类型 void，它也有对应的包装类 java.lang.Void，不过我们无法直接对它们进行操作。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">boolean</span> bool;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">byte</span> by;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">char</span> ch;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">double</span> d;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">float</span> f;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">long</span> l;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">short</span> sh;</span><br><span class="line">    <span class="keyword">static</span> String str;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Bool :"</span> + bool);</span><br><span class="line">        System.out.println(<span class="string">"Byte :"</span> + by);</span><br><span class="line">        System.out.println(<span class="string">"Character:"</span> + ch);</span><br><span class="line">        System.out.println(<span class="string">"Double :"</span> + d);</span><br><span class="line">        System.out.println(<span class="string">"Float :"</span> + f);</span><br><span class="line">        System.out.println(<span class="string">"Integer :"</span> + i);</span><br><span class="line">        System.out.println(<span class="string">"Long :"</span> + l);</span><br><span class="line">        System.out.println(<span class="string">"Short :"</span> + sh);</span><br><span class="line">        System.out.println(<span class="string">"String :"</span> + str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Bool     :false</span><br><span class="line">Byte     :0</span><br><span class="line">Character:</span><br><span class="line">Double   :0.0</span><br><span class="line">Float    :0.0</span><br><span class="line">Integer  :0</span><br><span class="line">Long     :0</span><br><span class="line">Short    :0</span><br><span class="line">String   :null</span><br></pre></td></tr></table></figure>
+<h1 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h1><ul>
+<li>在Java中，引用类型的变量非常类似于C/C++的指针。引用类型指向一个对象，指向对象的变量是引用变量。这些变量在声明时被指定为一个特定的类型，比如 Employee、Puppy 等。变量一旦声明后，类型就不能被改变了。</li>
+<li>对象、数组都是引用数据类型。</li>
+<li>所有引用类型的默认值都是null。</li>
+<li>一个引用变量可以用来引用任何与之兼容的类型。</li>
+<li>例子：Site site = new Site(“Runoob”)。</li>
+</ul>
+<h1 id="Java-常量"><a href="#Java-常量" class="headerlink" title="Java 常量"></a>Java 常量</h1><p>常量在程序运行时是不能被修改的。</p>
+<p>在 Java 中使用 <strong>final</strong> 关键字来修饰常量，声明方式和变量类似：</p>
+<p><code>final double PI = 3.1415927;</code><br>虽然常量名也可以用小写，但为了便于识别，通常使用大写字母表示常量。</p>
+<p>字面量可以赋给任何内置类型的变量。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">byte a = 68;</span><br><span class="line">char a = &apos;A&apos;</span><br></pre></td></tr></table></figure></p>
+<p>byte、int、long、和short都可以用十进制、16进制以及8进制的方式来表示。</p>
+<p>当使用常量的时候，前缀 0 表示 8 进制，而前缀 0x 代表 16 进制, 例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int decimal = 100;</span><br><span class="line">int octal = 0144;</span><br><span class="line">int hexa =  0x64;</span><br></pre></td></tr></table></figure></p>
+<p>和其他语言一样，Java的字符串常量也是包含在两个引号之间的字符序列。下面是字符串型字面量的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;Hello World&quot;</span><br><span class="line">&quot;two\nlines&quot;</span><br><span class="line">&quot;\&quot;This is in quotes\&quot;&quot;</span><br></pre></td></tr></table></figure></p>
+<p>字符串常量和字符常量都可以包含任何Unicode字符。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char a = &apos;\u0001&apos;;</span><br><span class="line">String a = &quot;\u0001&quot;;</span><br></pre></td></tr></table></figure></p>
+<h1 id="自动类型转换"><a href="#自动类型转换" class="headerlink" title="自动类型转换"></a>自动类型转换</h1><p>整型、实型（常量）、字符型数据可以混合运算。运算中，不同类型的数据先转化为同一类型，然后进行运算。</p>
+<p>转换从低级到高级。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">低  ------------------------------------&gt;  高</span><br><span class="line"></span><br><span class="line">byte,short,char—&gt; int —&gt; long—&gt; float —&gt; double</span><br></pre></td></tr></table></figure></p>
+<p>数据类型转换必须满足如下规则：</p>
+<ol>
+<li><p>不能对boolean类型进行类型转换。</p>
+</li>
+<li><p>不能把对象类型转换成不相关类的对象。</p>
+</li>
+<li><p>在把容量大的类型转换为容量小的类型时必须使用强制类型转换。</p>
+</li>
+<li><p>转换过程中可能导致溢出或损失精度，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int i =128;   </span><br><span class="line">byte b = (byte)i;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>因为 byte 类型是 8 位，最大值为127，所以当 int 强制转换为 byte 类型时，值 128 时候就会导致溢出。</p>
+<ol start="5">
+<li>浮点数到整数的转换是通过舍弃小数得到，而不是四舍五入，例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(int)23.7 == 23;        </span><br><span class="line">(int)-45.89f == -45</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="自动类型转换-1"><a href="#自动类型转换-1" class="headerlink" title="自动类型转换"></a>自动类型转换</h1><p>必须满足转换前的数据类型的位数要低于转换后的数据类型，例如: short数据类型的位数为16位，就可以自动转换位数为32的int类型，同样float数据类型的位数为32，可以自动转换为64位的double类型。</p>
+<p>实例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZiDongLeiZhuan</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">            <span class="keyword">char</span> c1=<span class="string">'a'</span>;<span class="comment">//定义一个char类型</span></span><br><span class="line">            <span class="keyword">int</span> i1 = c1;<span class="comment">//char自动类型转换为int</span></span><br><span class="line">            System.out.println(<span class="string">"char自动类型转换为int后的值等于"</span>+i1);</span><br><span class="line">            <span class="keyword">char</span> c2 = <span class="string">'A'</span>;<span class="comment">//定义一个char类型</span></span><br><span class="line">            <span class="keyword">int</span> i2 = c2+<span class="number">1</span>;<span class="comment">//char 类型和 int 类型计算</span></span><br><span class="line">            System.out.println(<span class="string">"char类型和int计算后的值等于"</span>+i2);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果为:</p>
+<p>char自动类型转换为int后的值等于97</p>
+<p>char类型和int计算后的值等于66</p>
+<p>解析：c1 的值为字符 a ,查 ASCII 码表可知对应的 int 类型值为 97， A 对应值为 65，所以 i2=65+1=66。</p>
+<p>强制类型转换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 条件是转换的数据类型必须是兼容的。</span><br><span class="line"></span><br><span class="line">2. 格式：(type)value type是要强制类型转换后的数据类型 实例：</span><br></pre></td></tr></table></figure></p>
+<p>实例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QiangZhiZhuanHuan</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i1 = <span class="number">123</span>;</span><br><span class="line">        <span class="keyword">byte</span> b = (<span class="keyword">byte</span>)i1;<span class="comment">//强制类型转换为byte</span></span><br><span class="line">        System.out.println(<span class="string">"int强制类型转换为byte后的值等于"</span>+b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
+<p>int强制类型转换为byte后的值等于123</p>
+<h1 id="隐含强制类型转换"><a href="#隐含强制类型转换" class="headerlink" title="隐含强制类型转换"></a>隐含强制类型转换</h1><ol>
+<li><p>整数的默认类型是 int。</p>
+</li>
+<li><p>浮点型不存在这种情况，因为在定义 float 类型时必须在数字后面跟上 F 或者 f。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate? comment?</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="zzm99 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.jpg" alt="zzm99 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/18/python1007/" rel="next" title="网络应用开发">
+                <i class="fa fa-chevron-left"></i> 网络应用开发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/19/javajichu2/" rel="prev" title="javajichu2">
+                javajichu2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="zzm99">
+            
+              <p class="site-author-name" itemprop="name">zzm99</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zzm99" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-基本数据类型"><span class="nav-number">1.</span> <span class="nav-text">Java 基本数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内置数据类型"><span class="nav-number">2.</span> <span class="nav-text">内置数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#byte："><span class="nav-number">2.1.</span> <span class="nav-text">byte：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#short："><span class="nav-number">2.2.</span> <span class="nav-text">short：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int："><span class="nav-number">2.3.</span> <span class="nav-text">int：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#long："><span class="nav-number">2.4.</span> <span class="nav-text">long：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#float："><span class="nav-number">2.5.</span> <span class="nav-text">float：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#double："><span class="nav-number">2.6.</span> <span class="nav-text">double：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boolean："><span class="nav-number">2.7.</span> <span class="nav-text">boolean：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#char："><span class="nav-number">2.8.</span> <span class="nav-text">char：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用类型"><span class="nav-number">4.</span> <span class="nav-text">引用类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-常量"><span class="nav-number">5.</span> <span class="nav-text">Java 常量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动类型转换"><span class="nav-number">6.</span> <span class="nav-text">自动类型转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动类型转换-1"><span class="nav-number">7.</span> <span class="nav-text">自动类型转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隐含强制类型转换"><span class="nav-number">8.</span> <span class="nav-text">隐含强制类型转换</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzm99</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">139.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'tCb3SA6mqeAq2F28wecWLXyU-gzGzoHsz',
+        appKey: 'xqRqUNcwfzn1jIhCov5sNS9G',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/click.js"></script>
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":0.8,"hHeadPos":0.5,"vHeadPos":0.5,"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"superSample":2,"width":300,"height":500,"position":"left","hOffset":0,"vOffset":0},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.9,"opacityOnHover":0.9},"log":false});</script></body>
+</html>
