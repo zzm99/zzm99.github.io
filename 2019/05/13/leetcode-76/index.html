@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="zzm99">
 <meta property="og:description" content="Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).1234Example:Input: S = &amp;quot;ADOBECODEBANC&amp;quot;, T = &amp;quot;ABC&amp;quot;Output:">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-13T06:03:16.801Z">
+<meta property="og:updated_time" content="2019-05-28T01:48:40.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-76-Minimum Window Substring">
 <meta name="twitter:description" content="Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).1234Example:Input: S = &amp;quot;ADOBECODEBANC&amp;quot;, T = &amp;quot;ABC&amp;quot;Output:">
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  79
+                  540
                 </span>
               
 
@@ -430,7 +430,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -455,6 +455,11 @@
 <p>Note:</p>
 <p>If there is no such window in S that covers all characters in T, return the empty string “”.</p>
 <p>If there is such window, you are guaranteed that there will always be only one unique minimum window in S.<br><a id="more"></a></p>
+<p>题意：给定一个字符串S，一个匹配串T，在S中找到最小连续子串，使得它包含T中所有元素，如果找不到，则返回空串。假设S长度为n，时间复杂度要求为O(n)。</p>
+<pre><code>思路：这道题考察map应用和双指针法的组合。假设字符串S长度为n1，T长度为n2，初始化指针left = 0，right = 0，start = -1（标记答案起始位置），cnt = n2（保存还需查找的字符串T中的元素个数），用map统计字符串T中的字符。① 如果map包含s[right]且map[s[right]]减一之后大于0，说明元素s[right]已经匹配了一个，此时cnt减一。② 当cnt = 0时，说明已经找到一个符合要求的连续子串，如果它的长度比目前的答案小，那么更新答案的起始位置start和对应的长度ans = right - left + 1；如果map包含[s[left]]且map[s[left]]加一大于等于1，说明在下一组匹配中，需要多处理一个字符s[left]，此时cnt加一、指针left加一。③ 在right小于n1的范围内遍历完一遍，返回答案。
+
+时间复杂度为O(n1 + n2)。
+</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// slicing window</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">minWindow</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n1 = s.length(), n2 = t.length();</span><br><span class="line">		<span class="comment">// Exceptional Case: </span></span><br><span class="line">		<span class="keyword">if</span>(n1 == <span class="number">0</span> || n2 == <span class="number">0</span> || n1 &lt; n2)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; m; </span><br><span class="line">		<span class="comment">// count t</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n2 - <span class="number">1</span>; i++)&#123;</span><br><span class="line">			m[t[i]]++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// update the window: [left, right]</span></span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = <span class="number">0</span>, ans = INT_MAX, start = <span class="number">-1</span>, cnt = n2;		</span><br><span class="line">		<span class="keyword">while</span>(right &lt;= n1 - <span class="number">1</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(m.count(s[right]))&#123;</span><br><span class="line">				<span class="keyword">if</span>(--m[s[right]] &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">					cnt--;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">while</span>(cnt == <span class="number">0</span>)&#123;</span><br><span class="line">					<span class="keyword">if</span>(right - left + <span class="number">1</span> &lt; ans)&#123;</span><br><span class="line">						ans = right - left + <span class="number">1</span>;</span><br><span class="line">						start = left;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span>(m.count(s[left]))&#123;</span><br><span class="line">						<span class="keyword">if</span>(++m[s[left]] &gt;= <span class="number">1</span>)&#123;</span><br><span class="line">							cnt++;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					left++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			right++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(start == <span class="number">-1</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> s.substr(start, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -593,7 +598,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -604,7 +609,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -683,7 +688,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">181.2k</span>
+    <span title="Site words total count">186.3k</span>
   
 </div>
 
