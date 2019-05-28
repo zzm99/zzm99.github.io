@@ -79,14 +79,17 @@
 
 
 
+<meta name="description" content="多进程Python标准库原本有threading和multiprocessing模块编写相应的多线程/多进程代码。但从Python3.2开始，标准库为我们提供了concurrent.futures模块，它提供了ThreadPoolExecutor和ProcessPoolExecutor两个类，实现了对threading和multiprocessing的更高级的抽象，对编写线程池/进程池提供了直接的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习爬虫Part9（待完善）">
+<meta property="og:title" content="学习爬虫Part9-给爬虫加速：多线程，多进程">
 <meta property="og:url" content="http://yoursite.com/2019/05/08/StudyPachong9/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="多进程Python标准库原本有threading和multiprocessing模块编写相应的多线程/多进程代码。但从Python3.2开始，标准库为我们提供了concurrent.futures模块，它提供了ThreadPoolExecutor和ProcessPoolExecutor两个类，实现了对threading和multiprocessing的更高级的抽象，对编写线程池/进程池提供了直接的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-21T05:31:10.675Z">
+<meta property="og:updated_time" content="2019-05-28T06:31:22.510Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习爬虫Part9（待完善）">
+<meta name="twitter:title" content="学习爬虫Part9-给爬虫加速：多线程，多进程">
+<meta name="twitter:description" content="多进程Python标准库原本有threading和multiprocessing模块编写相应的多线程/多进程代码。但从Python3.2开始，标准库为我们提供了concurrent.futures模块，它提供了ThreadPoolExecutor和ProcessPoolExecutor两个类，实现了对threading和multiprocessing的更高级的抽象，对编写线程池/进程池提供了直接的">
 
 
 
@@ -131,7 +134,7 @@
   daovoice('update');
   </script>
 
-  <title>学习爬虫Part9（待完善） | zzm99</title>
+  <title>学习爬虫Part9-给爬虫加速：多线程，多进程 | zzm99</title>
   
 
 
@@ -308,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">学习爬虫Part9（待完善）</h1>
+          <h1 class="post-title" itemprop="name headline">学习爬虫Part9-给爬虫加速：多线程，多进程</h1>
         
 
         <div class="post-meta">
@@ -411,7 +414,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  3.1k
                 </span>
               
 
@@ -427,7 +430,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  12
                 </span>
               
             </div>
@@ -448,7 +451,89 @@
       
 
       
-        
+        <h1 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h1><p>Python标准库原本有threading和multiprocessing模块编写相应的多线程/多进程代码。但从Python3.2开始，标准库为我们提供了concurrent.futures模块，它提供了ThreadPoolExecutor和ProcessPoolExecutor两个类，实现了对threading和multiprocessing的更高级的抽象，对编写线程池/进程池提供了直接的支持。多进程我们介绍futures的ProcessPoolExecutor</p>
+<p>ProcessPoolExecutor类是Executor类的子类，实例化ProcessPoolExecutor类以创建进程池，在实例化的过程中应指定同时运行的最大进程数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span>  ProcessPoolExecutor</span><br><span class="line">pool = ProcessPoolExecutor(max_workers=<span class="number">4</span>) <span class="comment"># 运行最大进程数4</span></span><br><span class="line"><span class="comment">#进程池的操作...</span></span><br><span class="line">pool.shutdown(wait=<span class="literal">True</span>) <span class="comment"># 关闭进程池，默认等待所有进程的完成。</span></span><br><span class="line">print(<span class="string">'Deep'</span>) <span class="comment"># 有shutdown的情况下所有进程完成后才会运行下面的print，没有的话会马上运行</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">创建进程也可用with,这时会自带shutdown功能</span></span><br><span class="line"><span class="string">with ProcessPoolExecutor(4) as pool:</span></span><br><span class="line"><span class="string">    #进程池的操作...</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<p>该类有两种方法对进程池提交任务建立进程(函数及一组参数构成一个任务)，分别是submit()和map()，如果单纯想多开进程别无他想，用哪个都行，但submit()会有更灵活的用法</p>
+<a id="more"></a> 
+<h2 id="map-fn-iterables"><a href="#map-fn-iterables" class="headerlink" title="map(fn,*iterables)"></a>map(fn,*iterables)</h2><ul>
+<li>fn：函数</li>
+<li>*iterables：函数每个参数的集合，N个参数就接N个集合<br>可以理解这是python自带map()的多进程版，他返回的是一个迭代器，包含每个任务对应的返回值（有序的），下面用例子来分析</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span>  ProcessPoolExecutor</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(x)</span>:</span></span><br><span class="line">    time.sleep(x) <span class="comment"># 时间阻塞</span></span><br><span class="line">    print(str(x)+<span class="string">'s'</span>)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">with</span> ProcessPoolExecutor(<span class="number">4</span>) <span class="keyword">as</span> pool:</span><br><span class="line">        p = pool.map(test,[<span class="number">2</span>,<span class="number">3</span>,<span class="number">10</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> p:</span><br><span class="line">            print(i)</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">2s</span><br><span class="line">2</span><br><span class="line">3s</span><br><span class="line">3</span><br><span class="line">5s</span><br><span class="line">6s</span><br><span class="line">10s</span><br><span class="line">10</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+<p>分析（下面以参数代替某个进程）：</p>
+<ul>
+<li><p>带s的是函数输出的，进程池最大允许4个进程同时运行，所以参数 2，3，10，5 首先一起进去。2最快完成，马上让给6进去，2+6 &lt; 10 ,所以后进6完成得比10快，最后输出顺序就是 2s,3s,5s,6s,10s</p>
+</li>
+<li><p>不带s的是for循环打印迭代器中的结果，由输出可见，i的值分配是会等待进程完成返回值的，等2的完成返回2，等3的完成返回3，等10的完成返回10，由于10完成前5和6早就完成了，所以返回10后紧接着返回5和6，最后输出顺序为2,3,10,5,6,是有序的，对应各任务的返回值</p>
+</li>
+</ul>
+<p>在爬虫中，上面代码中的时间阻塞会对应着网络I/O阻塞，任务中往往包含着网络请求。比如你有很多个图片链接，就写一个下载图片的函数（接收一个图片链接的参数），把函数和图片链接的集合喂给map()就实现多进程了加速了。</p>
+<h2 id="submit-fn-arg"><a href="#submit-fn-arg" class="headerlink" title="submit(fn, *arg)"></a>submit(fn, *arg)</h2><ul>
+<li>fn：函数</li>
+<li>*arg：函数的参数</li>
+</ul>
+<p>该方法是往进程池中提交可回调的任务，并返回一个future实例。提交多个任务可用循环实现，返回的future实例用列表存起来，每个future代表一个进程。关于future对象有许多方法：</p>
+<ul>
+<li>future.running()：判断某个future（进程）是否运行中</li>
+<li>future.done()：判断某个future（进程）是否正常结束</li>
+<li>future.cancel()：终止某个future（进程），终止失败返回False，成功返回True</li>
+<li>future.result()：获取future对应任务返回的结果。如果future还没完成就会去等待</li>
+<li>future.add_done_callback(fn)：接收函数fn，将fn绑定到future对象上。当future对象被终止或完成时，fn将会被调用并接受该future对象</li>
+<li>as_completed(fs)：接收futures列表，futures列表中一旦有某个future（进程）完成就将该future对象yield回来，是个迭代器</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ProcessPoolExecutor,as_completed</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(x)</span>:</span></span><br><span class="line">    time.sleep(x)</span><br><span class="line">    print(str(x)+<span class="string">'s'</span>)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">with</span> ProcessPoolExecutor(<span class="number">4</span>) <span class="keyword">as</span> pool:</span><br><span class="line">        futures = [pool.submit(test,i) <span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">2</span>,<span class="number">3</span>,<span class="number">10</span>,<span class="number">5</span>,<span class="number">6</span>]]</span><br><span class="line"></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">		for j in futures:</span></span><br><span class="line"><span class="string">        print(j.result()) # 对应接收参数有序输出，输出2，3，10，5，6</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> as_completed(futures):</span><br><span class="line">            print(j.result()) <span class="comment"># 对应进程完成顺序输出，输出2，3，5，6，10</span></span><br></pre></td></tr></table></figure>
+<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><p>建议小心使用，虽然多线程能实现高并发，但由于线程资源共享的特性，某个线程操作这些共享的资源时可能操到一半就停止让给另一个线程操作，导致错乱的发生。为避免此情况发生对某些操作需要加锁，所以这里介绍对锁有支持的threading模块，python自带直接导入。<br>如果你确信这些操作不会发生错乱，可以直接使用concurrent.future 的 ThreadPoolExecutor，方法什么的和ProcessPoolExecutor的一样</p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>创建线程有两种方法：</p>
+<ol>
+<li>实例化 threading.Thread 类，target接收函数，arg以可迭代形式接收参数。这种方法最简单</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line">     <span class="keyword">import</span> time</span><br><span class="line">     </span><br><span class="line">     <span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(x)</span>:</span></span><br><span class="line">        time.sleep(x)</span><br><span class="line">        print(str(x)+<span class="string">'s'</span>)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">        </span><br><span class="line">     t1 = threading.Thread(target=test, args=(<span class="number">1</span>,)) <span class="comment"># 创建线程</span></span><br><span class="line">     t2 = threading.Thread(target=test, args=(<span class="number">3</span>,))</span><br><span class="line">     t1.start() <span class="comment"># 启动线程</span></span><br><span class="line">     t2.start()</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>继承threading.Thread 类，重写run方法，把函数及参数接收写进自己写的多线程类中。这种方法更灵活，threading.Thread 类并没有供获取线程调用函数返回值的方法，如果需要函数返回值就需要继承该类自己实现</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestThread</span><span class="params">(threading.Thread)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,x)</span>:</span></span><br><span class="line">        threading.Thread.__init__(self)</span><br><span class="line">        self.x = x  <span class="comment"># 参数接收</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        time.sleep(self.x)  <span class="comment"># 原来的函数写到run中</span></span><br><span class="line">        print(str(self.x)+<span class="string">'s'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">result</span><span class="params">(self)</span>:</span>  <span class="comment"># 实现获取调用函数的返回值的方法</span></span><br><span class="line">        <span class="keyword">return</span> self.x</span><br><span class="line"></span><br><span class="line">t1 = TestThread(<span class="number">1</span>)  <span class="comment">#创建线程</span></span><br><span class="line">t2 = TestThread(<span class="number">3</span>)</span><br><span class="line">t1.start()  <span class="comment"># 启动线程</span></span><br><span class="line">t2.start()</span><br><span class="line">t1.join()  <span class="comment"># 等待线程结束</span></span><br><span class="line">t2.join()</span><br><span class="line">print(t1.result(),t2.result())</span><br></pre></td></tr></table></figure>
+<p>线程相关方法和属性：</p>
+<ul>
+<li>Thread.start()：启动线程</li>
+<li>Thread.join()：等待线程的结束，没有join的话会接着运行join下面的代码</li>
+<li>Thread.is_alive()：判断线程是否在运行，线程未开启/结束时返回 False</li>
+<li>Thread.name：返回线程的名字，默认线程名是Thread-N，N指第N个开启的线程</li>
+<li>Thread.setName(str)：给线程命名</li>
+<li>Thread.setDaemon(True/False)：设置子线程是否会随主线程结束而结束，原本所有子线程默认是不会随主线程结束而结束的</li>
+</ul>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><p>线程间资源共享，如果多个线程共同对某个数据修改，可能会出现错误，为了保证数据的正确性，需要对多个线程进行同步。这时就需要引入锁了（利用GIL），锁只有一个，一个线程在持有锁的状态下对某些数据进行操作，其他线程就无法对该数据进行操作，直至该线程释放锁让其他线程抢，谁抢到谁就有权修改。</p>
+<p>threading提供Lock和RLock两类锁，前者一个线程只能获取获取一次锁，后者允许一个线程能重复获取锁。如果某个线程对全局数据的操作是割裂的（分块的），那就使用RLock。</p>
+<ul>
+<li>acquire()：获取锁</li>
+<li>release()：释放锁</li>
+<li>有数据操作放在acquire 和 release 之间，就不会出现多个线程修改同一个数据的风险了</li>
+<li>acquire 和 release 必须成对存在，如果一个线程只拿不放，其他线程没有锁能抢就只能永远阻塞（停止）</li>
+<li>一个错乱的例子及锁的使用：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time, threading</span><br><span class="line"></span><br><span class="line">lock = threading.Lock() <span class="comment"># rlock = threading.RLock()</span></span><br><span class="line">balance = [<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000</span>): <span class="comment"># 理想的情况是执行了+n，-n操作后才让另一个线程处理，结果永0</span></span><br><span class="line">        <span class="comment">#lock.acquire()</span></span><br><span class="line">        balance[<span class="number">0</span>] = balance[<span class="number">0</span>] + n  <span class="comment"># 某个线程可能处理到这里就终止让给另一个线程处理了，循环一大，结果可能错乱不为0</span></span><br><span class="line">        balance[<span class="number">0</span>] = balance[<span class="number">0</span>] - n</span><br><span class="line">        <span class="comment">#lock.release()</span></span><br><span class="line">t1 = threading.Thread(target=test, args=(<span class="number">5</span>,))</span><br><span class="line">t2 = threading.Thread(target=test, args=(<span class="number">8.0</span>,))</span><br><span class="line">t1.start()</span><br><span class="line">t2.start()</span><br><span class="line">t1.join()</span><br><span class="line">t2.join()</span><br><span class="line">print(balance[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<p>在不加锁的情况下多跑几次，你会的到不同的结果。但是加了锁之后，+n,-n两个操作完整执行，不会中途中断，结果永0。</p>
+<h2 id="限制同时运行线程数"><a href="#限制同时运行线程数" class="headerlink" title="限制同时运行线程数"></a>限制同时运行线程数</h2><p>使用 threading.Semaphore 类就行，Semaphore 在内部管理着一个计数器。调用 acquire() 会使这个计数器减1，release() 则是加1。计数器的值永远不会小于 0。当计数器到 0 时，再调用 acquire() 就会阻塞，直到其他线程来调用release()，这样就限制了同时运行线程的数量。</p>
+<p>使用上非常简单，实例化Semaphore并指定线程数后，给函数的头加个acquire()，尾加个release()就行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading, time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(x)</span>:</span></span><br><span class="line">    semaphore.acquire()</span><br><span class="line">    time.sleep(x)</span><br><span class="line">    print(x)</span><br><span class="line">    semaphore.release()</span><br><span class="line">    </span><br><span class="line">semaphore = threading.Semaphore(<span class="number">4</span>) <span class="comment"># 最大4个线程同时进行</span></span><br><span class="line">ts = [threading.Thread(target=test,args=(i,)) <span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">6</span>]]</span><br><span class="line">[t.start() <span class="keyword">for</span> t <span class="keyword">in</span> ts]</span><br><span class="line"></span><br><span class="line"><span class="string">'输出：2，3，5，6，10 （原理和上面多进程的那个差不多）'</span></span><br></pre></td></tr></table></figure>
+<p>关于threading的其他高级用法本文并未提及，以上都是些常用的用法，如果有更高级的需要，可以参考<a href="https://www.cnblogs.com/chengd/articles/7770898.html" target="_blank" rel="noopener">https://www.cnblogs.com/chengd/articles/7770898.html</a></p>
+<h1 id="应用在爬虫上"><a href="#应用在爬虫上" class="headerlink" title="应用在爬虫上"></a>应用在爬虫上</h1><p>如果爬虫需要重复进行某个操作（如下载一张图片，爬取一张网页的源码，破解一次加密【加密耗cpu最好多进程】），那把这个操作抽象成一个接收相应参数的函数，把函数喂给进程/线程即可。</p>
+<h1 id="多线程下载豆瓣Top250电影图片"><a href="#多线程下载豆瓣Top250电影图片" class="headerlink" title="多线程下载豆瓣Top250电影图片"></a>多线程下载豆瓣Top250电影图片</h1><p>本次爬虫项目将爬取豆瓣Top250电影的图片，其网址为：<a href="https://movie.douban.com/top250" target="_blank" rel="noopener">https://movie.douban.com/top250</a></p>
+<p>分别不使用多线程和使用多线程来完成，通过两者的对比，显示出多线程在爬虫项目中的巨大优势。</p>
+<h2 id="不使用多线程"><a href="#不使用多线程" class="headerlink" title="不使用多线程"></a>不使用多线程</h2><p>  首先，我们不使用多线程来下载豆瓣Top250电影图片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"><span class="comment"># 该函数用于下载图片</span></span><br><span class="line"><span class="comment"># 传入函数： 网页的网址url</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download_picture</span><span class="params">(url)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取网页的源代码</span></span><br><span class="line">    r = requests.get(url)</span><br><span class="line">    <span class="comment"># 利用BeautifulSoup将获取到的文本解析成HTML</span></span><br><span class="line">    soup = BeautifulSoup(r.text, <span class="string">"lxml"</span>)</span><br><span class="line">    <span class="comment"># 获取网页中的电影图片</span></span><br><span class="line">    content = soup.find(<span class="string">'div'</span>, class_=<span class="string">'article'</span>)</span><br><span class="line">    images = content.find_all(<span class="string">'img'</span>)</span><br><span class="line">    <span class="comment"># 获取电影图片的名称和下载地址</span></span><br><span class="line">    picture_name_list = [image[<span class="string">'alt'</span>] <span class="keyword">for</span> image <span class="keyword">in</span> images]</span><br><span class="line">    picture_link_list = [image[<span class="string">'src'</span>] <span class="keyword">for</span> image <span class="keyword">in</span> images]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 利用urllib.request..urlretrieve正式下载图片</span></span><br><span class="line">    <span class="keyword">for</span> picture_name, picture_link <span class="keyword">in</span> zip(picture_name_list, picture_link_list):</span><br><span class="line">        urllib.request.urlretrieve(picture_link, <span class="string">'E://douban/%s.jpg'</span> % picture_name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 全部10个网页</span></span><br><span class="line">    start_urls = [<span class="string">"https://movie.douban.com/top250"</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">        start_urls.append(<span class="string">"https://movie.douban.com/top250?start=%d&amp;filter="</span> % (<span class="number">25</span> * i))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 统计该爬虫的消耗时间</span></span><br><span class="line">    t1 = time.time()</span><br><span class="line">    print(<span class="string">'*'</span> * <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> start_urls:</span><br><span class="line">        download_picture(url)</span><br><span class="line">    t2 = time.time()</span><br><span class="line"></span><br><span class="line">    print(<span class="string">'不使用多线程，总共耗时：%s'</span>%(t2-t1))</span><br><span class="line">    print(<span class="string">'*'</span> * <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">**************************************************</span><br><span class="line">不使用多线程，总共耗时：79.93260931968689</span><br><span class="line">**************************************************</span><br></pre></td></tr></table></figure>
+<p>在不使用多线程的情况下，这个爬虫总共耗时约80s，完成了豆瓣Top250电影图片的下载。</p>
+<blockquote>
+<p>urllib.request.urlretrieve(url, filename=None, reporthook=None, data=None)<br>将URL表示的网络对象复制到本地文件。<br><a href="https://blog.csdn.net/pursuit_zhangyu/article/details/80556275" target="_blank" rel="noopener">https://blog.csdn.net/pursuit_zhangyu/article/details/80556275</a></p>
+</blockquote>
+<h2 id="使用多线程"><a href="#使用多线程" class="headerlink" title="使用多线程"></a>使用多线程</h2><p>  接下来，我们使用多线程来下载豆瓣Top250电影图片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor, wait, ALL_COMPLETED</span><br><span class="line"></span><br><span class="line"><span class="comment"># 该函数用于下载图片</span></span><br><span class="line"><span class="comment"># 传入函数： 网页的网址url</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download_picture</span><span class="params">(url)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取网页的源代码</span></span><br><span class="line">    r = requests.get(url)</span><br><span class="line">    <span class="comment"># 利用BeautifulSoup将获取到的文本解析成HTML</span></span><br><span class="line">    soup = BeautifulSoup(r.text, <span class="string">"lxml"</span>)</span><br><span class="line">    <span class="comment"># 获取网页中的电影图片</span></span><br><span class="line">    content = soup.find(<span class="string">'div'</span>, class_=<span class="string">'article'</span>)</span><br><span class="line">    images = content.find_all(<span class="string">'img'</span>)</span><br><span class="line">    <span class="comment"># 获取电影图片的名称和下载地址</span></span><br><span class="line">    picture_name_list = [image[<span class="string">'alt'</span>] <span class="keyword">for</span> image <span class="keyword">in</span> images]</span><br><span class="line">    picture_link_list = [image[<span class="string">'src'</span>] <span class="keyword">for</span> image <span class="keyword">in</span> images]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 利用urllib.request..urlretrieve正式下载图片</span></span><br><span class="line">    <span class="keyword">for</span> picture_name, picture_link <span class="keyword">in</span> zip(picture_name_list, picture_link_list):</span><br><span class="line">        urllib.request.urlretrieve(picture_link, <span class="string">'E://douban/%s.jpg'</span> % picture_name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 全部10个网页</span></span><br><span class="line">    start_urls = [<span class="string">"https://movie.douban.com/top250"</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">        start_urls.append(<span class="string">"https://movie.douban.com/top250?start=%d&amp;filter="</span> % (<span class="number">25</span> * i))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 统计该爬虫的消耗时间</span></span><br><span class="line">    print(<span class="string">'*'</span> * <span class="number">50</span>)</span><br><span class="line">    t3 = time.time()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 利用并发下载电影图片</span></span><br><span class="line">    executor = ThreadPoolExecutor(max_workers=<span class="number">10</span>)  <span class="comment"># 可以自己调整max_workers,即线程的个数</span></span><br><span class="line">    <span class="comment"># submit()的参数： 第一个为函数， 之后为该函数的传入参数，允许有多个</span></span><br><span class="line">    future_tasks = [executor.submit(download_picture, url) <span class="keyword">for</span> url <span class="keyword">in</span> start_urls]</span><br><span class="line">    <span class="comment"># 等待所有的线程完成，才进入后续的执行</span></span><br><span class="line">    wait(future_tasks, return_when=ALL_COMPLETED)</span><br><span class="line"></span><br><span class="line">    t4 = time.time()</span><br><span class="line">    print(<span class="string">'使用多线程，总共耗时：%s'</span> % (t4 - t3))</span><br><span class="line">    print(<span class="string">'*'</span> * <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">**************************************************</span><br><span class="line">使用多线程，总共耗时：9.361606121063232</span><br><span class="line">**************************************************</span><br></pre></td></tr></table></figure>
+<p>同样是下载豆瓣Top250电影，10个网页中的图片，在没有使用多线程的情况下，总共耗时约80s，而在使用多线程（10个线程）的情况下，总共耗时约9.5秒，效率整整提高了约8倍。</p>
+
       
     </div>
     
@@ -568,8 +653,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -642,6 +736,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#多进程"><span class="nav-number">1.</span> <span class="nav-text">多进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#map-fn-iterables"><span class="nav-number">1.1.</span> <span class="nav-text">map(fn,*iterables)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#submit-fn-arg"><span class="nav-number">1.2.</span> <span class="nav-text">submit(fn, *arg)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程"><span class="nav-number">2.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">2.1.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁"><span class="nav-number">2.2.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制同时运行线程数"><span class="nav-number">2.3.</span> <span class="nav-text">限制同时运行线程数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用在爬虫上"><span class="nav-number">3.</span> <span class="nav-text">应用在爬虫上</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程下载豆瓣Top250电影图片"><span class="nav-number">4.</span> <span class="nav-text">多线程下载豆瓣Top250电影图片</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不使用多线程"><span class="nav-number">4.1.</span> <span class="nav-text">不使用多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用多线程"><span class="nav-number">4.2.</span> <span class="nav-text">使用多线程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -676,7 +786,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">186.3k</span>
+    <span title="Site words total count">192.8k</span>
   
 </div>
 
