@@ -79,14 +79,26 @@
 
 
 
+<meta name="description" content="中国剩余定理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="中国剩余定理">
 <meta property="og:url" content="http://yoursite.com/2019/05/23/suanfa14/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="中国剩余定理">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-23T14:11:44.745Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/23/suanfa14/deb7c86fb12b2385c48974b17e583b37.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/23/suanfa14/Snipaste_2019-05-30_21-17-59.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/23/suanfa14/0ce06692606c9cbe85b090b328d64857.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/23/suanfa14/0f2973ae2b9e8a3a9afa3e40ea84c73d.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/23/suanfa14/4dfc88bbc0804bb39504a9268268626b.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/23/suanfa14/5b0c9df549bd9069a381fee9310d790c.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/23/suanfa14/ba015c506a06e62ad255dbdb14f13a76.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/23/suanfa14/776405dd3cd52a8eae94e2a3fbd2479e.png">
+<meta property="og:updated_time" content="2019-05-30T13:42:58.482Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="中国剩余定理">
+<meta name="twitter:description" content="中国剩余定理">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/23/suanfa14/deb7c86fb12b2385c48974b17e583b37.png">
 
 
 
@@ -400,7 +412,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  621
                 </span>
               
 
@@ -416,7 +428,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -437,7 +449,31 @@
       
 
       
-        
+        <h1 id="中国剩余定理"><a href="#中国剩余定理" class="headerlink" title="中国剩余定理"></a>中国剩余定理</h1><a id="more"></a>
+<p>具体描述：</p>
+<p><img src="deb7c86fb12b2385c48974b17e583b37.png" alt="1"></p>
+<p>给出你n个ai和mi，最后让求出x的最小值是多少。</p>
+<p>中国剩余定理说明：假设整数m1, m2, … , mn两两互质，则对任意的整数：a1, a2, … , an，方程组(S)有解，并且通解可以用如下方式构造得到：</p>
+<p><img src="Snipaste_2019-05-30_21-17-59.png" alt="1"></p>
+<blockquote>
+<p>数论倒数(number-theoretic reciprocal)亦称算术倒数，是与同余有关的一个基本概念。 设m为模，a为任意整数，且(a，m)=1。 若有整数a′能满足同余式a′a≡1(mod m)，则称a′是a(mod m)的数论倒数，或逆元。</p>
+</blockquote>
+<p>例子:</p>
+<p><img src="0ce06692606c9cbe85b090b328d64857.png" alt="1"></p>
+<p>三个模数m1=3, m2=5, m3=7的乘积是M=105，对应的M1=35, M2=21, M3=15. 而可以计算出相应的数论倒数：t1=2, t2=1, t3=1. 所以《孙子歌诀》中的70，21和15其实是这个“物不知数”问题的基础解：</p>
+<p><img src="0f2973ae2b9e8a3a9afa3e40ea84c73d.png" alt="1"></p>
+<p>而将原方程组中的余数相应地乘到这三个基础解上，再加起来，其和就是原方程组的解：</p>
+<p><img src="4dfc88bbc0804bb39504a9268268626b.png" alt="1"></p>
+<p>这个和是233，实际上原方程组的通解公式为：</p>
+<p><img src="5b0c9df549bd9069a381fee9310d790c.png" alt="1"></p>
+<p>《孙子算经》中实际上给出了最小正整数解，也就是k=-2时的解：x=23.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///n个mi互质</span></span><br><span class="line"><span class="keyword">const</span> LL maxn = <span class="number">20</span>;</span><br><span class="line">LL a[maxn], m[maxn], n;</span><br><span class="line"><span class="function">LL <span class="title">CRT</span><span class="params">(LL a[], LL m[], LL n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LL M = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) M *= m[i];</span><br><span class="line">    LL ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        LL x, y;</span><br><span class="line">        LL tm = M / m[i];</span><br><span class="line">        ex_gcd(tm, m[i], x, y);</span><br><span class="line">        ret = (ret + tm * x * a[i]) % M;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (ret + M) % M;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>下面也就是关于这个的扩展，前面我们已经说了，中国剩余数定理是适用于n个mi两两互质的情况的，如果不互质呢，下面就是一个转换：<br>模不两两互质的同余式组可化为模两两互质的同余式组，再用孙子定理直接求解。</p>
+<p><img src="ba015c506a06e62ad255dbdb14f13a76.png" alt="1"></p>
+<p>84=22×3×7,160=25×5,63=32×7</p>
+<p><img src="776405dd3cd52a8eae94e2a3fbd2479e.png" alt="1"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///n个mi不互质</span></span><br><span class="line"><span class="keyword">const</span> LL maxn = <span class="number">1000</span>;</span><br><span class="line">LL a[maxn], m[maxn], n;</span><br><span class="line"><span class="function">LL <span class="title">CRT</span><span class="params">(LL a[], LL m[], LL n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (m[<span class="number">0</span>] &gt; a[<span class="number">0</span>]) <span class="keyword">return</span> a[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    LL x, y, d;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (m[i] &lt;= a[i]) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        d = ex_gcd(m[<span class="number">0</span>], m[i], x, y);</span><br><span class="line">        <span class="keyword">if</span> ((a[i] - a[<span class="number">0</span>]) % d != <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;   <span class="comment">//不能整除则无解</span></span><br><span class="line">        LL t = m[i] / d;</span><br><span class="line">        x = ((a[i] - a[<span class="number">0</span>]) / d * x % t + t) % t; <span class="comment">//第0个与第i个模线性方程的特解</span></span><br><span class="line">        a[<span class="number">0</span>] = x * m[<span class="number">0</span>] + a[<span class="number">0</span>];</span><br><span class="line">        m[<span class="number">0</span>] = m[<span class="number">0</span>] * m[i] / d;</span><br><span class="line">        a[<span class="number">0</span>] = (a[<span class="number">0</span>] % m[<span class="number">0</span>] + m[<span class="number">0</span>]) % m[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -557,8 +593,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -631,6 +676,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#中国剩余定理"><span class="nav-number">1.</span> <span class="nav-text">中国剩余定理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -665,7 +726,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">210.3k</span>
+    <span title="Site words total count">210.9k</span>
   
 </div>
 
