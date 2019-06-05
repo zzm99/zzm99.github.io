@@ -79,14 +79,20 @@
 
 
 
+<meta name="description" content="DjangoWeb应用机制和术语Web应用的工作流程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Django-Web应用机制和术语-快速上手">
 <meta property="og:url" content="http://yoursite.com/2019/06/04/python1012/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="DjangoWeb应用机制和术语Web应用的工作流程">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-05T14:44:46.172Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/04/python1012/Snipaste_2019-06-05_13-09-45.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/04/python1012/Snipaste_2019-06-05_13-12-16.png">
+<meta property="og:updated_time" content="2019-06-05T14:51:16.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django-Web应用机制和术语-快速上手">
+<meta name="twitter:description" content="DjangoWeb应用机制和术语Web应用的工作流程">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/04/python1012/Snipaste_2019-06-05_13-09-45.png">
 
 
 
@@ -400,7 +406,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  2.7k
                 </span>
               
 
@@ -416,7 +422,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  11
                 </span>
               
             </div>
@@ -437,7 +443,53 @@
       
 
       
-        
+        <h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h1><h2 id="Web应用机制和术语"><a href="#Web应用机制和术语" class="headerlink" title="Web应用机制和术语"></a>Web应用机制和术语</h2><p>Web应用的工作流程<br><a id="more"></a><br><img src="Snipaste_2019-06-05_13-09-45.png" alt="1"></p>
+<p><img src="Snipaste_2019-06-05_13-12-16.png" alt="1"></p>
+<h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>检查Python环境：Django 1.11需要Python 2.7或Python 3.4以上的版本；Django 2.0需要Python 3.4以上的版本；Django 2.1需要Python 3.5以上的版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ python3 --version</span><br><span class="line">$ python3</span><br><span class="line">&gt;&gt;&gt; import sys</span><br><span class="line">&gt;&gt;&gt; sys.version</span><br><span class="line">&gt;&gt;&gt; sys.version_info</span><br></pre></td></tr></table></figure></p>
+<p>创建项目文件夹并切换到该目录，例如我们要<strong>实例</strong>一个<strong>OA（办公自动化）项目</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir oa</span><br><span class="line">$ cd oa</span><br></pre></td></tr></table></figure></p>
+<p><strong>创建并激活虚拟环境</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -m venv venv</span><br><span class="line">$ source venv/bin/activate</span><br></pre></td></tr></table></figure></p>
+<p>说明：上面使用了<strong>Python自带的venv模块完成了虚拟环境的创建</strong>，当然也可以使用其他的工具，例如：virtualenv或pipenv等。<strong>要激活虚拟环境，在Windows系统下是通过”venv/Scripts/activate”执行批处理文件来实现。</strong></p>
+<p><code>cd到scripts目录运行activate.bat</code></p>
+<p><strong>更新包管理工具pip。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ pip install -U pip</span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">(venv)$ python -m pip install -U pip</span><br></pre></td></tr></table></figure></p>
+<p>注意<strong>：请注意终端提示符发生的变化，前面的(venv)说明我们已经进入虚拟环境</strong>，<strong>而虚拟环境下的python和pip已经是Python 3的解释器和包管理工具了</strong>。</p>
+<p>安装Django。</p>
+<p><code>(venv)$ pip install django</code><br>或指定版本号来安装对应的Django的版本。</p>
+<p><code>(venv)$ pip install django==1.11</code><br>检查Django的版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ python -m django --version</span><br><span class="line">(venv)$ django-admin --version</span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">(venv)$ python</span><br><span class="line">&gt;&gt;&gt; import django</span><br><span class="line">&gt;&gt;&gt; django.get_version()</span><br></pre></td></tr></table></figure></p>
+<p>当然，也可以通过pip来查看安装的依赖库及其版本，如：</p>
+<p><code>(venv)$ pip freeze</code><br><code>(venv)$ pip list</code></p>
+<p>使用django-admin创建项目，项目命名为oa。</p>
+<p><code>(venv)$ django-admin startproject oa .</code><br><strong>注意：上面的命令最后的那个点，它表示在当前路径下创建项目。</strong></p>
+<p>执行上面的命令后看看生成的文件和文件夹，它们的作用如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">manage.py： 一个让你用各种方式管理 Django 项目的命令行工具。</span><br><span class="line">oa/__init__.py：一个空文件，告诉 Python 这个目录应该被认为是一个 Python 包。</span><br><span class="line">oa/settings.py：Django 项目的配置文件。</span><br><span class="line">oa/urls.py：Django 项目的 URL 声明，就像你网站的“目录”。</span><br><span class="line">oa/wsgi.py：作为你的项目的运行在 WSGI 兼容的Web服务器上的入口。</span><br></pre></td></tr></table></figure></p>
+<p>启动服务器运行项目。</p>
+<p><code>(venv)$ python manage.py runserver</code><br>在浏览器中输入<code>http://127.0.0.1:8000</code>访问我们的服务器</p>
+<p>说明1：刚刚启动的是Django自带的用于开发和测试的服务器，它是一个用纯Python编写的轻量级Web服务器，但它并不是真正意义上的生产级别的服务器，千万不要将这个服务器用于和生产环境相关的任何地方。</p>
+<p>说明2：用于开发的服务器在需要的情况下会对每一次的访问请求重新载入一遍Python代码。所以你不需要为了让修改的代码生效而频繁的重新启动服务器。然而，一些动作，比如添加新文件，将不会触发自动重新加载，这时你得自己手动重启服务器。</p>
+<p>说明3：可以通过python manage.py help命令查看可用命令列表；在启动服务器时，也可以通过python manage.py runserver 1.2.3.4:5678来指定绑定的IP地址和端口。</p>
+<p>说明4：可以通过Ctrl+C来终止服务器的运行。</p>
+<p>接下来我们修改项目的配置文件settings.py，Django是一个支持国际化和本地化的框架，因此刚才我们看到的默认首页也是支持国际化的，我们将默认语言修改为中文，时区设置为东八区。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ vim oa/settings.py</span><br><span class="line"># 此处省略上面的内容</span><br><span class="line"></span><br><span class="line"># 设置语言代码</span><br><span class="line">LANGUAGE_CODE = &apos;zh-hans&apos;</span><br><span class="line"># 设置时区</span><br><span class="line">TIME_ZONE = &apos;Asia/Chongqing&apos;</span><br><span class="line"></span><br><span class="line"># 此处省略下面的内容</span><br></pre></td></tr></table></figure></p>
+<h3 id="动态页面"><a href="#动态页面" class="headerlink" title="动态页面"></a>动态页面</h3><p>创建名为hrs（人力资源系统）的应用，<strong>一个Django项目可以包含一个或多个应用</strong>。</p>
+<p><code>(venv)$ python manage.py startapp hrs</code><br>执行上面的命令会在当前路径下创建hrs目录，其目录结构如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">__init__.py：一个空文件，告诉 Python 这个目录应该被认为是一个 Python 包。</span><br><span class="line">admin.py：可以用来注册模型，用于在Django的管理界面管理模型。</span><br><span class="line">apps.py：当前应用的配置。</span><br><span class="line">migrations：存放与模型有关的数据库迁移信息。</span><br><span class="line">__init__.py：一个空文件，告诉 Python 这个目录应该被认为是一个 Python 包。</span><br><span class="line">models.py：存放应用的数据模型，即实体类及其之间的关系（MVC/MVT中的M）。</span><br><span class="line">tests.py：包含测试应用各项功能的测试类和测试函数。</span><br><span class="line">views.py：处理请求并返回响应的函数（MVC中的C，MVT中的V）。</span><br></pre></td></tr></table></figure></p>
+<p>修改应用目录下的视图文件views.py。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ vim hrs/views.py</span><br><span class="line">from django.http import HttpResponse</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def index(request):</span><br><span class="line">    return HttpResponse(&apos;&lt;h1&gt;Hello, Django!&lt;/h1&gt;&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>在应用目录创建一个urls.py文件并映射URL。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ touch hrs/urls.py</span><br><span class="line">(venv)$ vim hrs/urls.py</span><br><span class="line">from django.urls import path</span><br><span class="line"></span><br><span class="line">from hrs import views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(&apos;&apos;, views.index, name=&apos;index&apos;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>说明：上面使用的path函数是Django 2.x中新添加的函数，除此之外还可以使用支持正则表达式的URL映射函数re_path函数；Django 1.x中是用名为url函数来设定URL映射。</p>
+<p>切换到项目目录，修改该目录下的urls.py文件，对应用中设定的URL进行合并。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(venv) $ vim oa/urls.py</span><br><span class="line">from django.contrib import admin</span><br><span class="line">from django.urls import path, include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(&apos;admin/&apos;, admin.site.urls),</span><br><span class="line">    path(&apos;hrs/&apos;, include(&apos;hrs.urls&apos;)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>重新运行项目，并打开浏览器中访问<code>http://localhost:8000/hrs</code>。</p>
+<p><code>(venv)$ python manage.py runserver</code><br>修改views.py生成动态内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ vim hrs/views.py</span><br><span class="line">from io import StringIO</span><br><span class="line"></span><br><span class="line">from django.http import HttpResponse</span><br><span class="line"></span><br><span class="line">depts_list = [</span><br><span class="line">    &#123;&apos;no&apos;: 10, &apos;name&apos;: &apos;财务部&apos;, &apos;location&apos;: &apos;北京&apos;&#125;,</span><br><span class="line">    &#123;&apos;no&apos;: 20, &apos;name&apos;: &apos;研发部&apos;, &apos;location&apos;: &apos;成都&apos;&#125;,</span><br><span class="line">    &#123;&apos;no&apos;: 30, &apos;name&apos;: &apos;销售部&apos;, &apos;location&apos;: &apos;上海&apos;&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def index(request):</span><br><span class="line">    output = StringIO()</span><br><span class="line">    output.write(&apos;&lt;html&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;&lt;head&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;\t&lt;meta charset=&quot;utf-8&quot;&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;\t&lt;title&gt;首页&lt;/title&gt;&apos;)</span><br><span class="line">    output.write(&apos;&lt;/head&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;&lt;body&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;\t&lt;h1&gt;部门信息&lt;/h1&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;\t&lt;hr&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;\t&lt;table&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;\t\t&lt;tr&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;\t\t\t&lt;th width=120&gt;部门编号&lt;/th&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;\t\t\t&lt;th width=180&gt;部门名称&lt;/th&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;\t\t\t&lt;th width=180&gt;所在地&lt;/th&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;\t\t&lt;/tr&gt;\n&apos;)</span><br><span class="line">    for dept in depts_list:</span><br><span class="line">        output.write(&apos;\t\t&lt;tr&gt;\n&apos;)</span><br><span class="line">        output.write(f&apos;\t\t\t&lt;td align=center&gt;&#123;dept[&quot;no&quot;]&#125;&lt;/td&gt;\n&apos;)</span><br><span class="line">        output.write(f&apos;\t\t\t&lt;td align=center&gt;&#123;dept[&quot;name&quot;]&#125;&lt;/td&gt;\n&apos;)</span><br><span class="line">        output.write(f&apos;\t\t\t&lt;td align=center&gt;&#123;dept[&quot;location&quot;]&#125;&lt;/td&gt;\n&apos;)</span><br><span class="line">        output.write(&apos;\t\t&lt;/tr&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;\t&lt;/table&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;&lt;/body&gt;\n&apos;)</span><br><span class="line">    output.write(&apos;&lt;/html&gt;\n&apos;)</span><br><span class="line">    return HttpResponse(output.getvalue())</span><br></pre></td></tr></table></figure></p>
+<p>刷新页面查看程序的运行结果。</p>
+<h3 id="使用视图模板"><a href="#使用视图模板" class="headerlink" title="使用视图模板"></a>使用视图模板</h3><p>上面通过拼接HTML代码的方式生成动态视图的做法在实际开发中是无能接受的，这一点大家一定能够想到。为了解决这个问题，我们可以提前准备一个模板页，所谓模板页就是一个带占位符的HTML页面，当我们将程序中获得的数据替换掉页面中的占位符时，一个动态页面就产生了。</p>
+<p>我们可以<strong>用Django框架中template模块的Template类创建模板对象，通过模板对象的render方法实现对模板的渲染</strong>。所谓的渲染就是用数据替换掉模板页中的占位符，当然这里的渲染称为后端渲染，即在服务器端完成页面的渲染再输出到浏览器中，这种做法的主要坏处是当并发访问量较大时，服务器会承受较大的负担，所以今天有很多的Web应用都使用了前端渲染，即服务器只为浏览器提供所需的数据（通常是JSON格式），在浏览器中通过JavaScript获取这些数据并渲染到页面上，这些内容在后面为大家呈现。</p>
+<p>Django框架通过shortcuts模块的快捷函数render简化了渲染模板的操作，具体的用法如下所示。</p>
+<p>先回到manage.py文件所在的目录创建名为templates文件夹。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ mkdir templates</span><br><span class="line">创建模板页index.html。</span><br><span class="line"></span><br><span class="line">(venv)$ touch templates/index.html</span><br><span class="line">(venv)$ vim templates/index.html</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">	&lt;title&gt;首页&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;h1&gt;部门信息&lt;/h1&gt;</span><br><span class="line">	&lt;hr&gt;</span><br><span class="line">	&lt;table&gt;</span><br><span class="line">	    &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;部门编号&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;部门名称&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;所在地&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &#123;% for dept in depts_list %&#125;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;&#123;&#123; dept.no &#125;&#125;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&#123;&#123; dept.name &#125;&#125;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&#123;&#123; dept.location &#125;&#125;&lt;/td&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">        &#123;% endfor %&#125;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p><code>在上面的模板页中我们使用了这样的模板占位符语法，也使用了&amp;#123;% for %&amp;#125;这样的模板指令，这些都是Django模板语言（DTL）的一部分。</code></p>
+<p>回到应用目录，修改views.py文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ vim hrs/views.py</span><br><span class="line">from django.shortcuts import render</span><br><span class="line"></span><br><span class="line">depts_list = [</span><br><span class="line">    &#123;&apos;no&apos;: 10, &apos;name&apos;: &apos;财务部&apos;, &apos;location&apos;: &apos;北京&apos;&#125;,</span><br><span class="line">    &#123;&apos;no&apos;: 20, &apos;name&apos;: &apos;研发部&apos;, &apos;location&apos;: &apos;成都&apos;&#125;,</span><br><span class="line">    &#123;&apos;no&apos;: 30, &apos;name&apos;: &apos;销售部&apos;, &apos;location&apos;: &apos;上海&apos;&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def index(request):</span><br><span class="line">    return render(request, &apos;index.html&apos;, &#123;&apos;depts_list&apos;: depts_list&#125;)</span><br></pre></td></tr></table></figure>
+<p>到此为止，我们还没有办法让views.py中的render函数找到模板文件index.html，为此我们需要修改settings.py文件，配置模板文件所在的路径。</p>
+<p>切换到项目目录修改settings.py文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(venv)$ vim oa/settings.py</span><br><span class="line"># 此处省略上面的内容</span><br><span class="line"></span><br><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        &apos;BACKEND&apos;: &apos;django.template.backends.django.DjangoTemplates&apos;,</span><br><span class="line">        &apos;DIRS&apos;: [os.path.join(BASE_DIR, &apos;templates&apos;)],</span><br><span class="line">        &apos;APP_DIRS&apos;: True,</span><br><span class="line">        &apos;OPTIONS&apos;: &#123;</span><br><span class="line">            &apos;context_processors&apos;: [</span><br><span class="line">                &apos;django.template.context_processors.debug&apos;,</span><br><span class="line">                &apos;django.template.context_processors.request&apos;,</span><br><span class="line">                &apos;django.contrib.auth.context_processors.auth&apos;,</span><br><span class="line">                &apos;django.contrib.messages.context_processors.messages&apos;,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># 此处省略下面的内容</span><br></pre></td></tr></table></figure>
+<p>重新运行项目或直接刷新页面查看结果。</p>
+<p><code>(venv)$ python manage.py runserver</code></p>
+
       
     </div>
     
@@ -557,8 +609,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -631,6 +692,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Django"><span class="nav-number">1.</span> <span class="nav-text">Django</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用机制和术语"><span class="nav-number">1.1.</span> <span class="nav-text">Web应用机制和术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速上手"><span class="nav-number">1.2.</span> <span class="nav-text">快速上手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">1.2.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态页面"><span class="nav-number">1.2.2.</span> <span class="nav-text">动态页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用视图模板"><span class="nav-number">1.2.3.</span> <span class="nav-text">使用视图模板</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -665,7 +742,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">236.2k</span>
+    <span title="Site words total count">238.9k</span>
   
 </div>
 
