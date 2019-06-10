@@ -79,14 +79,25 @@
 
 
 
+<meta name="description" content="TVTK的管线理解TVTK的管线管线技术（Pipeline，流水线） 可视化管线(Visualization Pipeline)：将原始数据加工成图形数据的过程 图形管线(Graphics Pipeline)：图形数据加工为我们所看到的图像的过程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pythonkexuejisuan2">
+<meta property="og:title" content="TVTK的管线">
 <meta property="og:url" content="http://yoursite.com/2019/05/31/pythonkexuejisuan2/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="TVTK的管线理解TVTK的管线管线技术（Pipeline，流水线） 可视化管线(Visualization Pipeline)：将原始数据加工成图形数据的过程 图形管线(Graphics Pipeline)：图形数据加工为我们所看到的图像的过程">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-31T10:57:30.261Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/pythonkexuejisuan2/Snipaste_2019-06-08_17-53-04.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/pythonkexuejisuan2/Snipaste_2019-06-08_17-54-31.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/pythonkexuejisuan2/Snipaste_2019-06-08_18-00-45.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/pythonkexuejisuan2/Snipaste_2019-06-08_18-01-26.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/pythonkexuejisuan2/Snipaste_2019-06-08_18-01-44.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/pythonkexuejisuan2/Snipaste_2019-06-08_18-02-32.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/pythonkexuejisuan2/Snipaste_2019-06-08_18-02-53.png">
+<meta property="og:updated_time" content="2019-06-08T10:03:19.841Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pythonkexuejisuan2">
+<meta name="twitter:title" content="TVTK的管线">
+<meta name="twitter:description" content="TVTK的管线理解TVTK的管线管线技术（Pipeline，流水线） 可视化管线(Visualization Pipeline)：将原始数据加工成图形数据的过程 图形管线(Graphics Pipeline)：图形数据加工为我们所看到的图像的过程">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/31/pythonkexuejisuan2/Snipaste_2019-06-08_17-53-04.png">
 
 
 
@@ -131,7 +142,7 @@
   daovoice('update');
   </script>
 
-  <title>pythonkexuejisuan2 | zzm99</title>
+  <title>TVTK的管线 | zzm99</title>
   
 
 
@@ -308,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">pythonkexuejisuan2</h1>
+          <h1 class="post-title" itemprop="name headline">TVTK的管线</h1>
         
 
         <div class="post-meta">
@@ -400,7 +411,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  159
                 </span>
               
 
@@ -437,7 +448,18 @@
       
 
       
-        
+        <h1 id="TVTK的管线"><a href="#TVTK的管线" class="headerlink" title="TVTK的管线"></a>TVTK的管线</h1><h2 id="理解TVTK的管线"><a href="#理解TVTK的管线" class="headerlink" title="理解TVTK的管线"></a>理解TVTK的管线</h2><p>管线技术（<strong>Pipeline</strong>，流水线）</p>
+<p><strong>可视化管线</strong>(Visualization Pipeline)：将原始数据加工成图形数据的过程</p>
+<p><strong>图形管线</strong>(Graphics Pipeline)：图形数据加工为我们所看到的图像的过程<br><a id="more"></a><br><img src="Snipaste_2019-06-08_17-53-04.png" alt="1"></p>
+<p><img src="Snipaste_2019-06-08_17-54-31.png" alt="1"></p>
+<p>实例：绘制一个3d长方体：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tvtk.api <span class="keyword">import</span> tvtk</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建长方体数据源，并且同时设置其长宽高</span></span><br><span class="line">s = tvtk.CubeSource(x_length=<span class="number">1.0</span>, y_length=<span class="number">2.0</span>, z_length=<span class="number">3.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用PolyDataMapper将数据转换为图型数据</span></span><br><span class="line">m = tvtk.PolyDataMapper(input_connection=s.output_port)</span><br><span class="line"></span><br><span class="line">a = tvtk.Actor(mapper=m)</span><br><span class="line">r = tvtk.Renderer(background=(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">r.add_actor(a)</span><br><span class="line">w = tvtk.RenderWindow(size=(<span class="number">300</span>,<span class="number">300</span>))</span><br><span class="line">w.add_renderer(r)</span><br><span class="line">i = tvtk.RenderWindowInteractor(render_window=w)</span><br><span class="line">i.initialize()</span><br><span class="line">i.start()</span><br></pre></td></tr></table></figure>
+<p><img src="Snipaste_2019-06-08_18-00-45.png" alt="1"></p>
+<p><img src="Snipaste_2019-06-08_18-01-26.png" alt="1"></p>
+<p><img src="Snipaste_2019-06-08_18-01-44.png" alt="1"></p>
+<p><img src="Snipaste_2019-06-08_18-02-32.png" alt="1"></p>
+<p><img src="Snipaste_2019-06-08_18-02-53.png" alt="1"></p>
+
       
     </div>
     
@@ -500,8 +522,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/31/pythonkexuejisuan3/" rel="prev" title="pythonkexuejisuan3">
-                pythonkexuejisuan3 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/31/pythonkexuejisuan3/" rel="prev" title="用ivtk工具观察管线">
+                用ivtk工具观察管线 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -557,8 +579,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -631,6 +662,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TVTK的管线"><span class="nav-number">1.</span> <span class="nav-text">TVTK的管线</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解TVTK的管线"><span class="nav-number">1.1.</span> <span class="nav-text">理解TVTK的管线</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -665,7 +712,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">251.6k</span>
+    <span title="Site words total count">252.2k</span>
   
 </div>
 
