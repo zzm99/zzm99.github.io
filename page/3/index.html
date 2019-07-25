@@ -291,7 +291,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/qita9/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/20/leetcode-114/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zzm99">
@@ -310,7 +310,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/18/qita9/" itemprop="url">qita9</a></h1>
+                <a class="post-title-link" href="/2019/07/20/leetcode-114/" itemprop="url">leetcode-114- Flatten Binary Tree to Linked List</a></h1>
         
 
         <div class="post-meta">
@@ -322,7 +322,1005 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T14:17:31+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-20T11:42:37+08:00">
+                2019-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/20/leetcode-114/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/20/leetcode-114/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  88
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Given a binary tree, flatten it to a linked list in-place.</p>
+<p>For example, given the following tree:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">    1</span><br><span class="line">   / \</span><br><span class="line">  2   5</span><br><span class="line"> / \   \</span><br><span class="line">3   4   6</span><br><span class="line">The flattened tree should look like:</span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line">   \</span><br><span class="line">    3</span><br><span class="line">     \</span><br><span class="line">      4</span><br><span class="line">       \</span><br><span class="line">        5</span><br><span class="line">         \</span><br><span class="line">          6</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        helper(root);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    TreeNode* pre = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">nullptr</span>) &#123; </span><br><span class="line">            helper(root-&gt;right);</span><br><span class="line">            helper(root-&gt;left);</span><br><span class="line">            root-&gt;right = pre;</span><br><span class="line">            root-&gt;left = <span class="literal">nullptr</span>;</span><br><span class="line">            pre = root;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/20/leetcode-102/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/20/leetcode-102/" itemprop="url">leetcode-102-Binary Tree Level Order Traversal</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-20T11:38:16+08:00">
+                2019-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/20/leetcode-102/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/20/leetcode-102/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  175
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Given a binary tree, return the level order traversal of its nodes’ values. (ie, from left to right, level by level).</p>
+<p>For example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Given binary tree [3,9,20,null,null,15,7],</span><br><span class="line">    3</span><br><span class="line">   / \</span><br><span class="line">  9  20</span><br><span class="line">    /  \</span><br><span class="line">   15   7</span><br><span class="line">return its level order traversal as:</span><br><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [9,20],</span><br><span class="line">  [15,7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; levelOrder(TreeNode* root) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> result;</span><br><span class="line">        Helper(root, result, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Helper</span><span class="params">(TreeNode* root, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; &amp;result, <span class="keyword">int</span> h)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (result.size()&lt;h+<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">            tmp.push_back(root-&gt;val);</span><br><span class="line">            result.push_back(tmp);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            result[h].push_back(root-&gt;val);</span><br><span class="line">        &#125;</span><br><span class="line">        Helper(root-&gt;left, result, h+<span class="number">1</span>);</span><br><span class="line">        Helper(root-&gt;right, result, h+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/20/leetcode-337/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/20/leetcode-337/" itemprop="url">leetcode-337-House Robber III</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-20T11:21:21+08:00">
+                2019-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/20/leetcode-337/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/20/leetcode-337/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  221
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that “all houses in this place forms a binary tree”. It will automatically contact the police if two directly-linked houses were broken into on the same night.</p>
+<p>Determine the maximum amount of money the thief can rob tonight without alerting the police.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input: [3,2,3,null,3,null,1]</span><br><span class="line"></span><br><span class="line">     3</span><br><span class="line">    / \</span><br><span class="line">   2   3</span><br><span class="line">    \   \ </span><br><span class="line">     3   1</span><br><span class="line"></span><br><span class="line">Output: 7 </span><br><span class="line">Explanation: Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.</span><br></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input: [3,4,5,1,3,null,1]</span><br><span class="line"></span><br><span class="line">     3</span><br><span class="line">    / \</span><br><span class="line">   4   5</span><br><span class="line">  / \   \ </span><br><span class="line"> 1   3   1</span><br><span class="line"></span><br><span class="line">Output: 9</span><br><span class="line">Explanation: Maximum amount of money the thief can rob = 4 + 5 = 9.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode* root)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m = helper(root);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">std</span>::max(m.first, m.second);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; helper(TreeNode* root)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> &#123;<span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">auto</span> leftMoney = helper(root-&gt;left);</span><br><span class="line">        <span class="keyword">auto</span> rightMoney = helper(root-&gt;right);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> &#123;root-&gt;val + leftMoney.second + rightMoney.second,</span><br><span class="line">                <span class="built_in">std</span>::max(leftMoney.first, leftMoney.second) </span><br><span class="line">                + <span class="built_in">std</span>::max(rightMoney.first, rightMoney.second)&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/leetcode-96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/19/leetcode-96/" itemprop="url">leetcode-96-Unique Binary Search Trees</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-19T16:39:03+08:00">
+                2019-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/19/leetcode-96/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/19/leetcode-96/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  225
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Given n, how many structurally unique BST’s (binary search trees) that store values 1 … n?</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input: 3</span><br><span class="line">Output: 5</span><br><span class="line">Explanation:</span><br><span class="line">Given n = 3, there are a total of 5 unique BST&apos;s:</span><br><span class="line"></span><br><span class="line">   1         3     3      2      1</span><br><span class="line">    \       /     /      / \      \</span><br><span class="line">     3     2     1      1   3      2</span><br><span class="line">    /     /       \                 \</span><br><span class="line">   2     1         2                 3</span><br></pre></td></tr></table></figure>
+<p>we set dp[n] is the number of BST that store n consecutive values<br>we can get dp[n] as follows:</p>
+<p>we set 1 as root node, so left subtree has 0 children, right subtree has n - 1 children, the number of bst is dp[0] * dp<a href="we set dp[0] = 1">n - 1</a>;</p>
+<p>we set 2 as root node, so left subtree has 1 children, right subtree has n - 2 children, the number of bst is dp[1] * dp[n - 2];</p>
+<p>generally, we set k as root noode, so left subtree has k - 1 children, right subtree has n - k children, the number of bst is dp[k - 1] * dp[n - k];</p>
+<p>dp[n] = d[0] <em> dp[n - 1] + … + dp[k - 1] </em> dp[n - k] + … + dp[n - 1] * dp[0];</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= i; ++k) &#123;</span><br><span class="line">                dp[i] += dp[k - <span class="number">1</span>] * dp[i - k];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/leetcode-49/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/19/leetcode-49/" itemprop="url">leetcode-49-Group Anagrams</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-19T16:30:45+08:00">
+                2019-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/19/leetcode-49/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/19/leetcode-49/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  293
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Given an array of strings, group anagrams(相同字母异序词) together.</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: [&quot;eat&quot;, &quot;tea&quot;, &quot;tan&quot;, &quot;ate&quot;, &quot;nat&quot;, &quot;bat&quot;],</span><br><span class="line">Output:</span><br><span class="line">[</span><br><span class="line">  [&quot;ate&quot;,&quot;eat&quot;,&quot;tea&quot;],</span><br><span class="line">  [&quot;nat&quot;,&quot;tan&quot;],</span><br><span class="line">  [&quot;bat&quot;]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>Note:</p>
+<p>All inputs will be in lowercase.</p>
+<p>The order of your output does not matter.</p>
+<p>题解：</p>
+<blockquote>
+<p>C++ unordered_map and counting sort</p>
+</blockquote>
+<p>Use an unordered_map to group the strings by their sorted counterparts. Use the sorted string as the key and all anagram strings as the value.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; groupAnagrams(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">string</span> s : strs) &#123;</span><br><span class="line">            <span class="built_in">string</span> t = s; </span><br><span class="line">            sort(t.begin(), t.end());</span><br><span class="line">            mp[t].push_back(s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; anagrams;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> p : mp) &#123; </span><br><span class="line">            anagrams.push_back(p.second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> anagrams;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Moreover, since the string only contains lower-case alphabets, we can sort them using counting sort to improve the time complexity.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; groupAnagrams(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">string</span> s : strs) &#123;</span><br><span class="line">            mp[strSort(s)].push_back(s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; anagrams;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> p : mp) &#123; </span><br><span class="line">            anagrams.push_back(p.second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> anagrams;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">strSort</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> counter[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> c : s) &#123;</span><br><span class="line">            counter[c - <span class="string">'a'</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">string</span> t;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; <span class="number">26</span>; c++) &#123;</span><br><span class="line">            t += <span class="built_in">string</span>(counter[c], c + <span class="string">'a'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/candcpp24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/18/candcpp24/" itemprop="url">candcpp24</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T14:43:04+08:00">
                 2019-07-18
               </time>
             
@@ -345,7 +1343,18 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其他/" itemprop="url" rel="index">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
                     <span itemprop="name">其他</span>
                   </a>
                 </span>
@@ -363,8 +1372,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/07/18/qita9/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/qita9/" itemprop="commentCount"></span>
+                <a href="/2019/07/18/candcpp24/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/candcpp24/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -473,7 +1482,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/qita8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/candcpp23/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zzm99">
@@ -492,7 +1501,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/18/qita8/" itemprop="url">github拉取代码时候出现 Permission denied (publickey).</a></h1>
+                <a class="post-title-link" href="/2019/07/18/candcpp23/" itemprop="url">大数运算_求1000的阶乘</a></h1>
         
 
         <div class="post-meta">
@@ -504,1387 +1513,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T14:17:21+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T14:42:59+08:00">
                 2019-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/18/qita8/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/qita8/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  60
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="原因一：网络不行（常见原因）"><a href="#原因一：网络不行（常见原因）" class="headerlink" title="原因一：网络不行（常见原因）"></a>原因一：网络不行（常见原因）</h1><h2 id="检查："><a href="#检查：" class="headerlink" title="检查："></a>检查：</h2><h3 id="cmd输入ping-github-com"><a href="#cmd输入ping-github-com" class="headerlink" title="cmd输入ping github.com"></a>cmd输入<code>ping github.com</code></h3><p><img src="Snipaste_2019-07-18_14-19-49.png" alt="1"></p>
-<h1 id="原因二：ssh证书过期-换了另一个网"><a href="#原因二：ssh证书过期-换了另一个网" class="headerlink" title="原因二：ssh证书过期/换了另一个网"></a>原因二：ssh证书过期/换了另一个网</h1><h2 id="解决方法：新建新证书覆盖旧证书，并将新证书在GitHub中加入允许行列"><a href="#解决方法：新建新证书覆盖旧证书，并将新证书在GitHub中加入允许行列" class="headerlink" title="解决方法：新建新证书覆盖旧证书，并将新证书在GitHub中加入允许行列"></a>解决方法：<a href="https://blog.csdn.net/zhangzeshan/article/details/83472826" target="_blank" rel="noopener">新建新证书覆盖旧证书，并将新证书在GitHub中加入允许行列</a></h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/qita7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/18/qita7/" itemprop="url">Git：将已有的项目添加到github</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T14:09:12+08:00">
-                2019-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/18/qita7/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/qita7/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  797
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Git：将已有的项目添加到github"><a href="#Git：将已有的项目添加到github" class="headerlink" title="Git：将已有的项目添加到github"></a>Git：将已有的项目添加到github</h1><h2 id="1-目标："><a href="#1-目标：" class="headerlink" title="1. 目标："></a>1. 目标：</h2><p>把本地已经存在的项目，推送到github服务端，实现共享。</p>
-<h2 id="2-实现步骤："><a href="#2-实现步骤：" class="headerlink" title="2. 实现步骤："></a>2. 实现步骤：</h2><h3 id="1-先从github创建一个空的仓库"><a href="#1-先从github创建一个空的仓库" class="headerlink" title="(1). 先从github创建一个空的仓库"></a>(1). 先从github创建一个空的仓库</h3><p>先从github创建一个空的仓库，并复制链接地址</p>
-<h3 id="2-初始化本地仓库，并提交内容到本地"><a href="#2-初始化本地仓库，并提交内容到本地" class="headerlink" title="(2). 初始化本地仓库，并提交内容到本地"></a>(2). 初始化本地仓库，并提交内容到本地</h3><p>需要先打开 命令行终端，然后通过 cd 命令切换到需要添加到github 的项目的目录下，然后依次执行如下命令， 具体命令及其含义如下：</p>
-<p>1). <code>touch README.md</code><br>创建说明文档，</p>
-<p>2). <code>git init</code><br>初始化本地仓库</p>
-<p>3). <code>git add .</code><br>添加全部已经修改的文件，准备commit 提交 该命令效果等同于 Git add -A</p>
-<p>4). <code>git commit -m ‘提交说明’</code><br>将修改后的文件提交到本地仓库，如：git commit -m ‘增加README.md说明文档’</p>
-<h3 id="3-连接到远程仓库，并将代码同步到远程仓库"><a href="#3-连接到远程仓库，并将代码同步到远程仓库" class="headerlink" title="(3). 连接到远程仓库，并将代码同步到远程仓库"></a>(3). 连接到远程仓库，并将代码同步到远程仓库</h3><p>1). <code>git remote add origin 远程仓库地址</code></p>
-<p>连接到远程仓库并为该仓库创建别名 , 别名为origin . 这个别名是自定义的，通常用origin ;</p>
-<p>远程仓库地址，就是你自己新建的那个仓库的地址。</p>
-<p>如：git remote add origin <a href="https://github.com/CnPeng/MyCustomAlertDialog.git" target="_blank" rel="noopener">https://github.com/CnPeng/MyCustomAlertDialog.git</a> </p>
-<p>这段代码的含义是： 连接到github上<a href="https://github.com/CnPeng/MyCustomAlertDialog.git" target="_blank" rel="noopener">https://github.com/CnPeng/MyCustomAlertDialog.git</a> 这个仓库，并创建别名为origin . （之后push 或者pull 的时候就需要使用到这个 origin 别名）</p>
-<p>2). <code>git push -u origin master</code></p>
-<p>创建一个 upStream （上传流），并将本地代码通过这个 upStream 推送到 别名为 origin 的仓库中的 master 分支上</p>
-<p>-u ，就是创建 upStream 上传流，如果没有这个上传流就无法将代码推送到 github；同时，这个 upStream 只需要在初次推送代码的时候创建，以后就不用创建了</p>
-<p>另外，在初次 push 代码的时候，可能会因为网络等原因导致命令行终端上的内容一直没有变化，耐心等待一会就好。</p>
-<p>(4). <code>继续修改本地代码，然后提交并推送到github</code></p>
-<p>做完上面三个步骤之后，就实现了将本地代码同步到github的功能，接下来要做的事情就是继续修改代码，然后提交并推送到github</p>
-<p>1). <code>git add .</code><br>添加全部修改的代码，准备提交</p>
-<p>2). <code>git commit -m ‘提交说明’</code><br>将修改后的代码先提交到本地仓库</p>
-<p>3). <code>git pull</code></p>
-<p>如果是多人协作开发的话，一定要先 pull ，将 github 的代码拉取到本地，这样在 merge 解决冲突的时候稍微简便些。<br>默认拉取到 master分支（如果只是自己做这个项目，可以忽略pull）</p>
-<p>4). <code>git push</code><br>将代码推送到 github , 默认推送到 别名为 origin 的仓库中的 master 分支上。</p>
-<p>5). 注意事项：</p>
-<p>如果有多个远程仓库 或者 多个分支， 并且需要将代码推送到指定仓库的指定分支上，那么在 pull 或者 push 的时候，就需要 按照下面的格式书写：</p>
-<p><code>git pull 仓库别名 仓库分支名</code><br><code>git push 仓库别名 仓库分支名</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/qita6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/18/qita6/" itemprop="url">解决git push大小限制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T14:09:03+08:00">
-                2019-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/18/qita6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/qita6/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  93
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Symptoms"><a href="#Symptoms" class="headerlink" title="Symptoms"></a>Symptoms</h1><p>When users try to run “git push” the following error message is shown:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git push</span><br><span class="line">Counting objects: 2332669, done.</span><br><span class="line">Delta compression using up to 16 threads.</span><br><span class="line">Compressing objects: 100% (360818/360818), done.</span><br><span class="line">error: RPC failed; result=22, HTTP code = 411</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br><span class="line">Writing objects: 100% (2332669/2332669), 483.30 MiB | 114.26 MiB/s, done.</span><br><span class="line">Total 2332669 (delta 1949888), reused 2330461 (delta 1949349)</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br></pre></td></tr></table></figure>
-<h1 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h1><p>Increase the Git buffer size to the largest individual file size of your repo:</p>
-<p><code>git config --global http.postBuffer 157286400</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/excel4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/18/excel4/" itemprop="url">excel-公式教程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T11:52:15+08:00">
-                2019-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/excel/" itemprop="url" rel="index">
-                    <span itemprop="name">excel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/18/excel4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/excel4/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.8k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="公式入门"><a href="#公式入门" class="headerlink" title="公式入门"></a>公式入门</h1><h2 id="基础知识：使用-Excel-进行数学计算"><a href="#基础知识：使用-Excel-进行数学计算" class="headerlink" title="基础知识：使用 Excel 进行数学计算"></a>基础知识：使用 Excel 进行数学计算</h2><p>你可以在 Excel 中进行加、减、乘、除运算，无需使用任何内置函数。只需使用部分基本运算符：+、-、*、/。所有公式均以等号 (=) 开头。</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>若要相加，选择单元格 F3，键入 =C3+C4，然后按 Enter。</td>
-</tr>
-<tr>
-<td>若要相减，选择单元格 F4，键入 =C3-C4，然后按 Enter。</td>
-</tr>
-<tr>
-<td>若要相乘，选择单元格 F3，键入 =C3*C4，然后按 Enter。</td>
-</tr>
-<tr>
-<td>若要相除，选择单元格 F3，键入 =C3/C4，然后按 Enter。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="有关公式、单元格和区域的详细信息"><a href="#有关公式、单元格和区域的详细信息" class="headerlink" title="有关公式、单元格和区域的详细信息"></a>有关公式、单元格和区域的详细信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">公式可包含单元格引用、单元格引用范围、运算符和常数。以下均为公式的示例：</span><br><span class="line"></span><br><span class="line">=A1+B1</span><br><span class="line">=10+20</span><br><span class="line">=SUM(A1:A10)</span><br></pre></td></tr></table></figure>
-<p>你会注意到，上面的第三个示例中使用了 SUM 函数。函数是预先构建的命令，可采用一个值或多个值，以特定方式进行计算并返回结果。例如，SUM 函数采用单元格引用或指定区域，并对它们求和。在此示例中，它使用单元格 A1 到 A10，并对它们求和。Excel 拥有 400 多个函数，你可以在“公式”选项卡上进行浏览。</p>
-<p>带有函数的公式以等号开头，随后是函数名称，后接用括号括起来的参数（函数用于计算的值）。 </p>
-<p>按 Enter 即可确认公式。执行该操作后，公式将进行计算，结果将显示在单元格中。若要查看公式本身，可查看功能区下方的编辑栏，或按 F2 进入“编辑”模式，你将在单元格中看到公式。再次按 Enter 完成公式并计算结果。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/18/excel4/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/excel3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/18/excel3/" itemprop="url">excel-数据透视表教程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T11:52:05+08:00">
-                2019-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/excel/" itemprop="url" rel="index">
-                    <span itemprop="name">excel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/18/excel3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/excel3/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  670
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="什么是数据透视表？"><a href="#什么是数据透视表？" class="headerlink" title="什么是数据透视表？"></a>什么是数据透视表？</h1><p>在最基本形式中，数据透视表<strong>获取数据并进行汇总，这样人们能够了解数字含义，而无需键入任何公式！</strong></p>
-<h1 id="制作第一个数据透视表"><a href="#制作第一个数据透视表" class="headerlink" title="制作第一个数据透视表"></a>制作第一个数据透视表</h1><p>如果以下图中的数据来创建一个数据透视表<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/18/excel3/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/excel2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/18/excel2/" itemprop="url">excel基础知识2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T11:51:44+08:00">
-                2019-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/excel/" itemprop="url" rel="index">
-                    <span itemprop="name">excel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/18/excel2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/excel2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.3k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="对数字求和"><a href="#对数字求和" class="headerlink" title="对数字求和"></a>对数字求和</h1><p>使用公式SUM或者SUMIF或者按Alt+=并按Enter</p>
-<p>SUM公式语法示例：<code>=SUM(D4:D7)</code></p>
-<p>SUMIF公式语法示例： <code>=SUMIF(D11:D15,&quot;&gt;50&quot;)</code></p>
-<p>SUM的特殊用法：<code>=SUM(D48,G48:G51,100)</code></p>
-<p>上述公式中使用了下列内容：</p>
-<ul>
-<li>单个单元格引用，它是单元格的“地址”或“名称”。上述公式中，D48 是单个单元格引用。 </li>
-<li>单元格范围，这是一系列单元格，从一个单元格开始并以另一个单元格结束。公式中 G48:G51 是单元格范围。</li>
-<li>常量。该公式中的常量是数字 100。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/18/excel2/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/excel1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/18/excel1/" itemprop="url">excel基础知识1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T11:51:34+08:00">
-                2019-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/excel/" itemprop="url" rel="index">
-                    <span itemprop="name">excel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/18/excel1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/excel1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  730
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="excel基础知识"><a href="#excel基础知识" class="headerlink" title="excel基础知识"></a>excel基础知识</h1><h2 id="1-利用office助手进行查询：告诉我您想要做什么…"><a href="#1-利用office助手进行查询：告诉我您想要做什么…" class="headerlink" title="1. 利用office助手进行查询：告诉我您想要做什么…"></a>1. 利用office助手进行查询：告诉我您想要做什么…</h2><h2 id="2-数据输入："><a href="#2-数据输入：" class="headerlink" title="2. 数据输入："></a>2. 数据输入：</h2><ul>
-<li><p>单元格内<strong>换行</strong>：Alt+Enter</p>
-</li>
-<li><p>电话、身份证类的文本型数据输入时，先输入英文单引号（以文本形式保存数据）（否则将以数字类型保存电话号码等，可能会出现省略现象例如：123123123123变成1.23123E+11）</p>
-</li>
-<li><p>单元格列宽小于录入数据时，多余的数据会在相邻单元格显示，如果邻格也有数据，就会被截断不显示，但数据仍然存在。</p>
-</li>
-<li><p>快速填充相同数据：选中对应单元格，移到右下角显示+，拖动。</p>
-</li>
-<li><p>快速填充有序数据：输入前两个数据；选中前两个单元格；右下角拖动</p>
-</li>
-<li><p>同时快速填充可以同时拖动多列多行</p>
-</li>
-<li><p>修改数据：直接修改；右键清楚内容；键盘delete键</p>
-</li>
-<li><p>移动复制：移动对应单元格：ctrl+X–ctrl+V；复制对应单元格：ctrl+C–ctrl+V</p>
-</li>
-<li><p>查找替换数据：ctrl+F，选择对应功能</p>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/18/excel1/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/06/candcpp19/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/06/candcpp19/" itemprop="url">C++ 多线程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-06T22:37:47+08:00">
-                2019-07-06
               </time>
             
 
@@ -1935,8 +1565,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/07/06/candcpp19/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/06/candcpp19/" itemprop="commentCount"></span>
+                <a href="/2019/07/18/candcpp23/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/candcpp23/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1958,7 +1588,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.1k
+                  165
                 </span>
               
 
@@ -1974,7 +1604,625 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  9
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>采用数组存储</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1000 的阶乘 2568 位  </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;  </span></span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">int</span> a[<span class="number">3000</span>];  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> k)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"位数 %d 位\n"</span>,k);  </span><br><span class="line">    <span class="keyword">for</span> (i=k<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>,a[i]);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fanc</span><span class="params">(<span class="keyword">int</span> n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> w=<span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>, j=<span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">int</span> t=n;  </span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;    <span class="comment">// 表示数据的位数。  </span></span><br><span class="line">  </span><br><span class="line">    i=<span class="number">0</span>, k=<span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">while</span>(t)  </span><br><span class="line">    &#123;  </span><br><span class="line">        a[i++] = t%<span class="number">10</span>;  </span><br><span class="line">        t/=<span class="number">10</span>;  </span><br><span class="line">        k++;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">for</span> (j=n<span class="number">-1</span>; j&gt;<span class="number">1</span>; j--)  </span><br><span class="line">    &#123;  </span><br><span class="line">        w=<span class="number">0</span>;    <span class="comment">// 表示进位  </span></span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;k; i++)  </span><br><span class="line">        &#123;  </span><br><span class="line">            t = a[i]*j+w;  </span><br><span class="line">            a[i] = t%<span class="number">10</span>;  </span><br><span class="line">            w = t/<span class="number">10</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">while</span>(w)  </span><br><span class="line">        &#123;  </span><br><span class="line">            a[i++] = w%<span class="number">10</span>;  </span><br><span class="line">            w/=<span class="number">10</span>;  </span><br><span class="line">            k++;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> k;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> n;  </span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;  </span><br><span class="line">  </span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);  </span><br><span class="line">    k = fanc(n);  </span><br><span class="line">    show(k);  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/candcpp22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/18/candcpp22/" itemprop="url">fopen、fclose、fread、fwrite</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T14:42:42+08:00">
+                2019-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/18/candcpp22/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/candcpp22/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>fopen()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">功能：打开一个特定的文件，并把一个流和这个文件相关联</span><br><span class="line">头文件：#include&lt;stdio.h&gt;</span><br><span class="line">原型：</span><br><span class="line"></span><br><span class="line">FILE*fopen(const char *path,const char*mode)</span><br><span class="line"></span><br><span class="line">参数说明：</span><br><span class="line">path：是一个字符串，包含欲打开的文件路径及文件名</span><br><span class="line">mode：mode字符串则代表着流形态</span><br><span class="line">   r-&gt;读，该文件必须存在；</span><br><span class="line">   w-&gt;打开只写文件，若文件存在则长度清为0，</span><br><span class="line">      即该文件内容消失，若不存在则创建该文件</span><br><span class="line">   r+-&gt;以读/写方式打开文件，该文件必须存在</span><br><span class="line">   w+-&gt;打开可读/写文件</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">返回值：</span><br><span class="line"></span><br><span class="line">成功：它返回一个指向FILE结构的指针，该结构代表这个新创建的流</span><br><span class="line">    (文件顺利打开后，指向该流的文件指针就会被返回）</span><br><span class="line">失败：它就会返回一个空指针，errno会提示问题的性质</span><br><span class="line">    （如果文件打开失败，则返回NULL，并把错误代码存在errno中）</span><br></pre></td></tr></table></figure>
+<p>ps:应始终检查fopen函数的返回值</p>
+<p>例子：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FILE*input;</span><br><span class="line">input = fopen(<span class="string">"data3"</span>, <span class="string">"r"</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">NULL</span> == input)</span><br><span class="line">&#123;</span><br><span class="line">    perror(<span class="string">"data3"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>fclose()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">功能：关闭一个流</span><br><span class="line">头文件：#include&lt;stdio.h&gt;</span><br><span class="line">原型：int fclose(FILE*f);</span><br><span class="line">返回值：对于输出流，fclose函数会在文件关闭前刷新缓冲区，</span><br><span class="line">       如果它执行成功，fclose返回零值</span><br></pre></td></tr></table></figure>
+<p>注意：使用fclose函数就可以把缓冲区内最后剩余的数据输出到内核缓冲区，并释放文件指针和有关的缓冲区</p>
+<hr>
+<p>fwrite和fread是以记录为单位的I/O函数，fread和fwrite函数一般用于二进制文件的输入输出。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;  </span></span></span><br><span class="line"><span class="keyword">size_t</span> fread(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size, <span class="keyword">size_t</span> nmemb, FILE *stream);  </span><br><span class="line"><span class="keyword">size_t</span> fwrite(<span class="keyword">const</span> <span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size, <span class="keyword">size_t</span> nmemb, FILE *stream);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">返回值：读或写的记录数，成功时返回的记录数等于nmemb，出错或读到文件末尾时返回的记录</span><br><span class="line">数小于nmemb，也可能返回0。</span><br><span class="line"></span><br><span class="line">    fread和fwrite用于读写记录，这里的记录是指一串固定长度的字节，比如一个int、一个结构体或者一个定长数组。参数size指出一条记录的长度，而nmemb指出要读或写多少条记录，这些记录在ptr所指的内存空间中连续存放，共占size * nmemb个字节，fread从文件stream中读出size * nmemb个字节保存到ptr中，而fwrite把ptr中的size * nmemb个字节写到文件stream中。</span><br><span class="line"></span><br><span class="line">    nmemb是请求读或写的记录数，fread和fwrite返回的记录数有可能小于nmemb指定的记录数。例如当前读写位置距文件末尾只有一条记录的长度，调用fread时指定nmemb为2，则返回值为1。如果当前读写位置已经在文件末尾了，或者读文件时出错了，则fread返回0。如果写文件时出错了，则fwrite的返回值小于nmemb指定的值。下面的例子由两个程序组成，一个程序把结构体保存到文件中，另一个程序和从文件中读出结构体</span><br></pre></td></tr></table></figure>
+<p>fread和fwrite的例子程序如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* －－－－－－－－－－－－－－－－－－－writerec.c－－－－－－－－－－－－－－－ */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">record</span> &#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">10</span>];</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">record</span> <span class="title">array</span>[2] = &#123;</span>&#123;<span class="string">"Ken"</span>, <span class="number">24</span>&#125;, &#123;<span class="string">"Knuth"</span>, <span class="number">28</span>&#125;&#125;;</span><br><span class="line">	FILE *fp = fopen(<span class="string">"recfile"</span>, <span class="string">"w"</span>);</span><br><span class="line">	<span class="keyword">if</span> (fp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		perror(<span class="string">"Open file recfile"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	fwrite(<span class="built_in">array</span>, <span class="keyword">sizeof</span>(struct record), <span class="number">2</span>, fp);</span><br><span class="line">	fclose(fp);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/* －－－－－－－－－－－－－－－－－－－readrec.c－－－－－－－－－－－－－－－－－ */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">record</span> &#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">10</span>];</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">record</span> <span class="title">array</span>[2];</span></span><br><span class="line">	FILE *fp = fopen(<span class="string">"recfile"</span>, <span class="string">"r"</span>);</span><br><span class="line">	<span class="keyword">if</span> (fp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		perror(<span class="string">"Open file recfile"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	fread(<span class="built_in">array</span>, <span class="keyword">sizeof</span>(struct record), <span class="number">2</span>, fp);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Name1: %s\tAge1: %d\n"</span>, <span class="built_in">array</span>[<span class="number">0</span>].name, <span class="built_in">array</span>[<span class="number">0</span>].age);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Name2: %s\tAge2: %d\n"</span>, <span class="built_in">array</span>[<span class="number">1</span>].name, <span class="built_in">array</span>[<span class="number">1</span>].age);</span><br><span class="line">	fclose(fp);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc writerec.c -o writerec</span><br><span class="line">$ gcc readrec.c -o readrec</span><br></pre></td></tr></table></figure>
+<p>发现生成的文件recfile不能直接打开。</p>
+<p>原因：我们把一个struct record结构体看作一条记录，由于结构体中有填充字节，每条记录占16字节，<br>把两条记录写到文件中共占32字节。该程序生成的recfile文件是二进制文件而非文本文件，因为其<br>中不仅保存着字符型数据，还保存着整型数据24和28（在od命令的输出中以八进制显示为030和034）。<br>注意，直接在文件中读写结构体的程序是不可移植的，如果在一种平台上编译运行writebin.c程序，<br>把生成的recfile文件拷到另一种平台并在该平台上编译运行readbin.c程序，则不能保证正确读出<br>文件的内容，因为不同平台的大小端可能不同（因而对整型数据的存储方式不同），结构体的填充方式<br>也可能不同（因而同一个结构体所占的字节数可能不同，age成员在name成员之后的什么位置也可能不同）。<br>通过readrec程序读取文件recfile的内容，说明writerec程序的确记录成功写入recfile中。</p>
+<pre><code>从recfile读出的内容如下：           
+Name1: Ken    Age1: 24          
+Name2: Knuth  Age2: 28          
+</code></pre><hr>
+<p>fwrite和fread的应用举例：</p>
+<p>1.将一个字符串写入文件：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *str=<span class="string">"hello,I am a test program!"</span>;</span><br><span class="line">fwrite(str,<span class="keyword">sizeof</span>(<span class="keyword">char</span>),<span class="built_in">strlen</span>(str),fp)</span><br></pre></td></tr></table></figure></p>
+<p>2.将一个字符数组写入文件：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[]=&#123;<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>&#125;;</span><br><span class="line">fwrite(str,<span class="keyword">sizeof</span>(<span class="keyword">char</span>),<span class="keyword">sizeof</span>(str),fp)</span><br></pre></td></tr></table></figure></p>
+<p>3.将一个整型数组写入文件：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[]=&#123;<span class="number">12</span>,<span class="number">33</span>,<span class="number">23</span>,<span class="number">24</span>,<span class="number">12</span>&#125;;</span><br></pre></td></tr></table></figure></p>
+<pre><code>先计算数组元素个数nmemb,之后
+</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fwrite(a,<span class="keyword">sizeof</span>(<span class="keyword">int</span>),nmemb,fp)</span><br></pre></td></tr></table></figure>
+<pre><code>注：由于程序生成的文件是二进制文件而非文本文件，因此，不用机器，整数的表达不同，
+    所以无法直接打开生成文件。可通过fread函数检验数据是否写入文件。
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/candcpp21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/18/candcpp21/" itemprop="url">sdtout、stderr</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T14:42:37+08:00">
+                2019-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/18/candcpp21/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/candcpp21/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  335
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>stdout（标准输出），输出方式是行缓冲。输出的字符会先存放在缓冲区，等按下回车键时才进行实际的I/O操作。 </p>
+<p>stderr（标准错误），是不带缓冲的，这使得出错信息可以直接尽快地显示出来。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>,<span class="string">"Group"</span>);</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"XiyouLinux"</span>);</span><br><span class="line">        getchar();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在Linux环境下我们可以发现第一次会输出XiYouLinuxGroup,是因为stdout将输出的Group放到了缓冲区当中直到程序结束在将缓冲区中的数据刷新出来。</p>
+<p>那么我们再看下一个例子<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>,<span class="string">"Group\n"</span>);</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"XiyouLinux"</span>);</span><br><span class="line">        getchar();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Group</span><br><span class="line">XiYouLinux</span><br></pre></td></tr></table></figure></p>
+<p>这是什么原因呢？？？这个属于stdout输出的第二种情况即遇到换行符(“\n”)时输出,因此在本例中顺序输出了该结果</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=<span class="number">100000</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>,<span class="string">"Group"</span>);</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"XiYouLinux\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在电脑上面会一直输出末尾换行的XiYouLinux,直到stdout输出的字母数累计到1024后将这1024个字母输出,然后继续将末尾换行的XiYouLinux输出，接着等存够1024输出，如此反复直到程序结束，将缓冲区中的剩余字母输出。 </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/candcpp20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/18/candcpp20/" itemprop="url">exit() 与 _exit()</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T14:42:15+08:00">
+                2019-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/18/candcpp20/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/candcpp20/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  282
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
                 </span>
               
             </div>
@@ -1998,314 +2246,13 @@
         
           
             <blockquote>
-<p>Linux</p>
+<p>当需要结束一个进程的时候，可以使用exit()函数或_exit()函数来终止该进程。当程序运行到exit()函数或_exit()函数时，进程会无条件停止剩下的所有操作，并进行清理工作，最终将进程停止。</p>
 </blockquote>
-<h1 id="C-多线程"><a href="#C-多线程" class="headerlink" title="C++ 多线程"></a>C++ 多线程</h1><p>多线程是多任务处理的一种特殊形式，多任务处理允许让电脑同时运行两个或两个以上的程序。一般情况下，两种类型的多任务处理：基于进程和基于线程。</p>
-<ul>
-<li>基于进程的多任务处理是程序的并发执行。</li>
-<li>基于线程的多任务处理是同一程序的片段的并发执行。</li>
-</ul>
-<p>多线程程序包含可以同时运行的两个或多个部分。这样的程序中的每个部分称为一个线程，每个线程定义了一个单独的执行路径。</p>
-<h2 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h2><p>下面的程序，我们可以用它来创建一个 POSIX 线程：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line">pthread_create (thread, attr, start_routine, arg)</span><br></pre></td></tr></table></figure>
-<p>在这里，pthread_create 创建一个新的线程，并让它可执行。下面是关于参数的说明：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>thread</td>
-<td>指向线程标识符指针。</td>
-</tr>
-<tr>
-<td>attr</td>
-<td>一个不透明的属性对象，可以被用来设置线程属性。您可以指定线程属性对象，也可以使用默认值 NULL。</td>
-</tr>
-<tr>
-<td>start_routine</td>
-<td>线程运行函数起始地址，一旦线程被创建就会执行。</td>
-</tr>
-<tr>
-<td>arg</td>
-<td>运行函数的参数。它必须通过把引用作为指针强制转换为 void 类型进行传递。如果没有传递参数，则使用 NULL。</td>
-</tr>
-</tbody>
-</table>
-<p>创建线程成功时，函数返回 0，若返回值不为 0 则说明创建线程失败。</p>
-<h2 id="终止线程"><a href="#终止线程" class="headerlink" title="终止线程"></a>终止线程</h2><p>使用下面的程序，我们可以用它来终止一个 POSIX 线程：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line">pthread_exit (status)</span><br></pre></td></tr></table></figure></p>
-<p>在这里，pthread_exit 用于显式地退出一个线程。通常情况下，pthread_exit() 函数是在线程完成工作后无需继续存在时被调用。</p>
-<p>如果 main() 是在它所创建的线程之前结束，并通过 pthread_exit() 退出，那么其他线程将继续执行。否则，它们将在 main() 结束时自动被终止。</p>
-<p>以下简单的实例代码使用 pthread_create() 函数创建了 5 个线程，每个线程输出”Hello Runoob！”:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">// 必须的头文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NUM_THREADS 5</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 线程的运行函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span>* <span class="title">say_hello</span><span class="params">(<span class="keyword">void</span>* args)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello Runoob！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 定义线程的 id 变量，多个变量使用数组</span></span><br><span class="line">    <span class="keyword">pthread_t</span> tids[NUM_THREADS];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NUM_THREADS; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//参数依次是：创建的线程id，线程参数，调用的函数，传入的函数参数</span></span><br><span class="line">        <span class="keyword">int</span> ret = pthread_create(&amp;tids[i], <span class="literal">NULL</span>, say_hello, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">if</span> (ret != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">           <span class="built_in">cout</span> &lt;&lt; <span class="string">"pthread_create error: error_code="</span> &lt;&lt; ret &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//等各个线程退出后，进程才结束，否则进程强制结束了，线程可能还没反应过来；</span></span><br><span class="line">    pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">使用 -lpthread 库编译下面的程序：</span><br><span class="line"></span><br><span class="line">$ g++ test.cpp -lpthread -o test.o</span><br><span class="line">现在，执行程序，将产生下列结果：</span><br><span class="line"></span><br><span class="line">$ ./test.o</span><br><span class="line">Hello Runoob！</span><br><span class="line">Hello Runoob！</span><br><span class="line">Hello Runoob！</span><br><span class="line">Hello Runoob！</span><br><span class="line">Hello Runoob！</span><br></pre></td></tr></table></figure>
-<p>以下简单的实例代码使用 pthread_create() 函数创建了 5 个线程，并接收传入的参数。每个线程打印一个 “Hello Runoob!” 消息，并输出接收的参数，然后调用 pthread_exit() 终止线程。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件名：test.cpp</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NUM_THREADS     5</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">PrintHello</span><span class="params">(<span class="keyword">void</span> *threadid)</span></span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">   <span class="comment">// 对传入的参数进行强制类型转换，由无类型指针变为整形数指针，然后再读取</span></span><br><span class="line">   <span class="keyword">int</span> tid = *((<span class="keyword">int</span>*)threadid);</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello Runoob! 线程 ID, "</span> &lt;&lt; tid &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">   pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">pthread_t</span> threads[NUM_THREADS];</span><br><span class="line">   <span class="keyword">int</span> indexes[NUM_THREADS];<span class="comment">// 用数组来保存i的值</span></span><br><span class="line">   <span class="keyword">int</span> rc;</span><br><span class="line">   <span class="keyword">int</span> i;</span><br><span class="line">   <span class="keyword">for</span>( i=<span class="number">0</span>; i &lt; NUM_THREADS; i++ )&#123;      </span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"main() : 创建线程, "</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      indexes[i] = i; <span class="comment">//先保存i的值</span></span><br><span class="line">      <span class="comment">// 传入的时候必须强制转换为void* 类型，即无类型指针        </span></span><br><span class="line">      rc = pthread_create(&amp;threads[i], <span class="literal">NULL</span>, </span><br><span class="line">                          PrintHello, (<span class="keyword">void</span> *)&amp;(indexes[i]));</span><br><span class="line">      <span class="keyword">if</span> (rc)&#123;</span><br><span class="line">         <span class="built_in">cout</span> &lt;&lt; <span class="string">"Error:无法创建线程,"</span> &lt;&lt; rc &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">现在编译并执行程序，将产生下列结果：</span><br><span class="line"></span><br><span class="line">$ g++ test.cpp -lpthread -o test.o</span><br><span class="line">$ ./test.o</span><br><span class="line">main() : 创建线程, 0</span><br><span class="line">main() : 创建线程, 1</span><br><span class="line">Hello Runoob! 线程 ID, 0</span><br><span class="line">main() : 创建线程, Hello Runoob! 线程 ID, 21</span><br><span class="line"></span><br><span class="line">main() : 创建线程, 3</span><br><span class="line">Hello Runoob! 线程 ID, 2</span><br><span class="line">main() : 创建线程, 4</span><br><span class="line">Hello Runoob! 线程 ID, 3</span><br><span class="line">Hello Runoob! 线程 ID, 4</span><br></pre></td></tr></table></figure>
-<h2 id="向线程传递参数"><a href="#向线程传递参数" class="headerlink" title="向线程传递参数"></a>向线程传递参数</h2><p>这个实例演示了如何通过结构传递多个参数。您可以在线程回调中传递任意的数据类型，因为它指向 void，如下面的实例所示：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NUM_THREADS     5</span></span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">thread_data</span>&#123;</span></span><br><span class="line">   <span class="keyword">int</span>  thread_id;</span><br><span class="line">   <span class="keyword">char</span> *message;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">PrintHello</span><span class="params">(<span class="keyword">void</span> *threadarg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">thread_data</span> *<span class="title">my_data</span>;</span></span><br><span class="line"> </span><br><span class="line">   my_data = (struct thread_data *) threadarg;</span><br><span class="line"> </span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Thread ID : "</span> &lt;&lt; my_data-&gt;thread_id ;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">" Message : "</span> &lt;&lt; my_data-&gt;message &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">   pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">pthread_t</span> threads[NUM_THREADS];</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">thread_data</span> <span class="title">td</span>[<span class="title">NUM_THREADS</span>];</span></span><br><span class="line">   <span class="keyword">int</span> rc;</span><br><span class="line">   <span class="keyword">int</span> i;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">for</span>( i=<span class="number">0</span>; i &lt; NUM_THREADS; i++ )&#123;</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt;<span class="string">"main() : creating thread, "</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      td[i].thread_id = i;</span><br><span class="line">      td[i].message = (<span class="keyword">char</span>*)<span class="string">"This is message"</span>;</span><br><span class="line">      rc = pthread_create(&amp;threads[i], <span class="literal">NULL</span>,</span><br><span class="line">                          PrintHello, (<span class="keyword">void</span> *)&amp;td[i]);</span><br><span class="line">      <span class="keyword">if</span> (rc)&#123;</span><br><span class="line">         <span class="built_in">cout</span> &lt;&lt; <span class="string">"Error:unable to create thread,"</span> &lt;&lt; rc &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">当上面的代码被编译和执行时，它会产生下列结果：</span><br><span class="line"></span><br><span class="line">$ g++ -Wno-write-strings test.cpp -lpthread -o test.o</span><br><span class="line">$ ./test.o</span><br><span class="line">main() : creating thread, 0</span><br><span class="line">main() : creating thread, 1</span><br><span class="line">Thread ID : 0 Message : This is message</span><br><span class="line">main() : creating thread, Thread ID : 21</span><br><span class="line"> Message : This is message</span><br><span class="line">main() : creating thread, 3</span><br><span class="line">Thread ID : 2 Message : This is message</span><br><span class="line">main() : creating thread, 4</span><br><span class="line">Thread ID : 3 Message : This is message</span><br><span class="line">Thread ID : 4 Message : This is message</span><br></pre></td></tr></table></figure>
-<h2 id="连接和分离线程"><a href="#连接和分离线程" class="headerlink" title="连接和分离线程"></a>连接和分离线程</h2><p>我们可以使用以下两个函数来连接或分离线程：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pthread_join (threadid, status) </span><br><span class="line">pthread_detach (threadid)</span><br></pre></td></tr></table></figure></p>
-<p>pthread_join() 子程序阻碍调用程序，直到指定的 threadid 线程终止为止。当创建一个线程时，它的某个属性会定义它是否是可连接的（joinable）或可分离的（detached）。只有创建时定义为可连接的线程才可以被连接。如果线程创建时被定义为可分离的，则它永远也不能被连接。</p>
-<p>这个实例演示了如何使用 pthread_join() 函数来等待线程的完成。</p>
-<p>实例<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NUM_THREADS     5</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">wait</span><span class="params">(<span class="keyword">void</span> *t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> i;</span><br><span class="line">   <span class="keyword">long</span> tid;</span><br><span class="line"> </span><br><span class="line">   tid = (<span class="keyword">long</span>)t;</span><br><span class="line"> </span><br><span class="line">   sleep(<span class="number">1</span>);</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Sleeping in thread "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Thread with id : "</span> &lt;&lt; tid &lt;&lt; <span class="string">"  ...exiting "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">   pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> rc;</span><br><span class="line">   <span class="keyword">int</span> i;</span><br><span class="line">   <span class="keyword">pthread_t</span> threads[NUM_THREADS];</span><br><span class="line">   <span class="keyword">pthread_attr_t</span> attr;</span><br><span class="line">   <span class="keyword">void</span> *status;</span><br><span class="line"> </span><br><span class="line">   <span class="comment">// 初始化并设置线程为可连接的（joinable）</span></span><br><span class="line">   pthread_attr_init(&amp;attr);</span><br><span class="line">   pthread_attr_setdetachstate(&amp;attr, PTHREAD_CREATE_JOINABLE);</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">for</span>( i=<span class="number">0</span>; i &lt; NUM_THREADS; i++ )&#123;</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"main() : creating thread, "</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      rc = pthread_create(&amp;threads[i], <span class="literal">NULL</span>, wait, (<span class="keyword">void</span> *)&amp;i );</span><br><span class="line">      <span class="keyword">if</span> (rc)&#123;</span><br><span class="line">         <span class="built_in">cout</span> &lt;&lt; <span class="string">"Error:unable to create thread,"</span> &lt;&lt; rc &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="comment">// 删除属性，并等待其他线程</span></span><br><span class="line">   pthread_attr_destroy(&amp;attr);</span><br><span class="line">   <span class="keyword">for</span>( i=<span class="number">0</span>; i &lt; NUM_THREADS; i++ )&#123;</span><br><span class="line">      rc = pthread_join(threads[i], &amp;status);</span><br><span class="line">      <span class="keyword">if</span> (rc)&#123;</span><br><span class="line">         <span class="built_in">cout</span> &lt;&lt; <span class="string">"Error:unable to join,"</span> &lt;&lt; rc &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"Main: completed thread id :"</span> &lt;&lt; i ;</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"  exiting with status :"</span> &lt;&lt; status &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Main: program exiting."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">   pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">main() : creating thread, 0</span><br><span class="line">main() : creating thread, 1</span><br><span class="line">main() : creating thread, 2</span><br><span class="line">main() : creating thread, 3</span><br><span class="line">main() : creating thread, 4</span><br><span class="line">Sleeping in thread </span><br><span class="line">Thread with id : 4  ...exiting </span><br><span class="line">Sleeping in thread </span><br><span class="line">Thread with id : 3  ...exiting </span><br><span class="line">Sleeping in thread </span><br><span class="line">Thread with id : 2  ...exiting </span><br><span class="line">Sleeping in thread </span><br><span class="line">Thread with id : 1  ...exiting </span><br><span class="line">Sleeping in thread </span><br><span class="line">Thread with id : 0  ...exiting </span><br><span class="line">Main: completed thread id :0  exiting with status :0</span><br><span class="line">Main: completed thread id :1  exiting with status :0</span><br><span class="line">Main: completed thread id :2  exiting with status :0</span><br><span class="line">Main: completed thread id :3  exiting with status :0</span><br><span class="line">Main: completed thread id :4  exiting with status :0</span><br><span class="line">Main: program exiting.</span><br></pre></td></tr></table></figure>
-<h2 id="c-11-之后有了标准的线程库："><a href="#c-11-之后有了标准的线程库：" class="headerlink" title="c++ 11 之后有了标准的线程库："></a>c++ 11 之后有了标准的线程库：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::thread::id main_thread_id = <span class="built_in">std</span>::this_thread::get_id();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello Concurrent World\n"</span>;</span><br><span class="line">    <span class="keyword">if</span> (main_thread_id == <span class="built_in">std</span>::this_thread::get_id())</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"This is the main thread.\n"</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"This is not the main thread.\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pause_thread</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::this_thread::sleep_for(<span class="built_in">std</span>::chrono::seconds(n));</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"pause of "</span> &lt;&lt; n &lt;&lt; <span class="string">" seconds ended\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">t</span><span class="params">(hello)</span></span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; t.hardware_concurrency() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//可以并发执行多少个(不准确)</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"native_handle "</span> &lt;&lt; t.native_handle() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//可以并发执行多少个(不准确)</span></span><br><span class="line">    t.join();</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">a</span><span class="params">(hello)</span></span>;</span><br><span class="line">    a.detach();</span><br><span class="line">    <span class="built_in">std</span>::thread threads[<span class="number">5</span>];                         <span class="comment">// 默认构造线程</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Spawning 5 threads...\n"</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)</span><br><span class="line">        threads[i] = <span class="built_in">std</span>::thread(pause_thread, i + <span class="number">1</span>);   <span class="comment">// move-assign threads</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Done spawning threads. Now waiting for them to join:\n"</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;thread : threads)</span><br><span class="line">        thread.join();</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"All threads joined!\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">头文件：#include&lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">函数原型：void exit(int status)</span><br><span class="line"></span><br><span class="line">函数参数：status 表示让进程结束时的状态，默认使用0表示正常结束</span><br><span class="line"></span><br><span class="line">返回值：无</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">头文件：#include&lt;unistd.h&gt;</span><br><span class="line"></span><br><span class="line">函数原型：void _exit(int status)</span><br><span class="line"></span><br><span class="line">函数参数：status 同exit()函数</span><br><span class="line"></span><br><span class="line">返回值：无</span><br></pre></td></tr></table></figure>
+<p>_exit()函数的作用最为简单：直接使进程终止运行，清除其使用的内存空间，并销毁其在内核中的各种数据结构；</p>
+<p>exit()函数在调用exit系统调用之前要检查文件的打开情况，把文件缓冲区中的内容写回文件，就是”<strong>清理I/O缓冲</strong>“。</p>
+<p>示例代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">"one!"</span>);</span><br><span class="line">       <span class="comment">//exit(0);//print one!</span></span><br><span class="line">       _exit(<span class="number">0</span>);<span class="comment">//print nothing</span></span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">"two!\n"</span>);</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/06/candcpp18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/06/candcpp18/" itemprop="url">C++ 信号处理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-06T09:18:07+08:00">
-                2019-07-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/06/candcpp18/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/06/candcpp18/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  839
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="C-信号处理"><a href="#C-信号处理" class="headerlink" title="C++ 信号处理"></a>C++ 信号处理</h1><p>信号是由操作系统传给进程的中断，会提早终止一个程序。在 UNIX、LINUX、Mac OS X 或 Windows 系统上，可以通过按 Ctrl+C 产生中断。</p>
-<p>有些信号不能被程序捕获，但是下表所列信号可以在程序中捕获，并可以基于信号采取适当的动作。这些信号是定义在 C++ 头文件 \<csignal> 中。</csignal></p>
-<table>
-<thead>
-<tr>
-<th>信号</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SIGABRT</td>
-<td>程序的异常终止，如调用 abort。</td>
-</tr>
-<tr>
-<td>SIGFPE</td>
-<td>错误的算术运算，比如除以零或导致溢出的操作。</td>
-</tr>
-<tr>
-<td>SIGILL</td>
-<td>检测非法指令。</td>
-</tr>
-<tr>
-<td>SIGINT</td>
-<td>接收到交互注意信号。</td>
-</tr>
-<tr>
-<td>SIGSEGV</td>
-<td>非法访问内存。</td>
-</tr>
-<tr>
-<td>SIGTERM</td>
-<td>发送到程序的终止请求。</td>
-</tr>
-</tbody>
-</table>
-<h1 id="signal-函数"><a href="#signal-函数" class="headerlink" title="signal() 函数"></a>signal() 函数</h1><p>C++ 信号处理库提供了 signal 函数，用来捕获突发事件。以下是 signal() 函数的语法：</p>
-<p><code>void (*signal (int sig, void (*func)(int)))(int);</code></p>
-<p>这个函数接收两个参数：第一个参数是一个整数，代表了信号的编号；第二个参数是一个指向信号处理函数的指针。</p>
-<p>让我们编写一个简单的 C++ 程序，使用 signal() 函数捕获 SIGINT 信号。不管您想在程序中捕获什么信号，您都必须使用 signal 函数来注册信号，并将其与信号处理程序相关联。看看下面的实例：</p>
-<p>实例</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;csignal&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">signalHandler</span><span class="params">( <span class="keyword">int</span> signum )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Interrupt signal ("</span> &lt;&lt; signum &lt;&lt; <span class="string">") received.\n"</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 清理并关闭</span></span><br><span class="line">    <span class="comment">// 终止程序  </span></span><br><span class="line"> </span><br><span class="line">   <span class="built_in">exit</span>(signum);  </span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 注册信号 SIGINT 和信号处理程序</span></span><br><span class="line">    signal(SIGINT, signalHandler);  </span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">       <span class="built_in">cout</span> &lt;&lt; <span class="string">"Going to sleep...."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">       sleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Going to sleep....</span><br><span class="line">Going to sleep....</span><br><span class="line">Going to sleep....</span><br></pre></td></tr></table></figure>
-<p>现在，按 Ctrl+C 来中断程序，您会看到程序捕获信号，程序打印如下内容并退出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Going to sleep....</span><br><span class="line">Going to sleep....</span><br><span class="line">Going to sleep....</span><br><span class="line">Interrupt signal (2) received.</span><br></pre></td></tr></table></figure></p>
-<h1 id="raise-函数"><a href="#raise-函数" class="headerlink" title="raise() 函数"></a>raise() 函数</h1><p>您可以使用函数 raise() 生成信号，该函数带有一个整数信号编号作为参数，语法如下：</p>
-<p><code>int raise (signal sig);</code></p>
-<p>在这里，sig 是要发送的信号的编号，这些信号包括：<code>SIGINT、SIGABRT、SIGFPE、SIGILL、SIGSEGV、SIGTERM、SIGHUP</code>。以下是我们使用 raise() 函数内部生成信号的实例：</p>
-<p>实例<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;csignal&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">signalHandler</span><span class="params">( <span class="keyword">int</span> signum )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Interrupt signal ("</span> &lt;&lt; signum &lt;&lt; <span class="string">") received.\n"</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 清理并关闭</span></span><br><span class="line">    <span class="comment">// 终止程序 </span></span><br><span class="line"> </span><br><span class="line">   <span class="built_in">exit</span>(signum);  </span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 注册信号 SIGINT 和信号处理程序</span></span><br><span class="line">    signal(SIGINT, signalHandler);  </span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span>(++i)&#123;</span><br><span class="line">       <span class="built_in">cout</span> &lt;&lt; <span class="string">"Going to sleep...."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">       <span class="keyword">if</span>( i == <span class="number">3</span> )&#123;</span><br><span class="line">          raise( SIGINT);</span><br><span class="line">       &#125;</span><br><span class="line">       sleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>当上面的代码被编译和执行时，它会产生下列结果，并会自动退出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Going to sleep....</span><br><span class="line">Going to sleep....</span><br><span class="line">Going to sleep....</span><br><span class="line">Interrupt signal (2) received.</span><br></pre></td></tr></table></figure>
-<h1 id="Sleep-函数"><a href="#Sleep-函数" class="headerlink" title="Sleep 函数"></a>Sleep 函数</h1><p>功能：执行挂起一段时间，也就是等待一段时间在继续执行</p>
-<p>用法：Sleep(时间)</p>
-<p>注意：</p>
-<ul>
-<li>（1）Sleep是区分大小写的，有的编译器是大写，有的是小写。</li>
-<li>（2）Sleep括号里的时间，在windows下是已毫秒为单位，而LInux是已秒为单位。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"欢迎来到菜鸟教程！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        Sleep(<span class="number">100</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -2344,7 +2291,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2392,7 +2339,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">202</span>
+                  <span class="site-state-item-count">212</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2403,7 +2350,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2482,7 +2429,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">297.7k</span>
+    <span title="Site words total count">300.6k</span>
   
 </div>
 
