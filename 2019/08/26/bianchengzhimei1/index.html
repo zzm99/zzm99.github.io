@@ -79,14 +79,17 @@
 
 
 
+<meta name="description" content="Sleep()—让当前线程停下来Sleep函数可以使计算机程序（进程，任务或线程）进入休眠，使其在一段时间内处于非活动状态。当函数设定的计时器到期，或者接收到信号、程序发生中断都会导致程序继续执行。 1234在Windows系统中：Sleep(2*1000); //sleep for 2 seconds在Unix系统中：sleep(2);   //sleep for 2 seconds WaitF">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bianchengzhimei1">
+<meta property="og:title" content="有关了解当前线程、进程、系统效能的API">
 <meta property="og:url" content="http://yoursite.com/2019/08/26/bianchengzhimei1/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="Sleep()—让当前线程停下来Sleep函数可以使计算机程序（进程，任务或线程）进入休眠，使其在一段时间内处于非活动状态。当函数设定的计时器到期，或者接收到信号、程序发生中断都会导致程序继续执行。 1234在Windows系统中：Sleep(2*1000); //sleep for 2 seconds在Unix系统中：sleep(2);   //sleep for 2 seconds WaitF">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-26T14:40:51.176Z">
+<meta property="og:updated_time" content="2019-08-27T02:40:06.311Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bianchengzhimei1">
+<meta name="twitter:title" content="有关了解当前线程、进程、系统效能的API">
+<meta name="twitter:description" content="Sleep()—让当前线程停下来Sleep函数可以使计算机程序（进程，任务或线程）进入休眠，使其在一段时间内处于非活动状态。当函数设定的计时器到期，或者接收到信号、程序发生中断都会导致程序继续执行。 1234在Windows系统中：Sleep(2*1000); //sleep for 2 seconds在Unix系统中：sleep(2);   //sleep for 2 seconds WaitF">
 
 
 
@@ -131,7 +134,7 @@
   daovoice('update');
   </script>
 
-  <title>bianchengzhimei1 | zzm99</title>
+  <title>有关了解当前线程、进程、系统效能的API | zzm99</title>
   
 
 
@@ -308,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">bianchengzhimei1</h1>
+          <h1 class="post-title" itemprop="name headline">有关了解当前线程、进程、系统效能的API</h1>
         
 
         <div class="post-meta">
@@ -389,7 +392,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  545
                 </span>
               
 
@@ -405,7 +408,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -426,7 +429,25 @@
       
 
       
-        
+        <h1 id="Sleep-—让当前线程停下来"><a href="#Sleep-—让当前线程停下来" class="headerlink" title="Sleep()—让当前线程停下来"></a>Sleep()—让当前线程停下来</h1><p>Sleep函数可以使计算机程序（进程，任务或线程）进入休眠，使其在一段时间内处于非活动状态。当函数设定的计时器到期，或者接收到信号、程序发生中断都会导致程序继续执行。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在Windows系统中：</span><br><span class="line">Sleep(<span class="number">2</span>*<span class="number">1000</span>); <span class="comment">//sleep for 2 seconds</span></span><br><span class="line">在Unix系统中：</span><br><span class="line">sleep(<span class="number">2</span>);   <span class="comment">//sleep for 2 seconds</span></span><br></pre></td></tr></table></figure>
+<h1 id="WaitForSingleObject-—自己停下来，等待某个事件发生"><a href="#WaitForSingleObject-—自己停下来，等待某个事件发生" class="headerlink" title="WaitForSingleObject()—自己停下来，等待某个事件发生"></a>WaitForSingleObject()—自己停下来，等待某个事件发生</h1><h1 id="GetTickCount"><a href="#GetTickCount" class="headerlink" title="GetTickCount()"></a>GetTickCount()</h1><p>GetTickCount是一种函数。GetTickCount返回（retrieve）从操作系统启动所经过（elapsed）的毫秒数，它的返回值是DWORD。</p>
+<p><strong>常常用来判断某个方法执行的时间</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代替time函数来初始化随机数生成器</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinBase.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, k, r;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        srand (GetTickCount());</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; <span class="number">5</span>; k++)</span><br><span class="line">        &#123;</span><br><span class="line">            r = rand ();</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;r&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="QueryPerformanceFrequency-、QueryPerformanceCounter-—访问到精度更高的CPU数据"><a href="#QueryPerformanceFrequency-、QueryPerformanceCounter-—访问到精度更高的CPU数据" class="headerlink" title="QueryPerformanceFrequency()、QueryPerformanceCounter()—访问到精度更高的CPU数据"></a>QueryPerformanceFrequency()、QueryPerformanceCounter()—访问到精度更高的CPU数据</h1><p>QueryPerformanceFrequency是操作系统的性能统计分辨率，也就是每秒钟统计多少次的意思。 性能统计频率和应用程序性能没有关系。 </p>
+<p>QueryPerformanceCounter 是系统性能统计计数器，表示统计了多少次，除以QueryPerformanceFrequency，得到系统运行时间（秒数）。 </p>
+<p>QueryPerformanceCounter2-QueryPerformanceCounter1，得到高精度（微秒级，=1/QueryPerformanceFrequency秒）的时间差，常用于winddows高精度计时。</p>
+<h1 id="timeGetSystemTime-—另一个得到高精度时间的方法"><a href="#timeGetSystemTime-—另一个得到高精度时间的方法" class="headerlink" title="timeGetSystemTime()—另一个得到高精度时间的方法"></a>timeGetSystemTime()—另一个得到高精度时间的方法</h1><p>timeGetSystemTime，函数返回系统时间，（毫秒）。这里的系统时间是指自从系统启动时到调用该函数时的时间间隔。</p>
+<h1 id="PerformanceCounter-—效能计数器"><a href="#PerformanceCounter-—效能计数器" class="headerlink" title="PerformanceCounter()—效能计数器"></a>PerformanceCounter()—效能计数器</h1><h1 id="GetProcessorInfo-SetThreadAffinityMask-—遇到多核的问题时候更好地控制CPU"><a href="#GetProcessorInfo-SetThreadAffinityMask-—遇到多核的问题时候更好地控制CPU" class="headerlink" title="GetProcessorInfo()/SetThreadAffinityMask()—遇到多核的问题时候更好地控制CPU"></a>GetProcessorInfo()/SetThreadAffinityMask()—遇到多核的问题时候更好地控制CPU</h1><h1 id="GetCPUTickCount-—得到CPU核心运行周期数"><a href="#GetCPUTickCount-—得到CPU核心运行周期数" class="headerlink" title="GetCPUTickCount()—得到CPU核心运行周期数"></a>GetCPUTickCount()—得到CPU核心运行周期数</h1><h1 id="让CPU占用率曲线听你指挥"><a href="#让CPU占用率曲线听你指挥" class="headerlink" title="让CPU占用率曲线听你指挥"></a>让CPU占用率曲线听你指挥</h1><ol>
+<li><p>CPU占用率固定在50%，为一条直线</p>
+</li>
+<li><p>CPU占用率为一条直线，具体占用率由命令行参数决定（参数范围1-100）</p>
+</li>
+<li><p>CPU占用率状态是一个正弦曲线</p>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> DWORD busyTime = <span class="number">10</span>; <span class="comment">//10ms</span></span><br><span class="line"><span class="keyword">const</span> DWORD <span class="keyword">int</span> idleTime = busyTime; <span class="comment">//same ratio will lead to 50% cpu usage</span></span><br><span class="line"></span><br><span class="line">Int64 startTime = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">&#123;</span><br><span class="line">    DWORD startTime = GetTickCount();</span><br><span class="line">    <span class="comment">//busy loop</span></span><br><span class="line">    <span class="keyword">while</span>((GetTickCount() - startTime) &lt;= busyTime)</span><br><span class="line">        ;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//idle loop</span></span><br><span class="line">    Sleep(idleTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -489,8 +510,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/26/bianchengzhimei2/" rel="prev" title="bianchengzhimei2">
-                bianchengzhimei2 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/26/bianchengzhimei2/" rel="prev" title="中国象棋将帅问题">
+                中国象棋将帅问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -546,8 +567,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -564,7 +594,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">223</span>
+                  <span class="site-state-item-count">224</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -620,6 +650,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sleep-—让当前线程停下来"><span class="nav-number">1.</span> <span class="nav-text">Sleep()—让当前线程停下来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WaitForSingleObject-—自己停下来，等待某个事件发生"><span class="nav-number">2.</span> <span class="nav-text">WaitForSingleObject()—自己停下来，等待某个事件发生</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GetTickCount"><span class="nav-number">3.</span> <span class="nav-text">GetTickCount()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#QueryPerformanceFrequency-、QueryPerformanceCounter-—访问到精度更高的CPU数据"><span class="nav-number">4.</span> <span class="nav-text">QueryPerformanceFrequency()、QueryPerformanceCounter()—访问到精度更高的CPU数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#timeGetSystemTime-—另一个得到高精度时间的方法"><span class="nav-number">5.</span> <span class="nav-text">timeGetSystemTime()—另一个得到高精度时间的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PerformanceCounter-—效能计数器"><span class="nav-number">6.</span> <span class="nav-text">PerformanceCounter()—效能计数器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GetProcessorInfo-SetThreadAffinityMask-—遇到多核的问题时候更好地控制CPU"><span class="nav-number">7.</span> <span class="nav-text">GetProcessorInfo()/SetThreadAffinityMask()—遇到多核的问题时候更好地控制CPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GetCPUTickCount-—得到CPU核心运行周期数"><span class="nav-number">8.</span> <span class="nav-text">GetCPUTickCount()—得到CPU核心运行周期数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让CPU占用率曲线听你指挥"><span class="nav-number">9.</span> <span class="nav-text">让CPU占用率曲线听你指挥</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -654,7 +700,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">304.7k</span>
+    <span title="Site words total count">305.5k</span>
   
 </div>
 
