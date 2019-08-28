@@ -683,7 +683,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/27/bianchengzhimei7/" itemprop="url">bianchengzhimei7</a></h1>
+                <a class="post-title-link" href="/2019/08/27/bianchengzhimei7/" itemprop="url">阶乘问题</a></h1>
         
 
         <div class="post-meta">
@@ -759,7 +759,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  654
                 </span>
               
 
@@ -775,7 +775,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -798,7 +798,35 @@
       
         
           
-            
+            <h1 id="阶乘相关问题："><a href="#阶乘相关问题：" class="headerlink" title="阶乘相关问题："></a>阶乘相关问题：</h1><ol>
+<li>给定一个整数N，那么N的阶乘N！末尾有多少个0呢？例如：N=10，N！=3628800，N！的末尾有两个0。</li>
+<li>N！的二进制表示中最低位1的位置。</li>
+</ol>
+<h2 id="引理："><a href="#引理：" class="headerlink" title="引理："></a>引理：</h2><p><strong>N！中含有质因数2的个数，等于[N/2]+[N/4]+[N/8]+[N/16]+···</strong></p>
+<h1 id="对于问题一："><a href="#对于问题一：" class="headerlink" title="对于问题一："></a>对于问题一：</h1><h2 id="角度一：从“哪些数相乘能得到10”考虑"><a href="#角度一：从“哪些数相乘能得到10”考虑" class="headerlink" title="角度一：从“哪些数相乘能得到10”考虑"></a>角度一：从“哪些数相乘能得到10”考虑</h2><p>如果N！=K*10^M, 且K不能被10整除， 那么N!末尾有M个0。</p>
+<p>再考虑对N！进行质因数分解，N！=（2^x）*（3^y）*（5*z）···</p>
+<p>由于10 = 2*5，所以M只跟X和Z有关，每一对2和5相乘能得到一个10，所以M = min（X，Z）</p>
+<p>因为能被2整除的数出现的频率比能被5整除的数高得多，所以X大于等于Z，所以把公式简化为M = Z。</p>
+<p>所以只要计算出Z的值，就可以得到N！末尾0的个数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span>; i&lt;=N; i++)</span><br><span class="line">&#123;</span><br><span class="line">    j = i;</span><br><span class="line">    <span class="keyword">while</span>(j % <span class="number">5</span> == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ret++;</span><br><span class="line">        j/=<span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="角度二：思路类似角度一，找“5”的数"><a href="#角度二：思路类似角度一，找“5”的数" class="headerlink" title="角度二：思路类似角度一，找“5”的数"></a>角度二：思路类似角度一，找“5”的数</h2><p>公式： Z=[N/5]+[N/5^2]+[N/5^3]+···（不用担心这会是一个无穷的运算，因为总存在一个K，使得5^k &gt; N, [N/5^k]=0）</p>
+<p>公式中，[N/5]表示不大于N的数中5的倍数贡献一个5，[N/5^2]表示不大于N的数中5*5的倍数再贡献一个5···</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(N)</span><br><span class="line">&#123;</span><br><span class="line">    ret += N/<span class="number">5</span>;</span><br><span class="line">    N /= <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="对于问题二："><a href="#对于问题二：" class="headerlink" title="对于问题二："></a>对于问题二：</h1><p>判断最后一个二进制位是否为0，若为0，则将此二进制右移一位，即为商值；反之，若为1，则说明这个二进制数是奇数，无法被2整除</p>
+<p>所以，这个问题实际上等同于求N！含有质因数2的个数。即答案等于N！含有质因数2的个数加1。</p>
+<h2 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h2><p><strong>N！中含有质因数2的个数，等于[N/2]+[N/4]+[N/8]+[N/16]+···</strong></p>
+<blockquote>
+<p>[N/k]等于1，2，3，···，N中能被k整除的数的个数</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowestOne</span><span class="params">(<span class="keyword">int</span> N)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> Ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(N)</span><br><span class="line">    &#123;</span><br><span class="line">        N &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        Ret += N;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h2><p>N！含有质因数2的个数，还等于N减去N的二进制表示中1的数目。</p>
+<p>证明：</p>
+<p>N！中含有质因数2的个数为：[N/2]+[N/4]+[N/8]+[N/16]+···</p>
+<p>假设N = 11011</p>
+<p>即<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1101 + 110 + 11 + 1</span><br><span class="line">= (1000 + 100 + 1) + (100 + 10) + (10 + 1) + 1</span><br><span class="line">= (1000 + 100 + 10 + 1) + (100 + 10 + 1) + 1</span><br><span class="line">= 1111 + 111 + 1</span><br><span class="line">= (10000 - 1) + (1000 - 1) + (10-1) + (1-1)</span><br><span class="line">= 11011-(N二进制数表示中1的个数)</span><br></pre></td></tr></table></figure></p>
+<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>给定整数n，判断它是否为2的方幂。</p>
+<p><strong>(n&gt;0 &amp;&amp; ((n&amp;(n-1)) == 0))</strong></p>
+
           
         
       
@@ -865,7 +893,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/27/bianchengzhimei6/" itemprop="url">bianchengzhimei6</a></h1>
+                <a class="post-title-link" href="/2019/08/27/bianchengzhimei6/" itemprop="url">求二进制数中1的个数</a></h1>
         
 
         <div class="post-meta">
@@ -941,7 +969,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  591
                 </span>
               
 
@@ -957,7 +985,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -980,7 +1008,24 @@
       
         
           
-            
+            <h1 id="求二进制数中1的个数"><a href="#求二进制数中1的个数" class="headerlink" title="求二进制数中1的个数"></a>求二进制数中1的个数</h1><p>对于一个字节（8bit）的无符号整型变量，求其二进制表示中‘1’的个数，要求算法执行的<strong>效率尽可能高</strong></p>
+<h2 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h2><p>利用整型数据除法的特点，通过相除和判断余数的值来分析</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(v%<span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">        v /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法二：使用位操作"><a href="#解法二：使用位操作" class="headerlink" title="解法二：使用位操作"></a>解法二：使用位操作</h2><p>向右移位操作同样可以达到相除的目的，唯一的不同之处在于，移位之后如何来判断是否有1存在。</p>
+<p>需要判断最后一位是否为1，“与”操作可以达到目的，可以把该数与00000001进行与操作，如果结果为1，则表示当前八位数的最后一位为1，否则为0.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        num += v &amp; <span class="number">0x01</span>;</span><br><span class="line">        v &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法三："><a href="#解法三：" class="headerlink" title="解法三："></a>解法三：</h2><p>位操作比除、余操作的效率高了很多，但是，即使使用位操作，时间复杂度仍然为O(log2v)</p>
+<p>能否将复杂度进一步降低？</p>
+<p>为了简化这个问题，我们考虑只有一个1的情况，例如：01000000</p>
+<p>如何判断给定的二进制数只有一个1呢？可以通过判断这个数是否为2的整数次幂来实现。另外，如果只和这个1进行判断，如果希望操作后的结果为0，01000000可以和00111111来进行与操作。</p>
+<p>这样，要进行的操作就是0100000 &amp; （01000000 - 00000001） = 01000000 &amp; 00111111 = 0</p>
+<p>将这种判断只有一个1的做法推广到有不确定1的情况即有如下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        v &amp;= (v<span class="number">-1</span>);</span><br><span class="line">        num++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法四："><a href="#解法四：" class="headerlink" title="解法四："></a>解法四：</h2><p>解法三的复杂度已经降低到O(M)，M为v中1的个数</p>
+<p>若想继续降低时间复杂度，还可以利用空间换时间，提前制好8bit二进制数（255个）各自对应的num的一个数组（表），然后进行查表操作，无需进行任何比较。</p>
+<h1 id="相关问题："><a href="#相关问题：" class="headerlink" title="相关问题："></a>相关问题：</h1><p>给定两个正整数（二进制形式表示）A和B，问把A变为B需要改变多少位（bit）？也就是说，整数A和B的二进制表示中有多少位是不同的？</p>
+<p>与非 -&gt; 求有多少个1</p>
+
           
         
       
@@ -1669,7 +1714,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  314
+                  337
                 </span>
               
 
@@ -2126,7 +2171,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2174,7 +2219,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">232</span>
+                  <span class="site-state-item-count">229</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2264,7 +2309,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">306.8k</span>
+    <span title="Site words total count">308.1k</span>
   
 </div>
 
