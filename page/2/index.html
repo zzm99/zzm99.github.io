@@ -291,6 +291,1564 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/bianchengzhimei7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/27/bianchengzhimei7/" itemprop="url">阶乘问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T17:18:21+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程之美/" itemprop="url" rel="index">
+                    <span itemprop="name">编程之美</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/27/bianchengzhimei7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/bianchengzhimei7/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  654
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="阶乘相关问题："><a href="#阶乘相关问题：" class="headerlink" title="阶乘相关问题："></a>阶乘相关问题：</h1><ol>
+<li>给定一个整数N，那么N的阶乘N！末尾有多少个0呢？例如：N=10，N！=3628800，N！的末尾有两个0。</li>
+<li>N！的二进制表示中最低位1的位置。</li>
+</ol>
+<h2 id="引理："><a href="#引理：" class="headerlink" title="引理："></a>引理：</h2><p><strong>N！中含有质因数2的个数，等于[N/2]+[N/4]+[N/8]+[N/16]+···</strong></p>
+<h1 id="对于问题一："><a href="#对于问题一：" class="headerlink" title="对于问题一："></a>对于问题一：</h1><h2 id="角度一：从“哪些数相乘能得到10”考虑"><a href="#角度一：从“哪些数相乘能得到10”考虑" class="headerlink" title="角度一：从“哪些数相乘能得到10”考虑"></a>角度一：从“哪些数相乘能得到10”考虑</h2><p>如果N！=K*10^M, 且K不能被10整除， 那么N!末尾有M个0。</p>
+<p>再考虑对N！进行质因数分解，N！=（2^x）*（3^y）*（5*z）···</p>
+<p>由于10 = 2*5，所以M只跟X和Z有关，每一对2和5相乘能得到一个10，所以M = min（X，Z）</p>
+<p>因为能被2整除的数出现的频率比能被5整除的数高得多，所以X大于等于Z，所以把公式简化为M = Z。</p>
+<p>所以只要计算出Z的值，就可以得到N！末尾0的个数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span>; i&lt;=N; i++)</span><br><span class="line">&#123;</span><br><span class="line">    j = i;</span><br><span class="line">    <span class="keyword">while</span>(j % <span class="number">5</span> == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ret++;</span><br><span class="line">        j/=<span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="角度二：思路类似角度一，找“5”的数"><a href="#角度二：思路类似角度一，找“5”的数" class="headerlink" title="角度二：思路类似角度一，找“5”的数"></a>角度二：思路类似角度一，找“5”的数</h2><p>公式： Z=[N/5]+[N/5^2]+[N/5^3]+···（不用担心这会是一个无穷的运算，因为总存在一个K，使得5^k &gt; N, [N/5^k]=0）</p>
+<p>公式中，[N/5]表示不大于N的数中5的倍数贡献一个5，[N/5^2]表示不大于N的数中5*5的倍数再贡献一个5···</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(N)</span><br><span class="line">&#123;</span><br><span class="line">    ret += N/<span class="number">5</span>;</span><br><span class="line">    N /= <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="对于问题二："><a href="#对于问题二：" class="headerlink" title="对于问题二："></a>对于问题二：</h1><p>判断最后一个二进制位是否为0，若为0，则将此二进制右移一位，即为商值；反之，若为1，则说明这个二进制数是奇数，无法被2整除</p>
+<p>所以，这个问题实际上等同于求N！含有质因数2的个数。即答案等于N！含有质因数2的个数加1。</p>
+<h2 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h2><p><strong>N！中含有质因数2的个数，等于[N/2]+[N/4]+[N/8]+[N/16]+···</strong></p>
+<blockquote>
+<p>[N/k]等于1，2，3，···，N中能被k整除的数的个数</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowestOne</span><span class="params">(<span class="keyword">int</span> N)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> Ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(N)</span><br><span class="line">    &#123;</span><br><span class="line">        N &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        Ret += N;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h2><p>N！含有质因数2的个数，还等于N减去N的二进制表示中1的数目。</p>
+<p>证明：</p>
+<p>N！中含有质因数2的个数为：[N/2]+[N/4]+[N/8]+[N/16]+···</p>
+<p>假设N = 11011</p>
+<p>即<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1101 + 110 + 11 + 1</span><br><span class="line">= (1000 + 100 + 1) + (100 + 10) + (10 + 1) + 1</span><br><span class="line">= (1000 + 100 + 10 + 1) + (100 + 10 + 1) + 1</span><br><span class="line">= 1111 + 111 + 1</span><br><span class="line">= (10000 - 1) + (1000 - 1) + (10-1) + (1-1)</span><br><span class="line">= 11011-(N二进制数表示中1的个数)</span><br></pre></td></tr></table></figure></p>
+<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>给定整数n，判断它是否为2的方幂。</p>
+<p><strong>(n&gt;0 &amp;&amp; ((n&amp;(n-1)) == 0))</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/bianchengzhimei6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/27/bianchengzhimei6/" itemprop="url">求二进制数中1的个数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T17:18:10+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程之美/" itemprop="url" rel="index">
+                    <span itemprop="name">编程之美</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/27/bianchengzhimei6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/bianchengzhimei6/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  591
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="求二进制数中1的个数"><a href="#求二进制数中1的个数" class="headerlink" title="求二进制数中1的个数"></a>求二进制数中1的个数</h1><p>对于一个字节（8bit）的无符号整型变量，求其二进制表示中‘1’的个数，要求算法执行的<strong>效率尽可能高</strong></p>
+<h2 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h2><p>利用整型数据除法的特点，通过相除和判断余数的值来分析</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(v%<span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">        v /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法二：使用位操作"><a href="#解法二：使用位操作" class="headerlink" title="解法二：使用位操作"></a>解法二：使用位操作</h2><p>向右移位操作同样可以达到相除的目的，唯一的不同之处在于，移位之后如何来判断是否有1存在。</p>
+<p>需要判断最后一位是否为1，“与”操作可以达到目的，可以把该数与00000001进行与操作，如果结果为1，则表示当前八位数的最后一位为1，否则为0.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        num += v &amp; <span class="number">0x01</span>;</span><br><span class="line">        v &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法三："><a href="#解法三：" class="headerlink" title="解法三："></a>解法三：</h2><p>位操作比除、余操作的效率高了很多，但是，即使使用位操作，时间复杂度仍然为O(log2v)</p>
+<p>能否将复杂度进一步降低？</p>
+<p>为了简化这个问题，我们考虑只有一个1的情况，例如：01000000</p>
+<p>如何判断给定的二进制数只有一个1呢？可以通过判断这个数是否为2的整数次幂来实现。另外，如果只和这个1进行判断，如果希望操作后的结果为0，01000000可以和00111111来进行与操作。</p>
+<p>这样，要进行的操作就是0100000 &amp; （01000000 - 00000001） = 01000000 &amp; 00111111 = 0</p>
+<p>将这种判断只有一个1的做法推广到有不确定1的情况即有如下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        v &amp;= (v<span class="number">-1</span>);</span><br><span class="line">        num++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法四："><a href="#解法四：" class="headerlink" title="解法四："></a>解法四：</h2><p>解法三的复杂度已经降低到O(M)，M为v中1的个数</p>
+<p>若想继续降低时间复杂度，还可以利用空间换时间，提前制好8bit二进制数（255个）各自对应的num的一个数组（表），然后进行查表操作，无需进行任何比较。</p>
+<h1 id="相关问题："><a href="#相关问题：" class="headerlink" title="相关问题："></a>相关问题：</h1><p>给定两个正整数（二进制形式表示）A和B，问把A变为B需要改变多少位（bit）？也就是说，整数A和B的二进制表示中有多少位是不同的？</p>
+<p>与非 -&gt; 求有多少个1</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/bianchengzhimei5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/27/bianchengzhimei5/" itemprop="url">快速找出故障机器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T17:18:03+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程之美/" itemprop="url" rel="index">
+                    <span itemprop="name">编程之美</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/27/bianchengzhimei5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/bianchengzhimei5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="快速找出故障机器"><a href="#快速找出故障机器" class="headerlink" title="快速找出故障机器"></a>快速找出故障机器</h1><p>我们假设一个机器仅存储一个标号为ID的记录（假设ID是小于10亿的整数），假设每份数据保存两个备份，这样就有两个机器存储了同样的数据。</p>
+<ol>
+<li>在某个时间，如果得到一个数据文件ID的列表，是否能够快速地找出这个表中仅出现一次的ID？</li>
+<li>如果已经知道只有一台机器死机（也就是说只有一个备份丢失）呢？如果有两台机器死机呢（假设同一个数据的两个备份不会同时消失）？</li>
+</ol>
+<h1 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h1><p>这个问题可以转化为，有很多ID，其中只有一个ID出现的次数小于2，其余正常ID出现的次数都等于2，问如何找到这个次数为1的ID。</p>
+<p>为了达到这个目的，最简单的方法就是直接遍历列表，利用一个数组记下每个ID出现的次数，遍历完毕之后，出现次数小于2的ID就是我们想要的结果。</p>
+<p>假设有N个ID，且ID的取值在0~（N-1）之间，这个解法占用的时间复杂度为O（N），空间复杂度为O（N）。</p>
+<p>空间复杂度并不理想，如果ID的数量多达几十GB，这样的空间复杂度在实际运算中会带来效率问题，<strong>考虑进一步减少空间复杂度</strong>。</p>
+<h1 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h1><p>哪些数据是不必存储的？大部分的机器ID出现次数都等于2，这些机器肯定不是故障的机器，可以不予考虑，可以把解法1数组中等于2的元素清空，然后用来存储下一个机器ID的出现次数，这样就可以减少需要的空间。</p>
+<p>具体方法如下：遍历列表，利用哈希表记下每个ID出现的次数，每次遇到一个ID，就向哈希表中增加一个元素，如果这个ID出现的次数为2，那么就从哈希表中删除这个ID，最后剩下的ID就是我们想要的结果。这个算法空间复杂度在最好情况下，可以达到O（1），在最坏情况下仍然为O（N）</p>
+<h1 id="解法三："><a href="#解法三：" class="headerlink" title="解法三："></a>解法三：</h1><p>如何进一步降低空间复杂度？</p>
+<p>如果想<strong>继续降低空间复杂度</strong>，就要<strong>摒弃遍历列表计数</strong>这种方法了。</p>
+<p>是否可以降到常数级别（甚至O（1））呢？</p>
+<p>如果这样，我们可以把这个变量写成：<strong>x(i) = f(list[0],list[1],…,list[i])</strong>，也就是说这个变量是已经遍历过的列表元素的函数。</p>
+<p>这个函数需要满足的条件是：<strong>x(N) = ID_Lost</strong>。</p>
+<p>也就说遍历完整个列表后，这个变量的值应该等于丢失备份的ID。</p>
+<p>我们需要找到整个f</p>
+<p>可以考虑使用异或关系来帮忙找到结果。</p>
+<p>因为正确的机器都会有两个ID，不正确的机器只有一个ID。所以所有ID的异或值就等于这个仅出现一次的ID（因为异或运算满足交换律和结合律，其他出现两次的ID异或完都为0）。这样我们只使用一次遍历运算就得到了只有一台故障机器情况下故障机器的ID。</p>
+<p>因此，就可以使用 <strong>x(i) = list[0]⊕list[1]⊕…⊕list[i]</strong></p>
+<p>这种情况下，时间复杂度为O（N）， 空间复杂度为O（1）。</p>
+<hr>
+<p>对于第二问：由于有两个ID仅出现一次，设它们为A和B，那么所有ID的异或值为A⊕B。无法确定A和B的值</p>
+<p>如果A=B，则A⊕B为0，也就是说丢失的是同一份数据的两个拷贝，我们可以通过求和的方法得到A和B（A=B=（所有ID之和-所有正常工作机器ID之和）/2）</p>
+<p>如果A⊕B不等于0，那么这个异或值的二进制中某一位为1，显然，A和B中有且仅有一个数的相同位上也为1。</p>
+<p>我们就把所有ID分成两类，一类在这位上为1，另一类这位上为0，那么对于这两类ID，每一类分别含有A和B中的一个。那么我们使用两个变量，在遍历列表时，分别计算这两类ID的异或和，即可得到A和B的值。</p>
+<h1 id="解法四："><a href="#解法四：" class="headerlink" title="解法四："></a>解法四：</h1><p>如果需要考虑死机的两台机器ID相同的情况，还有没有办法解决？</p>
+<p>这个问题可以抽象为：在一个事先预定的整数（ID）集合当中，怎么样找出其中丢失的一个数（ID）或两个数（ID）？</p>
+<p>对于一个数，预先存好所有ID的和，然后减去后来的，就得到少了的那一个</p>
+<p>对于两个数，预先存好所有ID的和以及积（为降低数据大小，还可以改为存平方和），然后两个方程求两个未知数</p>
+<h1 id="扩展问题"><a href="#扩展问题" class="headerlink" title="扩展问题"></a>扩展问题</h1><p>如果是N个备份？</p>
+<p>N小的时候列几个方程？</p>
+<p>N多的时候还是用遍历数组？</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/matlab7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/27/matlab7/" itemprop="url">影像分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T10:51:52+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/matlab/" itemprop="url" rel="index">
+                    <span itemprop="name">matlab</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/27/matlab7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/matlab7/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  0
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/matlab6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/27/matlab6/" itemprop="url">图型界面GUI程序设计</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T10:51:46+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/matlab/" itemprop="url" rel="index">
+                    <span itemprop="name">matlab</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/27/matlab6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/matlab6/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  63
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Starting-A-GUI-Program"><a href="#Starting-A-GUI-Program" class="headerlink" title="Starting A GUI Program"></a>Starting A GUI Program</h1><ol>
+<li>将当前目录设置到你想存储GUI program的地方</li>
+<li>在命令窗口打入guide创建一个MATLAB GUI</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/27/matlab6/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/matlab5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/27/matlab5/" itemprop="url">进阶绘图</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T10:51:40+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/matlab/" itemprop="url" rel="index">
+                    <span itemprop="name">matlab</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/27/matlab5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/matlab5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  599
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Logarithm-Plots"><a href="#Logarithm-Plots" class="headerlink" title="Logarithm Plots"></a>Logarithm Plots</h1><p>当数据出现指数型变化时，如果继续使用polt的线性刻度，则低次幂部分无法完全表现出来，所以需要采用semilogx、semilogy、loglog函数来解决对数数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; x = logspace(-1,1,100);</span><br><span class="line">&gt;&gt; y = x.^2;</span><br><span class="line">&gt;&gt; subplot(2,2,1);</span><br><span class="line">&gt;&gt; plot(x,y);</span><br><span class="line">&gt;&gt; title(&apos;Plot&apos;);</span><br><span class="line">&gt;&gt; subplot(2,2,2);</span><br><span class="line">&gt;&gt; semilogx(x,y);</span><br><span class="line">&gt;&gt; title(&apos;Semilogx&apos;);</span><br><span class="line">&gt;&gt; subplot(2,2,3);</span><br><span class="line">&gt;&gt; semilogy(x,y);</span><br><span class="line">&gt;&gt; title(&apos;Semilogy&apos;);</span><br><span class="line">&gt;&gt; subplot(2,2,4);</span><br><span class="line">&gt;&gt; loglog(x,y);</span><br><span class="line">&gt;&gt; title(&apos;Loglog&apos;);</span><br><span class="line">&gt;&gt; set(gca,&apos;XGrid&apos;,&apos;on&apos;);</span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/27/matlab5/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/excel5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/26/excel5/" itemprop="url">excel-VBA与宏</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-26T23:28:12+08:00">
+                2019-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/excel/" itemprop="url" rel="index">
+                    <span itemprop="name">excel</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/26/excel5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/26/excel5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  233
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="什么是VBA、什么是宏"><a href="#什么是VBA、什么是宏" class="headerlink" title="什么是VBA、什么是宏"></a>什么是VBA、什么是宏</h1><p>VBA（ Visual Basic for Application ）：是office软件中内嵌的一种应用程序开发工具，其语言结构和开发环境与VB相似。</p>
+<p>宏：由一系列的菜单选项和操作指令组成的、用来完成特定任务的指令集合。</p>
+<h1 id="VBA与宏的关系"><a href="#VBA与宏的关系" class="headerlink" title="VBA与宏的关系"></a>VBA与宏的关系</h1><p>宏是录制出来的程序，VBA是人手工编译的程序，宏录制出来的程序其实就是一系列的VBA语言“宏”像一个机器人，VBA是用来制作宏这个“机器人”的工具和零件</p>
+<blockquote>
+<p>MS-Excel提供的函数或功能可能不足以执行复杂计算的基本内置功能。在这种情况下，VBA就成为解决这些复杂计算的一种最优方案了。</p>
+</blockquote>
+<h1 id="访问VBA编辑器"><a href="#访问VBA编辑器" class="headerlink" title="访问VBA编辑器"></a>访问VBA编辑器</h1><p>在Excel窗口中，找到开发工具 -&gt; Visual Basic，或按ALT + F11。</p>
+<p><img src="Snipaste_2019-08-26_23-49-26.png" alt="1"></p>
+<h1 id="编写一个简单的宏"><a href="#编写一个简单的宏" class="headerlink" title="编写一个简单的宏"></a>编写一个简单的宏</h1><p><a href="https://www.yiibai.com/vba/vba_excel_macros.html" target="_blank" rel="noopener">VBA教程</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/bianchengzhimei4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/26/bianchengzhimei4/" itemprop="url">bianchengzhimei4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-26T22:39:49+08:00">
+                2019-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程之美/" itemprop="url" rel="index">
+                    <span itemprop="name">编程之美</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/26/bianchengzhimei4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/26/bianchengzhimei4/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  0
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/bianchengzhimei3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -648,1754 +2206,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/bianchengzhimei1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/26/bianchengzhimei1/" itemprop="url">有关了解当前线程、进程、系统效能的API</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-26T22:39:27+08:00">
-                2019-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程之美/" itemprop="url" rel="index">
-                    <span itemprop="name">编程之美</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/26/bianchengzhimei1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/26/bianchengzhimei1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  545
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Sleep-—让当前线程停下来"><a href="#Sleep-—让当前线程停下来" class="headerlink" title="Sleep()—让当前线程停下来"></a>Sleep()—让当前线程停下来</h1><p>Sleep函数可以使计算机程序（进程，任务或线程）进入休眠，使其在一段时间内处于非活动状态。当函数设定的计时器到期，或者接收到信号、程序发生中断都会导致程序继续执行。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在Windows系统中：</span><br><span class="line">Sleep(<span class="number">2</span>*<span class="number">1000</span>); <span class="comment">//sleep for 2 seconds</span></span><br><span class="line">在Unix系统中：</span><br><span class="line">sleep(<span class="number">2</span>);   <span class="comment">//sleep for 2 seconds</span></span><br></pre></td></tr></table></figure>
-<h1 id="WaitForSingleObject-—自己停下来，等待某个事件发生"><a href="#WaitForSingleObject-—自己停下来，等待某个事件发生" class="headerlink" title="WaitForSingleObject()—自己停下来，等待某个事件发生"></a>WaitForSingleObject()—自己停下来，等待某个事件发生</h1><h1 id="GetTickCount"><a href="#GetTickCount" class="headerlink" title="GetTickCount()"></a>GetTickCount()</h1><p>GetTickCount是一种函数。GetTickCount返回（retrieve）从操作系统启动所经过（elapsed）的毫秒数，它的返回值是DWORD。</p>
-<p><strong>常常用来判断某个方法执行的时间</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代替time函数来初始化随机数生成器</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinBase.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, k, r;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        srand (GetTickCount());</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; <span class="number">5</span>; k++)</span><br><span class="line">        &#123;</span><br><span class="line">            r = rand ();</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;r&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="QueryPerformanceFrequency-、QueryPerformanceCounter-—访问到精度更高的CPU数据"><a href="#QueryPerformanceFrequency-、QueryPerformanceCounter-—访问到精度更高的CPU数据" class="headerlink" title="QueryPerformanceFrequency()、QueryPerformanceCounter()—访问到精度更高的CPU数据"></a>QueryPerformanceFrequency()、QueryPerformanceCounter()—访问到精度更高的CPU数据</h1><p>QueryPerformanceFrequency是操作系统的性能统计分辨率，也就是每秒钟统计多少次的意思。 性能统计频率和应用程序性能没有关系。 </p>
-<p>QueryPerformanceCounter 是系统性能统计计数器，表示统计了多少次，除以QueryPerformanceFrequency，得到系统运行时间（秒数）。 </p>
-<p>QueryPerformanceCounter2-QueryPerformanceCounter1，得到高精度（微秒级，=1/QueryPerformanceFrequency秒）的时间差，常用于winddows高精度计时。</p>
-<h1 id="timeGetSystemTime-—另一个得到高精度时间的方法"><a href="#timeGetSystemTime-—另一个得到高精度时间的方法" class="headerlink" title="timeGetSystemTime()—另一个得到高精度时间的方法"></a>timeGetSystemTime()—另一个得到高精度时间的方法</h1><p>timeGetSystemTime，函数返回系统时间，（毫秒）。这里的系统时间是指自从系统启动时到调用该函数时的时间间隔。</p>
-<h1 id="PerformanceCounter-—效能计数器"><a href="#PerformanceCounter-—效能计数器" class="headerlink" title="PerformanceCounter()—效能计数器"></a>PerformanceCounter()—效能计数器</h1><h1 id="GetProcessorInfo-SetThreadAffinityMask-—遇到多核的问题时候更好地控制CPU"><a href="#GetProcessorInfo-SetThreadAffinityMask-—遇到多核的问题时候更好地控制CPU" class="headerlink" title="GetProcessorInfo()/SetThreadAffinityMask()—遇到多核的问题时候更好地控制CPU"></a>GetProcessorInfo()/SetThreadAffinityMask()—遇到多核的问题时候更好地控制CPU</h1><h1 id="GetCPUTickCount-—得到CPU核心运行周期数"><a href="#GetCPUTickCount-—得到CPU核心运行周期数" class="headerlink" title="GetCPUTickCount()—得到CPU核心运行周期数"></a>GetCPUTickCount()—得到CPU核心运行周期数</h1><h1 id="让CPU占用率曲线听你指挥"><a href="#让CPU占用率曲线听你指挥" class="headerlink" title="让CPU占用率曲线听你指挥"></a>让CPU占用率曲线听你指挥</h1><ol>
-<li><p>CPU占用率固定在50%，为一条直线</p>
-</li>
-<li><p>CPU占用率为一条直线，具体占用率由命令行参数决定（参数范围1-100）</p>
-</li>
-<li><p>CPU占用率状态是一个正弦曲线</p>
-</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> DWORD busyTime = <span class="number">10</span>; <span class="comment">//10ms</span></span><br><span class="line"><span class="keyword">const</span> DWORD <span class="keyword">int</span> idleTime = busyTime; <span class="comment">//same ratio will lead to 50% cpu usage</span></span><br><span class="line"></span><br><span class="line">Int64 startTime = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">&#123;</span><br><span class="line">    DWORD startTime = GetTickCount();</span><br><span class="line">    <span class="comment">//busy loop</span></span><br><span class="line">    <span class="keyword">while</span>((GetTickCount() - startTime) &lt;= busyTime)</span><br><span class="line">        ;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//idle loop</span></span><br><span class="line">    Sleep(idleTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/shuzhijisuan1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/26/shuzhijisuan1/" itemprop="url">数值计算部分概念</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-26T22:22:06+08:00">
-                2019-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数值计算/" itemprop="url" rel="index">
-                    <span itemprop="name">数值计算</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/26/shuzhijisuan1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/26/shuzhijisuan1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  476
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="解误差"><a href="#解误差" class="headerlink" title="解误差"></a>解误差</h1><p>中文名称:解误差</p>
-<p>外文名称:error of solution</p>
-<p>正文内容:又称总离散误差。是真解与数值解之间的误差。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X为数值解</span><br><span class="line">Xn为真解</span><br><span class="line">解误差：|X-Xn|</span><br></pre></td></tr></table></figure>
-<h1 id="残差"><a href="#残差" class="headerlink" title="残差"></a>残差</h1><p>残差在数理统计中是指实际观察值与估计值（拟合值）之间的差。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">例如对于：Ax = b</span><br><span class="line">残差为： |AX1-b|</span><br></pre></td></tr></table></figure>
-<h1 id="舍入误差"><a href="#舍入误差" class="headerlink" title="舍入误差"></a>舍入误差</h1><p>舍入误差（英语：round-off error)，是指运算得到的近似值和精确值之间的差异。 比如当用有限位数的浮点数来表示实数的时候(理论上存在无限位数的浮点数)就会产生舍入误差。</p>
-<h1 id="截断误差"><a href="#截断误差" class="headerlink" title="截断误差"></a>截断误差</h1><p>由实际问题建立起来的数学模型，在很多情况下要得到准确解是困难的，通常要用数值方法求它的近似解，例如常把无限的计算过程用有限的计算过程代替，这种模型的准确解和由数值方法求出的近似解之间的误差称为截断误差。 因为截断误差是数值计算方法固有的，因此又称方法误差。</p>
-<h1 id="超定方程组"><a href="#超定方程组" class="headerlink" title="超定方程组"></a>超定方程组</h1><p>超定方程组是指方程个数大于未知量个数的方程组。</p>
-<h1 id="欠定方程组"><a href="#欠定方程组" class="headerlink" title="欠定方程组"></a>欠定方程组</h1><p>方程个数小于未知量个数的方程组。</p>
-<h1 id="恰定方程组"><a href="#恰定方程组" class="headerlink" title="恰定方程组"></a>恰定方程组</h1><p>方程数等于未知数个数</p>
-<h1 id="LU分解"><a href="#LU分解" class="headerlink" title="LU分解"></a>LU分解</h1><p>在线性代数与数值分析中，LU分解是矩阵分解的一种，将一个矩阵分解为一个下三角矩阵和一个上三角矩阵的乘积，有时需要再乘上一个置换矩阵。 LU分解可以被视为高斯消去法的矩阵形式。在数值计算上，LU分解经常被用来 <strong>解线性方程组、且在求反矩阵和计算行列式</strong> 中都是一个关键的步骤。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/31/matlab4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/31/matlab4/" itemprop="url">基础绘图</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-31T09:33:25+08:00">
-                2019-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/matlab/" itemprop="url" rel="index">
-                    <span itemprop="name">matlab</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/31/matlab4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/31/matlab4/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  245
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p> plot from  “Data”</p>
-</blockquote>
-<h1 id="plot"><a href="#plot" class="headerlink" title="plot()"></a>plot()</h1><ul>
-<li>plot(x,y) 画每一个对应的点x、y</li>
-<li>plot(y) 画每一个点(x, y) 其中x=[1,2,3…, n], n = length(y)</li>
-<li>例： plot(cos(0:pi/20:2*pi)); 画的是y为一连串cos值，x为0、1、2、…</li>
-</ul>
-<h1 id="hold-on-off"><a href="#hold-on-off" class="headerlink" title="hold on/off"></a>hold on/off</h1><p>plot画图会有服盖效果，先画cos 再画sin 那么看到的是sin 而不是sin和cos的重叠</p>
-<p>如果不想matlab每次画图都刷新画板，使用hold on</p>
-<p>结束画图后使用hold off</p>
-<p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hold on</span><br><span class="line">plot(cos(0:pi/20:2*pi));</span><br><span class="line">plot(sin(0:pi/20:2*pi));</span><br><span class="line">hold off</span><br></pre></td></tr></table></figure>
-<h1 id="plot-style"><a href="#plot-style" class="headerlink" title="plot style"></a>plot style</h1><ul>
-<li>plot(x, y, ‘str’); xy后面的参数指定画出来图形的风格</li>
-</ul>
-<p><img src="Snipaste_2019-08-13_09-23-57.png" alt="1"></p>
-<p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hold on</span><br><span class="line">plot(cos(0:pi/20:2*pi),&apos;or&apos;);</span><br><span class="line">plot(sin(0:pi/20:2*pi),&apos;xg&apos;);</span><br><span class="line">hold off</span><br></pre></td></tr></table></figure>
-<ul>
-<li>cos画的是红色圈圈</li>
-<li>sin画的是绿色叉叉</li>
-</ul>
-<h1 id="legend"><a href="#legend" class="headerlink" title="legend()"></a>legend()</h1><ul>
-<li>用于给图添加注解</li>
-<li>legend(‘L1’,’L2’…) L1对应为画的第一条线</li>
-</ul>
-<p><img src="Snipaste_2019-08-13_09-31-44.png" alt="1"></p>
-<p><img src="Snipaste_2019-08-13_09-32-09.png" alt="1"></p>
-<h1 id="title-and-label"><a href="#title-and-label" class="headerlink" title="title and ?label()"></a>title and ?label()</h1><ul>
-<li>title(‘…’)</li>
-<li>xlabel(‘…’)</li>
-<li>ylabel(‘…’)</li>
-<li>zlabel(‘…’)</li>
-</ul>
-<h1 id="text-and-annotation"><a href="#text-and-annotation" class="headerlink" title="text() and annotation()"></a>text() and annotation()</h1><ul>
-<li>Text里面要表示数学公式要使用LaTex标准</li>
-</ul>
-<p><img src="Snipaste_2019-08-13_09-43-56.png" alt="1"></p>
-<p><img src="Snipaste_2019-08-13_09-44-10.png" alt="1"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/31/matlab3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/31/matlab3/" itemprop="url">变量与档案存储</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-31T09:33:19+08:00">
-                2019-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/matlab/" itemprop="url" rel="index">
-                    <span itemprop="name">matlab</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/31/matlab3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/31/matlab3/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  879
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MATLAB-Data-Variables-Types"><a href="#MATLAB-Data-Variables-Types" class="headerlink" title="MATLAB Data (Variables) Types"></a>MATLAB Data (Variables) Types</h1><h2 id="Multidimensional-Array"><a href="#Multidimensional-Array" class="headerlink" title="Multidimensional Array:"></a>Multidimensional Array:</h2><ul>
-<li>logical</li>
-<li>char</li>
-<li>numeric: double(default)、int8、uint8、single、int16、uint16、int32、uint32、int64、uint64</li>
-<li>cell</li>
-<li>struct</li>
-</ul>
-<h2 id="Scalar"><a href="#Scalar" class="headerlink" title="Scalar"></a>Scalar</h2><ul>
-<li>function handle(@)</li>
-</ul>
-<h1 id="Variable-Data-Type-Conversion"><a href="#Variable-Data-Type-Conversion" class="headerlink" title="Variable(Data) Type Conversion"></a>Variable(Data) Type Conversion</h1><blockquote>
-<p>像function一样使用</p>
-</blockquote>
-<ul>
-<li>double()</li>
-<li>single()</li>
-<li>int8()</li>
-<li>int16()</li>
-<li>int32()</li>
-<li>int64()</li>
-<li>uint8()</li>
-<li>uint16()</li>
-<li>uint32()</li>
-<li>uint64()</li>
-</ul>
-<h1 id="Logical-Operations-and-Assignments"><a href="#Logical-Operations-and-Assignments" class="headerlink" title="Logical Operations and Assignments"></a>Logical Operations and Assignments</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; s1 = &apos;sample&apos;;</span><br><span class="line">&gt;&gt; s2 = &apos;abcded&apos;;</span><br><span class="line">&gt;&gt; s3 = [s1 s2]</span><br><span class="line"></span><br><span class="line">s3 =</span><br><span class="line"></span><br><span class="line">    &apos;sampleabcded&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt; s4 = [s1; s2]</span><br><span class="line"></span><br><span class="line">s4 =</span><br><span class="line"></span><br><span class="line">  2×6 char 数组</span><br><span class="line"></span><br><span class="line">    &apos;sample&apos;</span><br><span class="line">    &apos;abcded&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt; s3(s3 == &apos;a&apos;) = &apos;Z&apos;</span><br><span class="line"></span><br><span class="line">s3 =</span><br><span class="line"></span><br><span class="line">    &apos;sZmpleZbcded&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt; s3 == &apos;e&apos;</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  1×12 logical 数组</span><br><span class="line"></span><br><span class="line">   0   0   0   0   0   1   0   0   0   0   1   0</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; s1 = &apos;a b c d e f g&apos;</span><br><span class="line"></span><br><span class="line">s1 =</span><br><span class="line"></span><br><span class="line">    &apos;a b c d e f g&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt; s1(1)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    &apos;a&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt; length(s1)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    13</span><br><span class="line"></span><br><span class="line">&gt;&gt; s2 = s1(length(s1):-1:1)</span><br><span class="line"></span><br><span class="line">s2 =</span><br><span class="line"></span><br><span class="line">    &apos;g f e d c b a&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt; s2 = s1(end:-1:1)</span><br><span class="line"></span><br><span class="line">s2 =</span><br><span class="line"></span><br><span class="line">    &apos;g f e d c b a&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="cat"><a href="#cat" class="headerlink" title="cat()"></a>cat()</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1 2;3 4]; B = [5 6; 7 8];</span><br><span class="line">&gt;&gt; C = cat(1,A,B)</span><br><span class="line"></span><br><span class="line">C =</span><br><span class="line"></span><br><span class="line">     1     2</span><br><span class="line">     3     4</span><br><span class="line">     5     6</span><br><span class="line">     7     8</span><br><span class="line"></span><br><span class="line">&gt;&gt; C = cat(2, A, B)</span><br><span class="line"></span><br><span class="line">C =</span><br><span class="line"></span><br><span class="line">     1     2     5     6</span><br><span class="line">     3     4     7     8</span><br><span class="line"></span><br><span class="line">&gt;&gt; C = cat(3, A, B)</span><br><span class="line"></span><br><span class="line">C(:,:,1) =</span><br><span class="line"></span><br><span class="line">     1     2</span><br><span class="line">     3     4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C(:,:,2) =</span><br><span class="line"></span><br><span class="line">     5     6</span><br><span class="line">     7     8</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="reshape"><a href="#reshape" class="headerlink" title="reshape()"></a>reshape()</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = &#123;&apos;james&apos;, [1 2;3 4;5 6]; pi, magic(5)&#125;</span><br><span class="line"></span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">  2×2 cell 数组</span><br><span class="line"></span><br><span class="line">    &#123;&apos;james&apos; &#125;    &#123;3×2 double&#125;</span><br><span class="line">    &#123;[3.1416]&#125;    &#123;5×5 double&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt; C = reshape(A, 1, 4)</span><br><span class="line"></span><br><span class="line">C =</span><br><span class="line"></span><br><span class="line">  1×4 cell 数组</span><br><span class="line"></span><br><span class="line">  列 1 至 3</span><br><span class="line"></span><br><span class="line">    &#123;&apos;james&apos;&#125;    &#123;[3.1416]&#125;    &#123;3×2 double&#125;</span><br><span class="line"></span><br><span class="line">  列 4</span><br><span class="line"></span><br><span class="line">    &#123;5×5 double&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt; A(4)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  1×1 cell 数组</span><br><span class="line"></span><br><span class="line">    &#123;5×5 double&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt; A(2)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  1×1 cell 数组</span><br><span class="line"></span><br><span class="line">    &#123;[3.1416]&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt; A(3)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  1×1 cell 数组</span><br><span class="line"></span><br><span class="line">    &#123;3×2 double&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p> M = magic(n) 生成一个n*n的矩阵,矩阵元素是由整数1到n^2组成的并且任何行任何列的和都相等,阶数n必须是大于等于3的标量。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; a = magic(5)</span><br><span class="line"></span><br><span class="line">a =</span><br><span class="line"></span><br><span class="line">    17    24     1     8    15</span><br><span class="line">    23     5     7    14    16</span><br><span class="line">     4     6    13    20    22</span><br><span class="line">    10    12    19    21     3</span><br><span class="line">    11    18    25     2     9</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="File-Access"><a href="#File-Access" class="headerlink" title="File Access"></a>File Access</h1><p>File System <--> Work Space</--></p>
-<h2 id="save-and-load"><a href="#save-and-load" class="headerlink" title="save() and load()"></a>save() and load()</h2><ul>
-<li><p>Save (all) workspace data to a file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">clear;</span><br><span class="line">a = magic(4);</span><br><span class="line">save mydata1.mat</span><br><span class="line">save mydata2.mat -ascii</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Load data stored in a file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">load(&apos;mydata1.mat&apos;)</span><br><span class="line">load(&apos;mydata2.mat&apos;,&apos;-ascii&apos;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Excel-File-Reading-xlsread"><a href="#Excel-File-Reading-xlsread" class="headerlink" title="Excel File Reading: xlsread()"></a>Excel File Reading: xlsread()</h2><ul>
-<li>Read from Excel spreadsheet<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Score = xlsread(&apos;04Score.xlsx&apos;)</span><br><span class="line">Score = xlsread(&apos;04Score.xlsx&apos;,&apos;B2:D4&apos;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Excel-File-Writing-xlswrite"><a href="#Excel-File-Writing-xlswrite" class="headerlink" title="Excel File Writing: xlswrite()"></a>Excel File Writing: xlswrite()</h2><ul>
-<li><p>Calculate the means and write into Excel spreadsheet</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">M = mean(Score&apos;)&apos;;</span><br><span class="line">xlswrite(&apos;04Score.xlsx&apos;, M, 1, &apos;E2:E4&apos;);</span><br><span class="line">xlswrite(&apos;04Score.xlsx&apos;, &#123;&apos;Mean&apos;&#125;, 1, &apos;E1&apos;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>mean是求列平均数的函数，所以要使用两次“转置”</p>
-</li>
-<li>第二个参数是要写进去的东西</li>
-<li>第三个参数是excel的第几页</li>
-<li>第四个参数是位置</li>
-</ul>
-<h1 id="Getting-Text-in-Excel-Spreadsheet"><a href="#Getting-Text-in-Excel-Spreadsheet" class="headerlink" title="Getting Text in Excel Spreadsheet"></a>Getting Text in Excel Spreadsheet</h1><ul>
-<li>Getting both the text and numbers</li>
-</ul>
-<p><code>[Score Header] = xlsread(&#39;04Score.xlsx&#39;)</code></p>
-<h1 id="Low-level-File-Input-Output"><a href="#Low-level-File-Input-Output" class="headerlink" title="Low-level File Input/Output"></a>Low-level File Input/Output</h1><h2 id="Low-level-File-I-O-Functions"><a href="#Low-level-File-I-O-Functions" class="headerlink" title="Low-level File I/O Functions"></a>Low-level File I/O Functions</h2><ul>
-<li>fopen</li>
-<li>fclose</li>
-<li>fscanf</li>
-<li>fprintf</li>
-<li>feof</li>
-</ul>
-<h2 id="Open-and-close-a-file"><a href="#Open-and-close-a-file" class="headerlink" title="Open and close a file:"></a>Open and close a file:</h2><p><code>fid = fopen(&#39;[filename]&#39;, &#39;[permission]&#39;);</code></p>
-<p><code>status = fclose(fid);</code></p>
-<blockquote>
-<p>permission: ‘r’,’r+’,’w’,’w+’,’a’,’a+’</p>
-</blockquote>
-<h2 id="Writing-Sine-正弦-Values-into-A-File"><a href="#Writing-Sine-正弦-Values-into-A-File" class="headerlink" title="Writing Sine(正弦) Values into A File"></a>Writing Sine(正弦) Values into A File</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x = 0:pi/10:pi;</span><br><span class="line">y = sin(x);</span><br><span class="line">fid = fopen(&apos;sinx.txt&apos;, &apos;w&apos;);</span><br><span class="line">for i=1:11</span><br><span class="line">    fprintf(fid, &apos;%5.3f %8.4f\n&apos;, x(i), y(i));</span><br><span class="line">end</span><br><span class="line">fclose(fid);</span><br><span class="line">type sinx.txt</span><br></pre></td></tr></table></figure>
-<h2 id="Read-and-Write-through-Formatted-I-O"><a href="#Read-and-Write-through-Formatted-I-O" class="headerlink" title="Read and Write through Formatted I/O"></a>Read and Write through Formatted I/O</h2><ul>
-<li>Read: A = fscanf(fid, format, size);</li>
-<li>Write: fprintf(fid, format, x, y, …);</li>
-</ul>
-<h2 id="Reading-from-Files"><a href="#Reading-from-Files" class="headerlink" title="Reading from Files"></a>Reading from Files</h2><ul>
-<li>Check if it is the end of file: feof(fid)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">John 1995 12 5 12.3 3.24</span><br><span class="line">Tom 1995 12 7 2.3 2.0</span><br><span class="line">Jean 1996 3 2 10.2 0</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fid = fopen(&apos;asciiData.txt&apos;, &apos;r&apos;); i = 1;</span><br><span class="line">while ~feof(fid)</span><br><span class="line">    name(i,:) = fscanf(fid, &apos;%5c&apos;, 1);</span><br><span class="line">    year(i) = fscanf(fid, &apos;%d&apos;, 1);</span><br><span class="line">    no1(i) = fscanf(fid, &apos;%d&apos;, 1);</span><br><span class="line">    no2(i) = fscanf(fid, &apos;%d&apos;, 1);</span><br><span class="line">    no3(i) = fscanf(fid, &apos;%g&apos;, 1);</span><br><span class="line">    no4(i) = fscanf(fid, &apos;%g\n&apos;);</span><br><span class="line">    i = i+1;</span><br><span class="line">end</span><br><span class="line">fclose(fid);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>name那里的冒号：的意思是对应char数组的每一行</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/31/matlab2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/31/matlab2/" itemprop="url">结构化程式与自定函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-31T09:33:12+08:00">
-                2019-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/matlab/" itemprop="url" rel="index">
-                    <span itemprop="name">matlab</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/31/matlab2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/31/matlab2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  362
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MATLAB-Script"><a href="#MATLAB-Script" class="headerlink" title="MATLAB Script"></a>MATLAB Script</h1><ul>
-<li>.m结尾的文件</li>
-<li>不需要像c/c++一样需要编译</li>
-<li>%开头表示注解， %%则表示section一个块，可选择run section来运行一个子块来debug。</li>
-<li>设置断点直接点击代码对应那行最左边序号，显示红点</li>
-<li>ctrl+A或者手动选代码右键有注释与解注释以及智能缩进smart-indent功能</li>
-</ul>
-<h1 id="structure-programming"><a href="#structure-programming" class="headerlink" title="structure programming"></a>structure programming</h1><p><img src="Snipaste_2019-08-03_09-37-24.png" alt="1"></p>
-<p><img src="Snipaste_2019-08-03_09-37-55.png" alt="1"></p>
-<blockquote>
-<p>所有块语法都要带上end结尾</p>
-</blockquote>
-<h2 id="if-elseif-else"><a href="#if-elseif-else" class="headerlink" title="if elseif else"></a>if elseif else</h2><blockquote>
-<p>“elseif” and “else” are optional</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = 3;</span><br><span class="line">if rem(a,2) == 0  % rem求余</span><br><span class="line">    disp(&apos;a is even&apos;)</span><br><span class="line">else</span><br><span class="line">    disp(&apos;a is odd&apos;)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<h2 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">input_num = 1;</span><br><span class="line">switch input_num</span><br><span class="line">case -1</span><br><span class="line">    disp(&apos;negative 1&apos;);</span><br><span class="line">case 0</span><br><span class="line">    disp(&apos;zero&apos;);</span><br><span class="line">case 0</span><br><span class="line">    disp(&apos;positive 1&apos;);</span><br><span class="line">otherwise</span><br><span class="line">    disp(&apos;other value&apos;);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<h2 id="while"><a href="#while" class="headerlink" title="while"></a>while</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n = 1;</span><br><span class="line">while prod(1:n) &lt; 1e100  % prod-&gt; product 乘的意思 1:n-&gt;[1,2,3,...,n] n! &lt; 1e100 -&gt;1*10^100 </span><br><span class="line">    n = n+1;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<h2 id="for"><a href="#for" class="headerlink" title="for"></a>for</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for n = 1:10</span><br><span class="line">    a(n) = 2^10; % a(n) 表示a中第n个元素</span><br><span class="line">end</span><br><span class="line">disp(a)</span><br></pre></td></tr></table></figure>
-<h1 id="Tips-for-Script-Writing"><a href="#Tips-for-Script-Writing" class="headerlink" title="Tips for Script Writing"></a>Tips for Script Writing</h1><ul>
-<li>At the beginning of your script, use:</li>
-<li><ul>
-<li><code>clear all</code> to remove previous variables</li>
-</ul>
-</li>
-<li><ul>
-<li><code>close all</code> to close all figures</li>
-</ul>
-</li>
-<li>use ‘;’ at the end of commands unwanted output</li>
-<li><p>use ellipsis … to make scripts more readable:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A = [1 2 3 4 5 6; ...</span><br><span class="line">    6 5 4 3 2 1];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Press Ctrl+c to terminate the script before conclusion</p>
-</li>
-</ul>
-<h1 id="Scripts-vs-Functions"><a href="#Scripts-vs-Functions" class="headerlink" title="Scripts vs Functions"></a>Scripts vs Functions</h1><ul>
-<li>Scripts and functions are both .m files that contain MATLAB commands</li>
-<li>Function are written when we need to perform routines</li>
-</ul>
-<h1 id="Content-of-MATLAB-Built-in-Functions"><a href="#Content-of-MATLAB-Built-in-Functions" class="headerlink" title="Content of MATLAB Built-in Functions"></a>Content of MATLAB Built-in Functions</h1><p><code>edit(which(&#39;mean.m&#39;))</code></p>
-<p><img src="Snipaste_2019-08-03_10-12-21.png" alt="1"></p>
-<h1 id="User-Define-Functions"><a href="#User-Define-Functions" class="headerlink" title="User Define Functions"></a>User Define Functions</h1><p><img src="Snipaste_2019-08-03_10-13-25.png" alt="1"></p>
-<h2 id="Functions-with-Multiple-Inputs-and-Outputs"><a href="#Functions-with-Multiple-Inputs-and-Outputs" class="headerlink" title="Functions with Multiple Inputs and Outputs"></a>Functions with Multiple Inputs and Outputs</h2><p><img src="Snipaste_2019-08-03_10-17-47.png" alt="1"></p>
-<h1 id="Function-Handles"><a href="#Function-Handles" class="headerlink" title="Function Handles"></a>Function Handles</h1><p>a way to create anonymous functions</p>
-<p>one line expression functions that do not have to be defined in .m files</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = @(x) exp(-2*x);</span><br><span class="line">x = 0:0.1:2;</span><br><span class="line">plot(x, f(x));</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/31/matlab1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/31/matlab1/" itemprop="url">基本操作与矩阵运算</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-31T09:33:05+08:00">
-                2019-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/matlab/" itemprop="url" rel="index">
-                    <span itemprop="name">matlab</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/31/matlab1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/31/matlab1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="加减乘除优先级："><a href="#加减乘除优先级：" class="headerlink" title="加减乘除优先级："></a>加减乘除优先级：</h1><ul>
-<li>^(幂) &gt; *, / &gt; + - </li>
-</ul>
-<p>练习：</p>
-<p><img src="Snipaste_2019-07-31_09-43-45.png" alt="1"></p>
-<p><img src="Snipaste_2019-07-31_09-45-50.png" alt="1"></p>
-<p><img src="Snipaste_2019-07-31_09-49-05.png" alt="1"></p>
-<p><img src="Snipaste_2019-07-31_09-51-00.png" alt="1"></p>
-<p><img src="Snipaste_2019-07-31_09-51-11.png" alt="1"></p>
-<h1 id="MATLAB-Calling-Priority"><a href="#MATLAB-Calling-Priority" class="headerlink" title="MATLAB Calling Priority"></a>MATLAB Calling Priority</h1><p><img src="Snipaste_2019-07-31_10-00-15.png" alt="1"></p>
-<p><img src="Snipaste_2019-07-31_10-01-39.png" alt="1"></p>
-<h1 id="Numeric-Display-Format"><a href="#Numeric-Display-Format" class="headerlink" title="Numeric Display Format"></a>Numeric Display Format</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; format short</span><br><span class="line">&gt;&gt; pi</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    3.1416</span><br><span class="line"></span><br><span class="line">&gt;&gt; format long</span><br><span class="line">&gt;&gt; pi</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   3.141592653589793</span><br><span class="line"></span><br><span class="line">&gt;&gt; format shortE</span><br><span class="line">&gt;&gt; pi</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   3.1416e+00</span><br><span class="line"></span><br><span class="line">&gt;&gt; format longE</span><br><span class="line">&gt;&gt; pi</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     3.141592653589793e+00</span><br><span class="line"></span><br><span class="line">&gt;&gt; format bank</span><br><span class="line">&gt;&gt; pi</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">          3.14</span><br><span class="line"></span><br><span class="line">&gt;&gt; format hex</span><br><span class="line">&gt;&gt; pi</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   400921fb54442d18</span><br><span class="line"></span><br><span class="line">&gt;&gt; format rat</span><br><span class="line">&gt;&gt; pi</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     355/113</span><br></pre></td></tr></table></figure>
-<h1 id="Command-Line-Terminal"><a href="#Command-Line-Terminal" class="headerlink" title="Command Line Terminal"></a>Command Line Terminal</h1><ul>
-<li><p>方向键向上（PgUp）可以展示上一条指令</p>
-</li>
-<li><p>clc: clear command window display</p>
-</li>
-<li><p>clear: remove all variables in the workspace</p>
-</li>
-<li><p>who: variables in the workspace </p>
-</li>
-<li><p>whos: variable information of the workspace</p>
-</li>
-</ul>
-<h1 id="Array-Vector-and-Matrix"><a href="#Array-Vector-and-Matrix" class="headerlink" title="Array(Vector and Matrix)"></a>Array(Vector and Matrix)</h1><ul>
-<li>Row vector:</li>
-</ul>
-<p><code>a = [1 2 3 4]</code></p>
-<ul>
-<li>Column vector:</li>
-</ul>
-<p><code>b = [1;2;3;4]</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; a = [1 2 3 4]</span><br><span class="line"></span><br><span class="line">a =</span><br><span class="line"></span><br><span class="line">     1     2     3     4</span><br><span class="line"></span><br><span class="line">&gt;&gt; b = [1; 2; 3; 4]</span><br><span class="line"></span><br><span class="line">b =</span><br><span class="line"></span><br><span class="line">     1</span><br><span class="line">     2</span><br><span class="line">     3</span><br><span class="line">     4</span><br><span class="line"></span><br><span class="line">&gt;&gt; a * b</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    30</span><br><span class="line"></span><br><span class="line">&gt;&gt; b * a</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     1     2     3     4</span><br><span class="line">     2     4     6     8</span><br><span class="line">     3     6     9    12</span><br><span class="line">     4     8    12    16</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="Array-Indexing"><a href="#Array-Indexing" class="headerlink" title="Array Indexing"></a>Array Indexing</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1 21 6; 5 17 9; 31 2 7]</span><br><span class="line"></span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">     1    21     6</span><br><span class="line">     5    17     9</span><br><span class="line">    31     2     7</span><br><span class="line"></span><br><span class="line">&gt;&gt; A(8)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     9</span><br><span class="line"></span><br><span class="line">&gt;&gt; A(2)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     5</span><br><span class="line"></span><br><span class="line">&gt;&gt; A([1 3 5])</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     1    31    17</span><br><span class="line"></span><br><span class="line">&gt;&gt; A([1 3; 1 3])</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     1    31</span><br><span class="line">     1    31</span><br><span class="line"></span><br><span class="line">&gt;&gt; A(3, 2)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     2</span><br><span class="line"></span><br><span class="line">&gt;&gt; A([1 3],[1 3])</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     1     6</span><br><span class="line">    31     7</span><br><span class="line"></span><br><span class="line">&gt;&gt; A([1 2 3],[1 3])</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     1     6</span><br><span class="line">     5     9</span><br><span class="line">    31     7</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="Colon-operator"><a href="#Colon-operator" class="headerlink" title="Colon operator"></a>Colon operator</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; B = 1 : 5</span><br><span class="line"></span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">     1     2     3     4     5</span><br><span class="line"></span><br><span class="line">&gt;&gt; B = 1:2:5</span><br><span class="line"></span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">     1     3     5</span><br><span class="line"></span><br><span class="line">&gt;&gt; B = [1:5; 2:3:15; -2:0.5:0]</span><br><span class="line"></span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">    1.0000    2.0000    3.0000    4.0000    5.0000</span><br><span class="line">    2.0000    5.0000    8.0000   11.0000   14.0000</span><br><span class="line">   -2.0000   -1.5000   -1.0000   -0.5000         0</span><br><span class="line"></span><br><span class="line">&gt;&gt; str = &apos;a&apos;:2:&apos;z&apos;</span><br><span class="line"></span><br><span class="line">str =</span><br><span class="line"></span><br><span class="line">    &apos;acegikmoqsuwy&apos;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1 21 6; 5 17 9; 31 2 7]</span><br><span class="line"></span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">     1    21     6</span><br><span class="line">     5    17     9</span><br><span class="line">    31     2     7</span><br><span class="line"></span><br><span class="line">&gt;&gt; A[3, :] = []</span><br><span class="line"> A[3, :] = []</span><br><span class="line">  ↑</span><br><span class="line">错误: 表达式无效。调用函数或对变量进行索引时，请使用圆括号。否则，请检查不匹配的分隔符。</span><br><span class="line"> </span><br><span class="line">&gt;&gt; A(3,:) = []</span><br><span class="line"></span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">     1    21     6</span><br><span class="line">     5    17     9</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="Array-Concatenation"><a href="#Array-Concatenation" class="headerlink" title="Array Concatenation"></a>Array Concatenation</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1 2; 3 4]</span><br><span class="line"></span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">     1     2</span><br><span class="line">     3     4</span><br><span class="line"></span><br><span class="line">&gt;&gt; B = [9 9; 9 9]</span><br><span class="line"></span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">     9     9</span><br><span class="line">     9     9</span><br><span class="line"></span><br><span class="line">&gt;&gt; C = [5 6 7 8]</span><br><span class="line"></span><br><span class="line">C =</span><br><span class="line"></span><br><span class="line">     5     6     7     8</span><br><span class="line"></span><br><span class="line">&gt;&gt; D = [-2:1]</span><br><span class="line"></span><br><span class="line">D =</span><br><span class="line"></span><br><span class="line">    -2    -1     0     1</span><br><span class="line"></span><br><span class="line">&gt;&gt; F = [A ,B; C ; D]</span><br><span class="line"></span><br><span class="line">F =</span><br><span class="line"></span><br><span class="line">     1     2     9     9</span><br><span class="line">     3     4     9     9</span><br><span class="line">     5     6     7     8</span><br><span class="line">    -2    -1     0     1</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="Array-Manipulation"><a href="#Array-Manipulation" class="headerlink" title="Array Manipulation"></a>Array Manipulation</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1:3; 4 5 4; 9 8 7]</span><br><span class="line"></span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">     1     2     3</span><br><span class="line">     4     5     4</span><br><span class="line">     9     8     7</span><br><span class="line"></span><br><span class="line">&gt;&gt; B = [3 3 3 ;2 4 9; 1 3 1]</span><br><span class="line"></span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">     3     3     3</span><br><span class="line">     2     4     9</span><br><span class="line">     1     3     1</span><br><span class="line"></span><br><span class="line">&gt;&gt; a = 2</span><br><span class="line"></span><br><span class="line">a =</span><br><span class="line"></span><br><span class="line">     2</span><br><span class="line"></span><br><span class="line">&gt;&gt; A+a</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     3     4     5</span><br><span class="line">     6     7     6</span><br><span class="line">    11    10     9</span><br><span class="line"></span><br><span class="line">&gt;&gt; A/a</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    0.5000    1.0000    1.5000</span><br><span class="line">    2.0000    2.5000    2.0000</span><br><span class="line">    4.5000    4.0000    3.5000</span><br><span class="line"></span><br><span class="line">&gt;&gt; A./a</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    0.5000    1.0000    1.5000</span><br><span class="line">    2.0000    2.5000    2.0000</span><br><span class="line">    4.5000    4.0000    3.5000</span><br><span class="line"></span><br><span class="line">&gt;&gt; A^a</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    36    36    32</span><br><span class="line">    60    65    60</span><br><span class="line">   104   114   108</span><br><span class="line"></span><br><span class="line">&gt;&gt; A.^a</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     1     4     9</span><br><span class="line">    16    25    16</span><br><span class="line">    81    64    49</span><br><span class="line"></span><br><span class="line">&gt;&gt; A&apos;</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     1     4     9</span><br><span class="line">     2     5     8</span><br><span class="line">     3     4     7</span><br><span class="line"></span><br><span class="line">&gt;&gt; A+B</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     4     5     6</span><br><span class="line">     6     9    13</span><br><span class="line">    10    11     8</span><br><span class="line"></span><br><span class="line">&gt;&gt; A*B</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    10    20    24</span><br><span class="line">    26    44    61</span><br><span class="line">    50    80   106</span><br><span class="line"></span><br><span class="line">&gt;&gt; A.*B</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     3     6     9</span><br><span class="line">     8    20    36</span><br><span class="line">     9    24     7</span><br><span class="line"></span><br><span class="line">&gt;&gt; A/B</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    0.0714    0.2857    0.2143</span><br><span class="line">    1.1667         0    0.5000</span><br><span class="line">    3.2619   -0.2857   -0.2143</span><br><span class="line"></span><br><span class="line">&gt;&gt; A./B</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    0.3333    0.6667    1.0000</span><br><span class="line">    2.0000    1.2500    0.4444</span><br><span class="line">    9.0000    2.6667    7.0000</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="Some-Special-Matrix"><a href="#Some-Special-Matrix" class="headerlink" title="Some Special Matrix"></a>Some Special Matrix</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; linspace(0, 13, 6)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">         0    2.6000    5.2000    7.8000   10.4000   13.0000</span><br><span class="line"></span><br><span class="line">&gt;&gt; eye(3)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     1     0     0</span><br><span class="line">     0     1     0</span><br><span class="line">     0     0     1</span><br><span class="line"></span><br><span class="line">&gt;&gt; zeros(2,3)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     0     0     0</span><br><span class="line">     0     0     0</span><br><span class="line"></span><br><span class="line">&gt;&gt; ones(2,3)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     1     1     1</span><br><span class="line">     1     1     1</span><br><span class="line"></span><br><span class="line">&gt;&gt; diag([2 3 4])</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     2     0     0</span><br><span class="line">     0     3     0</span><br><span class="line">     0     0     4</span><br><span class="line"></span><br><span class="line">&gt;&gt; rand(5)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    0.8147    0.0975    0.1576    0.1419    0.6557</span><br><span class="line">    0.9058    0.2785    0.9706    0.4218    0.0357</span><br><span class="line">    0.1270    0.5469    0.9572    0.9157    0.8491</span><br><span class="line">    0.9134    0.9575    0.4854    0.7922    0.9340</span><br><span class="line">    0.6324    0.9649    0.8003    0.9595    0.6787</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="Some-Matrix-Related-Function"><a href="#Some-Matrix-Related-Function" class="headerlink" title="Some Matrix Related Function"></a>Some Matrix Related Function</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1 2 3 ; 0 5  6; 7 0 9]</span><br><span class="line"></span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">     1     2     3</span><br><span class="line">     0     5     6</span><br><span class="line">     7     0     9</span><br><span class="line"></span><br><span class="line">&gt;&gt; max(A)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     7     5     9</span><br><span class="line"></span><br><span class="line">&gt;&gt; max(max(A))</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     9</span><br><span class="line"></span><br><span class="line">&gt;&gt; sort(A)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     0     0     3</span><br><span class="line">     1     2     6</span><br><span class="line">     7     5     9</span><br><span class="line"></span><br><span class="line">&gt;&gt; sortrows(A)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     0     5     6</span><br><span class="line">     1     2     3</span><br><span class="line">     7     0     9</span><br><span class="line"></span><br><span class="line">&gt;&gt; min(A)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     0     0     3</span><br><span class="line"></span><br><span class="line">&gt;&gt; size(A)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     3     3</span><br><span class="line"></span><br><span class="line">&gt;&gt; sum(A)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     8     7    18</span><br><span class="line"></span><br><span class="line">&gt;&gt; length(A)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     3</span><br><span class="line"></span><br><span class="line">&gt;&gt; mean(A)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    2.6667    2.3333    6.0000</span><br><span class="line"></span><br><span class="line">&gt;&gt; find(A)</span><br><span class="line"></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     1</span><br><span class="line">     3</span><br><span class="line">     4</span><br><span class="line">     5</span><br><span class="line">     7</span><br><span class="line">     8</span><br><span class="line">     9</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/leetcode-621/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/25/leetcode-621/" itemprop="url">leetcode-621-Task Scheduler</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T15:13:08+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
-                    <span itemprop="name">top-100-liked-questions</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/25/leetcode-621/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/25/leetcode-621/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  240
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Given a char array representing tasks CPU need to do. It contains capital letters A to Z where different letters represent different tasks.Tasks could be done without original order. Each task could be done in one interval. For each interval, CPU could finish one task or just be idle.</p>
-<p>However, there is a non-negative cooling intervaln that means between twosame tasks, there must be at least n intervals that CPU are doing different tasks or just be idle.</p>
-<p>You need to return the least number of intervals the CPU will take to finish all the given tasks.</p>
-<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: tasks = [&apos;A&apos;,&apos;A&apos;,&apos;A&apos;,&apos;B&apos;,&apos;B&apos;,&apos;B&apos;], n = 2</span><br><span class="line">Output: 8</span><br><span class="line">Explanation: A -&gt; B -&gt; idle -&gt; A -&gt; B -&gt; idle -&gt; A -&gt; B.</span><br></pre></td></tr></table></figure></p>
-<p>Note:</p>
-<ul>
-<li>The number of tasks is in the range [1, 10000].</li>
-<li>The integer n is in the range [0, 100].</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">leastInterval</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&amp; tasks, <span class="keyword">int</span> n)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp(<span class="number">26</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> m=tasks.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            tmp[tasks[i]-<span class="string">'A'</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(tmp.begin(),tmp.end());</span><br><span class="line">        <span class="keyword">int</span> val=tmp[<span class="number">25</span>];</span><br><span class="line">        <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">25</span>;</span><br><span class="line">        <span class="keyword">while</span>(val==tmp[i] &amp;&amp; i&gt;=<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            count++;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res=(n+<span class="number">1</span>)*(val<span class="number">-1</span>)+count;</span><br><span class="line">        <span class="keyword">return</span> max(res,m);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/leetcode-309/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/25/leetcode-309/" itemprop="url">leetcode-309-Best Time to Buy and Sell Stock with Cooldown</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T15:12:41+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
-                    <span itemprop="name">top-100-liked-questions</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/25/leetcode-309/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/25/leetcode-309/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  511
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Say you have an array for which the ith element is the price of a given stock on day i.</p>
-<p>Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times) with the following restrictions:</p>
-<ul>
-<li>You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</li>
-<li>After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)</li>
-</ul>
-<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,2,3,0,2]</span><br><span class="line">Output: 3 </span><br><span class="line">Explanation: transactions = [buy, sell, cooldown, buy, sell]</span><br></pre></td></tr></table></figure></p>
-<p>首先，我们看到问题中提到了三种状态buy、sell和cooldown，那么我们脑中的第一个想法就是通过动态规划来解</p>
-<p>如果我们index:i天为冷冻期，那么只能说明index:i-1天卖掉了股票，那么i天的收益和i-1天是一样的</p>
-<p><code>cooldown[i]=sell[i-1]</code><br>如果我们考虑index:i天卖出，要求利润最大的话。那么无非是index:i-1之前就持有股票，所以index:i-1天也可以卖出，或者另一种情况就是index:i-1当天买入了股票。</p>
-<p><code>sell[i]=max(sell[i-1], buy[i-1]+prices[i])</code><br>如果我们考虑index:i天买入，要求利润最大的话。无非是index:i-1之前就不持有股票，我们要考虑哪天买，所以index:i-1也可以买入，或者另一种可能就是index:i-1天是冷冻期。</p>
-<p><code>buy[i]=max(buy[i-1], cooldown[i-1]-prices[i])</code><br>我们第一天不可能卖出或者冻结，那么这两个sell[0]=0 cooldown[0]=0，但是我们第一天可以买入啊，所以buy[0]=-prices[0]。还有一点要注意的就是，我们一定是最后一天卖出或者最后一天冻结利润最大。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!prices.size()) </span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; buy(prices.size(), <span class="number">0</span>), sell(prices.size(), <span class="number">0</span>), cooldown(prices.size(), <span class="number">0</span>);</span><br><span class="line">        buy[<span class="number">0</span>] = -prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; prices.size(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            cooldown[i] = sell[i - <span class="number">1</span>];</span><br><span class="line">            sell[i] = max(sell[i - <span class="number">1</span>], buy[i - <span class="number">1</span>] + prices[i]);</span><br><span class="line">            buy[i] = max(buy[i - <span class="number">1</span>], cooldown[i - <span class="number">1</span>] - prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max(sell[prices.size() - <span class="number">1</span>], cooldown[prices.size() - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2443,7 +2258,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">229</span>
+                  <span class="site-state-item-count">237</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2454,7 +2269,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2533,7 +2348,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">309.4k</span>
+    <span title="Site words total count">311.1k</span>
   
 </div>
 
