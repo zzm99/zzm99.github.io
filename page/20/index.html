@@ -291,6 +291,672 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/pythonweb1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/14/pythonweb1/" itemprop="url">awesome-website-1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-14T20:07:12+08:00">
+                2019-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/网站开发/" itemprop="url" rel="index">
+                    <span itemprop="name">网站开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/网站开发/实战/" itemprop="url" rel="index">
+                    <span itemprop="name">实战</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/14/pythonweb1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/14/pythonweb1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Python-网站开发-1-–-搭建开发环境"><a href="#Python-网站开发-1-–-搭建开发环境" class="headerlink" title="Python 网站开发(1) – 搭建开发环境"></a>Python 网站开发(1) – 搭建开发环境</h1><p>用pip安装网站开发所需要的第三方库：</p>
+<ul>
+<li>异步框架的 aiohttp</li>
+<li>前端模板引擎 jinja2</li>
+<li>数据库 MySQL的Python异步驱动程序 aiomysql (需要先下载安装最新版的 MySQL, 选择免费的 MySQL Community Server 下载安装就好)</li>
+<li>轻量级标记语言Markdown, 将文本转换为有效的HTML<br><code>$ pip3 install aiohttp jinja2 aiomysql markdown</code></li>
+</ul>
+<h1 id="构建项目结构"><a href="#构建项目结构" class="headerlink" title="构建项目结构"></a>构建项目结构</h1><p>选择一个工作目录，建立如下的目录结构:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">awesome-website/         &lt;-- 根目录</span><br><span class="line">|</span><br><span class="line">+- backup/               &lt;-- 备份目录</span><br><span class="line">|</span><br><span class="line">+- conf/                 &lt;-- 配置文件</span><br><span class="line">|</span><br><span class="line">+- dist/                 &lt;-- 打包目录</span><br><span class="line">|</span><br><span class="line">+- www/                  &lt;-- Web目录，存放.py文件</span><br><span class="line">|  |</span><br><span class="line">|  +- static/            &lt;-- 存放静态文件</span><br><span class="line">|  |</span><br><span class="line">|  +- templates/         &lt;-- 存放模板文件</span><br><span class="line">|</span><br><span class="line">+- LICENSE               &lt;-- 代码LICENSE</span><br></pre></td></tr></table></figure></p>
+<p>创建好项目的目录结构后，建议同时建立git仓库并同步到GitHub, 保证代码储存及修改的安全。</p>
+<h1 id="Python-网站开发-2-–-编写网站骨架"><a href="#Python-网站开发-2-–-编写网站骨架" class="headerlink" title="Python 网站开发(2) – 编写网站骨架"></a>Python 网站开发(2) – 编写网站骨架</h1><h1 id="编写网站骨架"><a href="#编写网站骨架" class="headerlink" title="编写网站骨架"></a>编写网站骨架</h1><p>为了搭建一个高效的网站，网站的IO处理要建立在asyncio(异步io)的基础上, 我们可以用 aiohttp 写一个基本的服务器应用 app.py 存放在www目录:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging; logging.basicConfig(level=logging.INFO)</span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> aiohttp <span class="keyword">import</span> web</span><br><span class="line"></span><br><span class="line"><span class="comment">## 定义服务器响应请求的的返回为 "Awesome Website"</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> web.Response(body=<span class="string">b'&lt;h1&gt;Awesome Website&lt;/h1&gt;'</span>, content_type=<span class="string">'text/html'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 建立服务器应用，持续监听本地9000端口的http请求，对首页"/"进行响应</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init</span><span class="params">()</span>:</span></span><br><span class="line">    app = web.Application()</span><br><span class="line">    app.router.add_get(<span class="string">'/'</span>, index)</span><br><span class="line">    web.run_app(app, host=<span class="string">'127.0.0.1'</span>, port=<span class="number">9000</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    init()</span><br></pre></td></tr></table></figure>
+<p>在www目录下运行这个 app.py, 服务器将在9000端口持续监听 http 请求，并异步对首页 / 进行响应：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python3 app.py</span><br><span class="line">======== Running on http://127.0.0.1:9000 ========</span><br><span class="line">(Press CTRL+C to quit)</span><br></pre></td></tr></table></figure></p>
+<p>打开浏览器输入地址 <a href="http://127.0.0.1:9000" target="_blank" rel="noopener">http://127.0.0.1:9000</a> 进行测试，如果返回我们设定好的Awesome Website字符串，就说明我们网站服务器应用的框架已经搭好了。</p>
+<h1 id="Python-网站开发-3-–-编写ORM"><a href="#Python-网站开发-3-–-编写ORM" class="headerlink" title="Python 网站开发(3) – 编写ORM"></a>Python 网站开发(3) – 编写ORM</h1><h1 id="编写ORM"><a href="#编写ORM" class="headerlink" title="编写ORM*"></a>编写ORM*</h1><p>对象关系映射 (Object Relational Mapping, 简称ORM) 模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。换句话说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。</p>
+<p>在一个网站中，所有的数据（包括用户，日志，评论等）都存储在数据库中。我们的网站awesome-website选择用MySQL作为数据库。访问数据库需要创建数据库连接，游标对象，执行SQL语句，处理异常，清理资源。这些访问数据库的代码如果分散到每个函数中去，十分难以维护，效率低下不利于复用。因此，我们将常用的MySQL数据库操作用函数封装起来，便于网站调用。</p>
+<p>由于我们的网站基于异步编程，系统的每一层都必须是异步。aiomysql为MySQL数据库提供了异步IO的驱动。</p>
+<h1 id="创建连接池"><a href="#创建连接池" class="headerlink" title="创建连接池"></a>创建连接池</h1><p>我们需要创建一个全局的连接池，每个HTTP请求都可以从连接池中直接获取数据库连接。使用连接池的好处是不必频繁地打开和关闭数据库连接，而是能复用就尽量复用。</p>
+<p>连接池由全局变量__pool存储，缺省情况下将编码设置为utf8，自动提交事务。在www目录下新建 orm.py加入以下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio, logging, aiomysql</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(sql, args=<span class="params">()</span>)</span>:</span></span><br><span class="line">    logging.info(<span class="string">'SQL: %s'</span> % sql)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">create_pool</span><span class="params">(loop, **kw)</span>:</span></span><br><span class="line">    logging.info(<span class="string">'create database connection pool...'</span>)</span><br><span class="line">    <span class="keyword">global</span> __pool</span><br><span class="line">    __pool = <span class="keyword">await</span> aiomysql.create_pool(</span><br><span class="line">        host=kw.get(<span class="string">'host'</span>, <span class="string">'localhost'</span>),</span><br><span class="line">        port=kw.get(<span class="string">'port'</span>, <span class="number">3306</span>),</span><br><span class="line">        user=kw[<span class="string">'user'</span>],</span><br><span class="line">        password=kw[<span class="string">'password'</span>],</span><br><span class="line">        db=kw[<span class="string">'db'</span>],</span><br><span class="line">        charset=kw.get(<span class="string">'charset'</span>, <span class="string">'utf8'</span>),</span><br><span class="line">        autocommit=kw.get(<span class="string">'autocommit'</span>, <span class="literal">True</span>),</span><br><span class="line">        maxsize=kw.get(<span class="string">'maxsize'</span>, <span class="number">10</span>),</span><br><span class="line">        minsize=kw.get(<span class="string">'minsize'</span>, <span class="number">1</span>),</span><br><span class="line">        loop=loop</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<h2 id="Select"><a href="#Select" class="headerlink" title="Select"></a>Select</h2><p>要执行SELECT语句，我们用select函数执行，需要传入SQL语句和SQL参数。缀加以下代码至orm.py：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">select</span><span class="params">(sql, args, size=None)</span>:</span></span><br><span class="line">    log(sql, args)</span><br><span class="line">    <span class="keyword">global</span> __pool</span><br><span class="line">    <span class="keyword">with</span> (<span class="keyword">await</span> __pool) <span class="keyword">as</span> conn:</span><br><span class="line">        cur = <span class="keyword">await</span> conn.cursor(aiomysql.DictCursor)</span><br><span class="line">        <span class="keyword">await</span> cur.execute(sql.replace(<span class="string">'?'</span>, <span class="string">'%s'</span>), args <span class="keyword">or</span> ())</span><br><span class="line">        <span class="keyword">if</span> size:</span><br><span class="line">            rs = <span class="keyword">await</span> cur.fetchmany(size)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            rs = <span class="keyword">await</span> cur.fetchall()</span><br><span class="line">        <span class="keyword">await</span> cur.close()</span><br><span class="line">        logging.info(<span class="string">'rows returned: %s'</span> % len(rs))</span><br><span class="line">        <span class="keyword">return</span> rs</span><br></pre></td></tr></table></figure>
+<p>SQL语句的占位符是?，而MySQL的占位符是%s，select()函数在内部自动替换。注意要始终坚持使用带参数的SQL，而不是自己拼接SQL字符串，这样可以防止SQL注入攻击。</p>
+<h2 id="Insert-Update-Delete"><a href="#Insert-Update-Delete" class="headerlink" title="Insert, Update, Delete"></a>Insert, Update, Delete</h2><p>要执行INSERT、UPDATE、DELETE语句，可以定义一个通用的execute()函数，因为这3种SQL的执行都需要相同的参数，以及返回一个整数表示影响的行数。缀加以下代码至orm.py：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">execute</span><span class="params">(sql, args)</span>:</span></span><br><span class="line">    log(sql)</span><br><span class="line">    <span class="keyword">with</span> (<span class="keyword">await</span> __pool) <span class="keyword">as</span> conn:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            cur = <span class="keyword">await</span> conn.cursor()</span><br><span class="line">            <span class="keyword">await</span> cur.execute(sql.replace(<span class="string">'?'</span>, <span class="string">'%s'</span>), args)</span><br><span class="line">            affected = cur.rowcount</span><br><span class="line">            <span class="keyword">await</span> cur.close()</span><br><span class="line">        <span class="keyword">except</span> BaseException <span class="keyword">as</span> e:</span><br><span class="line">            <span class="keyword">raise</span></span><br><span class="line">        <span class="keyword">return</span> affected</span><br></pre></td></tr></table></figure>
+<p>execute()函数和select()函数所不同的是，cursor对象不返回结果集，而是通过rowcount返回结果数。</p>
+<h1 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h1><p>首先要定义的是所有ORM映射的基类Model。缀加以下代码至orm.py：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span><span class="params">(dict, metaclass=ModelMetaclass)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, **kw)</span>:</span></span><br><span class="line">        super(Model, self).__init__(**kw)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, key)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">return</span> self[key]</span><br><span class="line">        <span class="keyword">except</span> KeyError:</span><br><span class="line">            <span class="keyword">raise</span> AttributeError(<span class="string">r"'Model' object has no attribute '%s'"</span> % key)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, key, value)</span>:</span></span><br><span class="line">        self[key] = value</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getValue</span><span class="params">(self, key)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> getattr(self, key, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getValueOrDefault</span><span class="params">(self, key)</span>:</span></span><br><span class="line">        value = getattr(self, key, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">if</span> value <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            field = self.__mappings__[key]</span><br><span class="line">            <span class="keyword">if</span> field.default <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                value = field.default() <span class="keyword">if</span> callable(field.default) <span class="keyword">else</span> field.default</span><br><span class="line">                logging.debug(<span class="string">'using default value for %s: %s'</span> % (key, str(value)))</span><br><span class="line">                setattr(self, key, value)</span><br><span class="line">        <span class="keyword">return</span> value</span><br></pre></td></tr></table></figure>
+<h1 id="以及Field和各种Field子类。缀加以下代码至orm-py："><a href="#以及Field和各种Field子类。缀加以下代码至orm-py：" class="headerlink" title="以及Field和各种Field子类。缀加以下代码至orm.py："></a>以及Field和各种Field子类。缀加以下代码至orm.py：</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Field</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, column_type, primary_key, default)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.column_type = column_type</span><br><span class="line">        self.primary_key = primary_key</span><br><span class="line">        self.default = default</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&lt;%s, %s:%s&gt;'</span> % (self.__class__.__name__, self.column_type, self.name)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StringField</span><span class="params">(Field)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name=None, primary_key=False, default=None, ddl=<span class="string">'varchar(100)'</span>)</span>:</span></span><br><span class="line">        super().__init__(name, ddl, primary_key, default)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BooleanField</span><span class="params">(Field)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name=None, default=False)</span>:</span></span><br><span class="line">        super().__init__(name, <span class="string">'boolean'</span>, <span class="literal">False</span>, default)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IntegerField</span><span class="params">(Field)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name=None, primary_key=False, default=<span class="number">0</span>)</span>:</span></span><br><span class="line">        super().__init__(name, <span class="string">'bigint'</span>, primary_key, default)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FloatField</span><span class="params">(Field)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name=None, primary_key=False, default=<span class="number">0.0</span>)</span>:</span></span><br><span class="line">        super().__init__(name, <span class="string">'real'</span>, primary_key, default)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextField</span><span class="params">(Field)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name=None, default=None)</span>:</span></span><br><span class="line">        super().__init__(name, <span class="string">'text'</span>, <span class="literal">False</span>, default)</span><br></pre></td></tr></table></figure>
+<p>注意到Model只是一个基类，要将具体的子类如User的映射信息读取出来需要通过metaclass：ModelMetaclass。 这样，任何继承自Model的类（比如User），会自动通过ModelMetaclass扫描映射关系，并存储到自身的类属性如<strong>table</strong>、<strong>mappings</strong>中。缀加以下代码至Model代码之前：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_args_string</span><span class="params">(num)</span>:</span></span><br><span class="line">    L = []</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> range(num):</span><br><span class="line">        L.append(<span class="string">'?'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">', '</span>.join(L)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ModelMetaclass</span><span class="params">(type)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, name, bases, attrs)</span>:</span></span><br><span class="line">        <span class="comment"># 排除Model类本身:</span></span><br><span class="line">        <span class="keyword">if</span> name==<span class="string">'Model'</span>:</span><br><span class="line">            <span class="keyword">return</span> type.__new__(cls, name, bases, attrs)</span><br><span class="line">        <span class="comment"># 获取table名称:</span></span><br><span class="line">        tableName = attrs.get(<span class="string">'__table__'</span>, <span class="literal">None</span>) <span class="keyword">or</span> name</span><br><span class="line">        logging.info(<span class="string">'found model: %s (table: %s)'</span> % (name, tableName))</span><br><span class="line">        <span class="comment"># 获取所有的Field和主键名:</span></span><br><span class="line">        mappings = dict()</span><br><span class="line">        fields = []</span><br><span class="line">        primaryKey = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> attrs.items():</span><br><span class="line">            <span class="keyword">if</span> isinstance(v, Field):</span><br><span class="line">                logging.info(<span class="string">'  found mapping: %s ==&gt; %s'</span> % (k, v))</span><br><span class="line">                mappings[k] = v</span><br><span class="line">                <span class="keyword">if</span> v.primary_key:</span><br><span class="line">                    <span class="comment"># 找到主键:</span></span><br><span class="line">                    <span class="keyword">if</span> primaryKey:</span><br><span class="line">                        <span class="keyword">raise</span> RuntimeError(<span class="string">'Duplicate primary key for field: %s'</span> % k)</span><br><span class="line">                    primaryKey = k</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    fields.append(k)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> primaryKey:</span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">'Primary key not found.'</span>)</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> mappings.keys():</span><br><span class="line">            attrs.pop(k)</span><br><span class="line">        escaped_fields = list(map(<span class="keyword">lambda</span> f: <span class="string">'`%s`'</span> % f, fields))</span><br><span class="line">        attrs[<span class="string">'__mappings__'</span>] = mappings <span class="comment"># 保存属性和列的映射关系</span></span><br><span class="line">        attrs[<span class="string">'__table__'</span>] = tableName</span><br><span class="line">        attrs[<span class="string">'__primary_key__'</span>] = primaryKey <span class="comment"># 主键属性名</span></span><br><span class="line">        attrs[<span class="string">'__fields__'</span>] = fields <span class="comment"># 除主键外的属性名</span></span><br><span class="line">        <span class="comment"># 构造默认的SELECT, INSERT, UPDATE和DELETE语句:</span></span><br><span class="line">        attrs[<span class="string">'__select__'</span>] = <span class="string">'select `%s`, %s from `%s`'</span> % (primaryKey, <span class="string">', '</span>.join(escaped_fields), tableName)</span><br><span class="line">        attrs[<span class="string">'__insert__'</span>] = <span class="string">'insert into `%s` (%s, `%s`) values (%s)'</span> % (tableName, <span class="string">', '</span>.join(escaped_fields), primaryKey, create_args_string(len(escaped_fields) + <span class="number">1</span>))</span><br><span class="line">        attrs[<span class="string">'__update__'</span>] = <span class="string">'update `%s` set %s where `%s`=?'</span> % (tableName, <span class="string">', '</span>.join(map(<span class="keyword">lambda</span> f: <span class="string">'`%s`=?'</span> % (mappings.get(f).name <span class="keyword">or</span> f), fields)), primaryKey)</span><br><span class="line">        attrs[<span class="string">'__delete__'</span>] = <span class="string">'delete from `%s` where `%s`=?'</span> % (tableName, primaryKey)</span><br><span class="line">        <span class="keyword">return</span> type.__new__(cls, name, bases, attrs)</span><br></pre></td></tr></table></figure>
+<p>然后，我们往Model类添加class方法，就可以让所有子类调用class方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span><span class="params">(dict)</span>:</span></span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">findAll</span><span class="params">(cls, where=None, args=None, **kw)</span>:</span></span><br><span class="line">        <span class="comment">## find objects by where clause</span></span><br><span class="line">        sql = [cls.__select__]</span><br><span class="line">        <span class="keyword">if</span> where:</span><br><span class="line">            sql.append(<span class="string">'where'</span>)</span><br><span class="line">            sql.append(where)</span><br><span class="line">        <span class="keyword">if</span> args <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            args = []</span><br><span class="line">        orderBy = kw.get(<span class="string">'orderBy'</span>, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">if</span> orderBy:</span><br><span class="line">            sql.append(<span class="string">'order by'</span>)</span><br><span class="line">            sql.append(orderBy)</span><br><span class="line">        limit = kw.get(<span class="string">'limit'</span>, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">if</span> limit <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            sql.append(<span class="string">'limit'</span>)</span><br><span class="line">            <span class="keyword">if</span> isinstance(limit, int):</span><br><span class="line">                sql.append(<span class="string">'?'</span>)</span><br><span class="line">                args.append(limit)</span><br><span class="line">            <span class="keyword">elif</span> isinstance(limit, tuple) <span class="keyword">and</span> len(limit) == <span class="number">2</span>:</span><br><span class="line">                sql.append(<span class="string">'?, ?'</span>)</span><br><span class="line">                args.extend(limit)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">raise</span> ValueError(<span class="string">'Invalid limit value: %s'</span> % str(limit))</span><br><span class="line">        rs = <span class="keyword">await</span> select(<span class="string">' '</span>.join(sql), args)</span><br><span class="line">        <span class="keyword">return</span> [cls(**r) <span class="keyword">for</span> r <span class="keyword">in</span> rs]</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">findNumber</span><span class="params">(cls, selectField, where=None, args=None)</span>:</span></span><br><span class="line">        <span class="comment">## find number by select and where</span></span><br><span class="line">        sql = [<span class="string">'select %s _num_ from `%s`'</span> % (selectField, cls.__table__)]</span><br><span class="line">        <span class="keyword">if</span> where:</span><br><span class="line">            sql.append(<span class="string">'where'</span>)</span><br><span class="line">            sql.append(where)</span><br><span class="line">        rs = <span class="keyword">await</span> select(<span class="string">' '</span>.join(sql), args, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> len(rs) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> rs[<span class="number">0</span>][<span class="string">'_num_'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(cls, pk)</span>:</span></span><br><span class="line">        <span class="comment">## find object by primary key</span></span><br><span class="line">        rs = <span class="keyword">await</span> select(<span class="string">'%s where `%s`=?'</span> % (cls.__select__, cls.__primary_key__), [pk], <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> len(rs) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> cls(**rs[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<p>往Model类添加实例方法，就可以让所有子类调用实例方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span><span class="params">(dict)</span>:</span></span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">save</span><span class="params">(self)</span>:</span></span><br><span class="line">        args = list(map(self.getValueOrDefault, self.__fields__))</span><br><span class="line">        args.append(self.getValueOrDefault(self.__primary_key__))</span><br><span class="line">        rows = <span class="keyword">await</span> execute(self.__insert__, args)</span><br><span class="line">        <span class="keyword">if</span> rows != <span class="number">1</span>:</span><br><span class="line">            logging.warn(<span class="string">'failed to insert record: affected rows: %s'</span> % rows)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self)</span>:</span></span><br><span class="line">        args = list(map(self.getValue, self.__fields__))</span><br><span class="line">        args.append(self.getValue(self.__primary_key__))</span><br><span class="line">        rows = <span class="keyword">await</span> execute(self.__update__, args)</span><br><span class="line">        <span class="keyword">if</span> rows != <span class="number">1</span>:</span><br><span class="line">            logging.warn(<span class="string">'failed to update by primary key: affected rows: %s'</span> % rows)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">remove</span><span class="params">(self)</span>:</span></span><br><span class="line">        args = [self.getValue(self.__primary_key__)]</span><br><span class="line">        rows = <span class="keyword">await</span> execute(self.__delete__, args)</span><br><span class="line">        <span class="keyword">if</span> rows != <span class="number">1</span>:</span><br><span class="line">            logging.warn(<span class="string">'failed to remove by primary key: affected rows: %s'</span> % rows)</span><br></pre></td></tr></table></figure>
+<h1 id="Python-网站开发-4-–-编写Model"><a href="#Python-网站开发-4-–-编写Model" class="headerlink" title="Python 网站开发(4) – 编写Model"></a>Python 网站开发(4) – 编写Model</h1><h1 id="编写Model"><a href="#编写Model" class="headerlink" title="编写Model"></a>编写Model</h1><p>orm.py编写完成后，就可以把网站应用需要的三个表（user, blog, comment）用Model表示出来。在www目录下，新建models.py:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time, uuid</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> orm <span class="keyword">import</span> Model, StringField, BooleanField, FloatField, TextField</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">next_id</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'%015d%s000'</span> % (int(time.time() * <span class="number">1000</span>), uuid.uuid4().hex)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(Model)</span>:</span></span><br><span class="line">    __table__ = <span class="string">'users'</span></span><br><span class="line"></span><br><span class="line">    id = StringField(primary_key=<span class="literal">True</span>, default=next_id, ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    email = StringField(ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    passwd = StringField(ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    admin = BooleanField()</span><br><span class="line">    name = StringField(ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    image = StringField(ddl=<span class="string">'varchar(500)'</span>)</span><br><span class="line">    created_at = FloatField(default=time.time)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Blog</span><span class="params">(Model)</span>:</span></span><br><span class="line">    __table__ = <span class="string">'blogs'</span></span><br><span class="line"></span><br><span class="line">    id = StringField(primary_key=<span class="literal">True</span>, default=next_id, ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    user_id = StringField(ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    user_name = StringField(ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    user_image = StringField(ddl=<span class="string">'varchar(500)'</span>)</span><br><span class="line">    name = StringField(ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    summary = StringField(ddl=<span class="string">'varchar(200)'</span>)</span><br><span class="line">    content = TextField()</span><br><span class="line">    created_at = FloatField(default=time.time)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Comment</span><span class="params">(Model)</span>:</span></span><br><span class="line">    __table__ = <span class="string">'comments'</span></span><br><span class="line"></span><br><span class="line">    id = StringField(primary_key=<span class="literal">True</span>, default=next_id, ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    blog_id = StringField(ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    user_id = StringField(ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    user_name = StringField(ddl=<span class="string">'varchar(50)'</span>)</span><br><span class="line">    user_image = StringField(ddl=<span class="string">'varchar(500)'</span>)</span><br><span class="line">    content = TextField()</span><br><span class="line">    created_at = FloatField(default=time.time)</span><br></pre></td></tr></table></figure>
+<h1 id="初始化数据库表"><a href="#初始化数据库表" class="headerlink" title="初始化数据库表"></a>初始化数据库表</h1><p>由于网站表的数量较少，可以手动创建SQL脚本schema.sql到根目录：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- schema.sql</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">exists</span> awesome;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> awesome;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> awesome;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">'www-data'</span>@<span class="string">'localhost'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'www-data'</span>;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> <span class="string">'www-data'</span>@<span class="string">'localhost'</span> <span class="keyword">identified</span> <span class="keyword">with</span> mysql_native_password <span class="keyword">by</span> <span class="string">'www-data'</span>;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span>, <span class="keyword">insert</span>, <span class="keyword">update</span>, <span class="keyword">delete</span> <span class="keyword">on</span> awesome.* <span class="keyword">to</span> <span class="string">'www-data'</span>@<span class="string">'localhost'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span> (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`email`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`passwd`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`admin`</span> <span class="built_in">bool</span> <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`image`</span> <span class="built_in">varchar</span>(<span class="number">500</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`created_at`</span> <span class="built_in">real</span> <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="keyword">unique</span> <span class="keyword">key</span> <span class="string">`idx_email`</span> (<span class="string">`email`</span>),</span><br><span class="line">    <span class="keyword">key</span> <span class="string">`idx_created_at`</span> (<span class="string">`created_at`</span>),</span><br><span class="line">    primary <span class="keyword">key</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">engine</span>=<span class="keyword">innodb</span> <span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> blogs (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`user_id`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`user_name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`user_image`</span> <span class="built_in">varchar</span>(<span class="number">500</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`summary`</span> <span class="built_in">varchar</span>(<span class="number">200</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`content`</span> mediumtext <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`created_at`</span> <span class="built_in">real</span> <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="keyword">key</span> <span class="string">`idx_created_at`</span> (<span class="string">`created_at`</span>),</span><br><span class="line">    primary <span class="keyword">key</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">engine</span>=<span class="keyword">innodb</span> <span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> comments (</span><br><span class="line">    <span class="string">`id`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`blog_id`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`user_id`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`user_name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`user_image`</span> <span class="built_in">varchar</span>(<span class="number">500</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`content`</span> mediumtext <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="string">`created_at`</span> <span class="built_in">real</span> <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="keyword">key</span> <span class="string">`idx_created_at`</span> (<span class="string">`created_at`</span>),</span><br><span class="line">    primary <span class="keyword">key</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">engine</span>=<span class="keyword">innodb</span> <span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</span><br></pre></td></tr></table></figure>
+<p>把SQL脚本 schema.sql放到MySQL命令行里执行，就完成了数据库表的初始化：</p>
+<p><code>$ mysql -u root -p &lt; schema.sql</code><br>然后我们可以编写数据访问代码test.py测试一下。如新建一个User的对象：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> orm</span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> models <span class="keyword">import</span> User, Blog, Comment</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(loop)</span>:</span></span><br><span class="line">    <span class="keyword">await</span> orm.create_pool(loop=loop, user=<span class="string">'root'</span>, password=<span class="string">'root'</span>, db=<span class="string">'awesome'</span>)</span><br><span class="line">    u = User(name=<span class="string">'Test'</span>, email=<span class="string">'test@qq.com'</span>, passwd=<span class="string">'1234567890'</span>, image=<span class="string">'about:blank'</span>)</span><br><span class="line">    <span class="keyword">await</span> u.save()</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    loop = asyncio.get_event_loop()</span><br><span class="line">    loop.run_until_complete(test(loop))</span><br><span class="line">    loop.close()</span><br></pre></td></tr></table></figure></p>
+<p>运行test.py后，可以在MySQL客户端命令行查询，看看测试的数据是不是正常储存到MySQL里面。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/pasysuzhaosheng/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/14/pasysuzhaosheng/" itemprop="url">爬取中大招生网2016~2018年专业分数表</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-14T14:25:28+08:00">
+                2019-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/学习爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">学习爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/学习爬虫/爬虫小实例/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫小实例</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/14/pasysuzhaosheng/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/14/pasysuzhaosheng/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<p>根据网站具体的css选择器要做修改，还有爬取标题时候中英括号有的不一样。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> requests_html <span class="keyword">import</span> HTMLSession</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">session = HTMLSession()</span><br><span class="line"></span><br><span class="line">file = open(<span class="string">'2018.csv'</span>, <span class="string">'w'</span>, newline=<span class="string">''</span>)</span><br><span class="line">csvwriter = csv.writer(file)</span><br><span class="line">csvwriter.writerow([<span class="string">'科类'</span>,<span class="string">'院系'</span>, <span class="string">'专业'</span>, <span class="string">'最高分'</span>, <span class="string">'最低分'</span>, <span class="string">'平均分'</span>, <span class="string">'省份'</span>, <span class="string">'年份'</span>])</span><br><span class="line"></span><br><span class="line">links = [<span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/beijing/1136901.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/zhejiang/1136947.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/hebei/1136940.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/tianjin/1136943.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/shanghai/1136938.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/chongqing/1136961.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/guangdong/1136663.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/shandong/1136936.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/jiangsu/1136929.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/sichuan/1136942.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/henan/1136922.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/shanxi/1136933.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/shanx/1136937.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/liaoning/1136931.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/qinghai/1136935.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/qinghai/1136935.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/ningxia/1136934.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/neimenggu/1136932.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/jiangxi/1136930.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/jilin/1136926.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/hunan/1136925.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/hubei/1136924.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/heilongjiang/1136923.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/hainan/1136920.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/anhui/1136900.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/yunnan/1136946.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/guizhou/1136918.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/guangxi/1136910.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/xinjiang/1136945.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/gansu/1136903.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/fujian/1136902.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/xizang/1136944.htm'</span>,</span><br><span class="line">         ]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> links:</span><br><span class="line">    r = session.get(link)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">80</span>):</span><br><span class="line">        shengfen = r.html.find(<span class="string">'#cont &gt; h1'</span>, first = <span class="literal">True</span>)</span><br><span class="line">        kelei = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">3</span>)+<span class="string">') &gt; td:nth-child(1) &gt; span &gt; span'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        yuanxi = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">3</span>)+<span class="string">') &gt; td:nth-child(2) &gt; span &gt; span'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        zhuanye = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">3</span>)+<span class="string">') &gt; td:nth-child(3) &gt; span &gt; span'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        high = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">3</span>)+<span class="string">') &gt; td:nth-child(4) &gt; span &gt; span'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        low = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">3</span>)+<span class="string">') &gt; td:nth-child(5) &gt; span &gt; span'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        avg = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">3</span>)+<span class="string">') &gt; td:nth-child(6) &gt; span &gt; span'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">if</span> kelei <span class="keyword">and</span> yuanxi <span class="keyword">and</span> zhuanye <span class="keyword">and</span> high <span class="keyword">and</span> low <span class="keyword">and</span> avg:</span><br><span class="line">            csvwriter.writerow([kelei.text, yuanxi.text, zhuanye.text, high.text, low.text, avg.text, shengfen.text.split(<span class="string">'（'</span>)[<span class="number">1</span>].split(<span class="string">'）'</span>)[<span class="number">0</span>], <span class="string">'2018'</span>])</span><br><span class="line">        <span class="keyword">elif</span> kelei <span class="keyword">and</span> yuanxi <span class="keyword">and</span> zhuanye <span class="keyword">and</span> high <span class="keyword">and</span> low:</span><br><span class="line">            csvwriter.writerow([<span class="string">' '</span>,kelei.text, yuanxi.text, zhuanye.text, high.text, low.text,shengfen.text.split(<span class="string">'（'</span>)[<span class="number">1</span>].split(<span class="string">'）'</span>)[<span class="number">0</span>], <span class="string">'2018'</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> requests_html <span class="keyword">import</span> HTMLSession</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">session = HTMLSession()</span><br><span class="line"></span><br><span class="line">file = open(<span class="string">'2016.csv'</span>, <span class="string">'a+'</span>, newline=<span class="string">''</span>)</span><br><span class="line">csvwriter = csv.writer(file)</span><br><span class="line"><span class="comment">#csvwriter.writerow(['科类','院系', '专业', '最高分', '最低分', '平均分', '省份', '年份'])</span></span><br><span class="line"></span><br><span class="line">links = [<span class="comment">#'http://admission.sysu.edu.cn/zs01/zs01c/henan/2018n.htm',</span></span><br><span class="line">         <span class="comment">#'http://admission.sysu.edu.cn/zs01/zs01c/fujian/2018n.htm',</span></span><br><span class="line">         <span class="comment">#'http://admission.sysu.edu.cn/zs01/zs01c/guangxi/2018n.htm',</span></span><br><span class="line">         <span class="comment">#'http://admission.sysu.edu.cn/zs01/zs01c/yunnan/2018n.htm',</span></span><br><span class="line">         <span class="comment">#'http://admission.sysu.edu.cn/zs01/zs01c/anhui/2018n.htm',</span></span><br><span class="line">         <span class="comment">#'http://admission.sysu.edu.cn/zs01/zs01c/hainan/2018n.htm',</span></span><br><span class="line">         <span class="comment">#'http://admission.sysu.edu.cn/zs01/zs01c/heilongjiang/2018n.htm',</span></span><br><span class="line">         <span class="comment">#'http://admission.sysu.edu.cn/zs01/zs01c/beijing/2018n.htm',</span></span><br><span class="line">         <span class="comment">#'http://admission.sysu.edu.cn/zs01/zs01c/zhejiang/2017n.htm',</span></span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/shanghai/2017n.htm'</span>,</span><br><span class="line">         ]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> links:</span><br><span class="line">    r = session.get(link)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">        shengfen = r.html.find(<span class="string">'#cont &gt; h1'</span>, first = <span class="literal">True</span>)</span><br><span class="line">        kelei = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(3)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        yuanxi = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(2)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        zhuanye = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(1)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        high = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(4)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        low = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(5)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        avg = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(6)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">if</span> kelei <span class="keyword">and</span> yuanxi <span class="keyword">and</span> zhuanye <span class="keyword">and</span> high <span class="keyword">and</span> low <span class="keyword">and</span> avg:</span><br><span class="line">            csvwriter.writerow([kelei.text, yuanxi.text, zhuanye.text, high.text, low.text, avg.text, shengfen.text.split(<span class="string">'('</span>)[<span class="number">1</span>].split(<span class="string">')'</span>)[<span class="number">0</span>], <span class="string">'2016'</span>])</span><br><span class="line">            print( shengfen.text.split(<span class="string">'('</span>)[<span class="number">1</span>].split(<span class="string">')'</span>)[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">elif</span> kelei <span class="keyword">and</span> yuanxi <span class="keyword">and</span> zhuanye <span class="keyword">and</span> high <span class="keyword">and</span> low:</span><br><span class="line">            csvwriter.writerow([<span class="string">' '</span>,kelei.text, yuanxi.text, zhuanye.text, high.text, low.text,shengfen.text.split(<span class="string">'('</span>)[<span class="number">1</span>].split(<span class="string">')'</span>)[<span class="number">0</span>], <span class="string">'2016'</span>])</span><br><span class="line">            print( shengfen.text.split(<span class="string">'('</span>)[<span class="number">1</span>].split(<span class="string">')'</span>)[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> requests_html <span class="keyword">import</span> HTMLSession</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">session = HTMLSession()</span><br><span class="line"></span><br><span class="line">file = open(<span class="string">'2016.csv'</span>, <span class="string">'w'</span>, newline=<span class="string">''</span>)</span><br><span class="line">csvwriter = csv.writer(file)</span><br><span class="line">csvwriter.writerow([<span class="string">'科类'</span>,<span class="string">'院系'</span>, <span class="string">'专业'</span>, <span class="string">'最高分'</span>, <span class="string">'最低分'</span>, <span class="string">'平均分'</span>, <span class="string">'省份'</span>, <span class="string">'年份'</span>])</span><br><span class="line"></span><br><span class="line">links = [<span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/chongqing/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/guangdong/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/shandong/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/jiangsu/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/sichuan/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/henan/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/sichuan/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/hebei/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/shanxi/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/shanx/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/liaoning/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/qinghai/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/ningxia/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/neimenggu/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/jiangxi/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/jilin/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/hunan/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/hubei/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/yunnan/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/guizhou/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/xinjiang/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/gansu/2018n.htm'</span>,</span><br><span class="line">         <span class="string">'http://admission.sysu.edu.cn/zs01/zs01c/xizang/2018n.htm'</span>,</span><br><span class="line">         ]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> links:</span><br><span class="line">    r = session.get(link)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">        shengfen = r.html.find(<span class="string">'#cont &gt; h1'</span>, first = <span class="literal">True</span>)</span><br><span class="line">        kelei = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(3)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        yuanxi = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(2)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        zhuanye = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(1)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        high = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(7)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        low = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(8)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        avg = r.html.find(<span class="string">'#cont &gt; table &gt; tbody &gt; tr:nth-child('</span>+ str(i+<span class="number">9</span>)+<span class="string">') &gt; td:nth-child(9)'</span>, first=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">if</span> kelei <span class="keyword">and</span> yuanxi <span class="keyword">and</span> zhuanye <span class="keyword">and</span> high <span class="keyword">and</span> low <span class="keyword">and</span> avg:</span><br><span class="line">            csvwriter.writerow([kelei.text, yuanxi.text, zhuanye.text, high.text, low.text, avg.text, shengfen.text.split(<span class="string">'（'</span>)[<span class="number">1</span>].split(<span class="string">'）'</span>)[<span class="number">0</span>], <span class="string">'2016'</span>])</span><br><span class="line">        <span class="keyword">elif</span> kelei <span class="keyword">and</span> yuanxi <span class="keyword">and</span> zhuanye <span class="keyword">and</span> high <span class="keyword">and</span> low:</span><br><span class="line">            csvwriter.writerow([<span class="string">' '</span>,kelei.text, yuanxi.text, zhuanye.text, high.text, low.text,shengfen.text.split(<span class="string">'（'</span>)[<span class="number">1</span>].split(<span class="string">'）'</span>)[<span class="number">0</span>], <span class="string">'2016'</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+<p><img src="1.jpg" alt="1"><br><img src="2.jpg" alt="1"><br><img src="3.jpg" alt="1"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/weibociyun/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/13/weibociyun/" itemprop="url">微博 热评 情感分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-13T23:15:07+08:00">
+                2019-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/学习爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">学习爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/学习爬虫/爬虫小实例/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫小实例</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/13/weibociyun/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/13/weibociyun/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>python123学习 <a href="https://python123.io/tutorials/weibo_sentiment_anlysis" target="_blank" rel="noopener">https://python123.io/tutorials/weibo_sentiment_anlysis</a></p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/13/weibociyun/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/ciyun/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1765,633 +2431,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/12/pachongzhuanti2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/12/pachongzhuanti2/" itemprop="url">提取数据的方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-12T21:39:52+08:00">
-                2019-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/学习爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">学习爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/学习爬虫/爬虫专题/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫专题</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/12/pachongzhuanti2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/12/pachongzhuanti2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  231
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="python进行网页数据抓取有两种方式："><a href="#python进行网页数据抓取有两种方式：" class="headerlink" title="python进行网页数据抓取有两种方式："></a>python进行网页数据抓取有两种方式：</h1><p>一种是直接依据url链接来拼接使用get方法得到内容，</p>
-<p>一种是构建post请求改变对应参数来获得web返回的内容。</p>
-<p>一、第一种方法通常用来获取静态页面内容，每次将页面对应的关键字进行替换就能抓取到相应的页面。</p>
-<p>二、第二种方法是通过使用post请求来进行获取web内容抓取，由于许多网站是动态网站，每次请求返回的对应链接都是无变化，所以不能直接使用get方法来抓取网站内容，基本思路是只能依据每次发送的post数据请求观察其中的参数，并模拟构造post请求实现相应的页面获取。</p>
-<p> 静态网页爬取可见从零开始爬虫系列中的实例</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/12/pachongzhuanti1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/12/pachongzhuanti1/" itemprop="url">反爬、保存cookie、代理IP设置、添加头信息、处理验证码、异常处理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-12T20:11:00+08:00">
-                2019-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/学习爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">学习爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/学习爬虫/爬虫专题/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫专题</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/12/pachongzhuanti1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/12/pachongzhuanti1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  2.9k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  13
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="反爬"><a href="#反爬" class="headerlink" title="反爬"></a>反爬</h1><ul>
-<li><p>1、设置爬取速度，由于爬虫发送请求的速度比较快，会对服务器造成一定的影响，尽可能控制爬取速度，做到文明爬取</p>
-</li>
-<li><p>2、重启路由器。并不是指物理上的插拔路由器，而是指模拟路由器重启时发送的表单。登陆自己的路由器，一般路由器会提供重启路由器的选项，根据路由器的重启特点进行模拟，如果觉得模拟请求麻烦，那就通过selenium+chromedriver直接点击重启，前提是路由器本身是获得动态IP的</p>
-</li>
-<li><p>3、设置请求代理，不过代理不是非常稳定，并且有一部分代理不是真正的高匿代理，只是它自己这么写</p>
-</li>
-<li><p>4、多主机策略，这种策略目前看来比较可靠，一般一些网站会部署许多服务器，而我们在本机上ping网站，由于宽带运营商的原因，往往只能访问到固定的一个服务器，</p>
-</li>
-<li><p>5、频繁更改user-agent</p>
-</li>
-<li><p>6、有些网站对于某些IP地址不会做过多限制，例如学校里的公网IP，因为学校人数多，访问量大没什么奇怪</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/12/pachongzhuanti1/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/12/leetcode-399/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/12/leetcode-399/" itemprop="url">leetcode-399-Evaluate Division</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-12T17:14:30+08:00">
-                2019-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
-                    <span itemprop="name">top-100-liked-questions</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/12/leetcode-399/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/12/leetcode-399/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  909
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Equations are given in the format A / B = k, where A and B are variables represented as strings, and k is a real number (floating point number). Given some queries, return the answers. If the answer does not exist, return -1.0.<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/12/leetcode-399/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2444,7 +2483,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">237</span>
+                  <span class="site-state-item-count">240</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2534,7 +2573,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">312.5k</span>
+    <span title="Site words total count">313.7k</span>
   
 </div>
 
