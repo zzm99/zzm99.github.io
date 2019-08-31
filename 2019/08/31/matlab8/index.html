@@ -79,14 +79,21 @@
 
 
 
+<meta name="description" content="Representing Polynomials in MATLAB Polynomials were represented as row vectors For example: f(x) = x^3 - 2*x - 5 to enter this polynomial into MATLAB, use p = [1 0 -1 -5];  values of polynomials : pol">
 <meta property="og:type" content="article">
-<meta property="og:title" content="matlab8">
+<meta property="og:title" content="数值计算">
 <meta property="og:url" content="http://yoursite.com/2019/08/31/matlab8/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="Representing Polynomials in MATLAB Polynomials were represented as row vectors For example: f(x) = x^3 - 2*x - 5 to enter this polynomial into MATLAB, use p = [1 0 -1 -5];  values of polynomials : pol">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-31T01:23:56.542Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/31/matlab8/Snipaste_2019-08-31_10-42-35.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/31/matlab8/Snipaste_2019-08-31_10-58-07.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/31/matlab8/Snipaste_2019-08-31_11-07-52.png">
+<meta property="og:updated_time" content="2019-08-31T03:08:41.250Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="matlab8">
+<meta name="twitter:title" content="数值计算">
+<meta name="twitter:description" content="Representing Polynomials in MATLAB Polynomials were represented as row vectors For example: f(x) = x^3 - 2*x - 5 to enter this polynomial into MATLAB, use p = [1 0 -1 -5];  values of polynomials : pol">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/31/matlab8/Snipaste_2019-08-31_10-42-35.png">
 
 
 
@@ -131,7 +138,7 @@
   daovoice('update');
   </script>
 
-  <title>matlab8 | zzm99</title>
+  <title>数值计算 | zzm99</title>
   
 
 
@@ -308,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">matlab8</h1>
+          <h1 class="post-title" itemprop="name headline">数值计算</h1>
         
 
         <div class="post-meta">
@@ -389,7 +396,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  658
                 </span>
               
 
@@ -405,7 +412,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  3
                 </span>
               
             </div>
@@ -426,7 +433,56 @@
       
 
       
-        
+        <h1 id="Representing-Polynomials-in-MATLAB"><a href="#Representing-Polynomials-in-MATLAB" class="headerlink" title="Representing Polynomials in MATLAB"></a>Representing Polynomials in MATLAB</h1><ul>
+<li>Polynomials were represented as row vectors</li>
+<li>For example: f(x) = x^3 - 2*x - 5</li>
+<li>to enter this polynomial into MATLAB, use <code>p = [1 0 -1 -5];</code></li>
+</ul>
+<h1 id="values-of-polynomials-polyval"><a href="#values-of-polynomials-polyval" class="headerlink" title="values of polynomials : polyval()"></a>values of polynomials : polyval()</h1><ul>
+<li>plot the polynomial</li>
+</ul>
+<p>f(x) = 9x^3 - 5x^2 + 3x + 7 (for -2 &lt;= x &lt;= 5)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [9, -5, 3, 7];</span><br><span class="line">x = -2:0.01:5;</span><br><span class="line">f = polyval(a, x);</span><br><span class="line">plot(x, f, &apos;LineWidth&apos;, 2);</span><br><span class="line">xlabel(&apos;x&apos;); ylabel(&apos;f(x)&apos;);</span><br><span class="line">set(gca, &apos;FontSize&apos;, 14);</span><br></pre></td></tr></table></figure>
+<h1 id="Polynomial-Differentiation微分-polyder"><a href="#Polynomial-Differentiation微分-polyder" class="headerlink" title="Polynomial Differentiation微分: polyder()"></a>Polynomial Differentiation微分: polyder()</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = [5 0 -2 0 1];</span><br><span class="line">polyder(p)</span><br></pre></td></tr></table></figure>
+<p>算某处微分值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = [5 0  -2 0 1];</span><br><span class="line">polyval(polyder(p), 7)</span><br></pre></td></tr></table></figure>
+<h1 id="Polynomial-Integration积分-：-polyint"><a href="#Polynomial-Integration积分-：-polyint" class="headerlink" title="Polynomial Integration积分 ： polyint()"></a>Polynomial Integration积分 ： polyint()</h1><p>需要多给matlab一个常熟项，积分后会出现一个常数项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = [5 0 -2 0 1];</span><br><span class="line">polyint(p, 3)</span><br></pre></td></tr></table></figure>
+<p>在某处的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">polyval(polyint(p, 3), 7)</span><br></pre></td></tr></table></figure>
+<h1 id="Numerical数值-Differentiation微分"><a href="#Numerical数值-Differentiation微分" class="headerlink" title="Numerical数值 Differentiation微分"></a>Numerical数值 Differentiation微分</h1><h2 id="Differences-diff"><a href="#Differences-diff" class="headerlink" title="Differences: diff()"></a>Differences: diff()</h2><ul>
+<li>diff() calculates the differences between adjacent相邻 elements of a vector</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = [1 2 5 2 1];</span><br><span class="line">diff(x)</span><br></pre></td></tr></table></figure>
+<h2 id="obtain-the-slope坡度-of-a-line-between-2-points-1-5-and-2-7"><a href="#obtain-the-slope坡度-of-a-line-between-2-points-1-5-and-2-7" class="headerlink" title="obtain the slope坡度 of a line between 2 points (1, 5) and (2, 7)"></a>obtain the slope坡度 of a line between 2 points (1, 5) and (2, 7)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = [1 2]; y = [5 7];</span><br><span class="line">slope = diff(y)./diff(x)</span><br></pre></td></tr></table></figure>
+<h2 id="Numerical-Differentiation-Using-diff"><a href="#Numerical-Differentiation-Using-diff" class="headerlink" title="Numerical Differentiation Using diff()"></a>Numerical Differentiation Using diff()</h2><ul>
+<li>Given f(x) = sin(x), find f`(x0) at x0 = pi/2 using h = 0.1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x0 = pi/2; h = 0.1;</span><br><span class="line">x = [x0 x0+h];</span><br><span class="line">y = [sin(x0) sin(x0+h)];</span><br><span class="line">m = diff(y)./diff(x)</span><br></pre></td></tr></table></figure>
+<h2 id="How-to-Find-the-f-over-an-interval-0-2Π"><a href="#How-to-Find-the-f-over-an-interval-0-2Π" class="headerlink" title="How to Find the f` over an interval [0, 2Π]?"></a>How to Find the f` over an interval [0, 2Π]?</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h = 0.05; x = 0:h:2*pi;</span><br><span class="line">y = sin(x); m = diff(y)./diff(x);</span><br><span class="line">plot(m);</span><br></pre></td></tr></table></figure>
+<h1 id="Second-and-Third-Derivatives-二次-三次微分"><a href="#Second-and-Third-Derivatives-二次-三次微分" class="headerlink" title="Second and Third Derivatives 二次/三次微分"></a>Second and Third Derivatives 二次/三次微分</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = -2:0.005:2; y = x.^3;</span><br><span class="line">m = diff(y)./diff(x);</span><br><span class="line">m2 = diff(m)./diff(x(1:end-1));</span><br><span class="line"></span><br><span class="line">plot(x, y, x(1:end-1), m, x(1:end-2), m2);</span><br><span class="line">xlabel(&apos;x&apos;, &apos;FontSize&apos;, 18);</span><br><span class="line">ylabel(&apos;y&apos;, &apos;FontSize&apos;, 18);</span><br><span class="line">legend(&apos;f(x) = x^3&apos;, &apos;f&apos;&apos;(x)&apos;, &apos;f&apos;&apos;&apos;&apos;(x)&apos;);</span><br><span class="line">set(gca, &apos;FontSize&apos;, 18);</span><br></pre></td></tr></table></figure>
+<p><img src="Snipaste_2019-08-31_10-42-35.png" alt="1"></p>
+<h1 id="Numerical-Integration"><a href="#Numerical-Integration" class="headerlink" title="Numerical Integration"></a>Numerical Integration</h1><p>用矩形或梯形来估算面积大小来作为积分值</p>
+<h2 id="Midpoint矩形估算-Rule-Using-sum"><a href="#Midpoint矩形估算-Rule-Using-sum" class="headerlink" title="Midpoint矩形估算 Rule Using sum()"></a>Midpoint矩形估算 Rule Using sum()</h2><p>底乘高，底是h ， 高是中等分点的函数值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">h = 0.05; x = 0:h:2;</span><br><span class="line">midpoint = (x(1:end-1)+x(2:end))./2;</span><br><span class="line">y = 4*midpoint.^3;</span><br><span class="line">s = sum(h*y);</span><br></pre></td></tr></table></figure>
+<h2 id="Trapezoid-Rule-梯形预测"><a href="#Trapezoid-Rule-梯形预测" class="headerlink" title="Trapezoid Rule 梯形预测"></a>Trapezoid Rule 梯形预测</h2><p>上底加下底乘高除二</p>
+<p>上底是x1的函数值 下底是x0的函数值 高是h</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h = 0.05; x = 0:h:2; y = 4*x.^3;</span><br><span class="line">s = h*trapz(y)  % trapz() 就是计算上底加下底除二</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h = 0.05; x = 0:h:2; y = 4*x.^3;</span><br><span class="line">trapezoid = (y(1:end-1)+y(2:end))/2;</span><br><span class="line">s = h*sum(trapezoid)</span><br></pre></td></tr></table></figure>
+<h1 id="Second-order-Rule-1-3-Simpson’s"><a href="#Second-order-Rule-1-3-Simpson’s" class="headerlink" title="Second-order Rule: 1/3 Simpson’s"></a>Second-order Rule: 1/3 Simpson’s</h1><p>计算面积的公式为： </p>
+<p>h/3*(f0 + 4f1 + f2)</p>
+<p><img src="Snipaste_2019-08-31_10-58-07.png" alt="1"></p>
+<h1 id="Review-of-Function-Handles"><a href="#Review-of-Function-Handles" class="headerlink" title="Review of Function Handles (@)"></a>Review of Function Handles (@)</h1><ul>
+<li>A handle is a pointer to a function</li>
+<li>can be used to pass functions to other functions</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function [y] = xy_plot(input, x)</span><br><span class="line">% xy_plot receives the handle of a function and plots that function of x</span><br><span class="line">y = input(x); plot(x, y &apos;r--&apos;);</span><br><span class="line">xlabel(&apos;x&apos;); ylabel(&apos;function(x)&apos;);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>Try: <code>xy_plot(@sin, 0:0.01:2*pi);</code></p>
+<p>不能将函数传给函数，只能传一个函数的handle给另一个函数</p>
+<h1 id="Numerical-Integration积分-integral"><a href="#Numerical-Integration积分-integral" class="headerlink" title="Numerical Integration积分: integral()"></a>Numerical Integration积分: integral()</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = @(x) 1./(x.^3-2*x-5);</span><br><span class="line">integral(y,0,2)</span><br></pre></td></tr></table></figure>
+<h1 id="Double-and-Triple-Integrals"><a href="#Double-and-Triple-Integrals" class="headerlink" title="Double and Triple Integrals"></a>Double and Triple Integrals</h1><p><img src="Snipaste_2019-08-31_11-07-52.png" alt="1"></p>
+
       
     </div>
     
@@ -489,8 +545,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/31/matlab9/" rel="prev" title="matlab9">
-                matlab9 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/31/matlab9/" rel="prev" title="方程式求根">
+                方程式求根 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -546,8 +602,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -620,6 +685,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Representing-Polynomials-in-MATLAB"><span class="nav-number">1.</span> <span class="nav-text">Representing Polynomials in MATLAB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#values-of-polynomials-polyval"><span class="nav-number">2.</span> <span class="nav-text">values of polynomials : polyval()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Polynomial-Differentiation微分-polyder"><span class="nav-number">3.</span> <span class="nav-text">Polynomial Differentiation微分: polyder()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Polynomial-Integration积分-：-polyint"><span class="nav-number">4.</span> <span class="nav-text">Polynomial Integration积分 ： polyint()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Numerical数值-Differentiation微分"><span class="nav-number">5.</span> <span class="nav-text">Numerical数值 Differentiation微分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Differences-diff"><span class="nav-number">5.1.</span> <span class="nav-text">Differences: diff()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#obtain-the-slope坡度-of-a-line-between-2-points-1-5-and-2-7"><span class="nav-number">5.2.</span> <span class="nav-text">obtain the slope坡度 of a line between 2 points (1, 5) and (2, 7)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Numerical-Differentiation-Using-diff"><span class="nav-number">5.3.</span> <span class="nav-text">Numerical Differentiation Using diff()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-Find-the-f-over-an-interval-0-2Π"><span class="nav-number">5.4.</span> <span class="nav-text">How to Find the f` over an interval [0, 2Π]?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Second-and-Third-Derivatives-二次-三次微分"><span class="nav-number">6.</span> <span class="nav-text">Second and Third Derivatives 二次/三次微分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Numerical-Integration"><span class="nav-number">7.</span> <span class="nav-text">Numerical Integration</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Midpoint矩形估算-Rule-Using-sum"><span class="nav-number">7.1.</span> <span class="nav-text">Midpoint矩形估算 Rule Using sum()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trapezoid-Rule-梯形预测"><span class="nav-number">7.2.</span> <span class="nav-text">Trapezoid Rule 梯形预测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Second-order-Rule-1-3-Simpson’s"><span class="nav-number">8.</span> <span class="nav-text">Second-order Rule: 1/3 Simpson’s</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Review-of-Function-Handles"><span class="nav-number">9.</span> <span class="nav-text">Review of Function Handles (@)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Numerical-Integration积分-integral"><span class="nav-number">10.</span> <span class="nav-text">Numerical Integration积分: integral()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Double-and-Triple-Integrals"><span class="nav-number">11.</span> <span class="nav-text">Double and Triple Integrals</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -654,7 +735,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">313.7k</span>
+    <span title="Site words total count">314.8k</span>
   
 </div>
 

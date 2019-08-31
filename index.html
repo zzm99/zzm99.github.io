@@ -492,7 +492,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/31/matlab9/" itemprop="url">matlab9</a></h1>
+                <a class="post-title-link" href="/2019/08/31/matlab9/" itemprop="url">方程式求根</a></h1>
         
 
         <div class="post-meta">
@@ -568,7 +568,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  468
                 </span>
               
 
@@ -584,7 +584,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -607,7 +607,79 @@
       
         
           
-            
+            <h1 id="Symbolic-Root-Finding-Approach"><a href="#Symbolic-Root-Finding-Approach" class="headerlink" title="Symbolic Root Finding Approach"></a>Symbolic Root Finding Approach</h1><ul>
+<li>Performing mathematics on symbols, NOT numbers</li>
+<li>The symbols math are performed using “symbolic variables”</li>
+<li>use sym or syms to create symbolic variables</li>
+</ul>
+<p>就是利用sym来创建一个未知数x</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syms x</span><br><span class="line">x + x + x  %就是3x</span><br><span class="line">(x + x + x)/4 %就是（3/4）x</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = sym(&apos;x&apos;);</span><br><span class="line">x + x + x</span><br><span class="line">(x + x + x)/4</span><br></pre></td></tr></table></figure>
+<p>同时用未知数去定义一个量，那个量也变为未知数</p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = x^2 - 2*x -8</span><br></pre></td></tr></table></figure></p>
+<h1 id="Symbolic-Root-Finding-solve"><a href="#Symbolic-Root-Finding-solve" class="headerlink" title="Symbolic Root Finding: solve()"></a>Symbolic Root Finding: solve()</h1><ul>
+<li>Function ‘solve’ finds roots for equations</li>
+</ul>
+<p>对于：y = x*sin(x) - x = 0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">syms x</span><br><span class="line">solve(&apos;x*sin(x)-x&apos;, x)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syms x</span><br><span class="line">y = x*sin(x)-x;</span><br><span class="line">solve(y, x)</span><br></pre></td></tr></table></figure>
+<h1 id="Solving-Multiple-Equations"><a href="#Solving-Multiple-Equations" class="headerlink" title="Solving Multiple Equations"></a>Solving Multiple Equations</h1><ul>
+<li>solve this equation using symbolic approach:</li>
+</ul>
+<p>{</p>
+<p>x - 2y = 5</p>
+<p>x + y = 6</p>
+<p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">syms x y</span><br><span class="line">eq1 = x - 2*y - 5;</span><br><span class="line">eq2 = x + y - 6;</span><br><span class="line">A = solve(eq1, eq2, x, y);</span><br><span class="line">A.x</span><br><span class="line">A.y</span><br></pre></td></tr></table></figure>
+<h1 id="Solving-Equations-Expressed-in-Symbols"><a href="#Solving-Equations-Expressed-in-Symbols" class="headerlink" title="Solving Equations Expressed in Symbols"></a>Solving Equations Expressed in Symbols</h1><ul>
+<li>what if we are given a function expressed in symbols?</li>
+</ul>
+<p>a*x^2 - b = 0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">syms x a b</span><br><span class="line">solve(&apos;a*x^2-b&apos;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>x is always the first choice to be solved</li>
+<li>what if one wants to express b in terms of a and x?</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">syms x a b</span><br><span class="line">solve(&apos;a*x^2-b&apos;,&apos;b&apos;)</span><br></pre></td></tr></table></figure>
+<h1 id="Symbolic-Differentiation微分-diff"><a href="#Symbolic-Differentiation微分-diff" class="headerlink" title="Symbolic Differentiation微分: diff()"></a>Symbolic Differentiation微分: diff()</h1><ul>
+<li>Calculate the derivative of a symbolic function:</li>
+</ul>
+<p>y = 4*x^5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syms x </span><br><span class="line">y = 4*x^5</span><br><span class="line">yprime = diff(y)</span><br></pre></td></tr></table></figure>
+<h1 id="Symbolic-Integration积分-int"><a href="#Symbolic-Integration积分-int" class="headerlink" title="Symbolic Integration积分: int()"></a>Symbolic Integration积分: int()</h1><p><img src="Snipaste_2019-08-31_13-57-06.png" alt="1"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">syms x;</span><br><span class="line">y = x^2*exp(x);</span><br><span class="line">z = int(y);</span><br><span class="line">z = z-subs(z, x, 0)</span><br></pre></td></tr></table></figure>
+<h1 id="fsolve"><a href="#fsolve" class="headerlink" title="fsolve()"></a>fsolve()</h1><ul>
+<li>A numeric root solver</li>
+<li>For example, solve this equation:</li>
+</ul>
+<p>f(x) = 1.2x + 0.3 + x*sin(x)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f2 = @(x)  (1.2*x+0.3+x*sin(x));</span><br><span class="line">fsolve(f2, 0)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中fsolve的第二个参数是对方程成立的x的大概范围猜测，上面例子猜测为0</p>
+</blockquote>
+<h1 id="fzero"><a href="#fzero" class="headerlink" title="fzero()"></a>fzero()</h1><ul>
+<li>Another numeric root solver</li>
+<li>Find the zero if and only if the function crosses the x-axis</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f = @(x) x.^2;</span><br><span class="line">fzero(f, 0.1) % fzero解不出来 因为x^2 没有穿过x轴 但是fsolve(f, 0)能解出来</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f = @(x) x;</span><br><span class="line">fzero(f, 0.1)  %能解出来</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>fzero第二个参数也类似fsolve</p>
+</blockquote>
+<h1 id="Finding-Roots-of-Polynomials-roots"><a href="#Finding-Roots-of-Polynomials-roots" class="headerlink" title="Finding Roots of Polynomials: roots()"></a>Finding Roots of Polynomials: roots()</h1><ul>
+<li>find the roots of the polynomial</li>
+<li>roots only works for polynomial</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roots([1 -6 -12 81])  % f(x) = x^3-6*x^2-12*x+81</span><br></pre></td></tr></table></figure>
+<h1 id="求解root-两种原理："><a href="#求解root-两种原理：" class="headerlink" title="求解root 两种原理："></a>求解root 两种原理：</h1><h2 id="Bisection-二分法"><a href="#Bisection-二分法" class="headerlink" title="Bisection 二分法"></a>Bisection 二分法</h2><h2 id="Newton-Raphson-Method-Open-牛顿法"><a href="#Newton-Raphson-Method-Open-牛顿法" class="headerlink" title="Newton-Raphson Method(Open) 牛顿法"></a>Newton-Raphson Method(Open) 牛顿法</h2><p>Assumption:</p>
+<ul>
+<li>f(x) continusous</li>
+<li>f`(x) known</li>
+</ul>
+<p><img src="Snipaste_2019-08-31_14-27-39.png" alt="1"></p>
+<p><img src="Snipaste_2019-08-31_14-27-28.png" alt="1"></p>
+
           
         
       
@@ -674,7 +746,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/31/matlab8/" itemprop="url">matlab8</a></h1>
+                <a class="post-title-link" href="/2019/08/31/matlab8/" itemprop="url">数值计算</a></h1>
         
 
         <div class="post-meta">
@@ -750,7 +822,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  658
                 </span>
               
 
@@ -766,7 +838,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  3
                 </span>
               
             </div>
@@ -789,7 +861,56 @@
       
         
           
-            
+            <h1 id="Representing-Polynomials-in-MATLAB"><a href="#Representing-Polynomials-in-MATLAB" class="headerlink" title="Representing Polynomials in MATLAB"></a>Representing Polynomials in MATLAB</h1><ul>
+<li>Polynomials were represented as row vectors</li>
+<li>For example: f(x) = x^3 - 2*x - 5</li>
+<li>to enter this polynomial into MATLAB, use <code>p = [1 0 -1 -5];</code></li>
+</ul>
+<h1 id="values-of-polynomials-polyval"><a href="#values-of-polynomials-polyval" class="headerlink" title="values of polynomials : polyval()"></a>values of polynomials : polyval()</h1><ul>
+<li>plot the polynomial</li>
+</ul>
+<p>f(x) = 9x^3 - 5x^2 + 3x + 7 (for -2 &lt;= x &lt;= 5)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [9, -5, 3, 7];</span><br><span class="line">x = -2:0.01:5;</span><br><span class="line">f = polyval(a, x);</span><br><span class="line">plot(x, f, &apos;LineWidth&apos;, 2);</span><br><span class="line">xlabel(&apos;x&apos;); ylabel(&apos;f(x)&apos;);</span><br><span class="line">set(gca, &apos;FontSize&apos;, 14);</span><br></pre></td></tr></table></figure>
+<h1 id="Polynomial-Differentiation微分-polyder"><a href="#Polynomial-Differentiation微分-polyder" class="headerlink" title="Polynomial Differentiation微分: polyder()"></a>Polynomial Differentiation微分: polyder()</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = [5 0 -2 0 1];</span><br><span class="line">polyder(p)</span><br></pre></td></tr></table></figure>
+<p>算某处微分值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = [5 0  -2 0 1];</span><br><span class="line">polyval(polyder(p), 7)</span><br></pre></td></tr></table></figure>
+<h1 id="Polynomial-Integration积分-：-polyint"><a href="#Polynomial-Integration积分-：-polyint" class="headerlink" title="Polynomial Integration积分 ： polyint()"></a>Polynomial Integration积分 ： polyint()</h1><p>需要多给matlab一个常熟项，积分后会出现一个常数项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = [5 0 -2 0 1];</span><br><span class="line">polyint(p, 3)</span><br></pre></td></tr></table></figure>
+<p>在某处的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">polyval(polyint(p, 3), 7)</span><br></pre></td></tr></table></figure>
+<h1 id="Numerical数值-Differentiation微分"><a href="#Numerical数值-Differentiation微分" class="headerlink" title="Numerical数值 Differentiation微分"></a>Numerical数值 Differentiation微分</h1><h2 id="Differences-diff"><a href="#Differences-diff" class="headerlink" title="Differences: diff()"></a>Differences: diff()</h2><ul>
+<li>diff() calculates the differences between adjacent相邻 elements of a vector</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = [1 2 5 2 1];</span><br><span class="line">diff(x)</span><br></pre></td></tr></table></figure>
+<h2 id="obtain-the-slope坡度-of-a-line-between-2-points-1-5-and-2-7"><a href="#obtain-the-slope坡度-of-a-line-between-2-points-1-5-and-2-7" class="headerlink" title="obtain the slope坡度 of a line between 2 points (1, 5) and (2, 7)"></a>obtain the slope坡度 of a line between 2 points (1, 5) and (2, 7)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = [1 2]; y = [5 7];</span><br><span class="line">slope = diff(y)./diff(x)</span><br></pre></td></tr></table></figure>
+<h2 id="Numerical-Differentiation-Using-diff"><a href="#Numerical-Differentiation-Using-diff" class="headerlink" title="Numerical Differentiation Using diff()"></a>Numerical Differentiation Using diff()</h2><ul>
+<li>Given f(x) = sin(x), find f`(x0) at x0 = pi/2 using h = 0.1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x0 = pi/2; h = 0.1;</span><br><span class="line">x = [x0 x0+h];</span><br><span class="line">y = [sin(x0) sin(x0+h)];</span><br><span class="line">m = diff(y)./diff(x)</span><br></pre></td></tr></table></figure>
+<h2 id="How-to-Find-the-f-over-an-interval-0-2Π"><a href="#How-to-Find-the-f-over-an-interval-0-2Π" class="headerlink" title="How to Find the f` over an interval [0, 2Π]?"></a>How to Find the f` over an interval [0, 2Π]?</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h = 0.05; x = 0:h:2*pi;</span><br><span class="line">y = sin(x); m = diff(y)./diff(x);</span><br><span class="line">plot(m);</span><br></pre></td></tr></table></figure>
+<h1 id="Second-and-Third-Derivatives-二次-三次微分"><a href="#Second-and-Third-Derivatives-二次-三次微分" class="headerlink" title="Second and Third Derivatives 二次/三次微分"></a>Second and Third Derivatives 二次/三次微分</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = -2:0.005:2; y = x.^3;</span><br><span class="line">m = diff(y)./diff(x);</span><br><span class="line">m2 = diff(m)./diff(x(1:end-1));</span><br><span class="line"></span><br><span class="line">plot(x, y, x(1:end-1), m, x(1:end-2), m2);</span><br><span class="line">xlabel(&apos;x&apos;, &apos;FontSize&apos;, 18);</span><br><span class="line">ylabel(&apos;y&apos;, &apos;FontSize&apos;, 18);</span><br><span class="line">legend(&apos;f(x) = x^3&apos;, &apos;f&apos;&apos;(x)&apos;, &apos;f&apos;&apos;&apos;&apos;(x)&apos;);</span><br><span class="line">set(gca, &apos;FontSize&apos;, 18);</span><br></pre></td></tr></table></figure>
+<p><img src="Snipaste_2019-08-31_10-42-35.png" alt="1"></p>
+<h1 id="Numerical-Integration"><a href="#Numerical-Integration" class="headerlink" title="Numerical Integration"></a>Numerical Integration</h1><p>用矩形或梯形来估算面积大小来作为积分值</p>
+<h2 id="Midpoint矩形估算-Rule-Using-sum"><a href="#Midpoint矩形估算-Rule-Using-sum" class="headerlink" title="Midpoint矩形估算 Rule Using sum()"></a>Midpoint矩形估算 Rule Using sum()</h2><p>底乘高，底是h ， 高是中等分点的函数值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">h = 0.05; x = 0:h:2;</span><br><span class="line">midpoint = (x(1:end-1)+x(2:end))./2;</span><br><span class="line">y = 4*midpoint.^3;</span><br><span class="line">s = sum(h*y);</span><br></pre></td></tr></table></figure>
+<h2 id="Trapezoid-Rule-梯形预测"><a href="#Trapezoid-Rule-梯形预测" class="headerlink" title="Trapezoid Rule 梯形预测"></a>Trapezoid Rule 梯形预测</h2><p>上底加下底乘高除二</p>
+<p>上底是x1的函数值 下底是x0的函数值 高是h</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h = 0.05; x = 0:h:2; y = 4*x.^3;</span><br><span class="line">s = h*trapz(y)  % trapz() 就是计算上底加下底除二</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h = 0.05; x = 0:h:2; y = 4*x.^3;</span><br><span class="line">trapezoid = (y(1:end-1)+y(2:end))/2;</span><br><span class="line">s = h*sum(trapezoid)</span><br></pre></td></tr></table></figure>
+<h1 id="Second-order-Rule-1-3-Simpson’s"><a href="#Second-order-Rule-1-3-Simpson’s" class="headerlink" title="Second-order Rule: 1/3 Simpson’s"></a>Second-order Rule: 1/3 Simpson’s</h1><p>计算面积的公式为： </p>
+<p>h/3*(f0 + 4f1 + f2)</p>
+<p><img src="Snipaste_2019-08-31_10-58-07.png" alt="1"></p>
+<h1 id="Review-of-Function-Handles"><a href="#Review-of-Function-Handles" class="headerlink" title="Review of Function Handles (@)"></a>Review of Function Handles (@)</h1><ul>
+<li>A handle is a pointer to a function</li>
+<li>can be used to pass functions to other functions</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function [y] = xy_plot(input, x)</span><br><span class="line">% xy_plot receives the handle of a function and plots that function of x</span><br><span class="line">y = input(x); plot(x, y &apos;r--&apos;);</span><br><span class="line">xlabel(&apos;x&apos;); ylabel(&apos;function(x)&apos;);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>Try: <code>xy_plot(@sin, 0:0.01:2*pi);</code></p>
+<p>不能将函数传给函数，只能传一个函数的handle给另一个函数</p>
+<h1 id="Numerical-Integration积分-integral"><a href="#Numerical-Integration积分-integral" class="headerlink" title="Numerical Integration积分: integral()"></a>Numerical Integration积分: integral()</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = @(x) 1./(x.^3-2*x-5);</span><br><span class="line">integral(y,0,2)</span><br></pre></td></tr></table></figure>
+<h1 id="Double-and-Triple-Integrals"><a href="#Double-and-Triple-Integrals" class="headerlink" title="Double and Triple Integrals"></a>Double and Triple Integrals</h1><p><img src="Snipaste_2019-08-31_11-07-52.png" alt="1"></p>
+
           
         
       
@@ -2370,7 +2491,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">313.7k</span>
+    <span title="Site words total count">314.8k</span>
   
 </div>
 

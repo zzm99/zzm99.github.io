@@ -79,14 +79,21 @@
 
 
 
+<meta name="description" content="Symbolic Root Finding Approach Performing mathematics on symbols, NOT numbers The symbols math are performed using “symbolic variables” use sym or syms to create symbolic variables  就是利用sym来创建一个未知数x 1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="matlab9">
+<meta property="og:title" content="方程式求根">
 <meta property="og:url" content="http://yoursite.com/2019/08/31/matlab9/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="Symbolic Root Finding Approach Performing mathematics on symbols, NOT numbers The symbols math are performed using “symbolic variables” use sym or syms to create symbolic variables  就是利用sym来创建一个未知数x 1">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-31T01:23:56.542Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/31/matlab9/Snipaste_2019-08-31_13-57-06.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/31/matlab9/Snipaste_2019-08-31_14-27-39.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/31/matlab9/Snipaste_2019-08-31_14-27-28.png">
+<meta property="og:updated_time" content="2019-08-31T06:29:17.107Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="matlab9">
+<meta name="twitter:title" content="方程式求根">
+<meta name="twitter:description" content="Symbolic Root Finding Approach Performing mathematics on symbols, NOT numbers The symbols math are performed using “symbolic variables” use sym or syms to create symbolic variables  就是利用sym来创建一个未知数x 1">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/31/matlab9/Snipaste_2019-08-31_13-57-06.png">
 
 
 
@@ -131,7 +138,7 @@
   daovoice('update');
   </script>
 
-  <title>matlab9 | zzm99</title>
+  <title>方程式求根 | zzm99</title>
   
 
 
@@ -308,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">matlab9</h1>
+          <h1 class="post-title" itemprop="name headline">方程式求根</h1>
         
 
         <div class="post-meta">
@@ -389,7 +396,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  468
                 </span>
               
 
@@ -405,7 +412,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -426,7 +433,79 @@
       
 
       
-        
+        <h1 id="Symbolic-Root-Finding-Approach"><a href="#Symbolic-Root-Finding-Approach" class="headerlink" title="Symbolic Root Finding Approach"></a>Symbolic Root Finding Approach</h1><ul>
+<li>Performing mathematics on symbols, NOT numbers</li>
+<li>The symbols math are performed using “symbolic variables”</li>
+<li>use sym or syms to create symbolic variables</li>
+</ul>
+<p>就是利用sym来创建一个未知数x</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syms x</span><br><span class="line">x + x + x  %就是3x</span><br><span class="line">(x + x + x)/4 %就是（3/4）x</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = sym(&apos;x&apos;);</span><br><span class="line">x + x + x</span><br><span class="line">(x + x + x)/4</span><br></pre></td></tr></table></figure>
+<p>同时用未知数去定义一个量，那个量也变为未知数</p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = x^2 - 2*x -8</span><br></pre></td></tr></table></figure></p>
+<h1 id="Symbolic-Root-Finding-solve"><a href="#Symbolic-Root-Finding-solve" class="headerlink" title="Symbolic Root Finding: solve()"></a>Symbolic Root Finding: solve()</h1><ul>
+<li>Function ‘solve’ finds roots for equations</li>
+</ul>
+<p>对于：y = x*sin(x) - x = 0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">syms x</span><br><span class="line">solve(&apos;x*sin(x)-x&apos;, x)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syms x</span><br><span class="line">y = x*sin(x)-x;</span><br><span class="line">solve(y, x)</span><br></pre></td></tr></table></figure>
+<h1 id="Solving-Multiple-Equations"><a href="#Solving-Multiple-Equations" class="headerlink" title="Solving Multiple Equations"></a>Solving Multiple Equations</h1><ul>
+<li>solve this equation using symbolic approach:</li>
+</ul>
+<p>{</p>
+<p>x - 2y = 5</p>
+<p>x + y = 6</p>
+<p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">syms x y</span><br><span class="line">eq1 = x - 2*y - 5;</span><br><span class="line">eq2 = x + y - 6;</span><br><span class="line">A = solve(eq1, eq2, x, y);</span><br><span class="line">A.x</span><br><span class="line">A.y</span><br></pre></td></tr></table></figure>
+<h1 id="Solving-Equations-Expressed-in-Symbols"><a href="#Solving-Equations-Expressed-in-Symbols" class="headerlink" title="Solving Equations Expressed in Symbols"></a>Solving Equations Expressed in Symbols</h1><ul>
+<li>what if we are given a function expressed in symbols?</li>
+</ul>
+<p>a*x^2 - b = 0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">syms x a b</span><br><span class="line">solve(&apos;a*x^2-b&apos;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>x is always the first choice to be solved</li>
+<li>what if one wants to express b in terms of a and x?</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">syms x a b</span><br><span class="line">solve(&apos;a*x^2-b&apos;,&apos;b&apos;)</span><br></pre></td></tr></table></figure>
+<h1 id="Symbolic-Differentiation微分-diff"><a href="#Symbolic-Differentiation微分-diff" class="headerlink" title="Symbolic Differentiation微分: diff()"></a>Symbolic Differentiation微分: diff()</h1><ul>
+<li>Calculate the derivative of a symbolic function:</li>
+</ul>
+<p>y = 4*x^5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syms x </span><br><span class="line">y = 4*x^5</span><br><span class="line">yprime = diff(y)</span><br></pre></td></tr></table></figure>
+<h1 id="Symbolic-Integration积分-int"><a href="#Symbolic-Integration积分-int" class="headerlink" title="Symbolic Integration积分: int()"></a>Symbolic Integration积分: int()</h1><p><img src="Snipaste_2019-08-31_13-57-06.png" alt="1"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">syms x;</span><br><span class="line">y = x^2*exp(x);</span><br><span class="line">z = int(y);</span><br><span class="line">z = z-subs(z, x, 0)</span><br></pre></td></tr></table></figure>
+<h1 id="fsolve"><a href="#fsolve" class="headerlink" title="fsolve()"></a>fsolve()</h1><ul>
+<li>A numeric root solver</li>
+<li>For example, solve this equation:</li>
+</ul>
+<p>f(x) = 1.2x + 0.3 + x*sin(x)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f2 = @(x)  (1.2*x+0.3+x*sin(x));</span><br><span class="line">fsolve(f2, 0)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中fsolve的第二个参数是对方程成立的x的大概范围猜测，上面例子猜测为0</p>
+</blockquote>
+<h1 id="fzero"><a href="#fzero" class="headerlink" title="fzero()"></a>fzero()</h1><ul>
+<li>Another numeric root solver</li>
+<li>Find the zero if and only if the function crosses the x-axis</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f = @(x) x.^2;</span><br><span class="line">fzero(f, 0.1) % fzero解不出来 因为x^2 没有穿过x轴 但是fsolve(f, 0)能解出来</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f = @(x) x;</span><br><span class="line">fzero(f, 0.1)  %能解出来</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>fzero第二个参数也类似fsolve</p>
+</blockquote>
+<h1 id="Finding-Roots-of-Polynomials-roots"><a href="#Finding-Roots-of-Polynomials-roots" class="headerlink" title="Finding Roots of Polynomials: roots()"></a>Finding Roots of Polynomials: roots()</h1><ul>
+<li>find the roots of the polynomial</li>
+<li>roots only works for polynomial</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roots([1 -6 -12 81])  % f(x) = x^3-6*x^2-12*x+81</span><br></pre></td></tr></table></figure>
+<h1 id="求解root-两种原理："><a href="#求解root-两种原理：" class="headerlink" title="求解root 两种原理："></a>求解root 两种原理：</h1><h2 id="Bisection-二分法"><a href="#Bisection-二分法" class="headerlink" title="Bisection 二分法"></a>Bisection 二分法</h2><h2 id="Newton-Raphson-Method-Open-牛顿法"><a href="#Newton-Raphson-Method-Open-牛顿法" class="headerlink" title="Newton-Raphson Method(Open) 牛顿法"></a>Newton-Raphson Method(Open) 牛顿法</h2><p>Assumption:</p>
+<ul>
+<li>f(x) continusous</li>
+<li>f`(x) known</li>
+</ul>
+<p><img src="Snipaste_2019-08-31_14-27-39.png" alt="1"></p>
+<p><img src="Snipaste_2019-08-31_14-27-28.png" alt="1"></p>
+
       
     </div>
     
@@ -479,8 +558,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/31/matlab8/" rel="next" title="matlab8">
-                <i class="fa fa-chevron-left"></i> matlab8
+              <a href="/2019/08/31/matlab8/" rel="next" title="数值计算">
+                <i class="fa fa-chevron-left"></i> 数值计算
               </a>
             
           </div>
@@ -546,8 +625,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -620,6 +708,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Symbolic-Root-Finding-Approach"><span class="nav-number">1.</span> <span class="nav-text">Symbolic Root Finding Approach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Symbolic-Root-Finding-solve"><span class="nav-number">2.</span> <span class="nav-text">Symbolic Root Finding: solve()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solving-Multiple-Equations"><span class="nav-number">3.</span> <span class="nav-text">Solving Multiple Equations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solving-Equations-Expressed-in-Symbols"><span class="nav-number">4.</span> <span class="nav-text">Solving Equations Expressed in Symbols</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Symbolic-Differentiation微分-diff"><span class="nav-number">5.</span> <span class="nav-text">Symbolic Differentiation微分: diff()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Symbolic-Integration积分-int"><span class="nav-number">6.</span> <span class="nav-text">Symbolic Integration积分: int()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fsolve"><span class="nav-number">7.</span> <span class="nav-text">fsolve()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fzero"><span class="nav-number">8.</span> <span class="nav-text">fzero()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Finding-Roots-of-Polynomials-roots"><span class="nav-number">9.</span> <span class="nav-text">Finding Roots of Polynomials: roots()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求解root-两种原理："><span class="nav-number">10.</span> <span class="nav-text">求解root 两种原理：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bisection-二分法"><span class="nav-number">10.1.</span> <span class="nav-text">Bisection 二分法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Newton-Raphson-Method-Open-牛顿法"><span class="nav-number">10.2.</span> <span class="nav-text">Newton-Raphson Method(Open) 牛顿法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -654,7 +758,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">313.7k</span>
+    <span title="Site words total count">314.8k</span>
   
 </div>
 
