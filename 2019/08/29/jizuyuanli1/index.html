@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="zzm99">
 <meta property="og:description" content="数据类型和方法： 数据类型：字节，byte占用8bit，halfword占用2byte=16bit，word占用4byte=32bit  一个字符需要一个Byte的空间  一个整数需要1个Word（4Byte）的空间  MIPS结构的每条指令长度都是32bit   寄存器： 有32个通用寄存器，用编号$0到$31来表示，也可以用寄存器名字来表示，例如$sp,$t1,$ra 有两个特殊的寄存器Lo、">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-01T15:32:45.089Z">
+<meta property="og:updated_time" content="2019-09-02T00:59:41.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIPS汇编语言学习">
 <meta name="twitter:description" content="数据类型和方法： 数据类型：字节，byte占用8bit，halfword占用2byte=16bit，word占用4byte=32bit  一个字符需要一个Byte的空间  一个整数需要1个Word（4Byte）的空间  MIPS结构的每条指令长度都是32bit   寄存器： 有32个通用寄存器，用编号$0到$31来表示，也可以用寄存器名字来表示，例如$sp,$t1,$ra 有两个特殊的寄存器Lo、">
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  594
+                  1.3k
                 </span>
               
 
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  5
                 </span>
               
             </div>
@@ -475,8 +475,47 @@
 <ol>
 <li>load指令：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">lw          register_destination, RAM_source    </span><br><span class="line">                    # copy word (4 bytes) at source_RAM location to destination register</span><br><span class="line">                    # load word -&gt; lw</span><br><span class="line"></span><br><span class="line">lb          register_destination, RAM_source</span><br><span class="line">                    # copy byte at source RAM location to low-order byte of destination register, and sign -e.g. tend to higher-order bytes</span><br><span class="line">                    # load byte -&gt; lb</span><br><span class="line"></span><br><span class="line">li          register_destination, value</span><br><span class="line">                    # load immediate value into destination register</span><br><span class="line">                    # load immediate -&gt; li</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>store 指令：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sw          register_source, RAM_destination</span><br><span class="line">                        # store word in source register into RAM destination</span><br><span class="line"></span><br><span class="line">sb         register_source, RAM_destination</span><br><span class="line">                        # store byte (low-order) in source register into RAM destination</span><br></pre></td></tr></table></figure>
+<p>example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">var1:       .word   23      # declare storage for var1; initial value is 23</span><br><span class="line"></span><br><span class="line">.text</span><br><span class="line">__start:</span><br><span class="line">lw          $t0, var1       # load contents of RAM location into register $t0;</span><br><span class="line">                            # $t0 = var1</span><br><span class="line"></span><br><span class="line">li          $t1, 5          # $t1 = 5   (&quot;load immediate&quot;)</span><br><span class="line">sw          $t1, var1       # store contents of register $t1 into RAM:</span><br><span class="line">                            # var1 = $t1 done</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h2 id="Part3-寻址"><a href="#Part3-寻址" class="headerlink" title="Part3: 寻址"></a>Part3: 寻址</h2><p>MIPS系统结构只能用load/store相关指令来实现寻址操作，包括三种寻址方式：</p>
+<ul>
+<li>装载地址： load address，相当于直接寻址，把数据地址直接载入寄存器。</li>
+<li>间接寻址： indirect addressing，间接寻址，把寄存器内容作为地址。</li>
+<li>基线寻址/索引寻址： based or indexed addressing， 相对寻址， 利用补偿值(offset)寻址</li>
+</ul>
+<ol>
+<li>直接寻址/装载地址：load address:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">la      $t0, var1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>把var1在主存RAM中的地址拷贝到寄存器t0中，var1也可以是程序中定义的一个子程序标签的地址。</p>
+<ol start="2">
+<li>间接寻址： indirect addressing：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lw      $t2, ($t0)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>主存中有一个字的地址存在t0中，按这个地址找到那个字，把字拷贝到寄存器t2中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sw      $t2, ($to)</span><br></pre></td></tr></table></figure></p>
+<p>把t2中的字存入t0中的地址指向的主存位置。</p>
+<ol start="3">
+<li>基线寻址/索引寻址： based or indexed addressing：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lw      $t2, 4($t0)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>把t0中地址+4所得的地址所对应的主存中的字载入寄存器t2中，4为包含在t0中的地址的偏移量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sw      $t2, -12($t0)   # offset can be negative</span><br></pre></td></tr></table></figure></p>
+<p>把t2中的内容存入t0中的地址-12所得的地址所对应的主存。</p>
+<blockquote>
+<p>基线寻址在以下场合特别有用：<br>1、 数组： 从基址出发，通过使用偏移量，存取数组元素。<br>2、 堆栈： 利用从堆栈指针或者框架指针的偏移量来存取元素。</p>
+</blockquote>
+<p>example：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">array1:     .space 12   # declare 12 bytes of storage to hold array of 3 integers</span><br><span class="line"></span><br><span class="line">.text</span><br><span class="line">__start:</span><br><span class="line">la          $t0, array1      # load base address of array into register $t0</span><br><span class="line">li          $t1, 5          # $t1 = 5 (&quot;load immediate&quot;)</span><br><span class="line">sw          $t1, ($t0)      # first array element set to 5;</span><br><span class="line">                            # indirect addressing</span><br><span class="line">li          $t1, 13         # $t1 = 13</span><br><span class="line">sw          $t1, 4($t0)     # second array element set to 13</span><br><span class="line"></span><br><span class="line">li          $t1, -7         # $t1 = -7</span><br><span class="line">sw          $t1, 8($t0)     # third array element set to -7</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>四位四位地走<br>存入一个字，占用4个字节，消耗4个内存号。且地址偏移量可正可负</p>
+</blockquote>
+<h2 id="Part5-算术运算指令：-Arithmetic-Instructions"><a href="#Part5-算术运算指令：-Arithmetic-Instructions" class="headerlink" title="Part5 算术运算指令： Arithmetic Instructions"></a>Part5 算术运算指令： Arithmetic Instructions</h2><ul>
+<li>算术运算指令地所有操作数都是寄存器，不能直接使用RAM地址或间接寻址。</li>
+<li>操作数地大小都为Word（4-Byte）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add     $t0,$t1,$t2         # $t0 = $t1 + $t2; add as signed</span><br><span class="line">                            # (2&apos;s complement) integers</span><br><span class="line">sub</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -688,7 +727,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型和方法："><span class="nav-number">1.</span> <span class="nav-text">数据类型和方法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寄存器："><span class="nav-number">2.</span> <span class="nav-text">寄存器：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编程序结构框架"><span class="nav-number">3.</span> <span class="nav-text">汇编程序结构框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据声明："><span class="nav-number">3.1.</span> <span class="nav-text">数据声明：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序代码："><span class="nav-number">3.2.</span> <span class="nav-text">程序代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序的注释："><span class="nav-number">3.3.</span> <span class="nav-text">程序的注释：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个MIPS汇编程序框架："><span class="nav-number">4.</span> <span class="nav-text">一个MIPS汇编程序框架：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写MIPS汇编程序："><span class="nav-number">5.</span> <span class="nav-text">编写MIPS汇编程序：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part1：-数据的声明"><span class="nav-number">5.1.</span> <span class="nav-text">Part1： 数据的声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part2-数据的装载和保存（Load-Store指令）"><span class="nav-number">5.2.</span> <span class="nav-text">Part2:   数据的装载和保存（Load/Store指令）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型和方法："><span class="nav-number">1.</span> <span class="nav-text">数据类型和方法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寄存器："><span class="nav-number">2.</span> <span class="nav-text">寄存器：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编程序结构框架"><span class="nav-number">3.</span> <span class="nav-text">汇编程序结构框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据声明："><span class="nav-number">3.1.</span> <span class="nav-text">数据声明：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序代码："><span class="nav-number">3.2.</span> <span class="nav-text">程序代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序的注释："><span class="nav-number">3.3.</span> <span class="nav-text">程序的注释：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个MIPS汇编程序框架："><span class="nav-number">4.</span> <span class="nav-text">一个MIPS汇编程序框架：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写MIPS汇编程序："><span class="nav-number">5.</span> <span class="nav-text">编写MIPS汇编程序：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part1：-数据的声明"><span class="nav-number">5.1.</span> <span class="nav-text">Part1： 数据的声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part2-数据的装载和保存（Load-Store指令）"><span class="nav-number">5.2.</span> <span class="nav-text">Part2:   数据的装载和保存（Load/Store指令）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part3-寻址"><span class="nav-number">5.3.</span> <span class="nav-text">Part3: 寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part5-算术运算指令：-Arithmetic-Instructions"><span class="nav-number">5.4.</span> <span class="nav-text">Part5 算术运算指令： Arithmetic Instructions</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -729,7 +768,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">316.3k</span>
+    <span title="Site words total count">317k</span>
   
 </div>
 
