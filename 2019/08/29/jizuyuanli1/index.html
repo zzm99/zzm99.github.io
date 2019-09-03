@@ -86,10 +86,13 @@
 <meta property="og:site_name" content="zzm99">
 <meta property="og:description" content="数据类型和方法： 数据类型：字节，byte占用8bit，halfword占用2byte=16bit，word占用4byte=32bit  一个字符需要一个Byte的空间  一个整数需要1个Word（4Byte）的空间  MIPS结构的每条指令长度都是32bit   寄存器： 有32个通用寄存器，用编号$0到$31来表示，也可以用寄存器名字来表示，例如$sp,$t1,$ra 有两个特殊的寄存器Lo、">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-02T00:59:41.755Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/jizuyuanli1/Snipaste_2019-09-02_20-02-07.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/jizuyuanli1/Snipaste_2019-09-02_19-22-38.png">
+<meta property="og:updated_time" content="2019-09-02T12:04:23.882Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIPS汇编语言学习">
 <meta name="twitter:description" content="数据类型和方法： 数据类型：字节，byte占用8bit，halfword占用2byte=16bit，word占用4byte=32bit  一个字符需要一个Byte的空间  一个整数需要1个Word（4Byte）的空间  MIPS结构的每条指令长度都是32bit   寄存器： 有32个通用寄存器，用编号$0到$31来表示，也可以用寄存器名字来表示，例如$sp,$t1,$ra 有两个特殊的寄存器Lo、">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/29/jizuyuanli1/Snipaste_2019-09-02_20-02-07.png">
 
 
 
@@ -392,7 +395,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.3k
+                  2.1k
                 </span>
               
 
@@ -408,7 +411,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  5
+                  9
                 </span>
               
             </div>
@@ -444,6 +447,7 @@
 <li>有两个特殊的寄存器Lo、Hi，用来保存乘法/除法的运算结果，这两寄存器不能直接寻址，只能用特殊的置零：mfhi和mflo来aceess其中的内容（mfhi = move from Hi, mflo = more from Lo）</li>
 <li>堆栈的增长方向是：从内存的高地址方向，向低地址方向。</li>
 </ul>
+<p><img src="Snipaste_2019-09-02_20-02-07.png" alt="1"></p>
 <h1 id="汇编程序结构框架"><a href="#汇编程序结构框架" class="headerlink" title="汇编程序结构框架"></a>汇编程序结构框架</h1><h2 id="数据声明："><a href="#数据声明：" class="headerlink" title="数据声明："></a>数据声明：</h2><p>以.data 开始，声明了在代码中使用的变量的名字。同时，也在主存RAM中创建了对应的空间。</p>
 <h2 id="程序代码："><a href="#程序代码：" class="headerlink" title="程序代码："></a>程序代码：</h2><p>以.text 开始，这部分包含了由指令构成的程序功能代码。代码以main: 函数开始。main的结束点应该调用exit system call </p>
 <h2 id="程序的注释："><a href="#程序的注释：" class="headerlink" title="程序的注释："></a>程序的注释：</h2><p>使用#符号进行注释，每行以#引导的部分都会被视作注释</p>
@@ -515,7 +519,37 @@
 <li>算术运算指令地所有操作数都是寄存器，不能直接使用RAM地址或间接寻址。</li>
 <li>操作数地大小都为Word（4-Byte）</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add     $t0,$t1,$t2         # $t0 = $t1 + $t2; add as signed</span><br><span class="line">                            # (2&apos;s complement) integers</span><br><span class="line">sub</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">add     $t0,$t1,$t2         # $t0 = $t1 + $t2; add as signed</span><br><span class="line">                            # (2&apos;s complement) integers</span><br><span class="line">sub     $t2,$t3,$t4         # $t2 = $t3 - $t4</span><br><span class="line">addi    $t2,$t3, 5          # $t2 = $t3 + 5; &quot;add immediate&quot;</span><br><span class="line">                            # (no sub immediate)</span><br><span class="line">addu    $t1,$t6,$t7         # $t1 = $t6 + $t7;</span><br><span class="line">addu    $t1,$t6,5           # $t1 = $t6 + 5;</span><br><span class="line">                            # add as unsigned intergers</span><br><span class="line">subu    $t1,$t6,$t7         # $t1 = $t6 - $t7;</span><br><span class="line">subu    $t1,$t6,5           # $t1 = $t6 - 5;</span><br><span class="line">                            # subtract as unsigned intergers                  </span><br><span class="line"></span><br><span class="line">mult    $t3,$t4             # multiply 32-bit quantities in $t3 and $4,</span><br><span class="line">                            # and store 64-bit result in special registers Lo and Hi: (Hi, Lo) = $t3 * $t4</span><br><span class="line"></span><br><span class="line">div     $t5,$t6             # Lo = $t5 / $t6    (integer quotient)</span><br><span class="line">                            # Hi = $t5 mod $t6 (remainder)</span><br><span class="line">mfhi    $t0                 # move quantity in special register Hi to $t0: </span><br><span class="line">                            # $t0= Hi</span><br><span class="line">mflo    $t1                 # move quantity in special register Lo to $t1:</span><br><span class="line">                            # $t1 = Lo, used to get at result of product or quotient</span><br><span class="line"></span><br><span class="line">more    $t2,$t3             # $t2 = $t3</span><br></pre></td></tr></table></figure>
+<h2 id="Part6-程序控制指令：-Control-Instructions"><a href="#Part6-程序控制指令：-Control-Instructions" class="headerlink" title="Part6: 程序控制指令： Control Instructions"></a>Part6: 程序控制指令： Control Instructions</h2><ol>
+<li>分支指令（Branches）</li>
+</ol>
+<p>条件分支的比较机制已经内建在指令中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">b           target # unconditional branch to program label target</span><br><span class="line"></span><br><span class="line">beq     $t0,$t1,target  # branch to target if $t0 = $t1</span><br><span class="line">blt     $t0,$t1,target  # branch to target if $t0 &lt; $t1</span><br><span class="line">ble     $t0,$t1,target  # branch to target if $t0 &lt;= $t1</span><br><span class="line">bgt     $t0,$t1,target  # branch to target if $t0 &gt; $t1</span><br><span class="line">bge     $t0,$t1,target  # branch to target if $t0 &gt;= $t1</span><br><span class="line">bne     $t0,$t1,target  # branch to target if $t0 &lt;&gt; $t1</span><br><span class="line"></span><br><span class="line">beqz     $t0, lab  # branch to lab if $t0 = 0.</span><br><span class="line">bnez     $t0, lab  # branch to lab if $t0 != 0.</span><br><span class="line">bgez     $t0, lab  # branch to lab if $t0 &gt;= 0.</span><br><span class="line">bgtz     $t0, lab  # branch to lab if $t0 &gt; 0.</span><br><span class="line">blez     $t0, lab  # branch to lab if $t0 &lt;= 0.</span><br><span class="line">bltz     $t0, lab  # branch to lab if $t0 &lt; 0.</span><br><span class="line"></span><br><span class="line">bgezal  $t0, lab # if $t0 &gt;= 0, then put the address of the next instruction into $ra and branch to lab</span><br><span class="line">bgtzal  $t0, lab # if $t0 &gt; 0, then put the address of the next instruction into $ra and branch to lab</span><br><span class="line">bltzal  $t0, lab # if $t0 &lt; 0, then put the address of the next instruction into $ra and branch to lab</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>跳转指令（Jumps）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">j       target  # unconditional jump to program label target</span><br><span class="line">jr      $t3     # jump to address contained in $t3 (&quot;jump register&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>子程序调用指令</p>
+</li>
+</ol>
+<p>子程序调用指令的实质是跳转并链接（Jump and Link），它把当前程序计数器的值保留到$ra中，以备跳回）</p>
+<p>跳到子程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jal     sub_label       # &quot;jump and link&quot;, preserve pc to $ra</span><br></pre></td></tr></table></figure></p>
+<p>sub_label为子程序的标签，如LOOP，SUB_ROUTINE</p>
+<p>从子程序返回:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jr      $ra     # &quot;jump register&quot; jump as the value of $ra</span><br></pre></td></tr></table></figure></p>
+<p>返回到$ra中储存的返回地址对应的位置，$ra中的返回地址由jal指令保存</p>
+<p>注意，返回地址存放在$ra寄存器中，如果子程序调用了下一级程序，或者递归调用，此时需要将返回地址保存在堆栈中，因为没执行依次jal指令就会覆盖$ra中的返回地址。</p>
+<h2 id="Part6：系统调用和I-O操作（SPIM仿真）"><a href="#Part6：系统调用和I-O操作（SPIM仿真）" class="headerlink" title="Part6：系统调用和I/O操作（SPIM仿真）"></a>Part6：系统调用和I/O操作（SPIM仿真）</h2><p>系统调用是指调用<strong>操作系统的特定子程序</strong></p>
+<p>系统调用用来在仿真器的窗口中打印或者读入字符串string，并可显示程序是否结束</p>
+<p>用<strong>syscall指令</strong>进行对系统子程序的调用</p>
+<p>本操作首先支持$v0 and $a0-$a1中的相对值</p>
+<p>调用以后的返回值（如果存在）会保存在$v0中。</p>
+<p><img src="Snipaste_2019-09-02_19-22-38.png" alt="1"></p>
+<p>e.g.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 打印在$t2中的整数</span><br><span class="line">li  $v0, 1</span><br><span class="line">move    $a0, $t2</span><br><span class="line">syscall</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># read integer value, store in RAM location with label int_value (presumably declared in data section)</span><br><span class="line">li      $v0, 5</span><br><span class="line">syscall</span><br><span class="line"></span><br><span class="line">sw      $v0, int_value</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># print out string</span><br><span class="line">.data</span><br><span class="line">	string1:    .asciiz  &quot;print this.\n&quot;</span><br><span class="line"></span><br><span class="line">.text</span><br><span class="line">main:</span><br><span class="line">    li   $v0, 4</span><br><span class="line">    la   $a0, string1</span><br><span class="line">    syscall</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># to indicate end of program, use exit system call</span><br><span class="line">li      $v0, 10</span><br><span class="line">syscall</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="阶乘："><a href="#阶乘：" class="headerlink" title="阶乘："></a>阶乘：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">.data     </span><br><span class="line">    msg: .asciiz&quot;Enter a Number &quot;</span><br><span class="line">    msg1: .asciiz&quot;The result is: &quot;</span><br><span class="line"></span><br><span class="line">.text                   </span><br><span class="line">main:                    </span><br><span class="line">    li $v0,4             </span><br><span class="line">    la $a0,msg           </span><br><span class="line">    syscall  </span><br><span class="line"></span><br><span class="line">    li $v0,5              </span><br><span class="line">    syscall  </span><br><span class="line"></span><br><span class="line">    move $s0,$v0          </span><br><span class="line">    li $s7, 1      </span><br><span class="line"></span><br><span class="line">factorial:              </span><br><span class="line">    mult $s0,$s7        </span><br><span class="line">    mflo $s7     </span><br><span class="line">    sub $s0,$s0,1         </span><br><span class="line">    bgt $s0,1,factorial   </span><br><span class="line"></span><br><span class="line">done:</span><br><span class="line">    li $v0,4</span><br><span class="line">    la $a0,msg1</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    move $a0,$s7         </span><br><span class="line">    li $v0,1              </span><br><span class="line">    syscall          </span><br><span class="line"></span><br><span class="line">    li     $v0, 10           </span><br><span class="line">    syscall</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -662,7 +696,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">242</span>
+                  <span class="site-state-item-count">243</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -727,7 +761,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型和方法："><span class="nav-number">1.</span> <span class="nav-text">数据类型和方法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寄存器："><span class="nav-number">2.</span> <span class="nav-text">寄存器：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编程序结构框架"><span class="nav-number">3.</span> <span class="nav-text">汇编程序结构框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据声明："><span class="nav-number">3.1.</span> <span class="nav-text">数据声明：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序代码："><span class="nav-number">3.2.</span> <span class="nav-text">程序代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序的注释："><span class="nav-number">3.3.</span> <span class="nav-text">程序的注释：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个MIPS汇编程序框架："><span class="nav-number">4.</span> <span class="nav-text">一个MIPS汇编程序框架：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写MIPS汇编程序："><span class="nav-number">5.</span> <span class="nav-text">编写MIPS汇编程序：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part1：-数据的声明"><span class="nav-number">5.1.</span> <span class="nav-text">Part1： 数据的声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part2-数据的装载和保存（Load-Store指令）"><span class="nav-number">5.2.</span> <span class="nav-text">Part2:   数据的装载和保存（Load/Store指令）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part3-寻址"><span class="nav-number">5.3.</span> <span class="nav-text">Part3: 寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part5-算术运算指令：-Arithmetic-Instructions"><span class="nav-number">5.4.</span> <span class="nav-text">Part5 算术运算指令： Arithmetic Instructions</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型和方法："><span class="nav-number">1.</span> <span class="nav-text">数据类型和方法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寄存器："><span class="nav-number">2.</span> <span class="nav-text">寄存器：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编程序结构框架"><span class="nav-number">3.</span> <span class="nav-text">汇编程序结构框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据声明："><span class="nav-number">3.1.</span> <span class="nav-text">数据声明：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序代码："><span class="nav-number">3.2.</span> <span class="nav-text">程序代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序的注释："><span class="nav-number">3.3.</span> <span class="nav-text">程序的注释：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个MIPS汇编程序框架："><span class="nav-number">4.</span> <span class="nav-text">一个MIPS汇编程序框架：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写MIPS汇编程序："><span class="nav-number">5.</span> <span class="nav-text">编写MIPS汇编程序：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part1：-数据的声明"><span class="nav-number">5.1.</span> <span class="nav-text">Part1： 数据的声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part2-数据的装载和保存（Load-Store指令）"><span class="nav-number">5.2.</span> <span class="nav-text">Part2:   数据的装载和保存（Load/Store指令）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part3-寻址"><span class="nav-number">5.3.</span> <span class="nav-text">Part3: 寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part5-算术运算指令：-Arithmetic-Instructions"><span class="nav-number">5.4.</span> <span class="nav-text">Part5 算术运算指令： Arithmetic Instructions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part6-程序控制指令：-Control-Instructions"><span class="nav-number">5.5.</span> <span class="nav-text">Part6: 程序控制指令： Control Instructions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part6：系统调用和I-O操作（SPIM仿真）"><span class="nav-number">5.6.</span> <span class="nav-text">Part6：系统调用和I/O操作（SPIM仿真）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#阶乘："><span class="nav-number">6.</span> <span class="nav-text">阶乘：</span></a></li></ol></div>
             
 
           </div>
@@ -768,7 +802,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">317k</span>
+    <span title="Site words total count">318.9k</span>
   
 </div>
 
