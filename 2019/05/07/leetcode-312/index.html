@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="zzm99">
 <meta property="og:description" content="Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number on it represented by array nums. You are asked to burst all the balloons. If the you burst balloon i you will get nums[le">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-08T07:41:58.400Z">
+<meta property="og:updated_time" content="2019-09-15T08:46:39.260Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-312-Burst Balloons">
 <meta name="twitter:description" content="Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number on it represented by array nums. You are asked to burst all the balloons. If the you burst balloon i you will get nums[le">
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  493
+                  597
                 </span>
               
 
@@ -447,7 +447,7 @@
 <li>0 ≤ n ≤ 500, 0 ≤ nums[i] ≤ 100</li>
 </ul>
 <p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: [3,1,5,8]</span><br><span class="line">Output: 167 </span><br><span class="line">Explanation: nums = [3,1,5,8] --&gt; [3,5,8] --&gt;   [3,8]   --&gt;  [8]  --&gt; []</span><br><span class="line">             coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167</span><br></pre></td></tr></table></figure></p>
-<p>he visualization help me to understand hope it can help you too.</p>
+<p>the visualization help me to understand hope it can help you too.</p>
 <p>1···················1</p>
 <p>add two 1 at beginning and end of nums, each · represent each number in nums.</p>
 <p>len is the subinterval length, it grows from 1 to full length of orignal nums string.</p>
@@ -459,6 +459,7 @@
 <p>then<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0    0    0    0    0    0</span><br><span class="line">0    3    30   0    0    0</span><br><span class="line">0    0    15   135  0    0</span><br><span class="line">0    0    0    40   48   0</span><br><span class="line">0    0    0    0    40   0</span><br><span class="line">0    0    0    0    0    0</span><br></pre></td></tr></table></figure></p>
 <p>at last<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0    0    0    0    0    0</span><br><span class="line">0    3    30   159  167  0</span><br><span class="line">0    0    15   135  159  0</span><br><span class="line">0    0    0    40   48   0</span><br><span class="line">0    0    0    0    40   0</span><br><span class="line">0    0    0    0    0    0</span><br></pre></td></tr></table></figure></p>
 <p>the code is like most others.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxCoins</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.size();</span><br><span class="line">        nums.insert(nums.begin(), <span class="number">1</span>);</span><br><span class="line">        nums.push_back(<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(nums.size(), <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(nums.size(), <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">1</span>; len &lt;= n; ++len)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> left = <span class="number">1</span>; left &lt;= n - len + <span class="number">1</span>; ++left) &#123;</span><br><span class="line">                <span class="keyword">int</span> right = left + len - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = left; k &lt;= right; ++k)</span><br><span class="line">                    dp[left][right] = max(dp[left][right], nums[left<span class="number">-1</span>]*nums[k]*nums[right+<span class="number">1</span>] + dp[left][k<span class="number">-1</span>] + dp[k+<span class="number">1</span>][right]);</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">1</span>][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxCoins</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] A = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length+<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">int</span> n = A.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length; i++)</span><br><span class="line">            A[i+<span class="number">1</span>] = nums[i];</span><br><span class="line">        A[<span class="number">0</span>] = A[n-<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n][n];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> left = n-<span class="number">3</span>; left &gt;= <span class="number">0</span>; left--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> right = left + <span class="number">2</span>; right &lt; n; right++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=left + <span class="number">1</span>; i&lt;right; i++)</span><br><span class="line">                    dp[left][right] = Math.max(dp[left][right], dp[left][i] + dp[i][right] + A[left]*A[i]*A[right]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -597,7 +598,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">264</span>
+                  <span class="site-state-item-count">266</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -687,7 +688,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">332.5k</span>
+    <span title="Site words total count">333k</span>
   
 </div>
 
