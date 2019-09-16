@@ -87,7 +87,7 @@
 <meta property="og:description" content="Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/05/08/leetcode-42/rainwatertrap.png">
-<meta property="og:updated_time" content="2019-09-10T12:42:37.597Z">
+<meta property="og:updated_time" content="2019-09-16T04:45:07.277Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-42-Trapping Rain Water">
 <meta name="twitter:description" content="Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.">
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.1k
+                  1.2k
                 </span>
               
 
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  5
+                  6
                 </span>
               
             </div>
@@ -447,6 +447,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Example:</span><br><span class="line"></span><br><span class="line">Input: [0,1,0,2,1,0,1,3,2,1,2,1]</span><br><span class="line">Output: 6</span><br></pre></td></tr></table></figure>
 <h3 id="动态规划："><a href="#动态规划：" class="headerlink" title="动态规划："></a>动态规划：</h3><p>将每一个位置点左侧的最大高度存起来，然后将每个位置点右侧的最大高度存起来，这样，该位置的最大存水量为min(maxleft[i], maxright[i])-height[i] 得到，最后将所有位置相加即可，为了提高空间复杂度方面的性能，我们只需要将所有位置对应的左侧最大高度存在一个数组中，然后每算出一个右侧最大高度，就将该位置对应的存水量算出来，接着进行下一位的计算。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(height.size(), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> maxleft = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;height.size(); ++i) &#123;</span><br><span class="line">            dp[i] = maxleft;</span><br><span class="line">            maxleft = max(height[i], maxleft);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> maxright = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=height.size()<span class="number">-1</span>; i&gt;=<span class="number">0</span>; --i) &#123;</span><br><span class="line">            dp[i] = min(dp[i], maxright);</span><br><span class="line">            maxright = max(maxright, height[i]);</span><br><span class="line">            <span class="keyword">if</span> (dp[i]-height[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                res += (dp[i]-height[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(height.length == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] maxleft = <span class="keyword">new</span> <span class="keyword">int</span>[height.length];</span><br><span class="line">        <span class="keyword">int</span>[] maxright = <span class="keyword">new</span> <span class="keyword">int</span>[height.length];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> maxcur = height[<span class="number">0</span>];</span><br><span class="line">        maxleft[<span class="number">0</span>] = height[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;height.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(height[i] &gt; maxcur)</span><br><span class="line">                maxcur = height[i];</span><br><span class="line">            maxleft[i] = maxcur;</span><br><span class="line">        &#125;</span><br><span class="line">        maxcur = height[height.length-<span class="number">1</span>];</span><br><span class="line">        maxright[height.length-<span class="number">1</span>] = height[height.length-<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=height.length-<span class="number">2</span>; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(height[i] &gt; maxcur)</span><br><span class="line">                maxcur = height[i];</span><br><span class="line">            maxright[i] = maxcur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;height.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum += Math.min(maxleft[i], maxright[i]) - height[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="two-pointer"><a href="#two-pointer" class="headerlink" title="two pointer:"></a>two pointer:</h3><ol>
 <li>加入水后，图片的高度整体是从左右两边往中间的一个最高点单向增大的，所以这就给了我们一个很好的解题思路。先找到整张图的最高点，并记录它所在的位置，然后依次从左右两端往最该点遍历，遍历时记录左边遍历过的位置的最高点的值，当到达位置的实际高度小于我们记录的最高值，则表明此处有积水，由于宽度都是1，所以我们总积水的体积可以直接加上在此处实际高度与记录的最高高度的差值。当左右遍历完成后，所得结果及时总的积水体积。</li>
 </ol>
@@ -604,7 +605,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">267</span>
+                  <span class="site-state-item-count">269</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -710,7 +711,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">333.1k</span>
+    <span title="Site words total count">333.6k</span>
   
 </div>
 
