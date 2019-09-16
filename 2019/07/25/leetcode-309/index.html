@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="zzm99">
 <meta property="og:description" content="Say you have an array for which the ith element is the price of a given stock on day i. Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one a">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-28T08:11:33.317Z">
+<meta property="og:updated_time" content="2019-09-16T11:04:19.556Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-309-Best Time to Buy and Sell Stock with Cooldown">
 <meta name="twitter:description" content="Say you have an array for which the ith element is the price of a given stock on day i. Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one a">
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  511
+                  601
                 </span>
               
 
@@ -419,7 +419,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  3
                 </span>
               
             </div>
@@ -453,6 +453,7 @@
 <p><code>sell[i]=max(sell[i-1], buy[i-1]+prices[i])</code><br>如果我们考虑index:i天买入，要求利润最大的话。无非是index:i-1之前就不持有股票，我们要考虑哪天买，所以index:i-1也可以买入，或者另一种可能就是index:i-1天是冷冻期。</p>
 <p><code>buy[i]=max(buy[i-1], cooldown[i-1]-prices[i])</code><br>我们第一天不可能卖出或者冻结，那么这两个sell[0]=0 cooldown[0]=0，但是我们第一天可以买入啊，所以buy[0]=-prices[0]。还有一点要注意的就是，我们一定是最后一天卖出或者最后一天冻结利润最大。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!prices.size()) </span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; buy(prices.size(), <span class="number">0</span>), sell(prices.size(), <span class="number">0</span>), cooldown(prices.size(), <span class="number">0</span>);</span><br><span class="line">        buy[<span class="number">0</span>] = -prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; prices.size(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            cooldown[i] = sell[i - <span class="number">1</span>];</span><br><span class="line">            sell[i] = max(sell[i - <span class="number">1</span>], buy[i - <span class="number">1</span>] + prices[i]);</span><br><span class="line">            buy[i] = max(buy[i - <span class="number">1</span>], cooldown[i - <span class="number">1</span>] - prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max(sell[prices.size() - <span class="number">1</span>], cooldown[prices.size() - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices.length == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[] buy = <span class="keyword">new</span> <span class="keyword">int</span>[prices.length];</span><br><span class="line">        <span class="keyword">int</span>[] sell = <span class="keyword">new</span> <span class="keyword">int</span>[prices.length];</span><br><span class="line">        <span class="keyword">int</span>[] cooldown = <span class="keyword">new</span> <span class="keyword">int</span>[prices.length];</span><br><span class="line">        buy[<span class="number">0</span>] =  -prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;prices.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cooldown[i] = sell[i-<span class="number">1</span>];</span><br><span class="line">            sell[i] = Math.max(sell[i-<span class="number">1</span>], buy[i-<span class="number">1</span>]+prices[i]);</span><br><span class="line">            buy[i] = Math.max(buy[i-<span class="number">1</span>], cooldown[i-<span class="number">1</span>]-prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Math.max(cooldown[prices.length-<span class="number">1</span>], sell[prices.length-<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -591,7 +592,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">269</span>
+                  <span class="site-state-item-count">271</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -681,7 +682,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">333.6k</span>
+    <span title="Site words total count">334k</span>
   
 </div>
 
