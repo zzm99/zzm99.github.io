@@ -291,6 +291,308 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/jizuyuanli1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/29/jizuyuanli1/" itemprop="url">MIPS汇编语言学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-29T15:54:05+08:00">
+                2019-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机组成原理/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机组成原理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/29/jizuyuanli1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/29/jizuyuanli1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="数据类型和方法："><a href="#数据类型和方法：" class="headerlink" title="数据类型和方法："></a>数据类型和方法：</h1><ul>
+<li><p>数据类型：字节，byte占用8bit，halfword占用2byte=16bit，word占用4byte=32bit</p>
+</li>
+<li><p>一个字符需要一个Byte的空间</p>
+</li>
+<li><p>一个整数需要1个Word（4Byte）的空间</p>
+</li>
+<li><p>MIPS结构的每条指令长度都是32bit</p>
+</li>
+</ul>
+<h1 id="寄存器："><a href="#寄存器：" class="headerlink" title="寄存器："></a>寄存器：</h1><ul>
+<li>有32个通用寄存器，用编号$0到$31来表示，也可以用寄存器名字来表示，例如$sp,$t1,$ra</li>
+<li>有两个特殊的寄存器Lo、Hi，用来保存乘法/除法的运算结果，这两寄存器不能直接寻址，只能用特殊的置零：mfhi和mflo来aceess其中的内容（mfhi = move from Hi, mflo = more from Lo）</li>
+<li>堆栈的增长方向是：从内存的高地址方向，向低地址方向。</li>
+</ul>
+<p><img src="Snipaste_2019-09-02_20-02-07.png" alt="1"></p>
+<h1 id="汇编程序结构框架"><a href="#汇编程序结构框架" class="headerlink" title="汇编程序结构框架"></a>汇编程序结构框架</h1><h2 id="数据声明："><a href="#数据声明：" class="headerlink" title="数据声明："></a>数据声明：</h2><p>以.data 开始，声明了在代码中使用的变量的名字。同时，也在主存RAM中创建了对应的空间。</p>
+<h2 id="程序代码："><a href="#程序代码：" class="headerlink" title="程序代码："></a>程序代码：</h2><p>以.text 开始，这部分包含了由指令构成的程序功能代码。代码以main: 函数开始。main的结束点应该调用exit system call </p>
+<h2 id="程序的注释："><a href="#程序的注释：" class="headerlink" title="程序的注释："></a>程序的注释：</h2><p>使用#符号进行注释，每行以#引导的部分都会被视作注释</p>
+<h1 id="一个MIPS汇编程序框架："><a href="#一个MIPS汇编程序框架：" class="headerlink" title="一个MIPS汇编程序框架："></a>一个MIPS汇编程序框架：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Comment giving name of program and description of function</span><br><span class="line"># Template.s</span><br><span class="line"># Bare-bones outline of MIPS assembly language program</span><br><span class="line">.data           # variable declarations follow this line </span><br><span class="line">                # ...</span><br><span class="line"></span><br><span class="line">.text           # instructions follow this line </span><br><span class="line">main:           # indicates start of code(first instruction to execute)</span><br><span class="line">                # ...</span><br><span class="line"></span><br><span class="line"># End of program, leave a blank line afterwards to make SPIM happy</span><br></pre></td></tr></table></figure>
+<h1 id="编写MIPS汇编程序："><a href="#编写MIPS汇编程序：" class="headerlink" title="编写MIPS汇编程序："></a>编写MIPS汇编程序：</h1><p>Content：</p>
+<ul>
+<li><p>Part1： 数据的声明</p>
+</li>
+<li><p>Part2： 数据的装载和保存（Load/Store指令）</p>
+</li>
+<li><p>Part3： 寻址</p>
+</li>
+<li><p>Part4： 算数运算指令： Arithmetic Instructions</p>
+</li>
+<li><p>Part5： 程序控制指令： Control Instructions</p>
+</li>
+<li><p>Part6： 系统调用和I/O操作（SPIM仿真）</p>
+</li>
+</ul>
+<h2 id="Part1：-数据的声明"><a href="#Part1：-数据的声明" class="headerlink" title="Part1： 数据的声明"></a>Part1： 数据的声明</h2><p>格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name:       storage_type    value(s)</span><br></pre></td></tr></table></figure>
+<p>创建一个以name为变量名称，values通常为初始值，storage_type代表存储类型。</p>
+<p>注意：变量名后要跟一个冒号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># example</span><br><span class="line"></span><br><span class="line">var1:   .word   3  # create a single integer:</span><br><span class="line">                   # variable with initial value 3</span><br><span class="line"></span><br><span class="line">array1: .byte   &apos;a&apos;,&apos;b&apos; # create a 2-element character</span><br><span class="line">                        # array with elements initialized:</span><br><span class="line">                        # to a and b</span><br><span class="line"></span><br><span class="line">array2: .space  40  # allocate 40 consecutive bytes,</span><br><span class="line">                    # with storage uninitialized</span><br><span class="line">                    # could be used as a 40-element</span><br><span class="line">                    # character array, or a </span><br><span class="line">                    # 10-element integer array;</span><br><span class="line">                    # a comment should indicate it.</span><br><span class="line">    </span><br><span class="line">string1 .asciiz &quot;Print this.\n&quot; # declare a string</span><br></pre></td></tr></table></figure>
+<h2 id="Part2-数据的装载和保存（Load-Store指令）"><a href="#Part2-数据的装载和保存（Load-Store指令）" class="headerlink" title="Part2:   数据的装载和保存（Load/Store指令）"></a>Part2:   数据的装载和保存（Load/Store指令）</h2><ul>
+<li><strong>主存RAM</strong>的存取access只能用<strong>load/store</strong>指令来完成。</li>
+<li>所有其他的指令都使用的是存储器作为操作数。</li>
+</ul>
+<ol>
+<li>load指令：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">lw          register_destination, RAM_source    </span><br><span class="line">                    # copy word (4 bytes) at source_RAM location to destination register</span><br><span class="line">                    # load word -&gt; lw</span><br><span class="line"></span><br><span class="line">lb          register_destination, RAM_source</span><br><span class="line">                    # copy byte at source RAM location to low-order byte of destination register, and sign -e.g. tend to higher-order bytes</span><br><span class="line">                    # load byte -&gt; lb</span><br><span class="line"></span><br><span class="line">li          register_destination, value</span><br><span class="line">                    # load immediate value into destination register</span><br><span class="line">                    # load immediate -&gt; li</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>store 指令：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sw          register_source, RAM_destination</span><br><span class="line">                        # store word in source register into RAM destination</span><br><span class="line"></span><br><span class="line">sb         register_source, RAM_destination</span><br><span class="line">                        # store byte (low-order) in source register into RAM destination</span><br></pre></td></tr></table></figure>
+<p>example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">var1:       .word   23      # declare storage for var1; initial value is 23</span><br><span class="line"></span><br><span class="line">.text</span><br><span class="line">__start:</span><br><span class="line">lw          $t0, var1       # load contents of RAM location into register $t0;</span><br><span class="line">                            # $t0 = var1</span><br><span class="line"></span><br><span class="line">li          $t1, 5          # $t1 = 5   (&quot;load immediate&quot;)</span><br><span class="line">sw          $t1, var1       # store contents of register $t1 into RAM:</span><br><span class="line">                            # var1 = $t1 done</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h2 id="Part3-寻址"><a href="#Part3-寻址" class="headerlink" title="Part3: 寻址"></a>Part3: 寻址</h2><p>MIPS系统结构只能用load/store相关指令来实现寻址操作，包括三种寻址方式：</p>
+<ul>
+<li>装载地址： load address，相当于直接寻址，把数据地址直接载入寄存器。</li>
+<li>间接寻址： indirect addressing，间接寻址，把寄存器内容作为地址。</li>
+<li>基线寻址/索引寻址： based or indexed addressing， 相对寻址， 利用补偿值(offset)寻址</li>
+</ul>
+<ol>
+<li>直接寻址/装载地址：load address:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">la      $t0, var1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>把var1在主存RAM中的地址拷贝到寄存器t0中，var1也可以是程序中定义的一个子程序标签的地址。</p>
+<ol start="2">
+<li>间接寻址： indirect addressing：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lw      $t2, ($t0)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>主存中有一个字的地址存在t0中，按这个地址找到那个字，把字拷贝到寄存器t2中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sw      $t2, ($to)</span><br></pre></td></tr></table></figure></p>
+<p>把t2中的字存入t0中的地址指向的主存位置。</p>
+<ol start="3">
+<li>基线寻址/索引寻址： based or indexed addressing：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lw      $t2, 4($t0)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>把t0中地址+4所得的地址所对应的主存中的字载入寄存器t2中，4为包含在t0中的地址的偏移量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sw      $t2, -12($t0)   # offset can be negative</span><br></pre></td></tr></table></figure></p>
+<p>把t2中的内容存入t0中的地址-12所得的地址所对应的主存。</p>
+<blockquote>
+<p>基线寻址在以下场合特别有用：<br>1、 数组： 从基址出发，通过使用偏移量，存取数组元素。<br>2、 堆栈： 利用从堆栈指针或者框架指针的偏移量来存取元素。</p>
+</blockquote>
+<p>example：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">array1:     .space 12   # declare 12 bytes of storage to hold array of 3 integers</span><br><span class="line"></span><br><span class="line">.text</span><br><span class="line">__start:</span><br><span class="line">la          $t0, array1      # load base address of array into register $t0</span><br><span class="line">li          $t1, 5          # $t1 = 5 (&quot;load immediate&quot;)</span><br><span class="line">sw          $t1, ($t0)      # first array element set to 5;</span><br><span class="line">                            # indirect addressing</span><br><span class="line">li          $t1, 13         # $t1 = 13</span><br><span class="line">sw          $t1, 4($t0)     # second array element set to 13</span><br><span class="line"></span><br><span class="line">li          $t1, -7         # $t1 = -7</span><br><span class="line">sw          $t1, 8($t0)     # third array element set to -7</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>四位四位地走<br>存入一个字，占用4个字节，消耗4个内存号。且地址偏移量可正可负</p>
+</blockquote>
+<h2 id="Part5-算术运算指令：-Arithmetic-Instructions"><a href="#Part5-算术运算指令：-Arithmetic-Instructions" class="headerlink" title="Part5 算术运算指令： Arithmetic Instructions"></a>Part5 算术运算指令： Arithmetic Instructions</h2><ul>
+<li>算术运算指令地所有操作数都是寄存器，不能直接使用RAM地址或间接寻址。</li>
+<li>操作数地大小都为Word（4-Byte）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">add     $t0,$t1,$t2         # $t0 = $t1 + $t2; add as signed</span><br><span class="line">                            # (2&apos;s complement) integers</span><br><span class="line">sub     $t2,$t3,$t4         # $t2 = $t3 - $t4</span><br><span class="line">addi    $t2,$t3, 5          # $t2 = $t3 + 5; &quot;add immediate&quot;</span><br><span class="line">                            # (no sub immediate)</span><br><span class="line">addu    $t1,$t6,$t7         # $t1 = $t6 + $t7;</span><br><span class="line">addu    $t1,$t6,5           # $t1 = $t6 + 5;</span><br><span class="line">                            # add as unsigned intergers</span><br><span class="line">subu    $t1,$t6,$t7         # $t1 = $t6 - $t7;</span><br><span class="line">subu    $t1,$t6,5           # $t1 = $t6 - 5;</span><br><span class="line">                            # subtract as unsigned intergers                  </span><br><span class="line"></span><br><span class="line">mult    $t3,$t4             # multiply 32-bit quantities in $t3 and $4,</span><br><span class="line">                            # and store 64-bit result in special registers Lo and Hi: (Hi, Lo) = $t3 * $t4</span><br><span class="line"></span><br><span class="line">div     $t5,$t6             # Lo = $t5 / $t6    (integer quotient)</span><br><span class="line">                            # Hi = $t5 mod $t6 (remainder)</span><br><span class="line">mfhi    $t0                 # move quantity in special register Hi to $t0: </span><br><span class="line">                            # $t0= Hi</span><br><span class="line">mflo    $t1                 # move quantity in special register Lo to $t1:</span><br><span class="line">                            # $t1 = Lo, used to get at result of product or quotient</span><br><span class="line"></span><br><span class="line">more    $t2,$t3             # $t2 = $t3</span><br></pre></td></tr></table></figure>
+<h2 id="Part6-程序控制指令：-Control-Instructions"><a href="#Part6-程序控制指令：-Control-Instructions" class="headerlink" title="Part6: 程序控制指令： Control Instructions"></a>Part6: 程序控制指令： Control Instructions</h2><ol>
+<li>分支指令（Branches）</li>
+</ol>
+<p>条件分支的比较机制已经内建在指令中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">b           target # unconditional branch to program label target</span><br><span class="line"></span><br><span class="line">beq     $t0,$t1,target  # branch to target if $t0 = $t1</span><br><span class="line">blt     $t0,$t1,target  # branch to target if $t0 &lt; $t1</span><br><span class="line">ble     $t0,$t1,target  # branch to target if $t0 &lt;= $t1</span><br><span class="line">bgt     $t0,$t1,target  # branch to target if $t0 &gt; $t1</span><br><span class="line">bge     $t0,$t1,target  # branch to target if $t0 &gt;= $t1</span><br><span class="line">bne     $t0,$t1,target  # branch to target if $t0 &lt;&gt; $t1</span><br><span class="line"></span><br><span class="line">beqz     $t0, lab  # branch to lab if $t0 = 0.</span><br><span class="line">bnez     $t0, lab  # branch to lab if $t0 != 0.</span><br><span class="line">bgez     $t0, lab  # branch to lab if $t0 &gt;= 0.</span><br><span class="line">bgtz     $t0, lab  # branch to lab if $t0 &gt; 0.</span><br><span class="line">blez     $t0, lab  # branch to lab if $t0 &lt;= 0.</span><br><span class="line">bltz     $t0, lab  # branch to lab if $t0 &lt; 0.</span><br><span class="line"></span><br><span class="line">bgezal  $t0, lab # if $t0 &gt;= 0, then put the address of the next instruction into $ra and branch to lab</span><br><span class="line">bgtzal  $t0, lab # if $t0 &gt; 0, then put the address of the next instruction into $ra and branch to lab</span><br><span class="line">bltzal  $t0, lab # if $t0 &lt; 0, then put the address of the next instruction into $ra and branch to lab</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>跳转指令（Jumps）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">j       target  # unconditional jump to program label target</span><br><span class="line">jr      $t3     # jump to address contained in $t3 (&quot;jump register&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>子程序调用指令</p>
+</li>
+</ol>
+<p>子程序调用指令的实质是跳转并链接（Jump and Link），它把当前程序计数器的值保留到$ra中，以备跳回）</p>
+<p>跳到子程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jal     sub_label       # &quot;jump and link&quot;, preserve pc to $ra</span><br></pre></td></tr></table></figure></p>
+<p>sub_label为子程序的标签，如LOOP，SUB_ROUTINE</p>
+<p>从子程序返回:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jr      $ra     # &quot;jump register&quot; jump as the value of $ra</span><br></pre></td></tr></table></figure></p>
+<p>返回到$ra中储存的返回地址对应的位置，$ra中的返回地址由jal指令保存</p>
+<p>注意，返回地址存放在$ra寄存器中，如果子程序调用了下一级程序，或者递归调用，此时需要将返回地址保存在堆栈中，因为没执行依次jal指令就会覆盖$ra中的返回地址。</p>
+<h2 id="Part6：系统调用和I-O操作（SPIM仿真）"><a href="#Part6：系统调用和I-O操作（SPIM仿真）" class="headerlink" title="Part6：系统调用和I/O操作（SPIM仿真）"></a>Part6：系统调用和I/O操作（SPIM仿真）</h2><p>系统调用是指调用<strong>操作系统的特定子程序</strong></p>
+<p>系统调用用来在仿真器的窗口中打印或者读入字符串string，并可显示程序是否结束</p>
+<p>用<strong>syscall指令</strong>进行对系统子程序的调用</p>
+<p>本操作首先支持$v0 and $a0-$a1中的相对值</p>
+<p>调用以后的返回值（如果存在）会保存在$v0中。</p>
+<p><img src="Snipaste_2019-09-02_19-22-38.png" alt="1"></p>
+<p>e.g.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 打印在$t2中的整数</span><br><span class="line">li  $v0, 1</span><br><span class="line">move    $a0, $t2</span><br><span class="line">syscall</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># read integer value, store in RAM location with label int_value (presumably declared in data section)</span><br><span class="line">li      $v0, 5</span><br><span class="line">syscall</span><br><span class="line"></span><br><span class="line">sw      $v0, int_value</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># print out string</span><br><span class="line">.data</span><br><span class="line">	string1:    .asciiz  &quot;print this.\n&quot;</span><br><span class="line"></span><br><span class="line">.text</span><br><span class="line">main:</span><br><span class="line">    li   $v0, 4</span><br><span class="line">    la   $a0, string1</span><br><span class="line">    syscall</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># to indicate end of program, use exit system call</span><br><span class="line">li      $v0, 10</span><br><span class="line">syscall</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="阶乘："><a href="#阶乘：" class="headerlink" title="阶乘："></a>阶乘：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">.data     </span><br><span class="line">    msg: .asciiz&quot;Enter a Number &quot;</span><br><span class="line">    msg1: .asciiz&quot;The result is: &quot;</span><br><span class="line"></span><br><span class="line">.text                   </span><br><span class="line">main:                    </span><br><span class="line">    li $v0,4             </span><br><span class="line">    la $a0,msg           </span><br><span class="line">    syscall  </span><br><span class="line"></span><br><span class="line">    li $v0,5              </span><br><span class="line">    syscall  </span><br><span class="line"></span><br><span class="line">    move $s0,$v0          </span><br><span class="line">    li $s7, 1      </span><br><span class="line"></span><br><span class="line">factorial:              </span><br><span class="line">    mult $s0,$s7        </span><br><span class="line">    mflo $s7     </span><br><span class="line">    sub $s0,$s0,1         </span><br><span class="line">    bgt $s0,1,factorial   </span><br><span class="line"></span><br><span class="line">done:</span><br><span class="line">    li $v0,4</span><br><span class="line">    la $a0,msg1</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    move $a0,$s7         </span><br><span class="line">    li $v0,1              </span><br><span class="line">    syscall          </span><br><span class="line"></span><br><span class="line">    li     $v0, 10           </span><br><span class="line">    syscall</span><br></pre></td></tr></table></figure>
+<h1 id="冒泡排序："><a href="#冒泡排序：" class="headerlink" title="冒泡排序："></a>冒泡排序：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">	Array: .word 21,4,12,6,89,17,33,10,9,51</span><br><span class="line">	seperate:.asciiz &quot; &quot;</span><br><span class="line"></span><br><span class="line"># for i(0~n-1)</span><br><span class="line"># 	for j(0~n-i)</span><br><span class="line"></span><br><span class="line">.text</span><br><span class="line">main:</span><br><span class="line">	la $t6,Array     # t6 = a[0]</span><br><span class="line">    move $t7,$zero   # t7 = 0</span><br><span class="line">    li $t8,10        # t8 = 10 (size)</span><br><span class="line">    move $t9,$zero   # t9 = 0</span><br><span class="line"></span><br><span class="line">loop1:</span><br><span class="line">    move $t9,$zero   # t9 = 0</span><br><span class="line"></span><br><span class="line">loop2:</span><br><span class="line">	move $t0,$t9     # t0 = t9</span><br><span class="line">    mul $t0,$t0,4	 # t0 = 4*t9</span><br><span class="line">    addu $t1,$t0,$t6   </span><br><span class="line">    lw $t2,0($t1)   # t2 = a[t9]</span><br><span class="line"></span><br><span class="line">	addi $t0,$t9,1   # t0 = t9 + 1</span><br><span class="line">    mul $t0,$t0,4</span><br><span class="line">    addu $t4,$t0,$t6</span><br><span class="line">    lw $t3,0($t4)	# t3 = a[t9+1]</span><br><span class="line"></span><br><span class="line">    bge $t2,$t3,skip # if(t2 &gt;= t3) goto skip</span><br><span class="line">    sw $t3,0($t1)  # if(t2 &lt; t3) swap</span><br><span class="line">    sw $t2,0($t4)</span><br><span class="line"></span><br><span class="line">skip:</span><br><span class="line">   addi $t9,$t9,1   # t9++</span><br><span class="line">   addi $t0,$t9,1   # t0 = t9 + 1</span><br><span class="line">   sub $t1,$t8,$t7    # t1 = t8 - t7</span><br><span class="line">   blt $t0,$t1,loop2  </span><br><span class="line">   addi $t7,$t7,1     </span><br><span class="line">   sub $t2,$t8,1</span><br><span class="line">   blt $t7,$t2,loop1</span><br><span class="line"></span><br><span class="line">set:</span><br><span class="line">	move $t7,$zero</span><br><span class="line">	</span><br><span class="line">done:</span><br><span class="line">	move $t0,$t7</span><br><span class="line">   	mul $t0,$t0,4</span><br><span class="line">   	addu $t1,$t0,$t6</span><br><span class="line">   	lw $a0,0($t1)</span><br><span class="line">  	li $v0,1</span><br><span class="line">   	syscall</span><br><span class="line"></span><br><span class="line">   	la $a0,seperate  </span><br><span class="line">   	li $v0,4</span><br><span class="line">   	syscall</span><br><span class="line"></span><br><span class="line">   	addi $t7,$t7,1</span><br><span class="line">   	blt $t7,10,done</span><br></pre></td></tr></table></figure>
+<h1 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">.text</span><br><span class="line">.globl main</span><br><span class="line">main:</span><br><span class="line">	addi $a1, $0, 2</span><br><span class="line">	addi $a2, $0, 3</span><br><span class="line"></span><br><span class="line">	jal print_two_number</span><br><span class="line">	jal addfunction</span><br><span class="line">	j result</span><br><span class="line"></span><br><span class="line">addfunction:</span><br><span class="line">	add $v1, $a1, $a2</span><br><span class="line">	jr $ra</span><br><span class="line"></span><br><span class="line">print_two_number:</span><br><span class="line">	move $a0, $a1</span><br><span class="line">	li $v0, 1</span><br><span class="line">	syscall</span><br><span class="line">	la $a0, change</span><br><span class="line">	li $v0, 4</span><br><span class="line">	syscall</span><br><span class="line"></span><br><span class="line">	move $a0, $a2</span><br><span class="line">	li $v0, 1</span><br><span class="line">	syscall</span><br><span class="line">	la $a0, change</span><br><span class="line">	li $v0 4</span><br><span class="line">	syscall</span><br><span class="line"></span><br><span class="line">	jr $ra</span><br><span class="line"></span><br><span class="line">result:</span><br><span class="line">	move $a0, $v1</span><br><span class="line">	li $v0, 1</span><br><span class="line">	syscall</span><br><span class="line"></span><br><span class="line">	la $a0, change</span><br><span class="line">	li $v0, 4</span><br><span class="line">	syscall</span><br><span class="line"></span><br><span class="line">	li $v0, 10</span><br><span class="line">	syscall</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.data</span><br><span class="line">	change:</span><br><span class="line">		.asciiz &quot;\n&quot;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/bianchengzhimei9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2205,252 +2507,6 @@ Step2：使用ping www.huawei.com获取IP。
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/matlab7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/27/matlab7/" itemprop="url">影像分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T10:51:52+08:00">
-                2019-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/matlab/" itemprop="url" rel="index">
-                    <span itemprop="name">matlab</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/27/matlab7/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/matlab7/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  962
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="影响分析（上）"><a href="#影响分析（上）" class="headerlink" title="影响分析（上）"></a>影响分析（上）</h1><h1 id="Read-and-Show-An-Image"><a href="#Read-and-Show-An-Image" class="headerlink" title="Read and Show An Image"></a>Read and Show An Image</h1><ul>
-<li>imread()</li>
-<li>imshow()</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">clear, close all</span><br><span class="line">I = imread(&apos;pout.tif&apos;);</span><br><span class="line">imshow(I);</span><br></pre></td></tr></table></figure>
-<h2 id="immultiply"><a href="#immultiply" class="headerlink" title="immultiply()"></a>immultiply()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;rice.png&apos;);</span><br><span class="line">subplot(1,2,1); imshow(I);</span><br><span class="line">J = immultiply(I, 1.5);</span><br><span class="line">subplot(1,2,2); imshow(J); % J更亮了</span><br></pre></td></tr></table></figure>
-<h2 id="imadd"><a href="#imadd" class="headerlink" title="imadd()"></a>imadd()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;rice.png&apos;);</span><br><span class="line">J = imread(&apos;cameraman.tif&apos;);</span><br><span class="line">K = imadd(I, J);</span><br><span class="line">subplot(1,3,1); imshow(I);</span><br><span class="line">subplot(1,3,2); imshow(K);</span><br><span class="line">subplot(1,3,3); imshow(J);</span><br></pre></td></tr></table></figure>
-<p>两张图片相加会变亮，相加的条件是大小要相等</p>
-<h2 id="imhist"><a href="#imhist" class="headerlink" title="imhist()"></a>imhist()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imhist(I)</span><br></pre></td></tr></table></figure>
-<p>将每一个graylevel拿出来统计，得到一个统计图表，横坐标为0~255，纵坐标为frequency</p>
-<h2 id="histeq"><a href="#histeq" class="headerlink" title="histeq()"></a>histeq()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;pout.tif&apos;); I2 = histeq(I);</span><br><span class="line">subplot(1,4,1); imhist(I);</span><br><span class="line">subplot(1,4,2); imshow(I);</span><br><span class="line">subplot(1,4,3); imshow(I2);</span><br><span class="line">subplot(1,4,4); imhist(I2);</span><br></pre></td></tr></table></figure>
-<p>对比度增加</p>
-<h2 id="imrotate"><a href="#imrotate" class="headerlink" title="imrotate()"></a>imrotate()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;rice.png&apos;); </span><br><span class="line">subplot(1,2,1);imshow(I); </span><br><span class="line">J = imrotate(I, 35, &apos;bilinear&apos;);</span><br><span class="line">subplot(1,2,2); imshow(J);</span><br><span class="line">size(I)</span><br><span class="line">size(J)</span><br></pre></td></tr></table></figure>
-<h2 id="imwrite"><a href="#imwrite" class="headerlink" title="imwrite()"></a>imwrite()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imwrite(I, &apos;pout2.png&apos;);</span><br></pre></td></tr></table></figure>
-<h1 id="影像分析（下）"><a href="#影像分析（下）" class="headerlink" title="影像分析（下）"></a>影像分析（下）</h1><h1 id="Problem-Setup"><a href="#Problem-Setup" class="headerlink" title="Problem Setup"></a>Problem Setup</h1><p>对于下图，如何通过影像分析数到有多少颗米，米的大小有多大？</p>
-<p><img src="Snipaste_2019-08-30_23-59-27.png" alt="1"></p>
-<p>策略：</p>
-<ol>
-<li>将该图二值化，即米变成白色，背景变成黑色</li>
-<li>计算连在一起的白色的点数</li>
-</ol>
-<h1 id="Image-Thresholding"><a href="#Image-Thresholding" class="headerlink" title="Image Thresholding"></a>Image Thresholding</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;rice.png&apos;); imhist(I);</span><br></pre></td></tr></table></figure>
-<p>A gray-level image can be turned into a binary image by using a threshold</p>
-<p>通过观察直方图，选出一个值(threshold)，对于每个像素，大于那个值的设置为白色，小于的设置为黑色</p>
-<h2 id="graythresh-and-im2bw"><a href="#graythresh-and-im2bw" class="headerlink" title="graythresh() and im2bw()"></a>graythresh() and im2bw()</h2><ul>
-<li>graythresh() find an optimal threshold level</li>
-<li>im2bw() converts an images into binary image</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;rice.png&apos;);</span><br><span class="line">level = graythresh(I);</span><br><span class="line">bw = im2bw(I, level);</span><br><span class="line">subplot(1,2,1);</span><br><span class="line">imshow(I);</span><br><span class="line">subplot(1,2,2);</span><br><span class="line">imshow(bw);</span><br></pre></td></tr></table></figure>
-<p>由于部分亮的背景被误认为米粒而变白，所以二进制图里面会有一些闪光点，为了不让这些点影响计算米粒数量结果，需要想办法让背景更加纯洁，就需要割去原有的背景</p>
-<h2 id="Background-Estimation"><a href="#Background-Estimation" class="headerlink" title="Background Estimation"></a>Background Estimation</h2><ul>
-<li>Estimation for the gray level of the background</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;rice.png&apos;);</span><br><span class="line">BG = imopen(I, strel(&apos;disk&apos;, 15));</span><br><span class="line">imshow(BG);</span><br></pre></td></tr></table></figure>
-<p>BG就是该图的背景，要去掉背景，就将原图减去这个背景图</p>
-<h2 id="Background-Subtraction"><a href="#Background-Subtraction" class="headerlink" title="Background Subtraction"></a>Background Subtraction</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;rice.png&apos;);</span><br><span class="line">subplot(1,3,1); imshow(I);</span><br><span class="line">BG = imopen(I, strel(&apos;disk&apos;, 15));</span><br><span class="line">subplot(1,3,2); imshow(BG);</span><br><span class="line">I2 = imsubtract(I, BG);  % I2 = I - BG</span><br><span class="line">subplot(1,3,3); imshow(I2);</span><br></pre></td></tr></table></figure>
-<p>这样就能让背近更加纯净</p>
-<h2 id="Thresholding-on-Background-Removed-Image"><a href="#Thresholding-on-Background-Removed-Image" class="headerlink" title="Thresholding on Background Removed Image"></a>Thresholding on Background Removed Image</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;rice.png&apos;); level = graythresh(I);</span><br><span class="line">bw = im2bw(I, level);</span><br><span class="line">subplot(1,2,1); imshow(bw); </span><br><span class="line">BG = imopen(I, strel(&apos;desk&apos;, 15));</span><br><span class="line">I2 = imsubtract(I, BG); level = graythresh(I2);</span><br><span class="line">bw2 = im2bw(I2, level);</span><br><span class="line">subplot(1,2,2); imshow(bw2);</span><br></pre></td></tr></table></figure>
-<p>可以见到由I2生成的bw2中没有了之前的闪点（sparkle）</p>
-<p>这样让误差减少了很多</p>
-<h2 id="identify-how-many-grains-are-there-in-the-image"><a href="#identify-how-many-grains-are-there-in-the-image" class="headerlink" title="identify how many grains are there in the image"></a>identify how many grains are there in the image</h2><p>使用的算法：Connected-component Labeling</p>
-<p>A procedure for assigning a unique label to each object</p>
-<p>对于原来的binary image，每个像素要么1要么0；</p>
-<p>对于每个区域的1，用不同的label来标记，1、2、3.。。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0 0 0 0 0 0 0</span><br><span class="line">0 1 1 0 0 0 0</span><br><span class="line">0 1 0 0 1 0 0</span><br><span class="line">0 0 0 1 1 0 0</span><br><span class="line">0 0 0 0 0 0 0</span><br></pre></td></tr></table></figure>
-<p>变成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0 0 0 0 0 0 0</span><br><span class="line">0 1 1 0 0 0 0</span><br><span class="line">0 1 0 0 2 0 0</span><br><span class="line">0 0 0 2 2 0 0</span><br><span class="line">0 0 0 0 0 0 0</span><br></pre></td></tr></table></figure>
-<h2 id="Connected-component-Labeling-bwlabel"><a href="#Connected-component-Labeling-bwlabel" class="headerlink" title="Connected-component Labeling: bwlabel()"></a>Connected-component Labeling: bwlabel()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;rice.png&apos;);</span><br><span class="line">BG = imopen(I, strel(&apos;disk&apos;,15));</span><br><span class="line">I2 = imsubtract(I, BG); level = graythresh(I2);</span><br><span class="line">BW = im2bw(I2, level);</span><br><span class="line">[labeled, numObjects] = bwlabel(BW, 8);</span><br></pre></td></tr></table></figure>
-<p>labeled就是一个用不同lebal标记后的一个矩阵</p>
-<p>看最大的label是多少就是米的数量有多少</p>
-<ul>
-<li>What is the size of the largest grain?</li>
-<li>what is the mean size of the grains?</li>
-</ul>
-<h2 id="Color-coding-Objects-label2rgb"><a href="#Color-coding-Objects-label2rgb" class="headerlink" title="Color-coding Objects: label2rgb()"></a>Color-coding Objects: label2rgb()</h2><ul>
-<li>Converts a label matrix into an RGB color image</li>
-<li>Visualize the labeled regions</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;rice.png&apos;);</span><br><span class="line">BG = imopen(I, strel(&apos;disk&apos;, 15));</span><br><span class="line">I2 = imsubtract(I, BG); level = graythresh(I2);</span><br><span class="line">BW = im2bw(I2, level);</span><br><span class="line">[labeled, numObjects] = bwlabel(BW, 8);</span><br><span class="line">RGB_label = label2rgb(labeled);</span><br><span class="line">imshow(RGB_label);</span><br></pre></td></tr></table></figure>
-<p>label2rgb()就是添加不同颜色，无其他功能</p>
-<h2 id="Object-Properties-regionprops"><a href="#Object-Properties-regionprops" class="headerlink" title="Object Properties: regionprops()"></a>Object Properties: regionprops()</h2><ul>
-<li>Provedes a set of properties for each connected component</li>
-</ul>
-<p>可以知道米的大小</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">I = imread(&apos;rice.png&apos;);</span><br><span class="line">BG = imopen(I, strel(&apos;disk&apos;, 15));</span><br><span class="line">I2 = imsubtract(I, BG);</span><br><span class="line">level = graythresh(I2);</span><br><span class="line">BW = im2bw(I2, level);</span><br><span class="line">[labeled, numObjects] = bwlabel(BW, 8);</span><br><span class="line">graindata = regionprops(labeled, &apos;basic&apos;);</span><br><span class="line">graindata(51)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2503,7 +2559,7 @@ Step2：使用ping www.huawei.com获取IP。
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">273</span>
+                  <span class="site-state-item-count">274</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2593,7 +2649,7 @@ Step2：使用ping www.huawei.com获取IP。
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">338.1k</span>
+    <span title="Site words total count">340.2k</span>
   
 </div>
 
