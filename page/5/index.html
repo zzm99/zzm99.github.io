@@ -310,7 +310,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/29/jizuyuanli2/" itemprop="url">jizuyuanli2</a></h1>
+                <a class="post-title-link" href="/2019/08/29/jizuyuanli2/" itemprop="url">MIPS——递归调用</a></h1>
         
 
         <div class="post-meta">
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  606
                 </span>
               
 
@@ -402,7 +402,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -425,7 +425,13 @@
       
         
           
-            
+            <h1 id="嵌套过程"><a href="#嵌套过程" class="headerlink" title="嵌套过程"></a>嵌套过程</h1><p>不调用其他过程的过程称为叶过程(leaf procedure)。如果所有过程都是叶过程，那么情况就很简单。但是某个过程可以调用其他过程，甚至调用的是自身的“克隆”。在调用非叶过程时使用寄存器需要十分小心。</p>
+<p>例如，假设主程序将参数3存入寄存器a0,然后使用jal A调用过程A。再假设过程A通过jal B调用过程B，参数为7，同样存入a0。由于A尚未结束任务，所以在寄存器a0的使用上存在冲突。同样，在寄存器ra保存的返回地址也存在冲突，因为它现在保存着B的返回值。</p>
+<p>我们必须采取措施阻止这类问题发生：</p>
+<p>一个解决方法是将其他所有必须保存的寄存器压栈，就像将保存寄存器压栈一样。调用者将所有调用后还需的参数寄存器（a1~a3）或临时寄存器（t0~t9）压栈。被调用者将返回地址寄存器(ra)和被调用者使用的保存寄存器（a0~a7）都压栈。栈指针 sp 随这栈中的寄存器个数调整。到返回时，寄存器会从存储器中恢复，栈指针也会随着重新调整。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">factorial</span><span class="params">(<span class="keyword">int</span> n)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">int</span> res = factorial(n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">factorial</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">1</span>)  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span>  <span class="keyword">return</span> n * factorial(n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">    prompt1: .asciiz &quot;Enter the number\n&quot;</span><br><span class="line">    prompt2: .asciiz &quot;The factorial of n is:\n&quot;</span><br><span class="line"></span><br><span class="line">.text</span><br><span class="line">    # Print prompt1</span><br><span class="line">    li $v0, 4</span><br><span class="line">    la $a0, prompt1</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    # Read integer</span><br><span class="line">    li $v0, 5</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    # Call factorial</span><br><span class="line">    move $a0, $v0</span><br><span class="line">    jal factorial</span><br><span class="line">    move $a1, $v0 # save return value to a1</span><br><span class="line"></span><br><span class="line">    # Print prompt2</span><br><span class="line">    li $v0, 4</span><br><span class="line">    la $a0, prompt2</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    # Print result</span><br><span class="line">    li $v0, 1</span><br><span class="line">    move $a0, $a1</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    # Exit</span><br><span class="line">    li $v0, 10</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    ## Function int factorial(int n)</span><br><span class="line">    factorial:</span><br><span class="line">        ## YOUR CODE HERE</span><br><span class="line">        addi $sp,$sp,-8            #adjust stack for 2 items</span><br><span class="line">        sw   $ra,4($sp)            #save return address</span><br><span class="line">        sw   $a0,0($sp)            #save the argument n</span><br><span class="line">    </span><br><span class="line">        slti $t0,$a0,1             #if n &lt; 1,then set $t0 as 1</span><br><span class="line">        beq  $t0,$zero,L1          #if equal,then jump L1</span><br><span class="line">                                   #above all,if n &gt;= 1,then jump L1</span><br><span class="line">        #if(n &lt; 1)</span><br><span class="line">        addi $v0,$zero,1            #return 1</span><br><span class="line">        addi $sp,$sp,8              #pop 2 items off stack</span><br><span class="line">        jr   $ra                    #return to caller</span><br><span class="line">        #else</span><br><span class="line">        L1:</span><br><span class="line">            add $a0,$a0,-1          #argument :n - 1</span><br><span class="line">            jal factorial           #call factorial with (n-1)</span><br><span class="line">        </span><br><span class="line">           lw   $a0,0($sp)          #restore argument n</span><br><span class="line">           lw   $ra,4($sp)          #restore address</span><br><span class="line">           addi $sp,$sp,8           #adjust stack pionter</span><br><span class="line">           mul  $v0,$a0,$v0         #return n * factorial(n-1)</span><br><span class="line">           jr   $ra                  return to caller</span><br><span class="line">    ## END OF YOUR CODE</span><br><span class="line">  #jr $ra</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -2615,7 +2621,7 @@ Step2：使用ping www.huawei.com获取IP。
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">340.5k</span>
+    <span title="Site words total count">341.1k</span>
   
 </div>
 
