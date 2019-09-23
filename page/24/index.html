@@ -291,6 +291,215 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/pythonweb2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/14/pythonweb2/" itemprop="url">awesome-website-2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-14T20:07:20+08:00">
+                2019-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/网站开发/" itemprop="url" rel="index">
+                    <span itemprop="name">网站开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/网站开发/实战/" itemprop="url" rel="index">
+                    <span itemprop="name">实战</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/14/pythonweb2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/14/pythonweb2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Python-网站开发-5-–-搭建Web框架"><a href="#Python-网站开发-5-–-搭建Web框架" class="headerlink" title="Python 网站开发(5) – 搭建Web框架"></a>Python 网站开发(5) – 搭建Web框架</h1><h1 id="搭建Web框架"><a href="#搭建Web框架" class="headerlink" title="搭建Web框架"></a>搭建Web框架</h1><p>由于aiohttp作为一个Web框架比较底层，我们还需要基于aiohttp编写一个更方便处理URL的Web框架。</p>
+<p>在www目录新建coroweb.py:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio, os, inspect, logging, functools</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> parse</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> aiohttp <span class="keyword">import</span> web</span><br><span class="line"></span><br><span class="line"><span class="comment">## apis是处理分页的模块,代码在本章页面末尾,请将apis.py放在www下以防报错</span></span><br><span class="line"><span class="comment">## APIError 是指API调用时发生逻辑错误</span></span><br><span class="line"><span class="keyword">from</span> apis <span class="keyword">import</span> APIError</span><br><span class="line"></span><br><span class="line"><span class="comment">## 编写装饰函数 @get()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="comment">## Define decorator @get('/path')</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">        @functools.wraps(func)</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">            <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">        wrapper.__method__ = <span class="string">'GET'</span></span><br><span class="line">        wrapper.__route__ = path</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">    <span class="keyword">return</span> decorator</span><br><span class="line"></span><br><span class="line"><span class="comment">## 编写装饰函数 @post()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="comment">## Define decorator @post('/path')</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">        @functools.wraps(func)</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kw)</span>:</span></span><br><span class="line">            <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">        wrapper.__method__ = <span class="string">'POST'</span></span><br><span class="line">        wrapper.__route__ = path</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">    <span class="keyword">return</span> decorator</span><br><span class="line"></span><br><span class="line"><span class="comment">## 以下是RequestHandler需要定义的一些函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_required_kw_args</span><span class="params">(fn)</span>:</span></span><br><span class="line">    args = []</span><br><span class="line">    params = inspect.signature(fn).parameters</span><br><span class="line">    <span class="keyword">for</span> name, param <span class="keyword">in</span> params.items():</span><br><span class="line">        <span class="keyword">if</span> param.kind == inspect.Parameter.KEYWORD_ONLY <span class="keyword">and</span> param.default == inspect.Parameter.empty:</span><br><span class="line">            args.append(name)</span><br><span class="line">    <span class="keyword">return</span> tuple(args)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_named_kw_args</span><span class="params">(fn)</span>:</span></span><br><span class="line">    args = []</span><br><span class="line">    params = inspect.signature(fn).parameters</span><br><span class="line">    <span class="keyword">for</span> name, param <span class="keyword">in</span> params.items():</span><br><span class="line">        <span class="keyword">if</span> param.kind == inspect.Parameter.KEYWORD_ONLY:</span><br><span class="line">            args.append(name)</span><br><span class="line">    <span class="keyword">return</span> tuple(args)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">has_named_kw_args</span><span class="params">(fn)</span>:</span></span><br><span class="line">    params = inspect.signature(fn).parameters</span><br><span class="line">    <span class="keyword">for</span> name, param <span class="keyword">in</span> params.items():</span><br><span class="line">        <span class="keyword">if</span> param.kind == inspect.Parameter.KEYWORD_ONLY:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">has_var_kw_arg</span><span class="params">(fn)</span>:</span></span><br><span class="line">    params = inspect.signature(fn).parameters</span><br><span class="line">    <span class="keyword">for</span> name, param <span class="keyword">in</span> params.items():</span><br><span class="line">        <span class="keyword">if</span> param.kind == inspect.Parameter.VAR_KEYWORD:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">has_request_arg</span><span class="params">(fn)</span>:</span></span><br><span class="line">    sig = inspect.signature(fn)</span><br><span class="line">    params = sig.parameters</span><br><span class="line">    found = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> name, param <span class="keyword">in</span> params.items():</span><br><span class="line">        <span class="keyword">if</span> name == <span class="string">'request'</span>:</span><br><span class="line">            found = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> found <span class="keyword">and</span> (param.kind != inspect.Parameter.VAR_POSITIONAL <span class="keyword">and</span> param.kind != inspect.Parameter.KEYWORD_ONLY <span class="keyword">and</span> param.kind != inspect.Parameter.VAR_KEYWORD):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'request parameter must be the last named parameter in function: %s%s'</span> % (fn.__name__, str(sig)))</span><br><span class="line">    <span class="keyword">return</span> found</span><br><span class="line"></span><br><span class="line"><span class="comment">## 定义RequestHandler从URL函数中分析其需要接受的参数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RequestHandler</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, app, fn)</span>:</span></span><br><span class="line">        self._app = app</span><br><span class="line">        self._func = fn</span><br><span class="line">        self._has_request_arg = has_request_arg(fn)</span><br><span class="line">        self._has_var_kw_arg = has_var_kw_arg(fn)</span><br><span class="line">        self._has_named_kw_args = has_named_kw_args(fn)</span><br><span class="line">        self._named_kw_args = get_named_kw_args(fn)</span><br><span class="line">        self._required_kw_args = get_required_kw_args(fn)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, request)</span>:</span></span><br><span class="line">        kw = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> self._has_var_kw_arg <span class="keyword">or</span> self._has_named_kw_args <span class="keyword">or</span> self._required_kw_args:</span><br><span class="line">            <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> request.content_type:</span><br><span class="line">                    <span class="keyword">return</span> web.HTTPBadRequest(<span class="string">'Missing Content-Type.'</span>)</span><br><span class="line">                ct = request.content_type.lower()</span><br><span class="line">                <span class="keyword">if</span> ct.startswith(<span class="string">'application/json'</span>):</span><br><span class="line">                    params = <span class="keyword">await</span> request.json()</span><br><span class="line">                    <span class="keyword">if</span> <span class="keyword">not</span> isinstance(params, dict):</span><br><span class="line">                        <span class="keyword">return</span> web.HTTPBadRequest(<span class="string">'JSON body must be object.'</span>)</span><br><span class="line">                    kw = params</span><br><span class="line">                <span class="keyword">elif</span> ct.startswith(<span class="string">'application/x-www-form-urlencoded'</span>) <span class="keyword">or</span> ct.startswith(<span class="string">'multipart/form-data'</span>):</span><br><span class="line">                    params = <span class="keyword">await</span> request.post()</span><br><span class="line">                    kw = dict(**params)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">return</span> web.HTTPBadRequest(<span class="string">'Unsupported Content-Type: %s'</span> % request.content_type)</span><br><span class="line">            <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">                qs = request.query_string</span><br><span class="line">                <span class="keyword">if</span> qs:</span><br><span class="line">                    kw = dict()</span><br><span class="line">                    <span class="keyword">for</span> k, v <span class="keyword">in</span> parse.parse_qs(qs, <span class="literal">True</span>).items():</span><br><span class="line">                        kw[k] = v[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> kw <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            kw = dict(**request.match_info)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> self._has_var_kw_arg <span class="keyword">and</span> self._named_kw_args:</span><br><span class="line">                <span class="comment"># remove all unamed kw:</span></span><br><span class="line">                copy = dict()</span><br><span class="line">                <span class="keyword">for</span> name <span class="keyword">in</span> self._named_kw_args:</span><br><span class="line">                    <span class="keyword">if</span> name <span class="keyword">in</span> kw:</span><br><span class="line">                        copy[name] = kw[name]</span><br><span class="line">                kw = copy</span><br><span class="line">            <span class="comment"># check named arg:</span></span><br><span class="line">            <span class="keyword">for</span> k, v <span class="keyword">in</span> request.match_info.items():</span><br><span class="line">                <span class="keyword">if</span> k <span class="keyword">in</span> kw:</span><br><span class="line">                    logging.warning(<span class="string">'Duplicate arg name in named arg and kw args: %s'</span> % k)</span><br><span class="line">                kw[k] = v</span><br><span class="line">        <span class="keyword">if</span> self._has_request_arg:</span><br><span class="line">            kw[<span class="string">'request'</span>] = request</span><br><span class="line">        <span class="comment"># check required kw:</span></span><br><span class="line">        <span class="keyword">if</span> self._required_kw_args:</span><br><span class="line">            <span class="keyword">for</span> name <span class="keyword">in</span> self._required_kw_args:</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> name <span class="keyword">in</span> kw:</span><br><span class="line">                    <span class="keyword">return</span> web.HTTPBadRequest(<span class="string">'Missing argument: %s'</span> % name)</span><br><span class="line">        logging.info(<span class="string">'call with args: %s'</span> % str(kw))</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            r = <span class="keyword">await</span> self._func(**kw)</span><br><span class="line">            <span class="keyword">return</span> r</span><br><span class="line">        <span class="keyword">except</span> APIError <span class="keyword">as</span> e:</span><br><span class="line">            <span class="keyword">return</span> dict(error=e.error, data=e.data, message=e.message)</span><br><span class="line"><span class="comment">## 定义add_static函数，来注册static文件夹下的文件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_static</span><span class="params">(app)</span>:</span></span><br><span class="line">    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), <span class="string">'static'</span>)</span><br><span class="line">    app.router.add_static(<span class="string">'/static/'</span>, path)</span><br><span class="line">    logging.info(<span class="string">'add static %s =&gt; %s'</span> % (<span class="string">'/static/'</span>, path))</span><br><span class="line"></span><br><span class="line"><span class="comment">## 定义add_route函数，来注册一个URL处理函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_route</span><span class="params">(app, fn)</span>:</span></span><br><span class="line">    method = getattr(fn, <span class="string">'__method__'</span>, <span class="literal">None</span>)</span><br><span class="line">    path = getattr(fn, <span class="string">'__route__'</span>, <span class="literal">None</span>)</span><br><span class="line">    <span class="keyword">if</span> path <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> method <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'@get or @post not defined in %s.'</span> % str(fn))</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> asyncio.iscoroutinefunction(fn) <span class="keyword">and</span> <span class="keyword">not</span> inspect.isgeneratorfunction(fn):</span><br><span class="line">        fn = asyncio.coroutine(fn)</span><br><span class="line">    logging.info(<span class="string">'add route %s %s =&gt; %s(%s)'</span> % (method, path, fn.__name__, <span class="string">', '</span>.join(inspect.signature(fn).parameters.keys())))</span><br><span class="line">    app.router.add_route(method, path, RequestHandler(app, fn))</span><br><span class="line"></span><br><span class="line"><span class="comment">## 定义add_routes函数，自动把handler模块的所有符合条件的URL函数注册了</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_routes</span><span class="params">(app, module_name)</span>:</span></span><br><span class="line">    n = module_name.rfind(<span class="string">'.'</span>)</span><br><span class="line">    <span class="keyword">if</span> n == (<span class="number">-1</span>):</span><br><span class="line">        mod = __import__(module_name, globals(), locals())</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        name = module_name[n+<span class="number">1</span>:]</span><br><span class="line">        mod = getattr(__import__(module_name[:n], globals(), locals(), [name]), name)</span><br><span class="line">    <span class="keyword">for</span> attr <span class="keyword">in</span> dir(mod):</span><br><span class="line">        <span class="keyword">if</span> attr.startswith(<span class="string">'_'</span>):</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        fn = getattr(mod, attr)</span><br><span class="line">        <span class="keyword">if</span> callable(fn):</span><br><span class="line">            method = getattr(fn, <span class="string">'__method__'</span>, <span class="literal">None</span>)</span><br><span class="line">            path = getattr(fn, <span class="string">'__route__'</span>, <span class="literal">None</span>)</span><br><span class="line">            <span class="keyword">if</span> method <span class="keyword">and</span> path:</span><br><span class="line">                add_route(app, fn)</span><br></pre></td></tr></table></figure></p>
+<p>最后，在app.py中加入middleware、jinja2模板和自注册的支持。app.py代码修改如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging; logging.basicConfig(level=logging.INFO)</span><br><span class="line"><span class="keyword">import</span> asyncio, os, json, time</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> aiohttp <span class="keyword">import</span> web</span><br><span class="line"><span class="keyword">from</span> jinja2 <span class="keyword">import</span> Environment, FileSystemLoader</span><br><span class="line"></span><br><span class="line"><span class="comment">## config 配置代码在后面会创建添加, 可先从'https://github.com/yzyly1992/2019_Python_Web_Dev'下载或下一章中复制`config.py`和`config_default.py`到`www`下,以防报错</span></span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> configs</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> orm</span><br><span class="line"><span class="keyword">from</span> coroweb <span class="keyword">import</span> add_routes, add_static</span><br><span class="line"></span><br><span class="line"><span class="comment">## handlers 是url处理模块, 当handlers.py在API章节里完全编辑完再将下一行代码的双井号去掉</span></span><br><span class="line"><span class="comment">## from handlers import cookie2user, COOKIE_NAME</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 初始化jinja2的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_jinja2</span><span class="params">(app, **kw)</span>:</span></span><br><span class="line">    logging.info(<span class="string">'init jinja2...'</span>)</span><br><span class="line">    options = dict(</span><br><span class="line">        autoescape = kw.get(<span class="string">'autoescape'</span>, <span class="literal">True</span>),</span><br><span class="line">        block_start_string = kw.get(<span class="string">'block_start_string'</span>, <span class="string">'&#123;%'</span>),</span><br><span class="line">        block_end_string = kw.get(<span class="string">'block_end_string'</span>, <span class="string">'%&#125;'</span>),</span><br><span class="line">        variable_start_string = kw.get(<span class="string">'variable_start_string'</span>, <span class="string">'&#123;&#123;'</span>),</span><br><span class="line">        variable_end_string = kw.get(<span class="string">'variable_end_string'</span>, <span class="string">'&#125;&#125;'</span>),</span><br><span class="line">        auto_reload = kw.get(<span class="string">'auto_reload'</span>, <span class="literal">True</span>)</span><br><span class="line">    )</span><br><span class="line">    path = kw.get(<span class="string">'path'</span>, <span class="literal">None</span>)</span><br><span class="line">    <span class="keyword">if</span> path <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), <span class="string">'templates'</span>)</span><br><span class="line">    logging.info(<span class="string">'set jinja2 template path: %s'</span> % path)</span><br><span class="line">    env = Environment(loader=FileSystemLoader(path), **options)</span><br><span class="line">    filters = kw.get(<span class="string">'filters'</span>, <span class="literal">None</span>)</span><br><span class="line">    <span class="keyword">if</span> filters <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">for</span> name, f <span class="keyword">in</span> filters.items():</span><br><span class="line">            env.filters[name] = f</span><br><span class="line">    app[<span class="string">'__templating__'</span>] = env</span><br><span class="line"></span><br><span class="line"><span class="comment">## 以下是middleware,可以把通用的功能从每个URL处理函数中拿出来集中放到一个地方</span></span><br><span class="line"><span class="comment">## URL处理日志工厂</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">logger_factory</span><span class="params">(app, handler)</span>:</span></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">logger</span><span class="params">(request)</span>:</span></span><br><span class="line">        logging.info(<span class="string">'Request: %s %s'</span> % (request.method, request.path))</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">await</span> handler(request))</span><br><span class="line">    <span class="keyword">return</span> logger</span><br><span class="line"></span><br><span class="line"><span class="comment">## 认证处理工厂--把当前用户绑定到request上，并对URL/manage/进行拦截，检查当前用户是否是管理员身份</span></span><br><span class="line"><span class="comment">## 需要handlers.py的支持, 当handlers.py在API章节里完全编辑完再将下面代码的双井号去掉</span></span><br><span class="line"><span class="comment">##async def auth_factory(app, handler):</span></span><br><span class="line"><span class="comment">##    async def auth(request):</span></span><br><span class="line"><span class="comment">##        logging.info('check user: %s %s' % (request.method, request.path))</span></span><br><span class="line"><span class="comment">##        request.__user__ = None</span></span><br><span class="line"><span class="comment">##        cookie_str = request.cookies.get(COOKIE_NAME)</span></span><br><span class="line"><span class="comment">##        if cookie_str:</span></span><br><span class="line"><span class="comment">##            user = await cookie2user(cookie_str)</span></span><br><span class="line"><span class="comment">##            if user:</span></span><br><span class="line"><span class="comment">##                logging.info('set current user: %s' % user.email)</span></span><br><span class="line"><span class="comment">##                request.__user__ = user</span></span><br><span class="line"><span class="comment">##        if request.path.startswith('/manage/') and (request.__user__ is None or not request.__user__.admin):</span></span><br><span class="line"><span class="comment">##            return web.HTTPFound('/signin')</span></span><br><span class="line"><span class="comment">##        return (await handler(request))</span></span><br><span class="line"><span class="comment">##    return auth</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 数据处理工厂</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">data_factory</span><span class="params">(app, handler)</span>:</span></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">parse_data</span><span class="params">(request)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">            <span class="keyword">if</span> request.content_type.startswith(<span class="string">'application/json'</span>):</span><br><span class="line">                request.__data__ = <span class="keyword">await</span> request.json()</span><br><span class="line">                logging.info(<span class="string">'request json: %s'</span> % str(request.__data__))</span><br><span class="line">            <span class="keyword">elif</span> request.content_type.startswith(<span class="string">'application/x-www-form-urlencoded'</span>):</span><br><span class="line">                request.__data__ = <span class="keyword">await</span> request.post()</span><br><span class="line">                logging.info(<span class="string">'request form: %s'</span> % str(request.__data__))</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">await</span> handler(request))</span><br><span class="line">    <span class="keyword">return</span> parse_data</span><br><span class="line"></span><br><span class="line"><span class="comment">## 响应返回处理工厂</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">response_factory</span><span class="params">(app, handler)</span>:</span></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">response</span><span class="params">(request)</span>:</span></span><br><span class="line">        logging.info(<span class="string">'Response handler...'</span>)</span><br><span class="line">        r = <span class="keyword">await</span> handler(request)</span><br><span class="line">        <span class="keyword">if</span> isinstance(r, web.StreamResponse):</span><br><span class="line">            <span class="keyword">return</span> r</span><br><span class="line">        <span class="keyword">if</span> isinstance(r, bytes):</span><br><span class="line">            resp = web.Response(body=r)</span><br><span class="line">            resp.content_type = <span class="string">'application/octet-stream'</span></span><br><span class="line">            <span class="keyword">return</span> resp</span><br><span class="line">        <span class="keyword">if</span> isinstance(r, str):</span><br><span class="line">            <span class="keyword">if</span> r.startswith(<span class="string">'redirect:'</span>):</span><br><span class="line">                <span class="keyword">return</span> web.HTTPFound(r[<span class="number">9</span>:])</span><br><span class="line">            resp = web.Response(body=r.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">            resp.content_type = <span class="string">'text/html;charset=utf-8'</span></span><br><span class="line">            <span class="keyword">return</span> resp</span><br><span class="line">        <span class="keyword">if</span> isinstance(r, dict):</span><br><span class="line">            template = r.get(<span class="string">'__template__'</span>)</span><br><span class="line">            <span class="keyword">if</span> template <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                resp = web.Response(body=json.dumps(r, ensure_ascii=<span class="literal">False</span>, default=<span class="keyword">lambda</span> o: o.__dict__).encode(<span class="string">'utf-8'</span>))</span><br><span class="line">                resp.content_type = <span class="string">'application/json;charset=utf-8'</span></span><br><span class="line">                <span class="keyword">return</span> resp</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment">## 在handlers.py完全完成后,去掉下一行的双井号</span></span><br><span class="line">                <span class="comment">##r['__user__'] = request.__user__</span></span><br><span class="line">                resp = web.Response(body=app[<span class="string">'__templating__'</span>].get_template(template).render(**r).encode(<span class="string">'utf-8'</span>))</span><br><span class="line">                resp.content_type = <span class="string">'text/html;charset=utf-8'</span></span><br><span class="line">                <span class="keyword">return</span> resp</span><br><span class="line">        <span class="keyword">if</span> isinstance(r, int) <span class="keyword">and</span> t &gt;= <span class="number">100</span> <span class="keyword">and</span> t &lt; <span class="number">600</span>:</span><br><span class="line">            <span class="keyword">return</span> web.Response(t)</span><br><span class="line">        <span class="keyword">if</span> isinstance(r, tuple) <span class="keyword">and</span> len(r) == <span class="number">2</span>:</span><br><span class="line">            t, m = r</span><br><span class="line">            <span class="keyword">if</span> isinstance(t, int) <span class="keyword">and</span> t &gt;= <span class="number">100</span> <span class="keyword">and</span> t &lt; <span class="number">600</span>:</span><br><span class="line">                <span class="keyword">return</span> web.Response(t, str(m))</span><br><span class="line">        <span class="comment"># default:</span></span><br><span class="line">        resp = web.Response(body=str(r).encode(<span class="string">'utf-8'</span>))</span><br><span class="line">        resp.content_type = <span class="string">'text/plain;charset=utf-8'</span></span><br><span class="line">        <span class="keyword">return</span> resp</span><br><span class="line">    <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line"><span class="comment">## 时间转换</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">datetime_filter</span><span class="params">(t)</span>:</span></span><br><span class="line">    delta = int(time.time() - t)</span><br><span class="line">    <span class="keyword">if</span> delta &lt; <span class="number">60</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">u'1分钟前'</span></span><br><span class="line">    <span class="keyword">if</span> delta &lt; <span class="number">3600</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">u'%s分钟前'</span> % (delta // <span class="number">60</span>)</span><br><span class="line">    <span class="keyword">if</span> delta &lt; <span class="number">86400</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">u'%s小时前'</span> % (delta // <span class="number">3600</span>)</span><br><span class="line">    <span class="keyword">if</span> delta &lt; <span class="number">604800</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">u'%s天前'</span> % (delta // <span class="number">86400</span>)</span><br><span class="line">    dt = datetime.fromtimestamp(t)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">u'%s年%s月%s日'</span> % (dt.year, dt.month, dt.day)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">init</span><span class="params">(loop)</span>:</span></span><br><span class="line">    <span class="keyword">await</span> orm.create_pool(loop=loop, **configs.db)</span><br><span class="line">    <span class="comment">## 在handlers.py完全完成后,在下面middlewares的list中加入auth_factory</span></span><br><span class="line">    app = web.Application(loop=loop, middlewares=[</span><br><span class="line">        logger_factory, response_factory</span><br><span class="line">    ])</span><br><span class="line">    init_jinja2(app, filters=dict(datetime=datetime_filter))</span><br><span class="line">    add_routes(app, <span class="string">'handlers'</span>)</span><br><span class="line">    add_static(app)</span><br><span class="line">    srv = <span class="keyword">await</span> loop.create_server(app.make_handler(), <span class="string">'127.0.0.1'</span>, <span class="number">9000</span>)</span><br><span class="line">    logging.info(<span class="string">'server started at http://127.0.0.1:9000...'</span>)</span><br><span class="line">    <span class="keyword">return</span> srv</span><br><span class="line"></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">loop.run_until_complete(init(loop))</span><br><span class="line">loop.run_forever()</span><br></pre></td></tr></table></figure></p>
+<p>以下是处理分页和API错误的代码apis.py, 请将之放置在www下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json, logging, inspect, functools</span><br><span class="line"></span><br><span class="line"><span class="comment">## 建立Page类来处理分页,可以在page_size更改每页项目的个数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Page</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, item_count, page_index=<span class="number">1</span>, page_size=<span class="number">8</span>)</span>:</span></span><br><span class="line">        self.item_count = item_count</span><br><span class="line">        self.page_size = page_size</span><br><span class="line">        self.page_count = item_count // page_size + (<span class="number">1</span> <span class="keyword">if</span> item_count % page_size &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">if</span> (item_count == <span class="number">0</span>) <span class="keyword">or</span> (page_index &gt; self.page_count):</span><br><span class="line">            self.offset = <span class="number">0</span></span><br><span class="line">            self.limit = <span class="number">0</span></span><br><span class="line">            self.page_index = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.page_index = page_index</span><br><span class="line">            self.offset = self.page_size * (page_index - <span class="number">1</span>)</span><br><span class="line">            self.limit = self.page_size</span><br><span class="line">        self.has_next = self.page_index &lt; self.page_count</span><br><span class="line">        self.has_previous = self.page_index &gt; <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'item_count: %s, page_count: %s, page_index: %s, page_size: %s, offset: %s, limit: %s'</span> % (self.item_count, self.page_count, self.page_index, self.page_size, self.offset, self.limit)</span><br><span class="line"></span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br><span class="line"><span class="comment">## 以下为API的几类错误代码</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">APIError</span><span class="params">(Exception)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, error, data=<span class="string">''</span>, message=<span class="string">''</span>)</span>:</span></span><br><span class="line">        super(APIError, self).__init__(message)</span><br><span class="line">        self.error = error</span><br><span class="line">        self.data = data</span><br><span class="line">        self.message = message</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">APIValueError</span><span class="params">(APIError)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, field, message=<span class="string">''</span>)</span>:</span></span><br><span class="line">        super(APIValueError, self).__init__(<span class="string">'value:invalid'</span>, field, message)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">APIResourceNotFoundError</span><span class="params">(APIError)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, field, message=<span class="string">''</span>)</span>:</span></span><br><span class="line">        super(APIResourceNotFoundError, self).__init__(<span class="string">'value:notfound'</span>, field, message)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">APIPermissionError</span><span class="params">(APIError)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, message=<span class="string">''</span>)</span>:</span></span><br><span class="line">        super(APIPermissionError, self).__init__(<span class="string">'permission:forbidden'</span>, <span class="string">'permission'</span>, message)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">import</span> doctest</span><br><span class="line">    doctest.testmod()</span><br></pre></td></tr></table></figure></p>
+<p>有了Web框架，接下来就可以添加需要的URL到handlers模块来处理了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/pythonweb1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2222,220 +2431,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/pachongzhuanti3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/13/pachongzhuanti3/" itemprop="url">模拟登陆</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-13T11:18:18+08:00">
-                2019-05-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/学习爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">学习爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/学习爬虫/爬虫专题/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫专题</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/13/pachongzhuanti3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/13/pachongzhuanti3/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>通过selenium进行模拟登陆，然后将Cookies传入requests，最终用requests进行网站的抓取。优点就是不但规避了“selenium”其本身抓取速度慢的问题（因为仅仅用其作为登陆），又规避了利用requests登陆时需要制作繁琐的Cookies的过程（因为是从selenium直接拿来cookies）。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/13/pachongzhuanti3/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2483,7 +2483,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">280</span>
+                  <span class="site-state-item-count">281</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2573,7 +2573,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">347.6k</span>
+    <span title="Site words total count">349.6k</span>
   
 </div>
 
