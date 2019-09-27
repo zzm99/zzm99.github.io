@@ -291,6 +291,257 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/31/matlab12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/31/matlab12/" itemprop="url">回归与内插</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-31T16:22:49+08:00">
+                2019-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/matlab/" itemprop="url" rel="index">
+                    <span itemprop="name">matlab</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/31/matlab12/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/31/matlab12/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  680
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Simple-Linear-Regression"><a href="#Simple-Linear-Regression" class="headerlink" title="Simple Linear Regression"></a>Simple Linear Regression</h1><ul>
+<li>A bunch of data points (xi, yi) are collected</li>
+<li>Assume x and y are linearly correlated</li>
+</ul>
+<p><img src="Snipaste_2019-09-01_10-07-05.png" alt="1"></p>
+<h1 id="Linear-Regression-Formulation"><a href="#Linear-Regression-Formulation" class="headerlink" title="Linear Regression Formulation"></a>Linear Regression Formulation</h1><p><img src="Snipaste_2019-09-01_10-23-15.png" alt="1"></p>
+<p>想要求解得β0和β1使SSE最小，就要做微分</p>
+<h1 id="Solving-Least-squares-Problem"><a href="#Solving-Least-squares-Problem" class="headerlink" title="Solving Least-squares Problem"></a>Solving Least-squares Problem</h1><ul>
+<li>SSE is minimized when its gradient with respect to each parameter is equal to zero:</li>
+</ul>
+<p><img src="Snipaste_2019-09-01_10-26-06.png" alt="1"></p>
+<h1 id="Least-squares-Solution"><a href="#Least-squares-Solution" class="headerlink" title="Least-squares Solution"></a>Least-squares Solution</h1><ul>
+<li>Suppose there exists N data points:</li>
+</ul>
+<p><img src="Snipaste_2019-09-01_10-28-42.png" alt="1"></p>
+<h1 id="Polynomial-Curve-Fitting-polyfit"><a href="#Polynomial-Curve-Fitting-polyfit" class="headerlink" title="Polynomial Curve Fitting: polyfit()"></a>Polynomial Curve Fitting: polyfit()</h1><ul>
+<li>Curve fitting for polynomials of different orders</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = [-1.2 -0.5 0.3 0.9 1.8 2.6 3.0 3.5];</span><br><span class="line">y = [-15.6 -8.5 2.2 4.5 6.6 8.2 8.9 10.0];</span><br><span class="line">fit = polyfit(x,y,1);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>1 代表一次方得polynomial， 即f(x) = ax + b<br>上例中 fit(1) -&gt; a, fit(2) -&gt; b </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xfit = [x(1):0.1:x(end)];</span><br><span class="line">yfit = fit(1)*xfit + fit(2);</span><br><span class="line">plot(x, y, &apos;ro&apos;, xfit, yfit);</span><br><span class="line">set(gca, &apos;FontSize&apos;, 14);</span><br><span class="line">legend(&apos;data points&apos;, &apos;best-fit&apos;);</span><br></pre></td></tr></table></figure>
+<h1 id="Are-x-and-y-Linearly-Correlated"><a href="#Are-x-and-y-Linearly-Correlated" class="headerlink" title="Are x and y Linearly Correlated?"></a>Are x and y Linearly Correlated?</h1><ul>
+<li>if not, the line may not well describe their relationship</li>
+<li>Check the linearity by using:</li>
+<li>scatter(): scatterplot 画散点图</li>
+<li>corrcoef(): correlaition coefficient, -1&lt;= r &lt;= 1 相关系数 很强正相关 趋近1 ，很强负相关 趋近-1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = [-1.2 -0.5 0.3 0.9 1.8 2.6 3.0 3.5];</span><br><span class="line">y = [-15.6 -8.5 2.2 4.5 6.6 8.2 8.9 10.0];</span><br><span class="line">scatter(x, y); box on; axis square;</span><br><span class="line">corrcoef(x, y)</span><br></pre></td></tr></table></figure>
+<p>corrcoef(x, y) 得到一个矩阵，对应x跟x、x跟y、y跟x、y跟y的相关系数</p>
+<h1 id="Higher-Order-Polynomials"><a href="#Higher-Order-Polynomials" class="headerlink" title="Higher Order Polynomials"></a>Higher Order Polynomials</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = [-1.2 -0.5 0.3 0.9 1.8 2.6 3.0 3.5];</span><br><span class="line">y = [-15.6 -8.5 2.2 4.5 6.6 8.2 8.9 10.0];</span><br><span class="line">figure(&apos;Position&apos;, [50 50 1500 400]);</span><br><span class="line">for i=1:3</span><br><span class="line">    subplot(1,3,i); p = polyfit(x, y, i);</span><br><span class="line">    xfit = x(1):0.1:x(end); yfit = polyval(p, xfit);</span><br><span class="line">    poly(x, y, &apos;ro&apos;, xfit, yfit); set(gca, &apos;FontSize&apos;, 14);</span><br><span class="line">    ylim([-17, 11]); legend(&apos;Location&apos;, &apos;SouthEast&apos;,&apos;Data points&apos;, &apos;Fitted curve&apos;);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h2 id="is-it-better-to-use-higher-order-polynomials"><a href="#is-it-better-to-use-higher-order-polynomials" class="headerlink" title="is it better to use higher order polynomials?"></a>is it better to use higher order polynomials?</h2><p>no ,过拟合</p>
+<h1 id="What-if-There-Exists-More-Variables"><a href="#What-if-There-Exists-More-Variables" class="headerlink" title="What if There Exists More Variables?"></a>What if There Exists More Variables?</h1><ul>
+<li>Equations associated with more than one explanatory variables:</li>
+</ul>
+<p>y = β0 + β1x1 + β2x2</p>
+<ul>
+<li>Multiple linear regression: regress()</li>
+<li>Note: the function gives you more statistics of the regression model</li>
+</ul>
+<h1 id="Multiple-Linear-Regression-regress"><a href="#Multiple-Linear-Regression-regress" class="headerlink" title="Multiple Linear Regression: regress()"></a>Multiple Linear Regression: regress()</h1><p><img src="Snipaste_2019-09-01_11-03-47.png" alt="1"></p>
+<h1 id="What-if-the-Equations-Are-Not-Linear"><a href="#What-if-the-Equations-Are-Not-Linear" class="headerlink" title="What if the Equations Are Not Linear?"></a>What if the Equations Are Not Linear?</h1><ul>
+<li>How do we do curve fitting using nonlinear equations?</li>
+</ul>
+<p>使用cftool工具</p>
+<h1 id="Interpolation内插-vs-Regression回归"><a href="#Interpolation内插-vs-Regression回归" class="headerlink" title="Interpolation内插 vs Regression回归"></a>Interpolation内插 vs Regression回归</h1><ul>
+<li>Interpolation:</li>
+<li><ul>
+<li>The process of finding an approximation of a function</li>
+</ul>
+</li>
+<li><ul>
+<li>The fit does traverse all known points</li>
+</ul>
+</li>
+<li><p>Regression:</p>
+</li>
+<li><ul>
+<li>The process of finding a curve of best fit</li>
+</ul>
+</li>
+<li><ul>
+<li>The fit generally does not pass through the data points</li>
+</ul>
+</li>
+</ul>
+<h1 id="Linear-Interpolation-interpl"><a href="#Linear-Interpolation-interpl" class="headerlink" title="Linear Interpolation: interpl()"></a>Linear Interpolation: interpl()</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">x = linspace(0, 2*pi, 40); x_m = x;</span><br><span class="line">x_m([11:13, 28:30]) = NaN; y_m = sin(x_m);</span><br><span class="line">plot(x_m, y_m, &apos;ro&apos;, &apos;MarkerFaceColor&apos;, &apos;r&apos;);</span><br><span class="line">xlim([0, 2*pi]); ylim([-1.2, 1.2]); box on;</span><br><span class="line">set(gca, &apos;FontName&apos;, &apos;symbol&apos;, &apos;FontSize&apos;, 16);</span><br><span class="line">set(gca, &apos;XTick&apos;, 0:pi/2:2*pi);</span><br><span class="line">set(gca, &apos;XTickLabel&apos;, &#123;&apos;0&apos;,&apos;p/2&apos;,&apos;p&apos;,&apos;3p/2&apos;,&apos;2p&apos;&#125;);</span><br><span class="line"></span><br><span class="line">m_i = ~isnan(x_m);</span><br><span class="line">y_i = interpl(x_m(m_i), y_m(m_i), x);</span><br><span class="line">hold on;</span><br><span class="line">plot(x, y_i, &apos;-b&apos;, &apos;LineWidth&apos;, 2);</span><br><span class="line">hold off;</span><br></pre></td></tr></table></figure>
+<h1 id="Spline-Interpolation-spline"><a href="#Spline-Interpolation-spline" class="headerlink" title="Spline Interpolation: spline()"></a>Spline Interpolation: spline()</h1><p>更圆滑的内插<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">m_i = ~isnan(x_m);</span><br><span class="line">y_i = spline(x_m(m_i), y_m(m_i), x);</span><br><span class="line">hold on; plot(x, y_i, &apos;-g&apos;, &apos;LineWidth&apos;, 2); hold off;</span><br><span class="line">h = legend(&apos;Original&apos;, &apos;Linear&apos;, &apos;Spline&apos;);</span><br><span class="line">set(h, &apos;FontName&apos;, &apos;Times New Roman&apos;);</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/31/matlab11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2349,200 +2600,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/bianchengzhimei8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/29/bianchengzhimei8/" itemprop="url">寻找发帖‘水王’</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-29T14:21:47+08:00">
-                2019-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程之美/" itemprop="url" rel="index">
-                    <span itemprop="name">编程之美</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/29/bianchengzhimei8/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/29/bianchengzhimei8/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  520
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>传说，Tango有一大水王，他不但喜欢发帖，还会回复其他ID发的贴子，坊间风闻该水王发帖数目超过了帖子总数的一半。如果你有一个当前论坛上所有帖子（包括回帖）的列表，其中帖子作者的ID也在表中，你能快速找出这个传说中的Tango水王吗？</p>
-<p><strong>最直接的方法</strong>，我们可以对所有ID进行排序，然后再扫描一边排好序的ID列表，统计各个ID出现的次数，如果某个ID出现的次数超过总数的一半，那么就输出这个ID。这个算法的时间复杂度是 O(N*logN + N)</p>
-<p>如果ID列表已经是有序的，还需要扫描一遍整个列表来统计各个ID出现的次数吗？</p>
-<p>当列表已经是有序时候，<strong>第N/2项就是水王ID</strong>。</p>
-<p>但上面两种方法都需要先对ID列表进行排序，时间复杂度没有本质的改进，能否避免排序呢？</p>
-<p>如果每次删除两个不同的ID（不管是否包含水王的ID），那么，在剩下的ID列表中，水王ID出现的次数仍然超过总数的一半，可以不断通过重复这个过程，把ID列表中的ID总数降低（转化为更小的问题），从而得到答案，新的思路，避免了排序这个耗时的步骤，总的时间复杂度只有O(N)，且只需要常数的额外内存。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Type <span class="title">Find</span><span class="params">(Type* ID, <span class="keyword">int</span> N)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Type candidate;</span><br><span class="line">    <span class="keyword">int</span> nTimes, i;</span><br><span class="line">    <span class="keyword">for</span>(i = nTimes = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(nTimes == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            candidate = ID[i], nTimes = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(candidate == ID[i])</span><br><span class="line">                nTimes++;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                nTimes--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> candidate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>把一个问题转化为规模较小的若干个问题，小的问题跟原问题本质上一直。</p>
-</blockquote>
-<p>扩展问题：</p>
-<p>统计发现，有三个发帖很多的ID，他们的发帖数目都超过了帖子总书N的1/4，你能从发帖ID列表中快速找出他们的ID吗？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2595,7 +2652,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">281</span>
+                  <span class="site-state-item-count">282</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2685,7 +2742,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">351.5k</span>
+    <span title="Site words total count">353.6k</span>
   
 </div>
 

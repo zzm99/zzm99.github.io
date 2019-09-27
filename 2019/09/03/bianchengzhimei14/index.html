@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="zzm99">
 <meta property="og:description" content="递归算法求斐波那契数列的第n项123456789int Fibonacci(int n)&amp;#123;    if(n &amp;lt;= 0)        return 0;    else if(n == 1)        return 1;    else        return Fibonacci(n-1) + Fibonacci(n-2);&amp;#125;  有没有更好的算法？  递推关系式的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-04T01:40:03.269Z">
+<meta property="og:updated_time" content="2019-09-24T05:32:19.773Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="斐波那契(Fibonacci)数列">
 <meta name="twitter:description" content="递归算法求斐波那契数列的第n项123456789int Fibonacci(int n)&amp;#123;    if(n &amp;lt;= 0)        return 0;    else if(n == 1)        return 1;    else        return Fibonacci(n-1) + Fibonacci(n-2);&amp;#125;  有没有更好的算法？  递推关系式的">
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  101
+                  152
                 </span>
               
 
@@ -434,9 +434,8 @@
 <p>有没有更好的算法？</p>
 </blockquote>
 <h1 id="递推关系式的优化："><a href="#递推关系式的优化：" class="headerlink" title="递推关系式的优化："></a>递推关系式的优化：</h1><p>用一个数组存储所有已经计算过的项</p>
-<h1 id="求解通项公式："><a href="#求解通项公式：" class="headerlink" title="求解通项公式："></a>求解通项公式：</h1><p>由递推公式F(n) = F(n-1) + F(n-2)</p>
-<p>得到F(n) 的特征方程为：</p>
-
+<h1 id="求解通项公式："><a href="#求解通项公式：" class="headerlink" title="求解通项公式："></a>求解通项公式：</h1><p>公式引入无理数，不能保证结果的精度</p>
+<h1 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Matrix</span>;</span> </span><br><span class="line"></span><br><span class="line"><span class="function">Matrix <span class="title">MatrixPow</span><span class="params">( <span class="keyword">const</span> Matrix&amp; m, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Matrix result = Matrix::Identity;</span><br><span class="line">    Matrix tmp = m;</span><br><span class="line">    <span class="keyword">for</span>(; n; n &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(n &amp; <span class="number">1</span>)</span><br><span class="line">            result  *= tmp;</span><br><span class="line">            tmp *= tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Fibonacci</span> <span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    Matrix an = MatrixPow(A, n<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">return</span> F1 * an(<span class="number">0</span>,<span class="number">0</span>) + F0 * an(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -583,7 +582,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">281</span>
+                  <span class="site-state-item-count">282</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -648,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#递归算法求斐波那契数列的第n项"><span class="nav-number">1.</span> <span class="nav-text">递归算法求斐波那契数列的第n项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#递推关系式的优化："><span class="nav-number">2.</span> <span class="nav-text">递推关系式的优化：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求解通项公式："><span class="nav-number">3.</span> <span class="nav-text">求解通项公式：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#递归算法求斐波那契数列的第n项"><span class="nav-number">1.</span> <span class="nav-text">递归算法求斐波那契数列的第n项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#递推关系式的优化："><span class="nav-number">2.</span> <span class="nav-text">递推关系式的优化：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求解通项公式："><span class="nav-number">3.</span> <span class="nav-text">求解通项公式：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分治"><span class="nav-number">4.</span> <span class="nav-text">分治</span></a></li></ol></div>
             
 
           </div>
@@ -689,7 +688,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">351.5k</span>
+    <span title="Site words total count">353.6k</span>
   
 </div>
 
