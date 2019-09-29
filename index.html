@@ -291,6 +291,231 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/leetcodeweek8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/leetcodeweek8/" itemprop="url">Weekly Contest 156</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T17:15:17+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
+                    <span itemprop="name">Weekly-Contest</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/29/leetcodeweek8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/leetcodeweek8/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Unique-Number-of-Occurrences"><a href="#Unique-Number-of-Occurrences" class="headerlink" title="Unique Number of Occurrences"></a>Unique Number of Occurrences</h1><p>Given an array of integers arr, write a function that returns true if and only if the number of occurrences of each value in the array is unique.</p>
+<p>Constraints:</p>
+<ul>
+<li>1 &lt;= arr.length &lt;= 1000</li>
+<li>-1000 &lt;= arr[i] &lt;= 1000</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">uniqueOccurrences</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countarr(<span class="number">2005</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countnum(<span class="number">1000</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;arr.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            countarr[arr[i]+<span class="number">1000</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=<span class="number">2000</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(countarr[i] != <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(countnum[countarr[i]] != <span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    countnum[countarr[i]]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Get-Equal-Substrings-Within-Budget"><a href="#Get-Equal-Substrings-Within-Budget" class="headerlink" title="Get Equal Substrings Within Budget"></a>Get Equal Substrings Within Budget</h1><p>给你两个长度相同的字符串，s 和 t。</p>
+<p>将 s 中的第 i 个字符变到 t 中的第 i 个字符需要 |s[i] - t[i]| 的开销（开销可能为 0），也就是两个字符的 ASCII 码值的差的绝对值。</p>
+<p>用于变更字符串的最大预算是 maxCost。在转化字符串时，总开销应当小于等于该预算，这也意味着字符串的转化可能是不完全的。</p>
+<p>如果你可以将 s 的子字符串转化为它在 t 中对应的子字符串，则返回可以转化的最大长度。</p>
+<p>如果 s 中没有子字符串可以转化成 t 中对应的子字符串，则返回 0。</p>
+<p>Instead of two string, we can imagine an array of the same size with absolute differences. Then, the problem is to find the longest subarray with the sum not exceeding maxCost.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">equalSubstring</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t, <span class="keyword">int</span> maxCost)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">0</span>; </span><br><span class="line">        <span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; s.size())</span><br><span class="line">        &#123;</span><br><span class="line">            maxCost -= <span class="built_in">abs</span>(s[i]-t[i++]);</span><br><span class="line">            <span class="keyword">if</span>(maxCost &lt; <span class="number">0</span>) maxCost += <span class="built_in">abs</span>(s[j] - t[j++]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i-j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">equalSubstring</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t, <span class="keyword">int</span> maxCost)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ab(s.size(), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;s.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ab[i] = <span class="built_in">abs</span>(s[i]-t[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> ii = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> jj = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(jj &lt; s.size())</span><br><span class="line">        &#123;</span><br><span class="line">            maxCost -= ab[jj++];</span><br><span class="line">            <span class="keyword">if</span>(maxCost &lt; <span class="number">0</span>) maxCost += ab[ii++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> jj-ii;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Remove-All-Adjacent-Duplicates-in-String-II"><a href="#Remove-All-Adjacent-Duplicates-in-String-II" class="headerlink" title="Remove All Adjacent Duplicates in String II"></a>Remove All Adjacent Duplicates in String II</h1><p>Given a string s, a k duplicate removal consists of choosing k adjacent and equal letters from s and removing them causing the left and the right side of the deleted substring to concatenate together.</p>
+<p>We repeatedly make k duplicate removals on s until we no longer can.</p>
+<p>Return the final string after all such duplicate removals have been made.</p>
+<p>It is guaranteed that the answer is unique.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot;deeedbbcccbdaa&quot;, k = 3</span><br><span class="line">Output: &quot;aa&quot;</span><br><span class="line">Explanation: </span><br><span class="line">First delete &quot;eee&quot; and &quot;ccc&quot;, get &quot;ddbbbdaa&quot;</span><br><span class="line">Then delete &quot;bbb&quot;, get &quot;dddaa&quot;</span><br><span class="line">Finally delete &quot;ddd&quot;, get &quot;aa&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">removeDuplicates</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s.size() == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;  <span class="built_in">stack</span>(<span class="number">100005</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> curidx = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;s.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">char</span> tmpch = s[i];</span><br><span class="line">            <span class="keyword">int</span> tmpnum = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=curidx<span class="number">-1</span>; j&gt;=<span class="number">0</span>; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">stack</span>[j] == tmpch)</span><br><span class="line">                    tmpnum++;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(tmpnum &gt;= k)</span><br><span class="line">            &#123;</span><br><span class="line">                curidx -= k<span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">stack</span>[curidx] = tmpch;</span><br><span class="line">                curidx++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">string</span> ret = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;curidx; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ret += <span class="built_in">stack</span>[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Minimum-Moves-to-Reach-Target-with-Rotations"><a href="#Minimum-Moves-to-Reach-Target-with-Rotations" class="headerlink" title="Minimum Moves to Reach Target with Rotations"></a>Minimum Moves to Reach Target with Rotations</h1><p>我们在一个 n*n 的网格上构建了新的迷宫地图，蛇的长度为 2，也就是说它会占去两个单元格。蛇会从左上角（(0, 0) 和 (0, 1)）开始移动。我们用 0 表示空单元格，用 1 表示障碍物。蛇需要移动到迷宫的右下角（(n-1, n-2) 和 (n-1, n-1)）。</p>
+<p>每次移动，蛇可以这样走：</p>
+<ul>
+<li>如果没有障碍，则向右移动一个单元格。并仍然保持身体的水平／竖直状态。</li>
+<li>如果没有障碍，则向下移动一个单元格。并仍然保持身体的水平／竖直状态。</li>
+<li>如果它处于水平状态并且其下面的两个单元都是空的，就顺时针旋转 90 度。蛇从（(r, c)、(r, c+1)）移动到 （(r, c)、(r+1, c)）。</li>
+<li>如果它处于竖直状态并且其右面的两个单元都是空的，就逆时针旋转 90 度。蛇从（(r, c)、(r+1, c)）移动到（(r, c)、(r, c+1)）。</li>
+</ul>
+<p>返回蛇抵达目的地所需的最少移动次数。</p>
+<p>如果无法到达目的地，请返回 -1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：grid = [[0,0,0,0,0,1],</span><br><span class="line">               [1,1,0,0,1,0],</span><br><span class="line">               [0,0,0,0,1,1],</span><br><span class="line">               [0,0,1,0,1,0],</span><br><span class="line">               [0,1,1,0,0,0],</span><br><span class="line">               [0,1,1,0,0,0]]</span><br><span class="line">输出：11</span><br><span class="line">解释：</span><br><span class="line">一种可能的解决方案是 [右, 右, 顺时针旋转, 右, 下, 下, 下, 下, 逆时针旋转, 右, 下]。</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canRotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; g, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> i &lt; g.size() - <span class="number">1</span> &amp;&amp; j &lt; g[i].size() - <span class="number">1</span> &amp;&amp; (g[i + <span class="number">1</span>][j] &amp; <span class="number">1</span>) == <span class="number">0</span> &amp;&amp; (g[i][j + <span class="number">1</span>] &amp; <span class="number">1</span>) == <span class="number">0</span> &amp;&amp; (g[i + <span class="number">1</span>][j + <span class="number">1</span>] &amp; <span class="number">1</span>) == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canGoDown</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; g, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">bool</span> vertical)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (vertical) <span class="keyword">return</span> i &lt; g.size() - <span class="number">2</span> &amp;&amp; (g[i + <span class="number">2</span>][j] &amp; <span class="number">1</span>) == <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">return</span> i &lt; g.size() - <span class="number">1</span> &amp;&amp; (g[i + <span class="number">1</span>][j] &amp; <span class="number">1</span>) == <span class="number">0</span> &amp;&amp; (g[i + <span class="number">1</span>][j + <span class="number">1</span>] &amp; <span class="number">1</span>) == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canGoRight</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; g, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">bool</span> vertical)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!vertical) <span class="keyword">return</span> j &lt; g[i].size() - <span class="number">2</span> &amp;&amp; (g[i][j + <span class="number">2</span>] &amp; <span class="number">1</span>) == <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">return</span> j &lt; g[i].size() - <span class="number">1</span> &amp;&amp; (g[i][j + <span class="number">1</span>] &amp; <span class="number">1</span>) == <span class="number">0</span> &amp;&amp; (g[i + <span class="number">1</span>][j + <span class="number">1</span>] &amp; <span class="number">1</span>) == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minimumMoves</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid, <span class="keyword">int</span> steps = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">      <span class="built_in">queue</span>&lt;<span class="built_in">array</span>&lt;<span class="keyword">int</span>, 3&gt;&gt; q1, q2;</span><br><span class="line">      q1.push(&#123; <span class="number">0</span>, <span class="number">0</span>, <span class="literal">false</span> &#125;); <span class="comment">// not vertical.</span></span><br><span class="line">      <span class="keyword">while</span> (!q1.empty()) &#123;</span><br><span class="line">        <span class="keyword">while</span> (!q1.empty()) &#123;</span><br><span class="line">          <span class="keyword">auto</span>&amp; a = q1.front();</span><br><span class="line">          <span class="keyword">if</span> (a[<span class="number">0</span>] == grid.size() - <span class="number">1</span> &amp;&amp; a[<span class="number">1</span>] == grid[a[<span class="number">0</span>]].size() - <span class="number">2</span>) <span class="keyword">return</span> steps;</span><br><span class="line">          <span class="keyword">if</span> ((grid[a[<span class="number">0</span>]][a[<span class="number">1</span>]] &amp; (a[<span class="number">2</span>] ? <span class="number">2</span> : <span class="number">4</span>)) == <span class="number">0</span>) &#123;</span><br><span class="line">            grid[a[<span class="number">0</span>]][a[<span class="number">1</span>]] = grid[a[<span class="number">0</span>]][a[<span class="number">1</span>]] | (a[<span class="number">2</span>] ? <span class="number">2</span> : <span class="number">4</span>);</span><br><span class="line">            <span class="keyword">if</span> (canGoDown(grid, a[<span class="number">0</span>], a[<span class="number">1</span>], a[<span class="number">2</span>])) q2.push(&#123; a[<span class="number">0</span>] + <span class="number">1</span>, a[<span class="number">1</span>], a[<span class="number">2</span>] &#125;);</span><br><span class="line">            <span class="keyword">if</span> (canGoRight(grid, a[<span class="number">0</span>], a[<span class="number">1</span>], a[<span class="number">2</span>])) q2.push(&#123; a[<span class="number">0</span>], a[<span class="number">1</span>] + <span class="number">1</span>, a[<span class="number">2</span>] &#125;);</span><br><span class="line">            <span class="keyword">if</span> (canRotate(grid, a[<span class="number">0</span>], a[<span class="number">1</span>])) q2.push(&#123; a[<span class="number">0</span>], a[<span class="number">1</span>], a[<span class="number">2</span>] ? <span class="literal">false</span> : <span class="literal">true</span> &#125;);</span><br><span class="line">          &#125;</span><br><span class="line">          q1.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        ++steps;</span><br><span class="line">        swap(q1, q2);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/shixun7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2227,245 +2452,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/22/leetcodeweek6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/22/leetcodeweek6/" itemprop="url">double Week Contest 9</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-22T18:00:20+08:00">
-                2019-09-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
-                    <span itemprop="name">Weekly-Contest</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/22/leetcodeweek6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/22/leetcodeweek6/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="最多可以买到的苹果数量"><a href="#最多可以买到的苹果数量" class="headerlink" title="最多可以买到的苹果数量"></a>最多可以买到的苹果数量</h1><p>楼下水果店正在促销，你打算买些苹果，arr[i] 表示第 i 个苹果的单位重量。</p>
-<p>你有一个购物袋，最多可以装 5000 单位重量的东西，算一算，最多可以往购物袋里装入多少苹果。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxNumberOfApples</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr)</span> </span>&#123;</span><br><span class="line">        sort(arr.begin(), arr.end());</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;arr.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum += arr[i];</span><br><span class="line">            <span class="keyword">if</span>(sum &gt; <span class="number">5000</span>)</span><br><span class="line">                <span class="keyword">return</span> ret;</span><br><span class="line">            ret++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="进击的骑士"><a href="#进击的骑士" class="headerlink" title="进击的骑士"></a>进击的骑士</h1><p>一个坐标可以从 -infinity 延伸到 +infinity 的 无限大的 棋盘上，你的 骑士 驻扎在坐标为 [0, 0] 的方格里。</p>
-<p>骑士的走法和中国象棋中的马相似，走 “日” 字：即先向左（或右）走 1 格，再向上（或下）走 2 格；或先向左（或右）走 2 格，再向上（或下）走 1 格。</p>
-<p>每次移动，他都可以按图示八个方向之一前进。</p>
-<p>现在，骑士需要前去征服坐标为 [x, y] 的部落，请你为他规划路线。</p>
-<p>最后返回所需的最小移动次数即可。本题确保答案是一定存在的。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">minKnightMoves</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; M(<span class="number">800</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">800</span>, <span class="number">-1</span>));</span><br><span class="line">    M[<span class="number">300</span>][<span class="number">300</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">queue</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; Q;</span><br><span class="line">    Q.push(&#123;<span class="number">0</span>, <span class="number">0</span>&#125;);</span><br><span class="line">    <span class="keyword">int</span> dx[] = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-2</span>, <span class="number">-2</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> dy[] = &#123;<span class="number">2</span>, <span class="number">-2</span>,<span class="number">1</span>, <span class="number">-1</span>, <span class="number">2</span>, <span class="number">-2</span>, <span class="number">1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line">    <span class="keyword">while</span> (!Q.empty() &amp;&amp; M[x+<span class="number">300</span>][y+<span class="number">300</span>] == <span class="number">-1</span>) &#123;</span><br><span class="line">      <span class="keyword">auto</span> [sx, sy] = Q.front(); Q.pop();</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> tx = sx + dx[i];</span><br><span class="line">        <span class="keyword">int</span> ty = sy + dy[i];</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">abs</span>(tx) + <span class="built_in">abs</span>(ty) &gt; <span class="number">300</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (M[tx+<span class="number">300</span>][ty+<span class="number">300</span>] != <span class="number">-1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        M[tx+<span class="number">300</span>][ty+<span class="number">300</span>] = M[sx+<span class="number">300</span>][sy+<span class="number">300</span>] + <span class="number">1</span>;</span><br><span class="line">        Q.push(&#123;tx, ty&#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> M[x+<span class="number">300</span>][y+<span class="number">300</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="找出所有行中最小公共元素"><a href="#找出所有行中最小公共元素" class="headerlink" title="找出所有行中最小公共元素"></a>找出所有行中最小公共元素</h1><p>给你一个矩阵 mat，其中每一行的元素都已经按 递增 顺序排好了。请你帮忙找出在所有这些行中 最小的公共元素。</p>
-<p>如果矩阵中没有这样的公共元素，就请返回 -1。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">smallestCommonElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; mat)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;mat[<span class="number">0</span>].size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = mat[<span class="number">0</span>][i];</span><br><span class="line">            <span class="keyword">int</span> flag = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;mat.size(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> z;</span><br><span class="line">                <span class="keyword">for</span>(z=<span class="number">0</span>; z&lt;mat[j].size(); z++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(mat[j][z] == tmp)</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(z == mat[j].size())</span><br><span class="line">                &#123;</span><br><span class="line">                    flag = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(flag == <span class="number">1</span>)</span><br><span class="line">                <span class="keyword">return</span> tmp;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="建造街区的最短时间"><a href="#建造街区的最短时间" class="headerlink" title="建造街区的最短时间"></a>建造街区的最短时间</h1><p>你是个城市规划工作者，手里负责管辖一系列的街区。在这个街区列表中 blocks[i] = t 意味着第  i 个街区需要 t 个单位的时间来建造。</p>
-<p>由于一个街区只能由一个工人来完成建造。</p>
-<p>所以，一个工人要么需要再召唤一个工人（工人数增加 1）；要么建造完一个街区后回家。这两个决定都需要花费一定的时间。</p>
-<p>一个工人再召唤一个工人所花费的时间由整数 split 给出。</p>
-<p>注意：如果两个工人同时召唤别的工人，那么他们的行为是并行的，所以时间花费仍然是 split。</p>
-<p>最开始的时候只有 一个 工人，请你最后输出建造完所有街区所需要的最少时间。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">示例 1：</span><br><span class="line"></span><br><span class="line">输入：blocks = [1], split = 1</span><br><span class="line">输出：1</span><br><span class="line">解释：我们使用 1 个工人在 1 个时间单位内来建完 1 个街区。</span><br><span class="line">示例 2：</span><br><span class="line"></span><br><span class="line">输入：blocks = [1,2], split = 5</span><br><span class="line">输出：7</span><br><span class="line">解释：我们用 5 个时间单位将这个工人分裂为 2 个工人，然后指派每个工人分别去建造街区，从而时间花费为 5 + max(1, 2) = 7</span><br><span class="line">示例 3：</span><br><span class="line"></span><br><span class="line">输入：blocks = [1,2,3], split = 1</span><br><span class="line">输出：4</span><br><span class="line">解释：</span><br><span class="line">将 1 个工人分裂为 2 个工人，然后指派第一个工人去建造最后一个街区，并将第二个工人分裂为 2 个工人。</span><br><span class="line">然后，用这两个未分派的工人分别去建造前两个街区。</span><br><span class="line">时间花费为 1 + max(3, 1 + max(1, 2)) = 4</span><br></pre></td></tr></table></figure>
-<p>提示：</p>
-<ul>
-<li>1 &lt;= blocks.length &lt;= 1000</li>
-<li>1 &lt;= blocks[i] &lt;= 10^5</li>
-<li>1 &lt;= split &lt;= 100</li>
-</ul>
-<pre><code class="cpp"><span class="comment">//</span>
-<span class="comment">//贪婪: 挑最小的两个合并(取大值+split)成新节点</span>
-
-<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> {</span>
-<span class="keyword">public</span>:
-    <span class="function"><span class="keyword">int</span> <span class="title">minBuildTime</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; blocks, <span class="keyword">int</span> split)</span> </span>{
-        <span class="built_in">multiset</span>&lt;<span class="keyword">int</span>&gt; vals(blocks.begin(), blocks.end());
-
-        <span class="keyword">while</span> (vals.size() &gt; <span class="number">1</span>)
-        {
-            <span class="keyword">int</span> minVal = *vals.begin();
-            vals.erase(vals.begin());
-            <span class="keyword">int</span> minVal2 = *vals.begin();  <span class="comment">//这个一定比前一个大或相等</span>
-            vals.erase(vals.begin());
-            vals.insert(minVal2 + split);
-        }
-
-        <span class="keyword">return</span> *vals.begin();
-    }
-};
-</code></pre>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2518,7 +2504,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-count">290</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2608,7 +2594,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">359.9k</span>
+    <span title="Site words total count">361.3k</span>
   
 </div>
 

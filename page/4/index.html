@@ -291,6 +291,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/10/leetcode-169/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/10/leetcode-169/" itemprop="url">leetcode-169-Majority Element</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-10T19:06:57+08:00">
+                2019-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/10/leetcode-169/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/10/leetcode-169/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  111
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.</p>
+<p>You may assume that the array is non-empty and the majority element always exist in the array.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: [3,2,3]</span><br><span class="line">Output: 3</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: [2,2,1,1,1,2,2]</span><br><span class="line">Output: 2</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.length, m = nums[<span class="number">0</span>], c = <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] == m)</span><br><span class="line">                c++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(c &gt; <span class="number">0</span>)</span><br><span class="line">                c--;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                m = nums[i];</span><br><span class="line">                c = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/10/leetcode-448/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2051,211 +2248,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/09/suanfa18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/09/suanfa18/" itemprop="url">试探回溯法（利用堆栈）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-09T12:47:32+08:00">
-                2019-09-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/09/suanfa18/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/09/suanfa18/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  908
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="试探回溯法"><a href="#试探回溯法" class="headerlink" title="试探回溯法"></a>试探回溯法</h1><h2 id="八皇后"><a href="#八皇后" class="headerlink" title="八皇后"></a>八皇后</h2><p>国际象棋中皇后的势力范围服盖其所在的水平线、垂直线以及两条对角线。</p>
-<p>在n x n 的棋盘上放置n个皇后，如何使得她们彼此互不攻击。</p>
-<h3 id="皇后"><a href="#皇后" class="headerlink" title="皇后"></a>皇后</h3><p>皇后是组成期盼和最终解得基本单元。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Queen</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">    Queen (<span class="keyword">int</span> xx = <span class="number">0</span>, <span class="keyword">int</span> yy = <span class="number">0</span>) : x (xx), y (yy) &#123;&#125;;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>== ( Queen <span class="keyword">const</span>&amp; q ) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (x == q.x) || (y == q.y) || (x + y == q.x + q.y) || (x - y == q.x - q.y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>!= ( Queen <span class="keyword">const</span>&amp; q ) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> !(*<span class="keyword">this</span> == q);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>既然每行能且仅能放置一个皇后，故不妨首先将各皇后分配至每一行。然后，从空棋盘开始，逐个尝试着将她们放置到无冲突的某列。每放置好一个皇后，才继续试探下一个。若当前皇后在任何列都会造成冲突，则后续皇后的试探都必将是徒劳，故此时应该回溯到上一皇后。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">placeQueens</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">    Stack&lt;Queen&gt; solu;</span><br><span class="line">    <span class="function">Queen <span class="title">q</span><span class="params">(<span class="number">0</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(N &lt;= solu.size() || N &lt;= q.y)</span><br><span class="line">        &#123;</span><br><span class="line">            q = solu.pop(); q.y++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>((q.y &lt; N) &amp;&amp; (<span class="number">0</span> &lt;= solu.find(q)))</span><br><span class="line">            &#123;</span><br><span class="line">                q.y++; nCheck++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(N &gt; q.y)</span><br><span class="line">            &#123;</span><br><span class="line">                solu.push(q);</span><br><span class="line">                <span class="keyword">if</span>(N &lt;= solu.size())  nSolu++;</span><br><span class="line">                q.x++; q.y = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">while</span>((<span class="number">0</span> &lt; q.x) || (q.y &lt; N));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="迷宫寻径"><a href="#迷宫寻径" class="headerlink" title="迷宫寻径"></a>迷宫寻径</h2><p>在任意指定的起始格点与目标格点之间，找出一条通路（如果存在）</p>
-<h3 id="迷宫格点："><a href="#迷宫格点：" class="headerlink" title="迷宫格点："></a>迷宫格点：</h3><p>格点是迷宫的基本组成单位，首先实现Cell类</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;AVAILABLE, ROUTE, BACKTRACKED, WALL &#125; Status;<span class="comment">//迷宫单元状态</span></span><br><span class="line"><span class="comment">// 原始可用的，在当前路径上的，所有方向均尝试失败之后回溯过的，不可使用的（墙）</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;UNKNOWN, EAST, SOUTH, WEST, NORTH, NO_WAY&#125; ESWN; <span class="comment">//单元的相对邻接方向</span></span><br><span class="line"><span class="comment">// 未定、东、南、西、北、无路可通</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ESWN <span class="title">nextESWN</span><span class="params">( ESWN eswn )</span> </span>&#123; <span class="keyword">return</span> ESWN ( eswn + <span class="number">1</span> ); &#125; <span class="comment">//依次转到下一邻接方向</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Cell</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> x, y; <span class="comment">// x, y 坐标</span></span><br><span class="line">    Status status; <span class="comment">// 类型</span></span><br><span class="line">    ESWN incoming, outgoing; <span class="comment">//进入、走出方向</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LABY_MAX 24 <span class="comment">//最大迷宫尺寸</span></span></span><br><span class="line">Cell laby[LABY_MAX][LABY_MAX]; <span class="comment">// 迷宫</span></span><br></pre></td></tr></table></figure>
-<h3 id="邻格查询："><a href="#邻格查询：" class="headerlink" title="邻格查询："></a>邻格查询：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> Cell* <span class="title">neighbor</span> <span class="params">( Cell* cell )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (Cell-&gt;outgoing)&#123;</span><br><span class="line">        <span class="keyword">case</span> EAST : <span class="keyword">return</span> cell + LABY_MAX;</span><br><span class="line">        <span class="keyword">case</span> SOUTH: <span class="keyword">return</span> cell + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">case</span> WEST: <span class="keyword">return</span> cell - LABY_MAX;</span><br><span class="line">        <span class="keyword">case</span> NORTH: <span class="keyword">return</span> cell - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">default</span> : <span class="built_in">exit</span> (<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="邻格转入："><a href="#邻格转入：" class="headerlink" title="邻格转入："></a>邻格转入：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> Cell* <span class="title">advance</span> <span class="params">( Cell* cell )</span> </span>&#123; <span class="comment">//从当前位置转入相邻格点</span></span><br><span class="line">    Cell* next;</span><br><span class="line">    <span class="keyword">switch</span> ( cell-&gt;outgoing ) &#123;</span><br><span class="line">       <span class="keyword">case</span> EAST:  next = cell + LABY_MAX; next-&gt;incoming = WEST;  <span class="keyword">break</span>; <span class="comment">//向东</span></span><br><span class="line">       <span class="keyword">case</span> SOUTH: next = cell + <span class="number">1</span>;        next-&gt;incoming = NORTH; <span class="keyword">break</span>; <span class="comment">//向南</span></span><br><span class="line">       <span class="keyword">case</span> WEST:  next = cell - LABY_MAX; next-&gt;incoming = EAST;  <span class="keyword">break</span>; <span class="comment">//向西</span></span><br><span class="line">       <span class="keyword">case</span> NORTH: next = cell - <span class="number">1</span>;        next-&gt;incoming = SOUTH; <span class="keyword">break</span>; <span class="comment">//向北</span></span><br><span class="line">       <span class="keyword">default</span> : <span class="built_in">exit</span> ( <span class="number">-1</span> );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="算法实现："><a href="#算法实现：" class="headerlink" title="算法实现："></a>算法实现：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 迷宫寻径算法：在格单元s至t之间规划一条通路（如果的确存在）</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">labyrinth</span> <span class="params">( Cell Laby[LABY_MAX][LABY_MAX], Cell* s, Cell* t )</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> ( ( AVAILABLE != s-&gt;status ) || ( AVAILABLE != t-&gt;status ) ) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//退化情况</span></span><br><span class="line">   Stack&lt;Cell*&gt; path; <span class="comment">//用栈记录通路（Theseus的线绳）</span></span><br><span class="line">   s-&gt;incoming = UNKNOWN; s-&gt;status = ROUTE; path.push ( s ); <span class="comment">//起点</span></span><br><span class="line">   <span class="keyword">do</span> &#123; <span class="comment">//从起点出发不断试探、回溯，直到抵达终点，或者穷尽所有可能</span></span><br><span class="line">      Cell* c = path.top(); <span class="comment">//检查当前位置（栈顶）</span></span><br><span class="line">      <span class="keyword">if</span> ( c == t ) <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//若已抵达终点，则找到了一条通路；否则，沿尚未试探的方向继续试探</span></span><br><span class="line">      <span class="keyword">while</span> ( NO_WAY &gt; ( c-&gt;outgoing = nextESWN ( c-&gt;outgoing ) ) ) <span class="comment">//逐一检查所有方向</span></span><br><span class="line">         <span class="keyword">if</span> ( AVAILABLE == neighbor ( c )-&gt;status ) <span class="keyword">break</span>; <span class="comment">//试图找到尚未试探的方向</span></span><br><span class="line">      <span class="keyword">if</span> ( NO_WAY &lt;= c-&gt;outgoing ) <span class="comment">//若所有方向都已尝试过</span></span><br><span class="line">         &#123; c-&gt;status = BACKTRACKED; c = path.pop(); &#125;<span class="comment">//则向后回溯一步</span></span><br><span class="line">      <span class="keyword">else</span> <span class="comment">//否则，向前试探一步</span></span><br><span class="line">         &#123; path.push ( c = advance ( c ) ); c-&gt;outgoing = UNKNOWN; c-&gt;status = ROUTE; &#125;</span><br><span class="line">   &#125; <span class="keyword">while</span> ( !path.empty() );</span><br><span class="line">   <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2308,7 +2300,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-count">290</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2398,7 +2390,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">359.9k</span>
+    <span title="Site words total count">361.3k</span>
   
 </div>
 

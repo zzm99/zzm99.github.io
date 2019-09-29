@@ -291,6 +291,217 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/31/matlab10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/31/matlab10/" itemprop="url">线性回归方程式与线性系统</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-31T09:23:33+08:00">
+                2019-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/matlab/" itemprop="url" rel="index">
+                    <span itemprop="name">matlab</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/31/matlab10/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/31/matlab10/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  328
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Gaussian-Elimination-rref"><a href="#Gaussian-Elimination-rref" class="headerlink" title="Gaussian Elimination - rref()"></a>Gaussian Elimination - rref()</h1><p>高斯消元解方程组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1 2 1;2 6 1; 1 1 4]</span><br><span class="line"></span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">     1     2     1</span><br><span class="line">     2     6     1</span><br><span class="line">     1     1     4</span><br><span class="line"></span><br><span class="line">&gt;&gt; b = [2; 7; 3]</span><br><span class="line"></span><br><span class="line">b =</span><br><span class="line"></span><br><span class="line">     2</span><br><span class="line">     7</span><br><span class="line">     3</span><br><span class="line"></span><br><span class="line">&gt;&gt; R = rref([A b])</span><br><span class="line"></span><br><span class="line">R =</span><br><span class="line"></span><br><span class="line">     1     0     0    -3</span><br><span class="line">     0     1     0     2</span><br><span class="line">     0     0     1     1</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="LU-Factorization"><a href="#LU-Factorization" class="headerlink" title="LU Factorization"></a>LU Factorization</h1><p>LU解法，将A拆解为一个下三角矩阵和一个上三角矩阵乘积</p>
+<p><img src="Snipaste_2019-08-31_15-52-20.png" alt="1"></p>
+<p>下三角矩阵对角线都为1 上半三角都为0</p>
+<p>上三角矩阵对角线无所谓，下半三角都为0</p>
+<p><img src="Snipaste_2019-08-31_15-54-24.png" alt="1"></p>
+<h2 id="How-to-Obtain-L-and-U"><a href="#How-to-Obtain-L-and-U" class="headerlink" title="How to Obtain L and U?"></a>How to Obtain L and U?</h2><ul>
+<li>the matrices L and U are obtained by using a serious of left-multiplication </li>
+</ul>
+<p><img src="Snipaste_2019-08-31_15-57-49.png" alt="1"></p>
+<h2 id="LU-Factorization-lu"><a href="#LU-Factorization-lu" class="headerlink" title="LU Factorization - lu()"></a>LU Factorization - lu()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A = [1 1 1; 2 3 5; 4 6 8];</span><br><span class="line">[L, U, P] = lu(A);</span><br></pre></td></tr></table></figure>
+<h1 id="Matrix-Left-Division-or-mldivide"><a href="#Matrix-Left-Division-or-mldivide" class="headerlink" title="Matrix Left Division: \ or mldivide()"></a>Matrix Left Division: \ or mldivide()</h1><ul>
+<li>Solving systems of linear equations Ax = b using factorization methods:</li>
+</ul>
+<p>一定要用左除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1 2 1;2 6 1;1 1 4];</span><br><span class="line">b = [2; 7; 3];</span><br><span class="line">x = A\b</span><br><span class="line"></span><br><span class="line">x =</span><br><span class="line"></span><br><span class="line">   -3.0000</span><br><span class="line">    2.0000</span><br><span class="line">    1.0000</span><br><span class="line"></span><br><span class="line">&gt;&gt; x = b/A</span><br><span class="line">错误使用  / </span><br><span class="line">矩阵维度必须一致。</span><br><span class="line"> </span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="Cramer’s-Inverse-Method"><a href="#Cramer’s-Inverse-Method" class="headerlink" title="Cramer’s(Inverse) Method"></a>Cramer’s(Inverse) Method</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A = [1 2 1; 2 6 1; 1 1 4];</span><br><span class="line">b = [2; 7; 3];</span><br><span class="line">x = inv(A)*b</span><br></pre></td></tr></table></figure>
+<h1 id="Singular"><a href="#Singular" class="headerlink" title="Singular"></a>Singular</h1><ul>
+<li>The inverse matirx does not exist</li>
+</ul>
+<p>当矩阵的解有无限多或者无解时候，那么这个矩阵就不存在逆inv(A)</p>
+<p>同时,det(A) = 0</p>
+<h1 id="Problem-with-Cramer’s-Method"><a href="#Problem-with-Cramer’s-Method" class="headerlink" title="Problem with Cramer’s Method"></a>Problem with Cramer’s Method</h1><ul>
+<li>the accuracy is low when the determinant is very close to zero(det(A) ~ 0)</li>
+</ul>
+<h1 id="Eigenvalues-and-Eigenvectors"><a href="#Eigenvalues-and-Eigenvectors" class="headerlink" title="Eigenvalues and Eigenvectors"></a>Eigenvalues and Eigenvectors</h1><h2 id="eig"><a href="#eig" class="headerlink" title="eig()"></a>eig()</h2><ul>
+<li>Find the eigenvalues and eigenvectors:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[v, d] = eig([2 -12; 1 -5])</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/31/matlab9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2353,225 +2564,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/suanfa16/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/29/suanfa16/" itemprop="url">直/折线分割平面</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-29T08:24:16+08:00">
-                2019-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/29/suanfa16/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/29/suanfa16/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  695
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="直线分割平面"><a href="#直线分割平面" class="headerlink" title="直线分割平面"></a>直线分割平面</h1><p>在一个平面上有一个圆和n条直线，这些直线中每一条在圆内同其他直线相交，假设没有3条直线相交于一点，试问这些直线将圆分成多少区域。 </p>
-<p>当添加第N条，为了使平面最多， 则第N条直线要与前面的N-1条直线都相交，且没有任何三条直线相交一个点。<br>则添加第N条直线会多N-1个交点。由于每增加N个交点，就增加N+1个平面，所以添加第N条直线来会在之前的基础上增加N个平面，用F[i]表示i条直线能把平面切分成的个数。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">F[1]=2; </span><br><span class="line">F[n]=F[n-1]+n; </span><br><span class="line">递推得F[n]=1+n*(n+1)/2</span><br></pre></td></tr></table></figure>
-<h1 id="折线分割平面"><a href="#折线分割平面" class="headerlink" title="折线分割平面"></a>折线分割平面</h1><p>平面上有n条折线，问这些折线最多能将平面分割成多少块? </p>
-<p><img src="Snipaste_2019-08-29_08-43-00.png" alt="1"></p>
-<p>分析先以问题一作为基础， </p>
-<p>再看每次增加两条相互平行的直线的情况。 </p>
-<p><img src="Snipaste_2019-08-29_08-43-43.png" alt="1"></p>
-<p>根据题型一分析可以知道 </p>
-<p>当第N次添加时，前面已经有2N-2条直线了，所以第N次添加时，第2N-1条直线和第2N条直线都各能增加2*（n-1）+1 个平面。 </p>
-<p>所以第N次添加增加的面数是2[2(n-1) + 1] = 4n - 2 个。因此，总面数应该是 </p>
-<p>1 + 4n(n+1)/2 - 2n = 2n^2 + 1</p>
-<p>如果把每次加进来的平行边让它们一头相交</p>
-<p><img src="Snipaste_2019-08-29_08-43-55.png" alt="1"></p>
-<p>则平面1、3已经合为一个面，因此，每一组平行线相交后，就会较少一个面， </p>
-<p>所以所求就是平行线分割平面数减去N，为2n^2 -n + 1. </p>
-<p>利用上述总结公式f(n)=2n^2 -n + 1 </p>
-<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><p>说起佐罗，大家首先想到的除了他脸上的面具，恐怕还有他每次刻下的“Z”字。我们知道，一个“Z”可以把平面分为2部分，两个“Z”可以把平面分为12部分，那么，现在的问题是：如果平面上有n个“Z”,平面最多可以分割为几部分呢？ </p>
-<p>说明1：“Z”的两端应看成射线 </p>
-<p>说明2：“Z”的两条射线规定为平行的 </p>
-<p>分析： </p>
-<p>设f(n)表示n个z字型折线至多平面划分数。 </p>
-<p>现在增加一条边a，和3(n-1)条线都相交，增加3(n-1)+1个区域。 </p>
-<p>再增加一条边b，与a平行，同样增加3(n-1)+1个区域。 </p>
-<p>最后增加一条边c，与已有的边都相交，增加3(n-1)+3个区域。又因为要与a，b形成锯齿形，所以又减去2*2个区域 </p>
-<p>所以得出递推式 f(n)=f(n-1)+9*(n-1)+1</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2624,7 +2616,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-count">290</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2714,7 +2706,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">359.9k</span>
+    <span title="Site words total count">361.3k</span>
   
 </div>
 
