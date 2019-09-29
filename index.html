@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.9k
+                  4.8k
                 </span>
               
 
@@ -402,7 +402,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  6
+                  17
                 </span>
               
             </div>
@@ -471,6 +471,43 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">将工作目录下，名为 AAA 的子目录删除 :</span><br><span class="line">rmdir AAA</span><br><span class="line">在工作目录下的 BBB 目录中，删除名为 Test 的子目录。若 Test 删除后，BBB 目录成为空目录，则 BBB 亦予删除。</span><br><span class="line">rmdir -p BBB/Test</span><br></pre></td></tr></table></figure>
 <h2 id="执行可执行文件"><a href="#执行可执行文件" class="headerlink" title="执行可执行文件"></a>执行可执行文件</h2><p>当前目录下的可执行文件前面加上./</p>
+<h2 id="gcc、g-、gdb"><a href="#gcc、g-、gdb" class="headerlink" title="gcc、g++、gdb"></a>gcc、g++、gdb</h2><h3 id="gcc"><a href="#gcc" class="headerlink" title="gcc:"></a>gcc:</h3><ol>
+<li>-c 只做编译，不做链接</li>
+<li>-o 生成目标，后面的路径会生成目标文件</li>
+<li><code>-std=c[++]**|gnu**</code> 规定ISO标准，如-std=c99就是使用c99标准编译文件，默认的话C语言是c89，C++是c++98/03</li>
+<li>-g 插入调试信息，请配合gdb食用</li>
+<li>-W** 警告某种规则，常见是-Wall，打开所有警告，可用值可以使用可以百度或者查看官方文档</li>
+<li>-Werror 把警告视为错误</li>
+<li>-Wno-** 关闭某种警告，可用值与上面相同</li>
+<li>-I 将路径添加到预处理默认路径</li>
+<li>-L 将路径添加到链接库默认路径</li>
+<li>-l 链接的时候链接库默认路径下的库文件，如-lgtest会链接/usr/lib或者/usr/local/lib下的libgtest.a文件或许libgtest.so文件（静态库或者动态库）</li>
+<li>-pthread 多线程代码使用</li>
+</ol>
+<h3 id="gdb"><a href="#gdb" class="headerlink" title="gdb:"></a>gdb:</h3><p>如果你编译代码的时候有加-g参数，那么你就可以使用gdb调试你的代码了</p>
+<p>使用<code>gdb &lt;program&gt;</code>可以对可执行文件进行调试。</p>
+<p><a href="https://blog.csdn.net/lyjtynet/article/details/4057723" target="_blank" rel="noopener">linux c++ gdb教程</a></p>
+<h2 id="grep、locate、find-查找"><a href="#grep、locate、find-查找" class="headerlink" title="grep、locate、find 查找"></a>grep、locate、find 查找</h2><ul>
+<li><p>如果想查找文档中的某些信息，使用grep绝对是个好选择<code>grep -i regex file</code> 会将file中匹配了正则表达式的行输出，请注意这里是行为单位的</p>
+</li>
+<li><p>find可以在特定文件夹中搜索匹配规则的文件，规则比较复杂，常用的是 -name 参数，可以查找名字匹配正则表达式的文件（包括文件夹，毕竟Unix一切皆文件嘛，文件夹也不例外）</p>
+</li>
+<li><p>locate命令可能需要通过 <code>sudo apt install locate</code> 安装，通过 locate name 可以定位文件位置，也就是查找文件啦</p>
+</li>
+</ul>
+<h2 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h2><p>Linux下的文件是有权限控制的，使用 <code>ls -l</code> 可以看到每行最前面有-rwxrwxr-x之类的，这是描述用于文件的属性与权限。第一个字符代表文件是否为目录，如果是则为d，否为-；接下来九个字符每三个为一组，分别代表用户，组，和其他人的权限，三个字符分别代表读写执行的权限，即r、w和x。一个二进制文件必须要有可执行权限才能运行。为了改变文件的属性，可以使用命令 <code>chmod [option] mode ... file ...</code> 来更改文件权限。mode是指文件的权限更改模式，主要有以下两种类型：</p>
+<ol>
+<li><p>一个三位的八进制数。这个八进制数从高位到低位分别代表用户、组和其他人的权限模式。每个位是1、2、4或者它们的和，1代表执行，2代表写，4代表读。如7 = 1 + 2 + 4，所以7代表有读写执行的权限，而5= 1 + 4，所以5代表有读和执行，但是没有写的权限。如果将这个三位八进制数写成二进制，每一位0正好对应前文说道的后九位的-，而每一位1对应字符。如数字0775写成二进制是111111 101，对应的就是rwx rwx r-x。正所谓一言不合777， <code>chmod 777 path</code> 将文件的所有权限给了所有人，是很不安全的行为。</p>
+</li>
+<li><p><code>[a|u|g|o][+|=|-][rwx]</code> 的格式。其中a代表全部，u代表用户，g代表用户组，o代表其他，+是加上权限，=是权限改为，-是除去权限。如 <code>chmod u+x a+r a.out</code> 是使得用户可执行，全部可读文件a.out</p>
+</li>
+</ol>
+<h2 id="Linux管道与（真）grep"><a href="#Linux管道与（真）grep" class="headerlink" title="Linux管道与（真）grep"></a>Linux管道与（真）grep</h2><p>一个由标准输入输出链接起来的进程集合，所以每一个进程的输出（stdout）被直接作为下一个进程的输入（stdin）</p>
+<p><img src="Snipaste_2019-09-29_14-11-31.png" alt="1"></p>
+<p>使用管道操作符 | 将多个命令连接起来，将前一个命令的输出作为当前命令的输入，就像管子一样字符串在命令之间流动。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt list | grep $&#123;package&#125;\ \\[installed\\] #快速查找软件包是否安装</span><br><span class="line">cat file | grep regx #查找文件中匹配正则表达式的行，快，但是缺点是只能匹配一行，其实可以使用sed</span><br><span class="line">ll -R dir | grep regx #确定目录下（包括所有子目录）是否含有匹配正则表达式的文件，个人觉得比find稍快，但是不能定位路径</span><br></pre></td></tr></table></figure>
+<p>使用管道+grep，可以极大减少无用信息的输出，极大地提高你的工作效率<br>当然，还有 less 命令可以使得长长的输出逐页输出，翻页随心所欲。</p>
+<h2 id="bash的初始化脚本"><a href="#bash的初始化脚本" class="headerlink" title="bash的初始化脚本"></a>bash的初始化脚本</h2><p>严格意义上说这是题外话，但是我觉得跟大家分享一下还是有必要的一般来说有两个文件是在bash启动的过程中比较重要的，一个是/etc/bash.bashrc，另一个是~/.bashrc，主要都是bash的配置命令。文件/etc/bash.bashrc会在系统启动时执行，而~/.bashrc会在用户打开bash的时候执行。如果你在linux或者Windows中装过JVM或者JDK，一定忘不了要设置环境变量，而在Linux下，一般是在写在/etc/bash.bashrc中，这样开机的时候就会把<br>JDK或者JVM的目录添加到$PATH中.</p>
 <h1 id="c-11特性："><a href="#c-11特性：" class="headerlink" title="c++ 11特性："></a>c++ 11特性：</h1><ol>
 <li>auto</li>
 <li>decltype：</li>
@@ -524,7 +561,60 @@
 <p><code>git config format.pretty oneline</code></p>
 <p>交互式添加文件到暂存区：</p>
 <p><code>git add -i</code></p>
-<h1 id="图解Git"><a href="#图解Git" class="headerlink" title="图解Git"></a>图解Git</h1>
+<h1 id="图解Git"><a href="#图解Git" class="headerlink" title="图解Git"></a>图解Git</h1><h2 id="基本用法："><a href="#基本用法：" class="headerlink" title="基本用法："></a>基本用法：</h2><p><img src="Snipaste_2019-09-29_12-52-44.png" alt="1"></p>
+<p>上面的四条命令在工作目录、暂存目录（也叫做索引）和仓库之间复制文件</p>
+<ul>
+<li>git add files 把文件放入暂存区域</li>
+<li>git commit 给暂存区域生成快照并提交</li>
+<li>git reset – files 用来撤销最后一次git add files， 你也可以用git reset撤销所有暂存区域文件</li>
+<li>git checkout – fils 把文件从暂存区域复制到工作目录中，用来丢弃本地修改</li>
+</ul>
+<p>你可以用git reset -p， git checkout -p， or git add -p进入交互模式</p>
+<p>也可以跳过暂存区域直接从仓库取出文件或者直接提交代码。</p>
+<p><img src="Snipaste_2019-09-29_12-56-13.png" alt="1"></p>
+<ul>
+<li>git commit -a 相当于运行git add 把所有当前目录下的文件加入暂存区域再运行git commit</li>
+<li>git commit files 进行一次包含最后一次提交加上工作目录中文件快照的提交，并且文件被添加到暂存区域</li>
+<li>git checkout HEAD –files 回滚到复制最后一次提交</li>
+</ul>
+<p><img src="Snipaste_2019-09-29_13-07-59.png" alt="1"></p>
+<p>绿色的5位字符表示提交的ID，分别指向父节点。分支用橘色显示，分别指向特定的提交。当前分支由附在其上的HEAD标识。 这张图片里显示最后5次提交，ed489是最新提交。 master分支指向此次提交，另一个maint分支指向祖父提交节点。</p>
+<h2 id="Diff"><a href="#Diff" class="headerlink" title="Diff"></a>Diff</h2><p>有许多种方法查看两次提交之间的变动。</p>
+<p><img src="Snipaste_2019-09-29_13-31-18.png" alt="1"></p>
+<h2 id="Commit"><a href="#Commit" class="headerlink" title="Commit"></a>Commit</h2><p>提交时，git用暂存区域的文件创建一个新的提交，并把此时的节点设为父节点。然后把当前分支指向新的提交节点。下图中，当前分支是master。 在运行命令之前，master指向ed489，提交后，master指向新的节点f0cec并以ed489作为父节点。</p>
+<p><img src="Snipaste_2019-09-29_13-33-16.png" alt="1"></p>
+<p>即便当前分支是某次提交的祖父节点，git会同样操作。下图中，在master分支的祖父节点maint分支进行一次提交，生成了1800b。 这样，maint分支就不再是master分支的祖父节点。此时，合并 (或者 衍合) 是必须的。</p>
+<p><img src="Snipaste_2019-09-29_13-34-02.png" alt="1"></p>
+<p><img src="Snipaste_2019-09-29_13-34-53.png" alt="1"></p>
+<h2 id="Checkout"><a href="#Checkout" class="headerlink" title="Checkout"></a>Checkout</h2><p>checkout命令用于从历史提交（或者暂存区域）中拷贝文件到工作目录，也可用于切换分支。</p>
+<p>当给定某个文件名（或者打开-p选项，或者文件名和-p选项同时打开）时，git会从指定的提交中拷贝文件到暂存区域和工作目录。比如，git checkout HEAD~ foo.c会将提交节点HEAD~(即当前提交节点的父节点)中的foo.c复制到工作目录并且加到暂存区域中。（如果命令中没有指定提交节点，则会从暂存区域中拷贝内容。）注意当前分支不会发生变化。</p>
+<p><img src="Snipaste_2019-09-29_13-35-55.png" alt="1"></p>
+<p>当不指定文件名，而是给出一个（本地）分支时，那么HEAD标识会移动到那个分支（也就是说，我们“切换”到那个分支了），然后暂存区域和工作目录中的内容会和HEAD对应的提交节点一致。新提交节点（下图中的a47c3）中的所有文件都会被复制（到暂存区域和工作目录中）；只存在于老的提交节点（ed489）中的文件会被删除；不属于上述两者的文件会被忽略，不受影响。</p>
+<p><img src="Snipaste_2019-09-29_13-36-06.png" alt="1"></p>
+<p>如果既没有指定文件名，也没有指定分支名，而是一个标签、远程分支、SHA-1值或者是像master~3类似的东西，就得到一个匿名分支，称作detached HEAD（被分离的HEAD标识）。这样可以很方便地在历史版本之间互相切换。比如说你想要编译1.6.6.1版本的git，你可以运行git checkout v1.6.6.1（这是一个标签，而非分支名），编译，安装，然后切换回另一个分支，比如说git checkout master。然而，当提交操作涉及到“分离的HEAD”时，其行为会略有不同，详情见在下面。</p>
+<p><img src="Snipaste_2019-09-29_13-36-29.png" alt="1"></p>
+<h2 id="HEAD标识处于分离状态时的提交操作"><a href="#HEAD标识处于分离状态时的提交操作" class="headerlink" title="HEAD标识处于分离状态时的提交操作"></a>HEAD标识处于分离状态时的提交操作</h2><p>当HEAD处于分离状态（不依附于任一分支）时，提交操作可以正常进行，但是不会更新任何已命名的分支。(你可以认为这是在更新一个匿名分支。)</p>
+<p><img src="Snipaste_2019-09-29_13-37-09.png" alt="1"></p>
+<p>一旦此后你切换到别的分支，比如说master，那么这个提交节点（可能）再也不会被引用到，然后就会被丢弃掉了。注意这个命令之后就不会有东西引用2eecb。</p>
+<p><img src="Snipaste_2019-09-29_13-37-17.png" alt="1"></p>
+<p>但是，如果你想保存这个状态，可以用命令git checkout -b name来创建一个新的分支。</p>
+<p><img src="Snipaste_2019-09-29_13-37-27.png" alt="1"></p>
+<h2 id="Reset"><a href="#Reset" class="headerlink" title="Reset"></a>Reset</h2><p>reset命令把当前分支指向另一个位置，并且有选择的变动工作目录和索引。也用来在从历史仓库中复制文件到索引，而不动工作目录。</p>
+<p><img src="Snipaste_2019-09-29_13-38-00.png" alt="1"></p>
+<p>如果不给选项，那么当前分支指向到那个提交。如果用–hard选项，那么工作目录也更新，如果用–soft选项，那么都不变。</p>
+<p><img src="Snipaste_2019-09-29_13-38-07.png" alt="1"></p>
+<p>如果没有给出提交点的版本号，那么默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交，如果用–hard选项，工作目录也同样。</p>
+<p><img src="Snipaste_2019-09-29_13-38-17.png" alt="1"></p>
+<p>如果给了文件名(或者 -p选项), 那么工作效果和带文件名的checkout差不多，除了索引被更新。</p>
+<h2 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h2><p>merge 命令把不同分支合并起来。合并前，索引必须和当前提交相同。如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做。 另一种情况是如果当前提交是另一个分支的祖父节点，就导致fast-forward合并。指向只是简单的移动，并生成一个新的提交。</p>
+<p><img src="Snipaste_2019-09-29_13-38-45.png" alt="1"></p>
+<p>否则就是一次真正的合并。默认把当前提交(ed489 如下所示)和另一个提交(33104)以及他们的共同祖父节点(b325c)进行一次三方合并。结果是先保存当前目录和索引，然后和父节点33104一起做一次新提交。</p>
+<p><img src="Snipaste_2019-09-29_13-39-03.png" alt="1"></p>
+<h2 id="Cherry-Pick"><a href="#Cherry-Pick" class="headerlink" title="Cherry Pick"></a>Cherry Pick</h2><p>cherry-pick命令”复制”一个提交节点并在当前分支做一次完全一样的新提交。</p>
+<p><img src="Snipaste_2019-09-29_13-40-15.png" alt="1"></p>
+<h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><p>衍合是合并命令的另一种选择。合并把两个父分支合并进行一次提交，提交历史不是线性的。衍合在当前分支上重演另一个分支的历史，提交历史是线性的。 本质上，这是线性化的自动的 cherry-pick</p>
+<p><img src="Snipaste_2019-09-29_13-40-40.png" alt="1"></p>
+
           
         
       
@@ -2617,7 +2707,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">355.4k</span>
+    <span title="Site words total count">358.4k</span>
   
 </div>
 
