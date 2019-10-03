@@ -79,14 +79,19 @@
 
 
 
+<meta name="description" content="单元测试 针对程序模块（软件设计的最小单位）来进行正确性检验的测试工作  程序模块可以是函数式编程中的函数和过程，也可以是面向对象编程中类的方法。通常每当我们完成了一个模块，我们都会对它进行测试以确保模块功能的完好。比如，后台完成了一个插入数据库的api，那么当我们使用这个api进行数据插入时，我们希望数据能够被正确的插入进数据库，于是我们使用这个api先尝试着插入几条数据，然后再在数据库中查看是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="shixun7">
+<meta property="og:title" content="Google Test">
 <meta property="og:url" content="http://yoursite.com/2019/09/29/shixun7/index.html">
 <meta property="og:site_name" content="zzm99">
+<meta property="og:description" content="单元测试 针对程序模块（软件设计的最小单位）来进行正确性检验的测试工作  程序模块可以是函数式编程中的函数和过程，也可以是面向对象编程中类的方法。通常每当我们完成了一个模块，我们都会对它进行测试以确保模块功能的完好。比如，后台完成了一个插入数据库的api，那么当我们使用这个api进行数据插入时，我们希望数据能够被正确的插入进数据库，于是我们使用这个api先尝试着插入几条数据，然后再在数据库中查看是">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-29T07:50:35.538Z">
+<meta property="og:image" content="http://yoursite.com/2019/09/29/shixun7/Snipaste_2019-10-03_22-51-50.png">
+<meta property="og:updated_time" content="2019-10-03T15:21:19.104Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shixun7">
+<meta name="twitter:title" content="Google Test">
+<meta name="twitter:description" content="单元测试 针对程序模块（软件设计的最小单位）来进行正确性检验的测试工作  程序模块可以是函数式编程中的函数和过程，也可以是面向对象编程中类的方法。通常每当我们完成了一个模块，我们都会对它进行测试以确保模块功能的完好。比如，后台完成了一个插入数据库的api，那么当我们使用这个api进行数据插入时，我们希望数据能够被正确的插入进数据库，于是我们使用这个api先尝试着插入几条数据，然后再在数据库中查看是">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/29/shixun7/Snipaste_2019-10-03_22-51-50.png">
 
 
 
@@ -131,7 +136,7 @@
   daovoice('update');
   </script>
 
-  <title>shixun7 | zzm99</title>
+  <title>Google Test | zzm99</title>
   
 
 
@@ -308,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">shixun7</h1>
+          <h1 class="post-title" itemprop="name headline">Google Test</h1>
         
 
         <div class="post-meta">
@@ -389,7 +394,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  3k
                 </span>
               
 
@@ -405,7 +410,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  12
                 </span>
               
             </div>
@@ -426,7 +431,103 @@
       
 
       
-        
+        <h1 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h1><blockquote>
+<p>针对程序模块（软件设计的最小单位）来进行正确性检验的测试工作</p>
+</blockquote>
+<p>程序模块可以是函数式编程中的函数和过程，也可以是面向对象编程中类的方法。通常每当我们完成了一个模块，我们都会对它进行测试以确保模块功能的完好。比如，后台完成了一个插入数据库的api，那么当我们使用这个api进行数据插入时，我们希望数据能够被正确的插入进数据库，于是我们使用这个api先尝试着插入几条数据，然后再在数据库中查看是否正确插入，这便是单元测试的工作原理。</p>
+<p>单元测试一个非常重要的特点是，各个模块是独立的，A模块功能的正确不应该依赖于B模块（因为我们只对A模块进行单元测试）。比如插入数据库的api模块不应该与制造数据的模块同时在同一单元测试中测试，出现依赖关系的时候应该考虑是否应该重新划分模块，将A，B模块集成为一个模块，如将产生数据和插入数据库集成为一个模块（对于这种情况不建议合并），或者通过模拟(mock)来模拟B的功能（在数据库插入的api测试中mock接口，并产生假数据）。</p>
+<h1 id="xUnit"><a href="#xUnit" class="headerlink" title="xUnit"></a>xUnit</h1><p>xUnit是一系列单元测试框架的集合(x代表语言，如JUnit中J代表Java)，xUnit测试框架是面向对象的，并且他们有一套共同的架构</p>
+<h1 id="xUnit的架构"><a href="#xUnit的架构" class="headerlink" title="xUnit的架构"></a>xUnit的架构</h1><ul>
+<li><p>Test runner<br>执行所有测试的可执行程序</p>
+</li>
+<li><p>Test case<br>基本类，所有的测试都继承于test case，对于同一个单元可以有多个test case来进行测试，每个测试可以覆盖不同的方面。比如在测试插入数据库api时，一个case对应插入正确数据，另一个case对应插入错误数据等</p>
+</li>
+<li><p>Test fixtures<br>可以理解为测试所需环境。在每个测试前为测试而搭建的环境（preconditions）。例如在在测试插入数据库api时，fixture可以为连接数据库</p>
+</li>
+<li><p>Test suites<br>共享同一fixture（precondition）的一系列测试，test suit里面的测试顺序不重要（每个测试都是独立的，互不依赖），例如在上述测试中的两个test case就应该放入同一test suit下</p>
+</li>
+<li><p>Test execution<br>对于每一个test case，都以以下步骤执行</p>
+</li>
+<li><ul>
+<li>setup() // 搭建测试环境</li>
+</ul>
+</li>
+<li><ul>
+<li>test() // 执行测试</li>
+</ul>
+</li>
+<li><ul>
+<li>teardown() // 恢复测试环境，以免影响到下一个测试</li>
+</ul>
+</li>
+<li><p>Test result formatter<br>输出测试结果，可以是plain text也可以是xml或其他格式</p>
+</li>
+<li><p>Assertions<br>Assertion（断言）是用来测试函数返回结果是否为期望值的函数或宏，遇到非期望值时，一般会抛出异常，终止当前测试</p>
+</li>
+</ul>
+<h1 id="Google-Test"><a href="#Google-Test" class="headerlink" title="Google Test"></a>Google Test</h1><blockquote>
+<p>Google Test，全称为Google’s C++ test framework，是一个基于xUnit的C++测试框架</p>
+</blockquote>
+<h1 id="Google-Test程序框架"><a href="#Google-Test程序框架" class="headerlink" title="Google Test程序框架"></a>Google Test程序框架</h1><p><img src="Snipaste_2019-10-03_22-51-50.png" alt="1"></p>
+<h1 id="Quick-Look"><a href="#Quick-Look" class="headerlink" title="Quick Look"></a>Quick Look</h1><p>假设我们实现了一个除法函数，其定义和实现如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> DIVISION_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DIVISION_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdexcept&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> myns &#123;</span><br><span class="line">    <span class="function"><span class="keyword">float</span> <span class="title">divide</span><span class="params">(<span class="keyword">float</span> dividend, <span class="keyword">float</span> divisor)</span> <span class="title">throw</span><span class="params">(<span class="built_in">std</span>::domain_error)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* DIVISION_H */</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// division.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdexcept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"division.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">float</span> myns::divide(<span class="keyword">float</span> dividend, <span class="keyword">float</span> divisor) <span class="keyword">throw</span>(domain_error) &#123;</span><br><span class="line">    <span class="keyword">if</span> (divisor == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> domain_error(<span class="string">"Divisor cannot be 0"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dividend / divisor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试文件:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;gtest/gtest.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdexcept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"division.h"</span></span></span><br><span class="line"></span><br><span class="line">TEST(divisionTest, divisorNotZero) &#123;</span><br><span class="line">    EXPECT_EQ(<span class="number">2</span>, myns::divide(<span class="number">8</span>, <span class="number">4</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">TEST(divisionTest, divisorZero) &#123;</span><br><span class="line">    EXPECT_THROW(myns::divide(<span class="number">1</span>, <span class="number">0</span>), <span class="built_in">std</span>::domain_error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编译命令：</p>
+<p><code>g++ division.cpp test.cpp -o test -std=c++11 -lgtest -lgtest_main -lpthread</code></p>
+<p>执行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Running main() from gtest_main.cc</span><br><span class="line">[==========] Running 2 tests from 1 test case.</span><br><span class="line">[----------] Global test environment set-up.</span><br><span class="line">[----------] 2 tests from divisionTest</span><br><span class="line">[ RUN ] divisionTest.divisorNotZero</span><br><span class="line">[ OK ] divisionTest.divisorNotZero (0 ms)</span><br><span class="line">[ RUN ] divisionTest.divisorZero</span><br><span class="line">[ OK ] divisionTest.divisorZero (0 ms)</span><br><span class="line">[----------] 2 tests from divisionTest (0 ms total)</span><br><span class="line">[----------] Global test environment tear-down</span><br><span class="line">[==========] 2 tests from 1 test case ran. (0 ms total)</span><br><span class="line">[ PASSED ] 2 tests.</span><br></pre></td></tr></table></figure>
+<h1 id="声明："><a href="#声明：" class="headerlink" title="声明："></a>声明：</h1><ul>
+<li>TEST()</li>
+</ul>
+<p>在Google Test中，每一个Test case都由 TEST() 宏来实现，其接收两个参数，第一个为test casename，第二个为test name（测试名字都是自己定义的，但是要按照要求定义）。正如QuickLook中的两个测试， TEST(divisionTest, divisorNotZero) ， TEST(divisionTest,divisorZero) ，第一个参数表明是对divide这个函数进行测试，第二个表示测试的测试的方面。这些名字会反应在生成的报告上。</p>
+<p>传入的名字不能带 _ 字符，因为这是一个宏定义，用户传入的名字会插入在Google Test内部定义的变量中，而这个变量是用 _ 连接的。</p>
+<ul>
+<li>Assertions</li>
+</ul>
+<p>Google Test的断言非常丰富，在Quick Look中使用了两个断言： EXPECT_EQ() 和EXPECT_THROW() 。其中 EXPECT_EQ() 会判断传入的两个值是否相等，若相等，则这次断言通过，不等，则失败。通常，第一个参数为期望值，第二个为实际测试的值，这个结果会最终反映在report中，用Expected和Actual表示。 EXPECT_THROW() 同理，第一个参数为一个表达式，第二个为一个异常，并期望这个表达式会抛出这个异常。</p>
+<p>Google Test中断言分为两类，一类是 EXPECT_<em> ，一类是 ASSERT_</em> 。 EXPECT_<em> 在失败时会继续这个 TEST() ，而 ASSERT_</em> 在失败时会终止该 TEST() 。<strong>一般情况下， ASSERT_* 用于致命错误，或者是这次断言失败 TEST() 中剩下的测试都没有意义的情况</strong>。</p>
+<ul>
+<li>编译命令</li>
+</ul>
+<p>写好的测试代码在编译时需要加上 -std=c++11 -lpthread -lgtest -lgtest_main 参数，Google Test安装时会安装 libgtest.a 和 libgtest_main.a （默认的main函数，这样就不用写main函数了）静态库。同时，Google Test是一个多线程程序，需要使用线程库。（实际测试的时候Google Test并不会开多线程让测试同时进行，因为这涉及到线程安全和死亡测试等问题，同时，也不要在非pthread库支持的平台下多线程测试 ）</p>
+<h1 id="重要的特性"><a href="#重要的特性" class="headerlink" title="重要的特性"></a>重要的特性</h1><h2 id="main"><a href="#main" class="headerlink" title="main()"></a>main()</h2><p>上面的例子使用了Goolge Test自带的main静态库，当然我们也可以自己写main函数，下面是Google Test自带的main函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span> </span>&#123;</span><br><span class="line">    ::testing::InitGoogleTest(&amp;argc, argv);</span><br><span class="line">    <span class="keyword">return</span> RUN_ALL_TESTS();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Google Test首先接收外部传参进行初始化（具体参数可以在运行测试程序时传入 –help 参数查看）， RUN_ALL_TESTS() 会收集所有的 TEST 并执行，因此实现的 TEST 不用手动注册了（后面讲到全局 SetUp 和 TearDown 时需要手动注册）</p>
+<h2 id="Fixture"><a href="#Fixture" class="headerlink" title="Fixture"></a>Fixture</h2><p>Fixture的目的是减少代码冗余，如果你的一系列测试中都需要在相同的环境运行，或者需要相同的测试数据，那么你不用在每次 TEST 的开头手动搭建环境和创建数据，而可以将这些配置都写在fixture里面。</p>
+<p>在Google Test中，创建一个fixture首先需要定义一个类，类名即为test case的名字，并从 ::testing::Test 继承，其中的所有成员都需要声明为 public 或 protected ，其中你可以定义以下内容：</p>
+<ul>
+<li>virtual void SetUp() （注意是大写的U）</li>
+<li>virtual void TearDown()</li>
+<li>static void SetUpTestCase()</li>
+<li>static void TearDownTestCase()</li>
+<li>以及在测试中需要用到的变量</li>
+</ul>
+<p>回顾xUnit中Test execution的执行顺序，每次执行 TEST() 的都会先执行 SetUp() ，每次 TEST() 执行完后都会执行 TearDown() ,继承 ::testing::Test 后重写这两个函数可以自定义其功能，对于开头数据库的例子，连接数据库的步骤就可以写在 SetUp() 中。</p>
+<p>SetUpTestCase() 和 TearDownTestCase() 同理，不过这个函数是作用在Test Case上的。它们分别会在Test Case中第一个 TEST() 的 SetUp() 之前和最后一个 TEST() 的 TearDown() 之后执行，作为整个Test Case的环境维护。这两个函数可以用于构造开销较大，在每个 TEST() 中都要用到的数据，以达到数据在 TEST() 之间共享的目的。要注意的是，数据共享并不意味着两个 TEST() 之间能够相互影响，原则上 TEST() 之间是应该互相独立的，其执行顺序不同也不应该影响测试结果，这意味着，当你在一个 TEST() 中修改了数据，你应该在测试结束时将其恢复。</p>
+<p>在每一个 TEST() 中都需要用到的变量可以直接声明在fixture中，在测试中可以直接使用 SetUpTestCase() 和 TearDownTestCase() 中操作的变量需要声明为 static 。所以，执行顺序为： SetUpTestCase()-&gt;SetUp()-&gt;TEST()-&gt;TearDown()-&gt;…-&gt;SetUp()-&gt;TEST()-&gt;TearDown()-&gt;TearDownTestCase() ，若有多个Test Case，则继续下一个Case。</p>
+<p>最后，要使用这个fixture，你需要使用 TEST_F() 宏，并将fixture类的名字传入第一个参数。</p>
+<p>现在修改上面 test.cpp 的代码，添加了 setup 和 teardown ，并添加了一些数据</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;gtest/gtest.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdexcept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"division.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">divisionTest</span>:</span> <span class="keyword">public</span> ::testing::Test &#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetUpTestCase</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"SetUpTestCase\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">TearDownTestCase</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"TearDownTestCase\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">SetUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        data1 = <span class="number">8</span>;</span><br><span class="line">        data2 = <span class="number">4</span>;</span><br><span class="line">        data3 = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"SetUp\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">TearDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"TearDown\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> data1, data2, data3;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">TEST_F(divisionTest, divisorNotZero) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Test: divisorNotZero\n"</span>;</span><br><span class="line">    EXPECT_EQ(<span class="number">2</span>, myns::divide(data1, data2));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">TEST_F(divisionTest, divisorZero) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Test: divisorZero\n"</span>;</span><br><span class="line">    EXPECT_THROW(myns::divide(<span class="number">1</span>, data3), <span class="built_in">std</span>::domain_error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Running main() from gtest_main.cc</span><br><span class="line">[==========] Running <span class="number">2</span> tests from <span class="number">1</span> test <span class="keyword">case</span>.</span><br><span class="line">[----------] Global test environment <span class="built_in">set</span>-up.</span><br><span class="line">[----------] <span class="number">2</span> tests from divisionTest</span><br><span class="line">SetUpTestCase</span><br><span class="line">[ RUN ] divisionTest.divisorNotZero</span><br><span class="line">SetUp</span><br><span class="line">Test: divisorNotZero</span><br><span class="line">TearDown</span><br><span class="line">[ OK ] divisionTest.divisorNotZero (<span class="number">0</span> ms)</span><br><span class="line">[ RUN ] divisionTest.divisorZero</span><br><span class="line">SetUp</span><br><span class="line">Test: divisorZero</span><br><span class="line">TearDown</span><br><span class="line">[ OK ] divisionTest.divisorZero (<span class="number">0</span> ms)</span><br><span class="line">TearDownTestCase</span><br><span class="line">[----------] <span class="number">2</span> tests from divisionTest (<span class="number">0</span> ms total)</span><br><span class="line">[----------] Global test environment tear-down</span><br><span class="line">[==========] <span class="number">2</span> tests from <span class="number">1</span> test <span class="keyword">case</span> ran. (<span class="number">0</span> ms total)</span><br><span class="line">[ PASSED ] <span class="number">2</span> tests.</span><br></pre></td></tr></table></figure>
+<p>从上面的运行结果可以很直观的看出执行顺序。</p>
+<p>既然Test Case也有 setup 和 teardown ，那么对于整个程序是否也有类似的方法呢？有的，在AdvancedGuide中有介绍。和创建fixture类似，首先你需要继承 ::testing::Environment 这个类，并重写 virtual void SetUp() 和 virtual void TearDown() 这两个方法。但是与fixture不同的是，你需要注册这个environment，在 RUN_ALL_TESTS() 之前调用 Environment*AddGlobalTestEnvironment(Environment* env) 来注册。当然，你可以注册多个Environment，他们会按照注册顺序依次执行。若你的设置了重复次数，那么每次重复时都会执行。</p>
+<p>重写main函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;gtest/gtest.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"division.h"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myEnv_1</span>:</span> <span class="keyword">public</span> ::testing::Environment &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">SetUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Global setup 1\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">TearDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Global teardown 1\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myEnv_2</span>:</span> <span class="keyword">public</span> ::testing::Environment &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">SetUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Global setup 2\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">TearDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Global teardown 2\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span> </span>&#123;</span><br><span class="line">    AddGlobalTestEnvironment(<span class="keyword">new</span> myEnv_1);</span><br><span class="line">    AddGlobalTestEnvironment(<span class="keyword">new</span> myEnv_2);</span><br><span class="line">    ::testing::InitGoogleTest(&amp;argc, argv);</span><br><span class="line">    <span class="keyword">return</span> RUN_ALL_TESTS();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[==========] Running 2 tests from 1 test case.</span><br><span class="line">[----------] Global test environment set-up.</span><br><span class="line">Global setup 1</span><br><span class="line">Global setup 2</span><br><span class="line">[----------] 2 tests from divisionTest</span><br><span class="line">SetUpTestCase</span><br><span class="line">[ RUN ] divisionTest.divisorNotZero</span><br><span class="line">SetUp</span><br><span class="line">Test: divisorNotZero</span><br><span class="line">TearDown</span><br><span class="line">[ OK ] divisionTest.divisorNotZero (0 ms)</span><br><span class="line">[ RUN ] divisionTest.divisorZero</span><br><span class="line">SetUp</span><br><span class="line">Test: divisorZero</span><br><span class="line">TearDown</span><br><span class="line">[ OK ] divisionTest.divisorZero (0 ms)</span><br><span class="line">TearDownTestCase</span><br><span class="line">[----------] 2 tests from divisionTest (0 ms total)</span><br><span class="line">[----------] Global test environment tear-down</span><br><span class="line">Global teardown 2</span><br><span class="line">Global teardown 1</span><br><span class="line">[==========] 2 tests from 1 test case ran. (0 ms total)</span><br><span class="line">[ PASSED ] 2 tests.</span><br></pre></td></tr></table></figure>
+<h1 id="自定义报错信息"><a href="#自定义报错信息" class="headerlink" title="自定义报错信息"></a>自定义报错信息</h1><p>如果在上面fixture例子中没有实现抛出异常的代码，那么错误报告会是这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test.cpp:37: Failure</span><br><span class="line">Expected: myns::divide(1, data3) throws an exception of type std::domain_error.</span><br><span class="line">    Actual: it throws nothing.</span><br></pre></td></tr></table></figure>
+<p>你会发现报错信息中出现了 data3 这个变量但是并没有显示出它的值，这非常不友好，也不容易让我们定位到错误。Google Test的所有断言都可以接收字符串流并显示在报告中。对此，你可以自定义报错信息来查看 data3 变量。下面是一个例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TEST_F(divisionTest, divisorZero) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Test: divisorZero\n"</span>;</span><br><span class="line">    ASSERT_THROW(myns::divide(<span class="number">1</span>, data3), <span class="built_in">std</span>::domain_error)</span><br><span class="line">        &lt;&lt; <span class="string">"With data3 = "</span> &lt;&lt; data3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>报错信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Expected: myns::divide(1, data3) throws an exception of type std::domain_error.</span><br><span class="line">    Actual: it throws nothing.</span><br><span class="line">With data3 = 0</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>Assertion的详细介绍（包括自定义断言等）<br>测试程序的传参（可以设置测试行为，如：生成xml报告，设置测试次数，随机测试顺序等）</p>
+</blockquote>
+
       
     </div>
     
@@ -479,8 +580,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/29/shixun6/" rel="next" title="shixun6">
-                <i class="fa fa-chevron-left"></i> shixun6
+              <a href="/2019/09/29/shixun6/" rel="next" title="linux gdb">
+                <i class="fa fa-chevron-left"></i> linux gdb
               </a>
             
           </div>
@@ -546,8 +647,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -564,7 +674,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">292</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -620,6 +730,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#单元测试"><span class="nav-number">1.</span> <span class="nav-text">单元测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xUnit"><span class="nav-number">2.</span> <span class="nav-text">xUnit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xUnit的架构"><span class="nav-number">3.</span> <span class="nav-text">xUnit的架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Google-Test"><span class="nav-number">4.</span> <span class="nav-text">Google Test</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Google-Test程序框架"><span class="nav-number">5.</span> <span class="nav-text">Google Test程序框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Quick-Look"><span class="nav-number">6.</span> <span class="nav-text">Quick Look</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明："><span class="nav-number">7.</span> <span class="nav-text">声明：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重要的特性"><span class="nav-number">8.</span> <span class="nav-text">重要的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#main"><span class="nav-number">8.1.</span> <span class="nav-text">main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fixture"><span class="nav-number">8.2.</span> <span class="nav-text">Fixture</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义报错信息"><span class="nav-number">9.</span> <span class="nav-text">自定义报错信息</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -654,7 +780,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">361.3k</span>
+    <span title="Site words total count">366k</span>
   
 </div>
 
