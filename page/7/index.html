@@ -291,6 +291,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/jizuyuanli2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/29/jizuyuanli2/" itemprop="url">MIPS——递归调用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-29T15:54:12+08:00">
+                2019-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机组成原理/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机组成原理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/29/jizuyuanli2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/29/jizuyuanli2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="嵌套过程"><a href="#嵌套过程" class="headerlink" title="嵌套过程"></a>嵌套过程</h1><p>不调用其他过程的过程称为叶过程(leaf procedure)。如果所有过程都是叶过程，那么情况就很简单。但是某个过程可以调用其他过程，甚至调用的是自身的“克隆”。在调用非叶过程时使用寄存器需要十分小心。</p>
+<p>例如，假设主程序将参数3存入寄存器a0,然后使用jal A调用过程A。再假设过程A通过jal B调用过程B，参数为7，同样存入a0。由于A尚未结束任务，所以在寄存器a0的使用上存在冲突。同样，在寄存器ra保存的返回地址也存在冲突，因为它现在保存着B的返回值。</p>
+<p>我们必须采取措施阻止这类问题发生：</p>
+<p>一个解决方法是将其他所有必须保存的寄存器压栈，就像将保存寄存器压栈一样。调用者将所有调用后还需的参数寄存器（a1~a3）或临时寄存器（t0~t9）压栈。被调用者将返回地址寄存器(ra)和被调用者使用的保存寄存器（a0~a7）都压栈。栈指针 sp 随这栈中的寄存器个数调整。到返回时，寄存器会从存储器中恢复，栈指针也会随着重新调整。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">factorial</span><span class="params">(<span class="keyword">int</span> n)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">int</span> res = factorial(n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">factorial</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">1</span>)  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span>  <span class="keyword">return</span> n * factorial(n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">    prompt1: .asciiz &quot;Enter the number\n&quot;</span><br><span class="line">    prompt2: .asciiz &quot;The factorial of n is:\n&quot;</span><br><span class="line"></span><br><span class="line">.text</span><br><span class="line">main:</span><br><span class="line">    # Print prompt1</span><br><span class="line">    li $v0, 4</span><br><span class="line">    la $a0, prompt1</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    # Read integer</span><br><span class="line">    li $v0, 5</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    # Call factorial</span><br><span class="line">    move $a0, $v0</span><br><span class="line">    jal factorial</span><br><span class="line">    move $a1, $v0 # save return value to a1</span><br><span class="line"></span><br><span class="line">    # Print prompt2</span><br><span class="line">    li $v0, 4</span><br><span class="line">    la $a0, prompt2</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    # Print result</span><br><span class="line">    li $v0, 1</span><br><span class="line">    move $a0, $a1</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    # Exit</span><br><span class="line">    li $v0, 10</span><br><span class="line">    syscall</span><br><span class="line"></span><br><span class="line">    ## Function int factorial(int n)</span><br><span class="line">    factorial:</span><br><span class="line">        ## YOUR CODE HERE</span><br><span class="line">        addi $sp,$sp,-8            #adjust stack for 2 items</span><br><span class="line">        sw   $ra,4($sp)            #save return address</span><br><span class="line">        sw   $a0,0($sp)            #save the argument n</span><br><span class="line">    </span><br><span class="line">        slti $t0,$a0,1             #if n &lt; 1,then set $t0 as 1</span><br><span class="line">        beq  $t0,$zero,L1          #if equal,then jump L1</span><br><span class="line">                                   #above all,if n &gt;= 1,then jump L1</span><br><span class="line">        #if(n &lt; 1)</span><br><span class="line">        addi $v0,$zero,1            #return 1</span><br><span class="line">        addi $sp,$sp,8              #pop 2 items off stack</span><br><span class="line">        jr   $ra                    #return to caller</span><br><span class="line">        #else</span><br><span class="line">        L1:</span><br><span class="line">            add $a0,$a0,-1          #argument :n - 1</span><br><span class="line">            jal factorial           #call factorial with (n-1)</span><br><span class="line">        </span><br><span class="line">           lw   $a0,0($sp)          #restore argument n</span><br><span class="line">           lw   $ra,4($sp)          #restore address</span><br><span class="line">           addi $sp,$sp,8           #adjust stack pionter</span><br><span class="line">           mul  $v0,$a0,$v0         #return n * factorial(n-1)</span><br><span class="line">           jr   $ra                 #return to caller</span><br><span class="line">    ## END OF YOUR CODE</span><br><span class="line">  #jr $ra</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">###########################################################################</span><br><span class="line">#</span><br><span class="line">#    #include&lt;iostream&gt;</span><br><span class="line">#    using namespace std;</span><br><span class="line">#    int sum(int n) &#123;</span><br><span class="line">#        if (n == 1) &#123;</span><br><span class="line">#            return 1;</span><br><span class="line">#        &#125;</span><br><span class="line">#        return n+sum(n-1);</span><br><span class="line">#    &#125;</span><br><span class="line">#</span><br><span class="line">#    int main() &#123;</span><br><span class="line">#      int n = 10;</span><br><span class="line">#      int result = sum(n);</span><br><span class="line">#      cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">#      return 0;</span><br><span class="line">#    &#125;</span><br><span class="line">#</span><br><span class="line">###########################################################################</span><br><span class="line">.text</span><br><span class="line">.globl main</span><br><span class="line">main:</span><br><span class="line">  # Argument for termination condition is saved in $s1, it is 1.</span><br><span class="line">  addi $s1,$0,1</span><br><span class="line">  # Calculate the sum from 1 to 10, n = 10, it is saved in $a1.</span><br><span class="line">  addi $a1,$0,10</span><br><span class="line"></span><br><span class="line">  addi $v0,$0,0</span><br><span class="line"></span><br><span class="line">  # jump to funcion int sum(int n)</span><br><span class="line">  jal sum</span><br><span class="line">  # print result</span><br><span class="line">  j result</span><br><span class="line"></span><br><span class="line"># function</span><br><span class="line">sum:</span><br><span class="line">  # push</span><br><span class="line">  # adjust stack for 2 items (2 * 4 = 8)</span><br><span class="line">  addi $sp,$sp,-8</span><br><span class="line">  #save return address</span><br><span class="line">  sw $ra,4($sp)</span><br><span class="line">  #save argument</span><br><span class="line">  sw $a1,0($sp)</span><br><span class="line"></span><br><span class="line">  # n == 1, calculate sum</span><br><span class="line">  beq $a1,$s1,calculate</span><br><span class="line"></span><br><span class="line">  # n ！= 1</span><br><span class="line">  # n = n - 1</span><br><span class="line">  addi $a1,$a1,-1</span><br><span class="line">  # push</span><br><span class="line">  jal sum</span><br><span class="line">  # continue to pop</span><br><span class="line"></span><br><span class="line">  # branch</span><br><span class="line">  calculate:</span><br><span class="line">    # load argument</span><br><span class="line">    lw $a1,0($sp)</span><br><span class="line">    # load return address</span><br><span class="line">    lw $ra,4($sp)</span><br><span class="line">    # adjust stack for 2 items (2 * 4 = 8)</span><br><span class="line">    addi $sp,$sp, 8</span><br><span class="line">    # n+sum(n-1)</span><br><span class="line">    add $v0,$a1,$v0</span><br><span class="line"></span><br><span class="line">    # continue to pop until return main</span><br><span class="line">    jr $ra</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">result:</span><br><span class="line">  move $a0,$v0</span><br><span class="line">  li $v0, 1                                        # load appropriate system call code into register $v0</span><br><span class="line">  syscall</span><br><span class="line"></span><br><span class="line">  la $a0, change                                   # load address of string &quot;change&quot;</span><br><span class="line">  li $v0, 4                                        # load appropriate system call code into register $v0</span><br><span class="line">  syscall</span><br><span class="line"></span><br><span class="line">  li $v0, 10                                       # exit</span><br><span class="line">  syscall</span><br><span class="line"></span><br><span class="line">.data                                              # statement of data</span><br><span class="line">  change:                                          # name of string</span><br><span class="line">       .asciiz &quot;\n&quot;                                # definition of string</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">###########################################################################</span><br><span class="line">#</span><br><span class="line">#    #include&lt;iostream&gt;</span><br><span class="line">#    using namespace std;</span><br><span class="line">#    int sum(int n) &#123;</span><br><span class="line">#        if (n != 1) &#123;</span><br><span class="line">#            return n+sum(n-1);</span><br><span class="line">#        &#125;</span><br><span class="line">#        return 1;</span><br><span class="line">#    &#125;</span><br><span class="line">#</span><br><span class="line">#    int main() &#123;</span><br><span class="line">#      int n = 10;</span><br><span class="line">#      int result = sum(n);</span><br><span class="line">#      cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">#      return 0;</span><br><span class="line">#    &#125;</span><br><span class="line">#</span><br><span class="line">###########################################################################</span><br><span class="line">.text</span><br><span class="line">.globl main</span><br><span class="line">main:</span><br><span class="line">  # Argument for termination condition is saved in $s1, it is 1.</span><br><span class="line">  addi $s1,$0,1</span><br><span class="line">  # Calculate the sum from 1 to 10, n = 10, it is saved in $a1.</span><br><span class="line">  addi $a1,$0,10</span><br><span class="line"></span><br><span class="line">  # jump to funcion int sum(int n)</span><br><span class="line">  jal sum</span><br><span class="line">  # print result</span><br><span class="line">  j result</span><br><span class="line"></span><br><span class="line"># function</span><br><span class="line">sum:</span><br><span class="line">  # push</span><br><span class="line">  # adjust stack for 2 items (2 * 4 = 8)</span><br><span class="line">  addi $sp,$sp,-8</span><br><span class="line">  #save return address</span><br><span class="line">  sw $ra,4($sp)</span><br><span class="line">  #save argument</span><br><span class="line">  sw $a1,0($sp)</span><br><span class="line"></span><br><span class="line">  # n ！= 1, continue to push</span><br><span class="line">  bne $a1,$s1,push_number_and_calculate</span><br><span class="line"></span><br><span class="line">  # n == 1, return 1 (pop)</span><br><span class="line">  addi $v0,$0,1</span><br><span class="line">  addi $sp,$sp,8</span><br><span class="line">  # continue to pop</span><br><span class="line">  jr $ra</span><br><span class="line"></span><br><span class="line">  # branch</span><br><span class="line">  push_number_and_calculate:</span><br><span class="line">    # n = n - 1</span><br><span class="line">    addi $a1,$a1,-1</span><br><span class="line">    # push</span><br><span class="line">    jal sum</span><br><span class="line"></span><br><span class="line">    # pop 2,3,4,...,10, and calculate n+sum(n-1)</span><br><span class="line">    # load argument</span><br><span class="line">    lw $a1,0($sp)</span><br><span class="line">    # load return address</span><br><span class="line">    lw $ra,4($sp)</span><br><span class="line">    # adjust stack for 2 items (2 * 4 = 8)</span><br><span class="line">    addi $sp,$sp, 8</span><br><span class="line">    # n+sum(n-1)</span><br><span class="line">    add $v0,$a1,$v0</span><br><span class="line"></span><br><span class="line">    # continue to pop until return main</span><br><span class="line">    jr $ra</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">result:</span><br><span class="line">  move $a0,$v0</span><br><span class="line">  li $v0, 1                                        # load appropriate system call code into register $v0</span><br><span class="line">  syscall</span><br><span class="line"></span><br><span class="line">  la $a0, change                                   # load address of string &quot;change&quot;</span><br><span class="line">  li $v0, 4                                        # load appropriate system call code into register $v0</span><br><span class="line">  syscall</span><br><span class="line"></span><br><span class="line">  li $v0, 10                                       # exit</span><br><span class="line">  syscall</span><br><span class="line"></span><br><span class="line">.data                                              # statement of data</span><br><span class="line">  change:                                          # name of string</span><br><span class="line">       .asciiz &quot;\n&quot;                                # definition of string</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/jizuyuanli1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2292,222 +2481,6 @@ Step2：使用ping www.huawei.com获取IP。
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/bianchengzhimei5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/27/bianchengzhimei5/" itemprop="url">快速找出故障机器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T17:18:03+08:00">
-                2019-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程之美/" itemprop="url" rel="index">
-                    <span itemprop="name">编程之美</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/27/bianchengzhimei5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/bianchengzhimei5/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.3k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="快速找出故障机器"><a href="#快速找出故障机器" class="headerlink" title="快速找出故障机器"></a>快速找出故障机器</h1><p>我们假设一个机器仅存储一个标号为ID的记录（假设ID是小于10亿的整数），假设每份数据保存两个备份，这样就有两个机器存储了同样的数据。</p>
-<ol>
-<li>在某个时间，如果得到一个数据文件ID的列表，是否能够快速地找出这个表中仅出现一次的ID？</li>
-<li>如果已经知道只有一台机器死机（也就是说只有一个备份丢失）呢？如果有两台机器死机呢（假设同一个数据的两个备份不会同时消失）？</li>
-</ol>
-<h1 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h1><p>这个问题可以转化为，有很多ID，其中只有一个ID出现的次数小于2，其余正常ID出现的次数都等于2，问如何找到这个次数为1的ID。</p>
-<p>为了达到这个目的，最简单的方法就是直接遍历列表，利用一个数组记下每个ID出现的次数，遍历完毕之后，出现次数小于2的ID就是我们想要的结果。</p>
-<p>假设有N个ID，且ID的取值在0~（N-1）之间，这个解法占用的时间复杂度为O（N），空间复杂度为O（N）。</p>
-<p>空间复杂度并不理想，如果ID的数量多达几十GB，这样的空间复杂度在实际运算中会带来效率问题，<strong>考虑进一步减少空间复杂度</strong>。</p>
-<h1 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h1><p>哪些数据是不必存储的？大部分的机器ID出现次数都等于2，这些机器肯定不是故障的机器，可以不予考虑，可以把解法1数组中等于2的元素清空，然后用来存储下一个机器ID的出现次数，这样就可以减少需要的空间。</p>
-<p>具体方法如下：遍历列表，利用哈希表记下每个ID出现的次数，每次遇到一个ID，就向哈希表中增加一个元素，如果这个ID出现的次数为2，那么就从哈希表中删除这个ID，最后剩下的ID就是我们想要的结果。这个算法空间复杂度在最好情况下，可以达到O（1），在最坏情况下仍然为O（N）</p>
-<h1 id="解法三："><a href="#解法三：" class="headerlink" title="解法三："></a>解法三：</h1><p>如何进一步降低空间复杂度？</p>
-<p>如果想<strong>继续降低空间复杂度</strong>，就要<strong>摒弃遍历列表计数</strong>这种方法了。</p>
-<p>是否可以降到常数级别（甚至O（1））呢？</p>
-<p>如果这样，我们可以把这个变量写成：<strong>x(i) = f(list[0],list[1],…,list[i])</strong>，也就是说这个变量是已经遍历过的列表元素的函数。</p>
-<p>这个函数需要满足的条件是：<strong>x(N) = ID_Lost</strong>。</p>
-<p>也就说遍历完整个列表后，这个变量的值应该等于丢失备份的ID。</p>
-<p>我们需要找到整个f</p>
-<p>可以考虑使用异或关系来帮忙找到结果。</p>
-<p>因为正确的机器都会有两个ID，不正确的机器只有一个ID。所以所有ID的异或值就等于这个仅出现一次的ID（因为异或运算满足交换律和结合律，其他出现两次的ID异或完都为0）。这样我们只使用一次遍历运算就得到了只有一台故障机器情况下故障机器的ID。</p>
-<p>因此，就可以使用 <strong>x(i) = list[0]⊕list[1]⊕…⊕list[i]</strong></p>
-<p>这种情况下，时间复杂度为O（N）， 空间复杂度为O（1）。</p>
-<hr>
-<p>对于第二问：由于有两个ID仅出现一次，设它们为A和B，那么所有ID的异或值为A⊕B。无法确定A和B的值</p>
-<p>如果A=B，则A⊕B为0，也就是说丢失的是同一份数据的两个拷贝，我们可以通过求和的方法得到A和B（A=B=（所有ID之和-所有正常工作机器ID之和）/2）</p>
-<p>如果A⊕B不等于0，那么这个异或值的二进制中某一位为1，显然，A和B中有且仅有一个数的相同位上也为1。</p>
-<p>我们就把所有ID分成两类，一类在这位上为1，另一类这位上为0，那么对于这两类ID，每一类分别含有A和B中的一个。那么我们使用两个变量，在遍历列表时，分别计算这两类ID的异或和，即可得到A和B的值。</p>
-<h1 id="解法四："><a href="#解法四：" class="headerlink" title="解法四："></a>解法四：</h1><p>如果需要考虑死机的两台机器ID相同的情况，还有没有办法解决？</p>
-<p>这个问题可以抽象为：在一个事先预定的整数（ID）集合当中，怎么样找出其中丢失的一个数（ID）或两个数（ID）？</p>
-<p>对于一个数，预先存好所有ID的和，然后减去后来的，就得到少了的那一个</p>
-<p>对于两个数，预先存好所有ID的和以及积（为降低数据大小，还可以改为存平方和），然后两个方程求两个未知数</p>
-<h1 id="扩展问题"><a href="#扩展问题" class="headerlink" title="扩展问题"></a>扩展问题</h1><p>如果是N个备份？</p>
-<p>N小的时候列几个方程？</p>
-<p>N多的时候还是用遍历数组？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2560,7 +2533,7 @@ Step2：使用ping www.huawei.com获取IP。
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">294</span>
+                  <span class="site-state-item-count">295</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2650,7 +2623,7 @@ Step2：使用ping www.huawei.com获取IP。
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">368.8k</span>
+    <span title="Site words total count">369.2k</span>
   
 </div>
 
