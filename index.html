@@ -291,6 +291,213 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/leetcode-211/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/11/leetcode-211/" itemprop="url">leetcode-211 Add and Search Word - Data structure design</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-11T19:19:12+08:00">
+                2019-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/11/leetcode-211/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/11/leetcode-211/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  305
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Design a data structure that supports the following two operations:</p>
+<ul>
+<li>void addWord(word)</li>
+<li>bool search(word)</li>
+</ul>
+<p>search(word) can search a literal word or a regular expression string containing only letters a-z or .. A . means it can represent any one letter.</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">addWord(&quot;bad&quot;)</span><br><span class="line">addWord(&quot;dad&quot;)</span><br><span class="line">addWord(&quot;mad&quot;)</span><br><span class="line">search(&quot;pad&quot;) -&gt; false</span><br><span class="line">search(&quot;bad&quot;) -&gt; true</span><br><span class="line">search(&quot;.ad&quot;) -&gt; true</span><br><span class="line">search(&quot;b..&quot;) -&gt; true</span><br></pre></td></tr></table></figure>
+<p>Note:</p>
+<ul>
+<li>You may assume that all words are consist of lowercase letters a-z.</li>
+</ul>
+<p>字典树</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">bool</span> word;</span><br><span class="line">    TrieNode* children[<span class="number">26</span>];</span><br><span class="line">    TrieNode()&#123;</span><br><span class="line">        word = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">memset</span>(children, <span class="literal">NULL</span>, <span class="keyword">sizeof</span>(children));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WordDictionary</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    WordDictionary() &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Adds a word into the data structure. */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addWord</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">        TrieNode* node = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> c: word)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!node-&gt;children[c-<span class="string">'a'</span>])&#123;</span><br><span class="line">                node-&gt;children[c-<span class="string">'a'</span>] = <span class="keyword">new</span> TrieNode();</span><br><span class="line">            &#125;</span><br><span class="line">            node = node-&gt;children[c-<span class="string">'a'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        node-&gt;word = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> search(word.c_str(), root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    TrieNode* root = <span class="keyword">new</span> TrieNode();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* word, TrieNode* node)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; word[i] &amp;&amp; node; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(word[i] != <span class="string">'.'</span>)&#123;</span><br><span class="line">                node = node-&gt;children[word[i]-<span class="string">'a'</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                TrieNode* tmp = node;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="number">26</span>; j++)&#123;</span><br><span class="line">                    node = tmp-&gt;children[j];</span><br><span class="line">                    <span class="keyword">if</span>(search(word+i+<span class="number">1</span>, node))&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node &amp;&amp; node-&gt;word;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your WordDictionary object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * WordDictionary* obj = new WordDictionary();</span></span><br><span class="line"><span class="comment"> * obj-&gt;addWord(word);</span></span><br><span class="line"><span class="comment"> * bool param_2 = obj-&gt;search(word);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/leetcode-1029/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2240,262 +2447,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/shixun5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/shixun5/" itemprop="url">Makefile</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T15:50:10+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/初级实训/" itemprop="url" rel="index">
-                    <span itemprop="name">初级实训</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/29/shixun5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/shixun5/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.5k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Makefile简介"><a href="#Makefile简介" class="headerlink" title="Makefile简介"></a>Makefile简介</h1><p>Makefile是一个定义项目的编译规则的文件，以便于整个项目的编译。</p>
-<p>Makefile中就可以定义好各个文件的依赖关系，在之后再需要编译时，只需要执行 make命令就可以自动编译了。</p>
-<p>在一次 make之后，一般 会生成很多 目标文件(*.o) 和一个可执行文件，当这些文件和源代码都没有被修改时，再次执行 make会提示 make: ‘bin/your_program’ is up to date.，而当你只修改了一个源代码文件再执行 make时，它也不会重复编译已经最新的文件，而只编译依赖了你的源代码的文件，这对提高编译效率是非常重要的。</p>
-<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">target ... : prerequisites ...</span><br><span class="line"><span class="built_in">command</span></span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>target 是下面的命令的 目标 ，即下面命令是为了target而生的。这个 目标 可以是*.o文件，也可以是可执行文件</p>
-</li>
-<li><p>prerequisites 则是生成该目标所 依赖 的文件，如果没有依赖的文件，下面的命令就不会执行且会中断 make</p>
-</li>
-<li><p>command 就是生成目标文件的命令，一般就是编译命令了，如 g++ main.cpp等等(注<br>意：命令前面必须有 Tab (‘\t’) 真正 的 Tab，这样make才会认为它是指令)</p>
-</li>
-</ul>
-<p><img src="Snipaste_2019-09-29_16-33-42.png" alt="1"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">main: main.o support1.o</span><br><span class="line">	g++ main.o support1.o -o main</span><br><span class="line"></span><br><span class="line">main.o: main.cpp main.hpp support1.hpp</span><br><span class="line">	g++ main.cpp main.hpp support1.hpp -c</span><br><span class="line"></span><br><span class="line">support1.o: support1.cpp support1.hpp</span><br><span class="line">	g++ support1.cpp support1.hpp -c</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	@rm -f main</span><br><span class="line">	@rm -f *.o</span><br><span class="line">	@rm -f *.gch</span><br></pre></td></tr></table></figure>
-<p><img src="Snipaste_2019-09-29_16-35-08.png" alt="1"></p>
-<hr>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Makefile version 3</span></span><br><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 -­w</span><br><span class="line"></span><br><span class="line">main: support1.o main.o</span><br><span class="line">    $(CC) $(FLAGS) main.o support1.o ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">support1.o: support1.hpp support1.cpp</span><br><span class="line">    $(CC) $(FLAGS) ­-c support1.cpp</span><br><span class="line"></span><br><span class="line">main.o: main.cpp</span><br><span class="line">    $(CC) $(FLAGS) -­c main.cpp</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­f *.o</span><br><span class="line">    @rm ­f *.gch</span><br><span class="line">    @rm ­f main</span><br></pre></td></tr></table></figure>
-<ul>
-<li>变量</li>
-<li>在Makefile中可以使用”<name> := <content>”声明变量，并在此后使用$(<name>)可以使用，类似C/C++中的宏，它是字符串的直接替换。如 $(CC) $(FLAGS) ­csupport1.cpp会变成 g++ ­std=c++11 ­-w -­c support1.cpp。</name></content></name></li>
-<li>前缀是 $符号，后面带个括号 ()的都是变量，如 $@也是变量，称为 自动化变量，它是目标文件的名字。如目标为 main的这一段的命令会变成 g++ ­std=c++ -­w main.o support1.o ­-o main</li>
-<li>伪目标</li>
-<li>clean一段中，target后面没有依赖文件，这称为 伪目标 ，作用是写了之后就可以使用 make clean来执行它的命令集了</li>
-<li>这里的命令集可以使用许多shell命令，但似乎并不是所有都能用</li>
-<li>命令前面的 @表示 不显示这条命令 ，和Windows下的.bat类似(下面分别是不使<br>用 @和使用 @的对比)</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">在Makefile中加入</span><br><span class="line">foo:</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Testing"</span></span><br><span class="line"><span class="comment"># 同样地，这是伪目标，可以使用make foo来执行其命令集</span></span><br><span class="line"></span><br><span class="line">user@computer:~/learnmake$ make foo</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Testing"</span></span><br><span class="line">Testing</span><br><span class="line"></span><br><span class="line">Makefile中改为</span><br><span class="line">foo:</span><br><span class="line">@<span class="built_in">echo</span> <span class="string">"Testing"</span></span><br><span class="line"></span><br><span class="line">user@computer:~/learnmake$ make foo</span><br><span class="line">Testing</span><br></pre></td></tr></table></figure>
-<h2 id="复杂一点的情况"><a href="#复杂一点的情况" class="headerlink" title="复杂一点的情况"></a>复杂一点的情况</h2><p>有时候一个项目的目录并没有如此简单，例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">├── build</span><br><span class="line">├── include</span><br><span class="line">├── lib</span><br><span class="line">│ ├── mysql</span><br><span class="line">│ └── mysql++</span><br><span class="line">└── src</span><br></pre></td></tr></table></figure>
-<ul>
-<li>bin是编译生成的可执行文件</li>
-<li>build是编译的中间文件如*.o文件</li>
-<li>include是各种.h或.hpp文件</li>
-<li>lib是一些必要的库文件</li>
-<li>src是.cpp文件</li>
-</ul>
-<p>这个时候，事情并不简单。因为现在的代码“身首异处”，所以要把它们的路径告诉编译器才行，我们使用 相对路径 来达到效果。</p>
-<p>.表示当前目录， ..表示上一级目录，用类似这样的相对路径来找到需要的文件，当然 ./经常可以省略</p>
-<p>以下面的目录结构为目标(假设原本不存在 bin目录和 build目录)：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">│ └── main</span><br><span class="line">├── build</span><br><span class="line">│ ├── main.o</span><br><span class="line">│ └── support1.o</span><br><span class="line">├── include</span><br><span class="line">│ └── support1.hpp</span><br><span class="line">├── Makefile</span><br><span class="line">└── src</span><br><span class="line">├── main.cpp</span><br><span class="line">└── support1.cpp</span><br></pre></td></tr></table></figure>
-<p>因为最后的目标 main在 bin目录中，所以target也应该是 bin/main，而其依赖的两个文件也要写清楚目录了 build/main.o build/support1.o。</p>
-<p>而在编译前，应该确认 bin和 build都是存在的目录，因此需要在编译前多一条命令 <code>mkdir ­-p bin</code>。因为要指明文件目录，于是编译命令变成 <code>g++ ­std=c++11 -­w build/main.o build/support1.o ­-o bin/main</code></p>
-<p>由于在support1.cpp中我们写了 #include “support1.hpp”，按以前的经验，这样写是只能找到同一个文件夹下的文件的，所以需要加一个编译器的参数 ­I./include，让它去其他地方找头文件。这样编译命令就完成了，生成.o文件的也类似。那么Makefile就可以写出来了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 -­w</span><br><span class="line"></span><br><span class="line">bin/main: build/support1.o build/main.o</span><br><span class="line">    @mkdir ­-p bin</span><br><span class="line">    $(CC) $(FLAGS) ­I./include build/support1.o build/main.o ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">build/%.o: src/%.cpp</span><br><span class="line">    @mkdir ­-p build</span><br><span class="line">    $(CC) $(FLAGS) ­I./include ­-c ­-o <span class="variable">$@</span> src/support1.cpp</span><br><span class="line"></span><br><span class="line">build/main.o: src/main.cpp</span><br><span class="line">    @mkdir ­-p build</span><br><span class="line">    $(CC) $(FLAGS) ­I./include ­-c ­-o <span class="variable">$@</span> src/main.cpp</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­rf build</span><br><span class="line">    @rm ­rf bin</span><br></pre></td></tr></table></figure>
-<p>这样就好了吗？不，不可以。将来要是文件结构有了偏差，写这个Makefile的人是要负责的。如果目录不同了，那么改各个路径要每个都改，而最好的做法应该是只改一处就影响全局。所以应该下面这样会更好。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 ­-w</span><br><span class="line">INC_DIR := include</span><br><span class="line">SRC_DIR := src</span><br><span class="line">BUILD_DIR := build</span><br><span class="line">BIN_DIR := bin</span><br><span class="line">INCLUDE := ­I./$(INC_DIR)</span><br><span class="line"></span><br><span class="line">$(BIN_DIR)/main: $(BUILD_DIR)/support1.o $(BUILD_DIR)/main.o</span><br><span class="line">    @mkdir ­-p $(BIN_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) $(BUILD_DIR)/support1.o $(BUILD_DIR)/main.o ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp</span><br><span class="line">    @mkdir -­p $(BUILD_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) ­-c -­o <span class="variable">$@</span> $(SRC_DIR)/support1.cpp</span><br><span class="line"></span><br><span class="line">$(BUILD_DIR)/main.o: $(SRC_DIR)/main.cpp</span><br><span class="line">    @mkdir -­p $(BUILD_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) -­c -­o <span class="variable">$@</span> $(SRC_DIR)/main.cpp</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­rf $(BUILD_DIR)</span><br><span class="line">    @rm ­rf $(BIN_DIR)</span><br></pre></td></tr></table></figure>
-<p>然而这个Makefile还可以更加简短并更加完善</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 ­-w</span><br><span class="line">INC_DIR := include</span><br><span class="line">SRC_DIR := src</span><br><span class="line">BUILD_DIR := build</span><br><span class="line">BIN_DIR := bin</span><br><span class="line">INCLUDE := ­I./$(INC_DIR)</span><br><span class="line"></span><br><span class="line">$(BIN_DIR)/main: $(BUILD_DIR)/support1.o $(BUILD_DIR)/main.o</span><br><span class="line">    @mkdir ­-p $(BIN_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) $^ ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp</span><br><span class="line">    @mkdir -­p $(BUILD_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) -­c ­-o <span class="variable">$@</span> $&lt;</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­rf $(BUILD_DIR)</span><br><span class="line">    @rm ­rf $(BIN_DIR)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>两个自动化变量</li>
-<li><ul>
-<li>$^依赖文件的集合，用空格分隔</li>
-</ul>
-</li>
-<li><ul>
-<li>$&lt;第一个依赖文件</li>
-</ul>
-</li>
-<li><ul>
-<li>其实在 %.o部分，也可以换成 $^</li>
-</ul>
-</li>
-<li><ul>
-<li>还有上文已经提过的 $@目标文件</li>
-</ul>
-</li>
-<li>通配符 %</li>
-<li><ul>
-<li>作用是就是 *的作用了通配</li>
-</ul>
-</li>
-</ul>
-<p>这里的好处就是当 src目录下再多cpp文件时，生成%.o文件的这一部分不用更改，生成可执行文件那里只要加一个依赖就好了</p>
-<p>实际上还有方法让生成可执行文件的规则也自动</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2548,7 +2499,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">296</span>
+                  <span class="site-state-item-count">297</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2638,7 +2589,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">369.4k</span>
+    <span title="Site words total count">369.7k</span>
   
 </div>
 
