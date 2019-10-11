@@ -291,6 +291,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/bianchengzhimei6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/27/bianchengzhimei6/" itemprop="url">求二进制数中1的个数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T17:18:10+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程之美/" itemprop="url" rel="index">
+                    <span itemprop="name">编程之美</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/27/bianchengzhimei6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/bianchengzhimei6/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  591
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="求二进制数中1的个数"><a href="#求二进制数中1的个数" class="headerlink" title="求二进制数中1的个数"></a>求二进制数中1的个数</h1><p>对于一个字节（8bit）的无符号整型变量，求其二进制表示中‘1’的个数，要求算法执行的<strong>效率尽可能高</strong></p>
+<h2 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h2><p>利用整型数据除法的特点，通过相除和判断余数的值来分析</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(v%<span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">        v /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法二：使用位操作"><a href="#解法二：使用位操作" class="headerlink" title="解法二：使用位操作"></a>解法二：使用位操作</h2><p>向右移位操作同样可以达到相除的目的，唯一的不同之处在于，移位之后如何来判断是否有1存在。</p>
+<p>需要判断最后一位是否为1，“与”操作可以达到目的，可以把该数与00000001进行与操作，如果结果为1，则表示当前八位数的最后一位为1，否则为0.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        num += v &amp; <span class="number">0x01</span>;</span><br><span class="line">        v &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法三："><a href="#解法三：" class="headerlink" title="解法三："></a>解法三：</h2><p>位操作比除、余操作的效率高了很多，但是，即使使用位操作，时间复杂度仍然为O(log2v)</p>
+<p>能否将复杂度进一步降低？</p>
+<p>为了简化这个问题，我们考虑只有一个1的情况，例如：01000000</p>
+<p>如何判断给定的二进制数只有一个1呢？可以通过判断这个数是否为2的整数次幂来实现。另外，如果只和这个1进行判断，如果希望操作后的结果为0，01000000可以和00111111来进行与操作。</p>
+<p>这样，要进行的操作就是0100000 &amp; （01000000 - 00000001） = 01000000 &amp; 00111111 = 0</p>
+<p>将这种判断只有一个1的做法推广到有不确定1的情况即有如下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        v &amp;= (v<span class="number">-1</span>);</span><br><span class="line">        num++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法四："><a href="#解法四：" class="headerlink" title="解法四："></a>解法四：</h2><p>解法三的复杂度已经降低到O(M)，M为v中1的个数</p>
+<p>若想继续降低时间复杂度，还可以利用空间换时间，提前制好8bit二进制数（255个）各自对应的num的一个数组（表），然后进行查表操作，无需进行任何比较。</p>
+<h1 id="相关问题："><a href="#相关问题：" class="headerlink" title="相关问题："></a>相关问题：</h1><p>给定两个正整数（二进制形式表示）A和B，问把A变为B需要改变多少位（bit）？也就是说，整数A和B的二进制表示中有多少位是不同的？</p>
+<p>与非 -&gt; 求有多少个1</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/bianchengzhimei5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2063,200 +2262,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/shuzhijisuan1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/26/shuzhijisuan1/" itemprop="url">数值计算部分概念</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-26T22:22:06+08:00">
-                2019-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数值计算/" itemprop="url" rel="index">
-                    <span itemprop="name">数值计算</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/26/shuzhijisuan1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/26/shuzhijisuan1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  476
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="解误差"><a href="#解误差" class="headerlink" title="解误差"></a>解误差</h1><p>中文名称:解误差</p>
-<p>外文名称:error of solution</p>
-<p>正文内容:又称总离散误差。是真解与数值解之间的误差。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X为数值解</span><br><span class="line">Xn为真解</span><br><span class="line">解误差：|X-Xn|</span><br></pre></td></tr></table></figure>
-<h1 id="残差"><a href="#残差" class="headerlink" title="残差"></a>残差</h1><p>残差在数理统计中是指实际观察值与估计值（拟合值）之间的差。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">例如对于：Ax = b</span><br><span class="line">残差为： |AX1-b|</span><br></pre></td></tr></table></figure>
-<h1 id="舍入误差"><a href="#舍入误差" class="headerlink" title="舍入误差"></a>舍入误差</h1><p>舍入误差（英语：round-off error)，是指运算得到的近似值和精确值之间的差异。 比如当用有限位数的浮点数来表示实数的时候(理论上存在无限位数的浮点数)就会产生舍入误差。</p>
-<h1 id="截断误差"><a href="#截断误差" class="headerlink" title="截断误差"></a>截断误差</h1><p>由实际问题建立起来的数学模型，在很多情况下要得到准确解是困难的，通常要用数值方法求它的近似解，例如常把无限的计算过程用有限的计算过程代替，这种模型的准确解和由数值方法求出的近似解之间的误差称为截断误差。 因为截断误差是数值计算方法固有的，因此又称方法误差。</p>
-<h1 id="超定方程组"><a href="#超定方程组" class="headerlink" title="超定方程组"></a>超定方程组</h1><p>超定方程组是指方程个数大于未知量个数的方程组。</p>
-<h1 id="欠定方程组"><a href="#欠定方程组" class="headerlink" title="欠定方程组"></a>欠定方程组</h1><p>方程个数小于未知量个数的方程组。</p>
-<h1 id="恰定方程组"><a href="#恰定方程组" class="headerlink" title="恰定方程组"></a>恰定方程组</h1><p>方程数等于未知数个数</p>
-<h1 id="LU分解"><a href="#LU分解" class="headerlink" title="LU分解"></a>LU分解</h1><p>在线性代数与数值分析中，LU分解是矩阵分解的一种，将一个矩阵分解为一个下三角矩阵和一个上三角矩阵的乘积，有时需要再乘上一个置换矩阵。 LU分解可以被视为高斯消去法的矩阵形式。在数值计算上，LU分解经常被用来 <strong>解线性方程组、且在求反矩阵和计算行列式</strong> 中都是一个关键的步骤。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2309,7 +2314,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">295</span>
+                  <span class="site-state-item-count">296</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2399,7 +2404,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">369.2k</span>
+    <span title="Site words total count">369.4k</span>
   
 </div>
 
