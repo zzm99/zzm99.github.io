@@ -291,6 +291,600 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/06/leetcodeweek9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/06/leetcodeweek9/" itemprop="url">Weekly Contest 157</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-06T23:51:38+08:00">
+                2019-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
+                    <span itemprop="name">Weekly-Contest</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/06/leetcodeweek9/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/06/leetcodeweek9/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  685
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1217-Play-with-Chips"><a href="#1217-Play-with-Chips" class="headerlink" title="1217. Play with Chips"></a>1217. Play with Chips</h1><p><strong>There are some chips, and the i-th chip is at position chips[i].</strong></p>
+<p>You can perform any of the two following types of moves any number of times (possibly zero) on any chip:</p>
+<ul>
+<li>Move the i-th chip by 2 units to the left or to the right with a cost of 0.</li>
+<li>Move the i-th chip by 1 unit to the left or to the right with a cost of 1.</li>
+</ul>
+<p>There can be two or more chips at the same position initially.</p>
+<p>Return the minimum cost needed to move all the chips to the same position (any position).</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minCostToMoveChips</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; chips)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> cnt[<span class="number">2</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> p: chips)</span><br><span class="line">            cnt[p % <span class="number">2</span>]++;</span><br><span class="line">        <span class="keyword">return</span> cnt[<span class="number">0</span>] &lt; cnt[<span class="number">1</span>] ? cnt[<span class="number">0</span>] : cnt[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="1218-Longest-Arithmetic-Subsequence-of-Given-Difference"><a href="#1218-Longest-Arithmetic-Subsequence-of-Given-Difference" class="headerlink" title="1218. Longest Arithmetic Subsequence of Given Difference"></a>1218. Longest Arithmetic Subsequence of Given Difference</h1><p>Given an integer array arr and an integer difference, return the length of the longest subsequence in arr which is an arithmetic sequence such that the difference between adjacent elements in the subsequence equals difference.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestSubsequence</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="keyword">int</span> difference)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=arr.size()<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            m[arr[i]] = <span class="number">1</span> + m[arr[i] + difference];</span><br><span class="line">            ret = max(ret, m[arr[i]]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="1219-Path-with-Maximum-Gold"><a href="#1219-Path-with-Maximum-Gold" class="headerlink" title="1219. Path with Maximum Gold"></a>1219. Path with Maximum Gold</h1><p>In a gold mine grid of size m * n, each cell in this mine has an integer representing the amount of gold in that cell, 0 if it is empty.</p>
+<p>Return the maximum amount of gold you can collect under the conditions:</p>
+<ul>
+<li>Every time you are located in a cell you will collect all the gold in that cell.</li>
+<li>From your position you can walk one step to the left, right, up or down.</li>
+<li>You can’t visit the same cell more than once.</li>
+<li>Never visit a cell with 0 gold.</li>
+<li>You can start and stop collecting gold from any position in the grid that has some gold.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; g, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (i &lt; <span class="number">0</span> || j &lt; <span class="number">0</span> || i &gt;= g.size() || j &gt;= g[i].size() || g[i][j] &lt;= <span class="number">0</span>)  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      g[i][j] = -g[i][j];</span><br><span class="line">      <span class="keyword">auto</span> res = max(&#123; dfs(g, i + <span class="number">1</span>, j), dfs(g, i, j + <span class="number">1</span>), dfs(g, i - <span class="number">1</span>, j), dfs(g, i, j - <span class="number">1</span>) &#125;);</span><br><span class="line">      g[i][j] = -g[i][j];</span><br><span class="line">      <span class="keyword">return</span> g[i][j] + res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getMaximumGold</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid, <span class="keyword">int</span> res = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; grid.size(); ++i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> j = <span class="number">0</span>; j &lt; grid[i].size(); ++j)</span><br><span class="line">          res = max(res, dfs(grid, i, j));</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="1220-Count-Vowels-Permutation"><a href="#1220-Count-Vowels-Permutation" class="headerlink" title="1220. Count Vowels Permutation"></a>1220. Count Vowels Permutation</h1><p>Given an integer n, your task is to count how many strings of length n can be formed under the following rules:</p>
+<ul>
+<li>Each character is a lower case vowel (‘a’, ‘e’, ‘i’, ‘o’, ‘u’)</li>
+<li>Each vowel ‘a’ may only be followed by an ‘e’.</li>
+<li>Each vowel ‘e’ may only be followed by an ‘a’ or an ‘i’.</li>
+<li>Each vowel ‘i’ may not be followed by another ‘i’.</li>
+<li>Each vowel ‘o’ may only be followed by an ‘i’ or a ‘u’.</li>
+<li>Each vowel ‘u’ may only be followed by an ‘a’.</li>
+</ul>
+<p>Since the answer may be too large, return it modulo 10^9 + 7.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countVowelPermutation</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span>[][] moves = &#123; &#123;<span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">2</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>&#125;, &#123;<span class="number">2</span>, <span class="number">4</span>&#125;, &#123; <span class="number">0</span> &#125; &#125;;</span><br><span class="line">      <span class="keyword">int</span>[] v = &#123; <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span> &#125;;</span><br><span class="line">      <span class="keyword">while</span> (--n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] v1 = &#123; <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> &#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> j : moves[i])</span><br><span class="line">            v1[j] = (v1[j] + v[i]) % <span class="number">1000000007</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        v = v1;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> (<span class="keyword">int</span>)(((<span class="keyword">long</span>)v[<span class="number">0</span>] + v[<span class="number">1</span>] + v[<span class="number">2</span>] + v[<span class="number">3</span>] + v[<span class="number">4</span>]) % <span class="number">1000000007</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/web6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/web6/" itemprop="url">移动网络安全与应用-实验一-SSL实验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T23:47:03+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web2-0-and-移动网络安全技术/" itemprop="url" rel="index">
+                    <span itemprop="name">web2.0 and 移动网络安全技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/29/web6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/web6/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  0
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="123-1.png" alt="1"><br><img src="123-2.png" alt="1"><br><img src="123-3.png" alt="1"><br><img src="123-4.png" alt="1"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/web5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/web5/" itemprop="url">web2.0作业三：动态按钮</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T23:46:59+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web2-0-and-移动网络安全技术/" itemprop="url" rel="index">
+                    <span itemprop="name">web2.0 and 移动网络安全技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/29/web5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/web5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  806
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>环形按钮<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">sizes</span>=<span class="string">"196x196"</span> <span class="attr">href</span>=<span class="string">"assets/images/favicon.png"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"style.css"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"at-plus-container"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"bottom-positioner"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"button"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"info-bar"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:block"</span> <span class="attr">class</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">title</span>=<span class="string">"2人参与讨论"</span> <span class="attr">class</span>=<span class="string">"page user"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"assets/images/people.png"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>14<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">title</span>=<span class="string">"3条评论"</span> <span class="attr">class</span>=<span class="string">"page comment"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"assets/images/comment.png"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>20<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">title</span>=<span class="string">"我有6条评论"</span> <span class="attr">class</span>=<span class="string">"mine posted"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"assets/images/post.png"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>3<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">li</span> <span class="attr">title</span>=<span class="string">"被赞6次"</span> <span class="attr">class</span>=<span class="string">"mine like"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"assets/images/like.png"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>4<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"control-ring-container"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"control-ring"</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">li</span> <span class="attr">title</span>=<span class="string">"蒙板"</span> <span class="attr">class</span>=<span class="string">"mask button"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">li</span> <span class="attr">title</span>=<span class="string">"历史记录"</span> <span class="attr">class</span>=<span class="string">"history button"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">li</span> <span class="attr">title</span>=<span class="string">"消息"</span> <span class="attr">class</span>=<span class="string">"message button"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"unread"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">li</span> <span class="attr">title</span>=<span class="string">"设置"</span> <span class="attr">class</span>=<span class="string">"setting button"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">li</span> <span class="attr">title</span>=<span class="string">"登录/注册"</span> <span class="attr">class</span>=<span class="string">"sign button"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"apb"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#at-plus-container</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto; </span><br><span class="line">  <span class="attribute">position</span>: relative; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#info-bar</span> &#123;</span><br><span class="line">	<span class="attribute">position</span>: absolute;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#7E7E7E</span>;</span><br><span class="line">	<span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">26px</span>;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">26px</span>;</span><br><span class="line">	<span class="attribute">bottom</span>: <span class="number">97px</span>;</span><br><span class="line">	<span class="attribute">left</span>: <span class="number">77px</span>;</span><br><span class="line">	<span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">transition</span>: <span class="number">0.5s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#button</span><span class="selector-pseudo">:hover</span> <span class="selector-id">#info-bar</span> &#123;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#7E7E7E</span>;</span><br><span class="line"> 	<span class="attribute">width</span>: <span class="number">130px</span>;</span><br><span class="line"> 	<span class="attribute">height</span>: <span class="number">130px</span>;</span><br><span class="line"> 	<span class="attribute">bottom</span>: <span class="number">150px</span>;</span><br><span class="line"> 	<span class="attribute">left</span>: <span class="number">25px</span>;</span><br><span class="line"> 	<span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#button</span> <span class="selector-tag">ul</span>&#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#button</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">	<span class="attribute">list-style</span>: none;</span><br><span class="line">	<span class="attribute">text-align</span>: center;</span><br><span class="line">	<span class="attribute">color</span>: white;</span><br><span class="line">	<span class="attribute">margin-top</span>: <span class="number">5px</span>;</span><br><span class="line">	<span class="attribute">margin-bottom</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#info-bar</span> <span class="selector-tag">li</span><span class="selector-class">.comment</span> &#123;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#info-bar</span> <span class="selector-tag">li</span><span class="selector-class">.comment</span> <span class="selector-tag">img</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">padding-right</span>: <span class="number">2px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#info-bar</span> <span class="selector-tag">li</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">8px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#info-bar</span> <span class="selector-tag">li</span> <span class="selector-tag">img</span> &#123;</span><br><span class="line">	<span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#info-bar</span> <span class="selector-tag">li</span><span class="selector-class">.mine</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#26E79E</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#info-bar</span> <span class="selector-tag">li</span><span class="selector-class">.posted</span> &#123;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#info-bar</span> <span class="selector-tag">li</span><span class="selector-class">.like</span> &#123;</span><br><span class="line">  <span class="attribute">padding-right</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#control-ring-container</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">50%</span>; </span><br><span class="line">  <span class="attribute">bottom</span>: -<span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">30px</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#control-ring-container</span> <span class="selector-tag">ul</span>&#123;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">45px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">60px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-id">#control-ring</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#686868</span> center no-repeat;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">background-size</span>: <span class="number">16px</span> <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">transition</span>: <span class="number">0.5s</span>;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#control-ring</span> <span class="selector-class">.unread</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#E0D6DC</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">9pt</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#button</span><span class="selector-pseudo">:hover</span> <span class="selector-id">#control-ring</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#button</span><span class="selector-pseudo">:hover</span> <span class="selector-id">#control-ring</span> &gt; <span class="selector-tag">li</span><span class="selector-class">.mask</span><span class="selector-class">.button</span>&#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">32px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">55px</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">'assets/images/nomask.png'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#button</span><span class="selector-pseudo">:hover</span> <span class="selector-id">#control-ring</span> &gt; <span class="selector-tag">li</span><span class="selector-class">.history</span><span class="selector-class">.button</span>&#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">'assets/images/history.png'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#button</span><span class="selector-pseudo">:hover</span> <span class="selector-id">#control-ring</span> &gt; <span class="selector-tag">li</span><span class="selector-class">.message</span><span class="selector-class">.button</span>&#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">44px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">55px</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">'assets/images/message.png'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#button</span><span class="selector-pseudo">:hover</span> <span class="selector-id">#control-ring</span> &gt; <span class="selector-tag">li</span><span class="selector-class">.setting</span><span class="selector-class">.button</span>&#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">68px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">'assets/images/setting.png'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#button</span><span class="selector-pseudo">:hover</span> <span class="selector-id">#control-ring</span> &gt; <span class="selector-tag">li</span><span class="selector-class">.sign</span><span class="selector-class">.button</span>&#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">'assets/images/signin.png'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#button</span> <span class="selector-class">.apb</span>&#123;</span><br><span class="line">	<span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">'assets/images/atplus_white.png'</span>) center no-repeat;</span><br><span class="line">	<span class="attribute">background-size</span>: <span class="number">20px</span> <span class="number">15px</span>;</span><br><span class="line">	<span class="attribute">position</span>: absolute;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">26px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">26px</span>;</span><br><span class="line">	<span class="attribute">bottom</span>: <span class="number">97px</span>;</span><br><span class="line">	<span class="attribute">left</span>: <span class="number">77px</span>;</span><br><span class="line">	<span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#989FCF</span>;</span><br><span class="line">	<span class="attribute">transition</span>: <span class="number">0.5s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#button</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.apb</span> &#123;</span><br><span class="line">	<span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">'assets/images/atplus_green.png'</span>) center no-repeat;</span><br><span class="line">  <span class="attribute">background-size</span>: <span class="number">40px</span> <span class="number">30px</span>;</span><br><span class="line"> 	<span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line"> 	<span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">85px</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">65px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#303F9F</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="Snipaste_2019-10-03_22-43-27.png" alt="1"></p>
+<p><img src="Snipaste_2019-10-03_22-43-51.png" alt="1"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/leetcodeweek8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1969,705 +2563,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/27/shixun1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/27/shixun1/" itemprop="url">git</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-27T21:26:53+08:00">
-                2019-09-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/初级实训/" itemprop="url" rel="index">
-                    <span itemprop="name">初级实训</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/27/shixun1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/27/shixun1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  2.5k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  9
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="git-简明指南"><a href="#git-简明指南" class="headerlink" title="git-简明指南"></a>git-简明指南</h1><h2 id="创建新仓库"><a href="#创建新仓库" class="headerlink" title="创建新仓库"></a>创建新仓库</h2><p><code>git init</code></p>
-<h2 id="检出仓库"><a href="#检出仓库" class="headerlink" title="检出仓库"></a>检出仓库</h2><p>执行如下命令以创建一个本地仓库的克隆版</p>
-<p><code>git clone /path/to/repository</code></p>
-<p>如果是远端服务器上的仓库，你的命令会是这个样子：</p>
-<p><code>git clone username$host:/path/to/repository</code></p>
-<h2 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h2><p>你的本地仓库由git维护的三棵树组成，第一个是你的工作目录，它持有实际文件；第二个是暂存区，它像个缓冲区域，临时保存你的改动；最后是HEAD，它指向你最后一次提交的结果。</p>
-<p><code>working-dir----add----&gt;index(stage)-----commit---&gt;HEAD</code></p>
-<h2 id="添加和提交"><a href="#添加和提交" class="headerlink" title="添加和提交"></a>添加和提交</h2><p><code>git add &lt;filename&gt;</code><br>or<br><code>git add *</code><br>or<br><code>git add .</code></p>
-<p>then</p>
-<p><code>git commit -m &quot;message&quot;</code></p>
-<h2 id="推动改动"><a href="#推动改动" class="headerlink" title="推动改动"></a>推动改动</h2><p><code>git push origin master</code><br>可以把master换成你想要推送的任何分支</p>
-<p>如果你还没有克隆现有仓库，并欲将你的仓库连接到某个远程服务器，你可以使用如下命令添加：<br><code>git remote add origin &lt;server&gt;</code></p>
-<p>如此你就能够将你的改动推送到所添加的服务器上去了</p>
-<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，master是默认的分支，在其他分支上进行开发，完成后再将他们合并到主分支上。</p>
-<p>创建一个叫“feature_x”的分支，并切换过去：</p>
-<p><code>git checkout -b feature_x</code></p>
-<p>切换回主分支：</p>
-<p><code>git checkout master</code></p>
-<p>再把新建的分支删掉：</p>
-<p><code>git branch -d feature_x</code></p>
-<p>除非你将分支推送到远端仓库，不然该分支就是不为他人所见的：</p>
-<p><code>git push origin &lt;branch&gt;</code></p>
-<h2 id="更新与合并"><a href="#更新与合并" class="headerlink" title="更新与合并"></a>更新与合并</h2><p>更新你的仓库至最新改动：<code>git pull</code></p>
-<p>以在你的工作目录中获取（fetch）并合并（merge）远端的改动。</p>
-<p>要合并其他分支到你的当前分支（例如master），执行：</p>
-<p><code>git merge &lt;branch&gt;</code></p>
-<p>在这两种情况下，git都会尝试去自动合并改动。遗憾的是，这可能并非每次都成功，并可能出现冲突（conflicts），这时候就需要你修改这些文件来手动合并这些冲突（conflicts），改动之后，你需要执行如下命令以将他们标记为合并成功。</p>
-<p><code>git add &lt;filename&gt;</code></p>
-<p>在合并改动之前，你可以使用如下命令预览差异：</p>
-<p><code>git diff &lt;source_branch&gt; &lt;target_branch&gt;</code></p>
-<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><p>为软件发布创建标签是推荐的</p>
-<p><code>git tag 1.0.0 1b2e1d63ff</code></p>
-<p>1b2e1d63ff是你想要标记的提交ID的前10位字符，可以使用下列命令获取提交ID：</p>
-<p><code>git log</code></p>
-<p>你也可以使用少一点的提交ID前几位，只要它的指向具有唯一性</p>
-<h2 id="替换本地改动"><a href="#替换本地改动" class="headerlink" title="替换本地改动"></a>替换本地改动</h2><p>假如你操作十五，你可以使用如下命令替换掉本地改动：</p>
-<p><code>git checkout -- &lt;filename&gt;</code></p>
-<p>此命令会使HEAD中的最新内容替换掉你的工作目录中的文件，已添加到暂存区的改动以及新文件都不会受到影响</p>
-<p>假如你想丢弃你在本地的所有改动和提交，可以到服务器上获取最新的版本历史，并将你本地主分支指向它:</p>
-<p><code>git fetch origin</code><br><code>git reset --hard origin/master</code></p>
-<h2 id="实用小贴士"><a href="#实用小贴士" class="headerlink" title="实用小贴士"></a>实用小贴士</h2><p>内键的图形化git<br><code>gitk</code></p>
-<p>彩色的git输出：<br><code>git config color.ui true</code></p>
-<p>显示历史记录时，每个提交的信息只显示一行:</p>
-<p><code>git config format.pretty oneline</code></p>
-<p>交互式添加文件到暂存区：</p>
-<p><code>git add -i</code></p>
-<h1 id="图解Git"><a href="#图解Git" class="headerlink" title="图解Git"></a>图解Git</h1><h2 id="基本用法："><a href="#基本用法：" class="headerlink" title="基本用法："></a>基本用法：</h2><p><img src="Snipaste_2019-09-29_12-52-44.png" alt="1"></p>
-<p>上面的四条命令在工作目录、暂存目录（也叫做索引）和仓库之间复制文件</p>
-<ul>
-<li>git add files 把文件放入暂存区域</li>
-<li>git commit 给暂存区域生成快照并提交</li>
-<li>git reset – files 用来撤销最后一次git add files， 你也可以用git reset撤销所有暂存区域文件</li>
-<li>git checkout – fils 把文件从暂存区域复制到工作目录中，用来丢弃本地修改</li>
-</ul>
-<p>你可以用git reset -p， git checkout -p， or git add -p进入交互模式</p>
-<p>也可以跳过暂存区域直接从仓库取出文件或者直接提交代码。</p>
-<p><img src="Snipaste_2019-09-29_12-56-13.png" alt="1"></p>
-<ul>
-<li>git commit -a 相当于运行git add 把所有当前目录下的文件加入暂存区域再运行git commit</li>
-<li>git commit files 进行一次包含最后一次提交加上工作目录中文件快照的提交，并且文件被添加到暂存区域</li>
-<li>git checkout HEAD –files 回滚到复制最后一次提交</li>
-</ul>
-<p><img src="Snipaste_2019-09-29_13-07-59.png" alt="1"></p>
-<p>绿色的5位字符表示提交的ID，分别指向父节点。分支用橘色显示，分别指向特定的提交。当前分支由附在其上的HEAD标识。 这张图片里显示最后5次提交，ed489是最新提交。 master分支指向此次提交，另一个maint分支指向祖父提交节点。</p>
-<h2 id="Diff"><a href="#Diff" class="headerlink" title="Diff"></a>Diff</h2><p>有许多种方法查看两次提交之间的变动。</p>
-<p><img src="Snipaste_2019-09-29_13-31-18.png" alt="1"></p>
-<h2 id="Commit"><a href="#Commit" class="headerlink" title="Commit"></a>Commit</h2><p>提交时，git用暂存区域的文件创建一个新的提交，并把此时的节点设为父节点。然后把当前分支指向新的提交节点。下图中，当前分支是master。 在运行命令之前，master指向ed489，提交后，master指向新的节点f0cec并以ed489作为父节点。</p>
-<p><img src="Snipaste_2019-09-29_13-33-16.png" alt="1"></p>
-<p>即便当前分支是某次提交的祖父节点，git会同样操作。下图中，在master分支的祖父节点maint分支进行一次提交，生成了1800b。 这样，maint分支就不再是master分支的祖父节点。此时，合并 (或者 衍合) 是必须的。</p>
-<p><img src="Snipaste_2019-09-29_13-34-02.png" alt="1"></p>
-<p><img src="Snipaste_2019-09-29_13-34-53.png" alt="1"></p>
-<h2 id="Checkout"><a href="#Checkout" class="headerlink" title="Checkout"></a>Checkout</h2><p>checkout命令用于从历史提交（或者暂存区域）中拷贝文件到工作目录，也可用于切换分支。</p>
-<p>当给定某个文件名（或者打开-p选项，或者文件名和-p选项同时打开）时，git会从指定的提交中拷贝文件到暂存区域和工作目录。比如，git checkout HEAD~ foo.c会将提交节点HEAD~(即当前提交节点的父节点)中的foo.c复制到工作目录并且加到暂存区域中。（如果命令中没有指定提交节点，则会从暂存区域中拷贝内容。）注意当前分支不会发生变化。</p>
-<p><img src="Snipaste_2019-09-29_13-35-55.png" alt="1"></p>
-<p>当不指定文件名，而是给出一个（本地）分支时，那么HEAD标识会移动到那个分支（也就是说，我们“切换”到那个分支了），然后暂存区域和工作目录中的内容会和HEAD对应的提交节点一致。新提交节点（下图中的a47c3）中的所有文件都会被复制（到暂存区域和工作目录中）；只存在于老的提交节点（ed489）中的文件会被删除；不属于上述两者的文件会被忽略，不受影响。</p>
-<p><img src="Snipaste_2019-09-29_13-36-06.png" alt="1"></p>
-<p>如果既没有指定文件名，也没有指定分支名，而是一个标签、远程分支、SHA-1值或者是像master~3类似的东西，就得到一个匿名分支，称作detached HEAD（被分离的HEAD标识）。这样可以很方便地在历史版本之间互相切换。比如说你想要编译1.6.6.1版本的git，你可以运行git checkout v1.6.6.1（这是一个标签，而非分支名），编译，安装，然后切换回另一个分支，比如说git checkout master。然而，当提交操作涉及到“分离的HEAD”时，其行为会略有不同，详情见在下面。</p>
-<p><img src="Snipaste_2019-09-29_13-36-29.png" alt="1"></p>
-<h2 id="HEAD标识处于分离状态时的提交操作"><a href="#HEAD标识处于分离状态时的提交操作" class="headerlink" title="HEAD标识处于分离状态时的提交操作"></a>HEAD标识处于分离状态时的提交操作</h2><p>当HEAD处于分离状态（不依附于任一分支）时，提交操作可以正常进行，但是不会更新任何已命名的分支。(你可以认为这是在更新一个匿名分支。)</p>
-<p><img src="Snipaste_2019-09-29_13-37-09.png" alt="1"></p>
-<p>一旦此后你切换到别的分支，比如说master，那么这个提交节点（可能）再也不会被引用到，然后就会被丢弃掉了。注意这个命令之后就不会有东西引用2eecb。</p>
-<p><img src="Snipaste_2019-09-29_13-37-17.png" alt="1"></p>
-<p>但是，如果你想保存这个状态，可以用命令git checkout -b name来创建一个新的分支。</p>
-<p><img src="Snipaste_2019-09-29_13-37-27.png" alt="1"></p>
-<h2 id="Reset"><a href="#Reset" class="headerlink" title="Reset"></a>Reset</h2><p>reset命令把当前分支指向另一个位置，并且有选择的变动工作目录和索引。也用来在从历史仓库中复制文件到索引，而不动工作目录。</p>
-<p><img src="Snipaste_2019-09-29_13-38-00.png" alt="1"></p>
-<p>如果不给选项，那么当前分支指向到那个提交。如果用–hard选项，那么工作目录也更新，如果用–soft选项，那么都不变。</p>
-<p><img src="Snipaste_2019-09-29_13-38-07.png" alt="1"></p>
-<p>如果没有给出提交点的版本号，那么默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交，如果用–hard选项，工作目录也同样。</p>
-<p><img src="Snipaste_2019-09-29_13-38-17.png" alt="1"></p>
-<p>如果给了文件名(或者 -p选项), 那么工作效果和带文件名的checkout差不多，除了索引被更新。</p>
-<h2 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h2><p>merge 命令把不同分支合并起来。合并前，索引必须和当前提交相同。如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做。 另一种情况是如果当前提交是另一个分支的祖父节点，就导致fast-forward合并。指向只是简单的移动，并生成一个新的提交。</p>
-<p><img src="Snipaste_2019-09-29_13-38-45.png" alt="1"></p>
-<p>否则就是一次真正的合并。默认把当前提交(ed489 如下所示)和另一个提交(33104)以及他们的共同祖父节点(b325c)进行一次三方合并。结果是先保存当前目录和索引，然后和父节点33104一起做一次新提交。</p>
-<p><img src="Snipaste_2019-09-29_13-39-03.png" alt="1"></p>
-<h2 id="Cherry-Pick"><a href="#Cherry-Pick" class="headerlink" title="Cherry Pick"></a>Cherry Pick</h2><p>cherry-pick命令”复制”一个提交节点并在当前分支做一次完全一样的新提交。</p>
-<p><img src="Snipaste_2019-09-29_13-40-15.png" alt="1"></p>
-<h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><p>衍合是合并命令的另一种选择。合并把两个父分支合并进行一次提交，提交历史不是线性的。衍合在当前分支上重演另一个分支的历史，提交历史是线性的。 本质上，这是线性化的自动的 cherry-pick</p>
-<p><img src="Snipaste_2019-09-29_13-40-40.png" alt="1"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/26/leetcodeweek7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/26/leetcodeweek7/" itemprop="url">Weekly Contest 149</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-26T18:54:05+08:00">
-                2019-09-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
-                    <span itemprop="name">Weekly-Contest</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/26/leetcodeweek7/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/26/leetcodeweek7/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  804
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Day-of-the-Year"><a href="#Day-of-the-Year" class="headerlink" title="Day of the Year"></a>Day of the Year</h1><p>Given a string date representing a Gregorian calendar date formatted as YYYY-MM-DD, return the day number of the year.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dayOfYear</span><span class="params">(<span class="built_in">string</span> data)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mm[<span class="number">12</span>] = &#123;<span class="number">31</span>, <span class="number">28</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> year = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> month = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> day = <span class="number">0</span>;</span><br><span class="line">        year = (data[<span class="number">0</span>]-<span class="string">'0'</span>) * <span class="number">1000</span> + (data[<span class="number">1</span>]-<span class="string">'0'</span>) * <span class="number">100</span> +(data[<span class="number">2</span>]-<span class="string">'0'</span>) * <span class="number">10</span> +(data[<span class="number">3</span>]-<span class="string">'0'</span>); </span><br><span class="line">        month = (data[<span class="number">5</span>]-<span class="string">'0'</span>) * <span class="number">10</span> + (data[<span class="number">6</span>]-<span class="string">'0'</span>);</span><br><span class="line">        day = (data[<span class="number">8</span>]-<span class="string">'0'</span>) * <span class="number">10</span> + (data[<span class="number">9</span>]-<span class="string">'0'</span>);</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(year % <span class="number">100</span> != <span class="number">0</span> &amp;&amp; year % <span class="number">4</span> == <span class="number">0</span> || year % <span class="number">400</span> == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;month<span class="number">-1</span>; i++)&#123;</span><br><span class="line">                ret += mm[i];</span><br><span class="line">            &#125;</span><br><span class="line">            ret += day;</span><br><span class="line">            <span class="keyword">if</span>(month &gt; <span class="number">2</span>)&#123;</span><br><span class="line">                ret++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;month<span class="number">-1</span>; i++)&#123;</span><br><span class="line">                ret += mm[i];</span><br><span class="line">            &#125;</span><br><span class="line">            ret += day;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="Number-of-Dice-Rolls-With-Target-Sum"><a href="#Number-of-Dice-Rolls-With-Target-Sum" class="headerlink" title="Number of Dice Rolls With Target Sum"></a>Number of Dice Rolls With Target Sum</h1><p>You have d dice, and each die has f faces numbered 1, 2, …, f.</p>
-<p>Return the number of possible ways (out of fd total ways) modulo 10^9 + 7 to roll the dice so the sum of the face up numbers equals target.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dpp = <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;(<span class="number">35</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">1005</span>, <span class="number">-1</span>));</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span> d, <span class="keyword">int</span> f, <span class="keyword">int</span> target, <span class="keyword">int</span> ans)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(dpp[d][target] &gt; <span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">return</span> dpp[d][target];</span><br><span class="line">        <span class="keyword">if</span>(d == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> dpp[d][target] = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(target == <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=f; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(target-i &gt;= <span class="number">0</span>)</span><br><span class="line">                ans = (ans + helper(d<span class="number">-1</span>, f, target-i, <span class="number">0</span>)) % <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">1e9</span>+<span class="number">7</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dpp[d][target] = ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numRollsToTarget</span><span class="params">(<span class="keyword">int</span> d, <span class="keyword">int</span> f, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> helper(d, f, target, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="Swap-For-Longest-Repeated-Character-Substring"><a href="#Swap-For-Longest-Repeated-Character-Substring" class="headerlink" title="Swap For Longest Repeated Character Substring"></a>Swap For Longest Repeated Character Substring</h1><p>Given a string text, we are allowed to swap two of the characters in the string. Find the length of the longest substring with repeated characters.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxRepOpt1</span><span class="params">(<span class="built_in">string</span> text)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> n = text.size();</span><br><span class="line">        <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; count(<span class="number">26</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">        	count[text[i]-<span class="string">'a'</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left(n, <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; right(n, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        cur = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="keyword">if</span>(text[i] == text[i<span class="number">-1</span>])</span><br><span class="line">        		cur++;</span><br><span class="line">        	<span class="keyword">else</span></span><br><span class="line">        		cur = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        	left[i] = max(cur, left[i]);</span><br><span class="line">        	ans = max(cur, ans);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cur = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-2</span>; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="keyword">if</span>(text[i] == text[i+<span class="number">1</span>])</span><br><span class="line">        		cur++;</span><br><span class="line">        	<span class="keyword">else</span></span><br><span class="line">        		cur = <span class="number">1</span>;</span><br><span class="line">        	right[i] = max(cur, right[i]);</span><br><span class="line">        	ans = max(cur, ans);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n<span class="number">-1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="keyword">if</span>(count[text[i<span class="number">-1</span>]-<span class="string">'a'</span>] &gt; left[i<span class="number">-1</span>])</span><br><span class="line">        		ans = max(ans, left[i<span class="number">-1</span>] + <span class="number">1</span>);</span><br><span class="line">        	<span class="keyword">if</span>(count[text[i+<span class="number">1</span>]-<span class="string">'a'</span>] &gt; right[i+<span class="number">1</span>])</span><br><span class="line">        		ans = max(ans, right[i+<span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">        	<span class="keyword">if</span>( text[i<span class="number">-1</span>] == text[i+<span class="number">1</span>] &amp;&amp; text[i<span class="number">-1</span>] != text[i])</span><br><span class="line">        		<span class="keyword">if</span>(count[text[i<span class="number">-1</span>]-<span class="string">'a'</span>] &gt; (left[i<span class="number">-1</span>] + right[i+<span class="number">1</span>]))</span><br><span class="line">        			ans = max(ans, left[i<span class="number">-1</span>] + right[i+<span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">        		<span class="keyword">else</span></span><br><span class="line">        			ans = max(ans, left[i<span class="number">-1</span>] + right[i+<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="Online-Majority-Element-In-Subarray"><a href="#Online-Majority-Element-In-Subarray" class="headerlink" title="Online Majority Element In Subarray"></a>Online Majority Element In Subarray</h1><p>Implementing the class MajorityChecker, which has the following API:</p>
-<ul>
-<li>MajorityChecker(int[] arr) constructs an instance of MajorityChecker with the given array arr;</li>
-<li>int query(int left, int right, int threshold) has arguments such that:</li>
-<li><ul>
-<li>0 &lt;= left &lt;= right &lt; arr.length representing a subarray of arr;</li>
-</ul>
-</li>
-<li><ul>
-<li>2 * threshold &gt; right - left + 1, ie. the threshold is always a strict majority of the length of the subarray</li>
-</ul>
-</li>
-</ul>
-<p>Each query(…) returns the element in arr[left], arr[left+1], …, arr[right] that occurs at least threshold times, or -1 if no such element exists.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MajorityChecker majorityChecker = new MajorityChecker([1,1,2,2,1,1]);</span><br><span class="line">majorityChecker.query(0,5,4); // returns 1</span><br><span class="line">majorityChecker.query(0,3,3); // returns -1</span><br><span class="line">majorityChecker.query(2,3,2); // returns 2</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MajorityChecker</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; idx;</span><br><span class="line">    MajorityChecker(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;arr.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            idx[arr[i]].push_back(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> threshold)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;i: idx)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i.second.size() &lt; threshold)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">auto</span> t1 = lower_bound(i.second.begin(), i.second.end(), left);</span><br><span class="line">            <span class="keyword">auto</span> t2 = upper_bound(i.second.begin(), i.second.end(), right);</span><br><span class="line">            <span class="keyword">if</span>(t2 - t1 &gt;= threshold)</span><br><span class="line">                <span class="keyword">return</span> i.first;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your MajorityChecker object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * MajorityChecker* obj = new MajorityChecker(arr);</span></span><br><span class="line"><span class="comment"> * int param_1 = obj-&gt;query(left,right,threshold);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/shujvjiegou5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/23/shujvjiegou5/" itemprop="url">二叉树</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-23T19:54:52+08:00">
-                2019-09-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/23/shujvjiegou5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/23/shujvjiegou5/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  3k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  16
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BinNode.h</span></span><br><span class="line"><span class="comment">// 二叉树的基本组陈实体是二叉树节点，而边则对应于节点之间的相互关系</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BinNodePosi(T) BinNode<span class="meta-string">&lt;T&gt;* //节点位置</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stature(p)  ((p) ? (p)-&gt;height : -1)<span class="comment">// 节点高度，约定空树高度为-1</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//BinNode 状态与性质的判断：</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IsRoot(x) ( !( (x).parent ) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IsLChild(x) ( ! IsRoot(x) &amp;&amp; ( &amp;(x) == (x).parent-&gt;lc ) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IsRChild(x) ( ! IsRoot(x) &amp;&amp; ( &amp;(x) == (x).parent-&gt;rc ) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HasParent(x) ( ! IsRoot(x) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HasLChild(x) ( (x).lc )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HasRChild(x) ( (x).rc )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HasChild(x) ( HasLChild(x) || HasRChild(x) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HasBothChild(x) ( HasLChild(x) &amp;&amp; HasRChild(x) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IsLeaf(x) ( ! HasChild(x) )</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 与BinNode具有特定关系的节点以及指针:</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sibling(p) ( IsLChild(*(p)) ? (p)-&gt;parent-&gt;rc: (p)-&gt;parent-&gt;lc ) <span class="comment">//兄弟</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uncle(x) ( IsLChild(*((x)-&gt;parent)) ? (x)-&gt;parent-&gt;parent-&gt;rc: (x)-&gt;parent-&gt;parent-&gt;lc ) <span class="comment">//叔叔</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FromParentTo(x) <span class="comment">/*来自父亲的引用*/</span> ( IsRoot(x) ? _root: ( IsLChild(x) ? (x).parent-&gt;lc : (x).parent-&gt;rc ) ) <span class="comment">//含有父指针的二叉树结点，一般会定义这样的一个宏（获取从父节点指向自己的指针）</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123; RE_RED, RB_BLACK&#125; RBColor; <span class="comment">//节点颜色</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">struct</span> <span class="title">BinNode</span>&#123;</span> <span class="comment">//二叉树节点模板类</span></span><br><span class="line"><span class="comment">// 成员</span></span><br><span class="line">	T data;</span><br><span class="line">	BinNodePosi(T) parent; BinNodePosi(T) lc; BinNodePosi(T) rc; <span class="comment">// 父节点以及左右孩子</span></span><br><span class="line">	<span class="keyword">int</span> height; <span class="comment">//高度</span></span><br><span class="line">	<span class="keyword">int</span> npl; <span class="comment">//Null Path Length (左式堆， 也可以用height代替)</span></span><br><span class="line">	RBColor color; <span class="comment">//颜色 红黑树</span></span><br><span class="line"><span class="comment">// 构造函数</span></span><br><span class="line">	BinNode(): parent(<span class="literal">NULL</span>), lc(<span class="literal">NULL</span>), rc(<span class="literal">NULL</span>), height(<span class="number">0</span>), npl(<span class="number">1</span>), color(RE_RED) &#123;&#125;</span><br><span class="line">	BinNode(T e, BinNodePosi(T) p = <span class="literal">NULL</span>, BinNodePosi(T) lc = <span class="literal">NULL</span>, BinNodePosi(T) rc = <span class="literal">NULL</span>, <span class="keyword">int</span> h = <span class="number">0</span>, <span class="keyword">int</span> l = <span class="number">1</span>, RBColor c = RE_RED): data(e), parent(p), lc(lc), rc(rc), height(h), npl(l), color(c)&#123;&#125;</span><br><span class="line"><span class="comment">// 操作接口</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>; <span class="comment">// 统计当前节点后代总数，亦即以其为根的子树的规模</span></span><br><span class="line">	BinNodePosi(T) insertAsLC( T <span class="keyword">const</span>&amp; ); <span class="comment">// 作为当前节点的左孩子插入新节点</span></span><br><span class="line">	BinNodePosi(T) insertAsRC( T <span class="keyword">const</span>&amp; ); <span class="comment">// 作为当前节点的右孩子插入新节点</span></span><br><span class="line">	BinNodePosi(T) succ(); <span class="comment">//取当前节点的直接后继</span></span><br><span class="line">	<span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travLevel</span><span class="params">( VST&amp; )</span></span>; <span class="comment">//子树层次遍历</span></span><br><span class="line">	<span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travPre</span><span class="params">( VST&amp; )</span></span>; <span class="comment">//子树先序遍历</span></span><br><span class="line">	<span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travIn</span><span class="params">( VST&amp; )</span></span>; <span class="comment">//子树中序遍历</span></span><br><span class="line">	<span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travPost</span><span class="params">( VST&amp; )</span></span>; <span class="comment">//子树后序遍历</span></span><br><span class="line"><span class="comment">// 比较器、判等器 </span></span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt; (BinNode <span class="keyword">const</span>&amp; bn) &#123; <span class="keyword">return</span> data &lt; bn.data; &#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>== (BinNode <span class="keyword">const</span>&amp; bn) &#123; <span class="keyword">return</span> data == bn.data; &#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&gt; (BinNode <span class="keyword">const</span>&amp; bn) &#123; <span class="keyword">return</span> data &gt; bn.data; &#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt;= (BinNode <span class="keyword">const</span>&amp; bn) &#123; <span class="keyword">return</span> data &lt;= bn.data; &#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&gt;= (BinNode <span class="keyword">const</span>&amp; bn) &#123; <span class="keyword">return</span> data &gt;= bn.data; &#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>!= (BinNode <span class="keyword">const</span>&amp; bn) &#123; <span class="keyword">return</span> data != bn.data; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入儿子节点： 约定插入新节点之前，当前节点尚无左/右孩子</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; BinNodePosi(T) BinNode&lt;T&gt;::insertAsLC( T <span class="keyword">const</span>&amp; e)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> lc = <span class="keyword">new</span> BinNode( e, <span class="keyword">this</span> );</span><br><span class="line">	<span class="comment">/* 相当于：</span></span><br><span class="line"><span class="comment">		this-&gt;lc = new BinNode(e, this);</span></span><br><span class="line"><span class="comment">		return this-&gt;lc;</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; BinNodePosi(T) BinNode&lt;T&gt;::insertAsRC( T <span class="keyword">const</span>&amp; e)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> rc = <span class="keyword">new</span> BinNode( e, <span class="keyword">this</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BinTree.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"BinNode.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">BinTree</span>&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	<span class="keyword">int</span> _size; <span class="comment">//规模</span></span><br><span class="line">	BinNodePosi(T) _root; <span class="comment">//根节点</span></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">updateHeight</span> <span class="params">( BinNodePosi(T) x )</span></span>; <span class="comment">//更新节点x的高度</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">updateHeightAbove</span> <span class="params">( BinNodePosi(T) x )</span></span>; <span class="comment">//更新节点x及其祖先的高度</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	BinTree(): _size(<span class="number">0</span>), _root(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">	~BinTree() &#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="number">0</span> &lt; _size)</span><br><span class="line">			remove( _root );</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> _size; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> !_root; &#125;</span><br><span class="line">	BinNodePosi(T) root() <span class="keyword">const</span> &#123; <span class="keyword">return</span> _root; &#125;</span><br><span class="line">	BinNodePosi(T) insertAsRoot ( T <span class="keyword">const</span>&amp; e );</span><br><span class="line">	BinNodePosi(T) insertAsLC ( BinNodePosi(T) x, T <span class="keyword">const</span>&amp; e);</span><br><span class="line">	BinNodePosi(T) insertAsRC ( BinNodePosi(T) x, T <span class="keyword">const</span>&amp; e);</span><br><span class="line">	BinNodePosi(T) attachAsLC ( BinNodePosi(T) x, BinTree&lt;T&gt;* &amp;S);<span class="comment">//T作为x左子树插入</span></span><br><span class="line">	BinNodePosi(T) attachAsRC ( BinNodePosi(T) x, BinTree&lt;T&gt;* &amp;S);</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">remove</span> <span class="params">( BinNodePosi(T) x)</span></span>; <span class="comment">//删除以位置x处节点为根的子树，返回该子树原先的规模</span></span><br><span class="line">	BinTree&lt;T&gt;* secede ( BinNodePosi(T) x ); <span class="comment">// 将子树x从当前树中摘除，并将其转换为一颗独立的子树</span></span><br><span class="line">	<span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travLevel</span><span class="params">( VST&amp; visit)</span> </span>&#123; <span class="keyword">if</span>(_root) _root-&gt;travLevel(visit); &#125; <span class="comment">// 层次遍历</span></span><br><span class="line">	<span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travPre</span> <span class="params">(VST&amp; visit)</span> </span>&#123; <span class="keyword">if</span>(_root) _root-&gt;travPre(visit); &#125;</span><br><span class="line">	<span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travIn</span> <span class="params">(VST&amp; visit)</span> </span>&#123; <span class="keyword">if</span>(_root) _root-&gt;travIn(visit); &#125;</span><br><span class="line">	<span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travPost</span> <span class="params">(VST&amp; visit)</span> </span>&#123; <span class="keyword">if</span>(_root) _root-&gt;travPost(visit); &#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt; (BinTree&lt;T&gt; <span class="keyword">const</span>&amp; t) &#123; <span class="keyword">return</span> _root &amp;&amp; t._root &amp;&amp; (_root-&gt;data &lt; t._root-&gt;data); &#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>== (BinTree&lt;T&gt; <span class="keyword">const</span>&amp; t) &#123; <span class="keyword">return</span> _root &amp;&amp; t._root &amp;&amp; (_root-&gt;data == t._root-&gt;data); &#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>!= (BinTree&lt;T&gt; <span class="keyword">const</span>&amp; t) &#123; <span class="keyword">return</span> _root &amp;&amp; t._root &amp;&amp; (_root-&gt;data != t._root-&gt;data); &#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&gt; (BinTree&lt;T&gt; <span class="keyword">const</span>&amp; t) &#123; <span class="keyword">return</span> _root &amp;&amp; t._root &amp;&amp; (_root-&gt;data &gt; t._root-&gt;data); &#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt;= (BinTree&lt;T&gt; <span class="keyword">const</span>&amp; t) &#123; <span class="keyword">return</span> _root &amp;&amp; t._root &amp;&amp; (_root-&gt;data &lt;= t._root-&gt;data); &#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&gt;= (BinTree&lt;T&gt; <span class="keyword">const</span>&amp; t) &#123; <span class="keyword">return</span> _root &amp;&amp; t._root &amp;&amp; (_root-&gt;data &gt;= t._root-&gt;data); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一旦有节点加入/离开二叉树，则更新其所有祖先的高度</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">int</span> BinTree&lt;T&gt;::updateHeight(BinNodePosi(T) x)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> x-&gt;height = <span class="number">1</span> + max(stature(x-&gt;lc), stature(x-&gt;rc));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">void</span> BinTree&lt;T&gt;::updateHeightAbove(BinNodePosi(T) x)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(x)</span><br><span class="line">	&#123;</span><br><span class="line">		updateHeight(x); </span><br><span class="line">		x = x-&gt;parent;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; <span class="comment">// 在某些种类的二叉树（红黑树）中，高度的定义有所不同，因此这里updateHeight()定义为保护级的虚函数，以便派生类在必要时重写(override)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//节点插入：</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; BinNodePosi(T) BinTree&lt;T&gt;::insertAsRoot( T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">	_size = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> _root = <span class="keyword">new</span> BinNode&lt;T&gt;(e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; BinNodePosi(T) BinTree&lt;T&gt;::insertAsLC(  BinNodePosi(T) x, T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">	_size++;</span><br><span class="line">	x-&gt;insertAsLC(e);</span><br><span class="line">	updateHeightAbove(x);</span><br><span class="line">	<span class="keyword">return</span> x-&gt;lc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; BinNodePosi(T) BinTree&lt;T&gt;::insertAsRC(  BinNodePosi(T) x, T <span class="keyword">const</span>&amp; e)&#123;</span><br><span class="line">	_size++;</span><br><span class="line">	x-&gt;insertAsRC(e);</span><br><span class="line">	updateHeightAbove(x);</span><br><span class="line">	<span class="keyword">return</span> x-&gt;lc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//子树接入：</span></span><br><span class="line"><span class="comment">//指针是一个存放地址的变量，而指针引用指的是这个变量的引用，众所周知C++中如果参数不是引用的话会调用参数对象的拷贝构造函数，所以如果有需求想改变指针所指的对象（换句话说，就是要改变指针里面存的地址），就要使用指针引用</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">BinNodePosi(T) BinTree&lt;T&gt;::attachAsLC( BinNodePosi(T) x, BinTree&lt;T&gt;* &amp;S)&#123;</span><br><span class="line">	<span class="keyword">if</span>(x-&gt;lc = S-&gt;_root) x-&gt;lc-&gt;parent = x;</span><br><span class="line">	_size += S-&gt;_size;</span><br><span class="line">	updateHeightAbove(x);</span><br><span class="line">	S-&gt;root = <span class="literal">NULL</span>;</span><br><span class="line">	S-&gt;_size = <span class="number">0</span>;</span><br><span class="line">	release( S );</span><br><span class="line">	S = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">BinNodePosi(T) BinTree&lt;T&gt;::attachAsRC( BinNodePosi(T) x, BinTree&lt;T&gt;* &amp;S)&#123;</span><br><span class="line">	<span class="keyword">if</span>(x-&gt;rc = S-&gt;_root) x-&gt;rc-&gt;parent = x;</span><br><span class="line">	_size += S-&gt;_size;</span><br><span class="line">	updateHeightAbove(x);</span><br><span class="line">	S-&gt;root = <span class="literal">NULL</span>;</span><br><span class="line">	S-&gt;_size = <span class="number">0</span>;</span><br><span class="line">	release( S );</span><br><span class="line">	S = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//子树删除</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">int</span> BinTree&lt;T&gt;::remove( BinNodePosi(T) x )</span><br><span class="line">&#123;</span><br><span class="line">	FromParentTo(*x) = <span class="literal">NULL</span>; <span class="comment">//切断来自父节点的指针</span></span><br><span class="line">	updateHeightAbove(x-&gt;parent);<span class="comment">//更新祖先高度</span></span><br><span class="line">	<span class="keyword">int</span> n = removeAt(x);</span><br><span class="line">	_size -= n;</span><br><span class="line">	<span class="keyword">return</span> n; <span class="comment">// 删除子树x，更新规模，返回删除节点总数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; </span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">removeAt</span><span class="params">( BinNodePosi(T) x )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>( !x ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> n = <span class="number">1</span> + removeAt( x-&gt;lc ) + removeAt( x-&gt;rc );</span><br><span class="line"><span class="comment">//	release( x-&gt;data );</span></span><br><span class="line"><span class="comment">//	release( x );</span></span><br><span class="line">	<span class="keyword">delete</span> x;</span><br><span class="line">	<span class="keyword">return</span> n;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子树分离</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">BinTree&lt;T&gt;* BinTree&lt;T&gt;::secede( BinNodePosi(T) x )&#123;</span><br><span class="line">	FromParentTo ( *x ) = <span class="literal">NULL</span>;</span><br><span class="line">	updateHeightAbove( x-&gt;parent );</span><br><span class="line">	BinTree&lt;T&gt;* S = <span class="keyword">new</span> BinTree&lt;T&gt;;</span><br><span class="line">	S-&gt;root = x;</span><br><span class="line">	x-&gt;parent = <span class="literal">NULL</span>;</span><br><span class="line">	S-&gt;_size = x-&gt;size();</span><br><span class="line">	_size -= S-&gt;_size;</span><br><span class="line">	<span class="keyword">return</span> S;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历：</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> VST&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">travPre</span> <span class="params">( BinNodePosi(T) x, VST&amp; visit )</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>( !x ) <span class="keyword">return</span>;</span><br><span class="line">	visit (x-&gt;data);</span><br><span class="line">	travPre (x-&gt;lc, visit);</span><br><span class="line">	travPre (x-&gt;rc, visit);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> VST&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">travPost</span> <span class="params">( BinNodePosi(T) x, VST&amp; visit )</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>( !x ) <span class="keyword">return</span>;</span><br><span class="line">	travPre (x-&gt;lc, visit);</span><br><span class="line">	travPre (x-&gt;rc, visit);</span><br><span class="line">	visit (x-&gt;data);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> VST&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">travIn</span> <span class="params">( BinNodePosi(T) x, VST&amp; visit )</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>( !x ) <span class="keyword">return</span>;</span><br><span class="line">	travPre (x-&gt;lc, visit);</span><br><span class="line">	visit (x-&gt;data);</span><br><span class="line">	travPre (x-&gt;rc, visit);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接后继及其定位 (中序遍历)</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; BinNodePosi(T) BinNode&lt;T&gt;::succ()&#123;</span><br><span class="line">	BinNodePosi(T) s = <span class="keyword">this</span>;</span><br><span class="line">	<span class="keyword">if</span>(rc) <span class="comment">//若有右孩子，则直接后继必在右子树中</span></span><br><span class="line">	&#123;</span><br><span class="line">		s = rc;</span><br><span class="line">		<span class="keyword">while</span>(HasLChild(*s)) s = s-&gt;lc;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="comment">// 否则，直接后继应是“将当前节点包含于其左子树中的最低祖先”</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(IsRChild(*s)) s = s-&gt;parent;</span><br><span class="line">		s = s-&gt;parent;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 层次遍历</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt;</span><br><span class="line"><span class="keyword">void</span> BinNode&lt;T&gt;::travLevel(VST&amp; visit)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">queue</span>&lt;BinNodePosi(T)&gt; Q;</span><br><span class="line">	Q.push (<span class="keyword">this</span>);</span><br><span class="line">	<span class="keyword">while</span>( !Q.empty() )&#123;</span><br><span class="line">		BinNodePosi(T) x = Q.front(); Q.pop(); visit(x-&gt;data);</span><br><span class="line">		<span class="keyword">if</span>(HasLChild(*x)) Q.push(x-&gt;lc);</span><br><span class="line">		<span class="keyword">if</span>(HasRChild(*x)) Q.push(x-&gt;rc);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"BinTree.h"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	BinTree&lt;<span class="keyword">int</span>&gt; test;</span><br><span class="line">	test.insertAsRoot(<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; test.size();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> T &gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	TreeNode(T s): data(s), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">	T data;</span><br><span class="line">	TreeNode* left;</span><br><span class="line">	TreeNode* right;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> T &gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tree</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> size;</span><br><span class="line">	TreeNode&lt;T&gt;* root;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Tree(): size(<span class="number">0</span>), root(<span class="literal">NULL</span>)&#123;&#125;;</span><br><span class="line">	Tree( T x )&#123;</span><br><span class="line">		size = <span class="number">1</span>;</span><br><span class="line">		root = <span class="keyword">new</span> TreeNode&lt;T&gt;(x);</span><br><span class="line">	&#125;</span><br><span class="line">	~Tree()&#123;</span><br><span class="line">		<span class="keyword">if</span>(size &gt; <span class="number">0</span>)&#123;</span><br><span class="line">			<span class="built_in">queue</span>&lt;TreeNode&lt;T&gt;*&gt; delq;</span><br><span class="line">			delq.push(root);</span><br><span class="line">			<span class="keyword">while</span>(!delq.empty())&#123;</span><br><span class="line">				TreeNode&lt;T&gt;* x = delq.front();</span><br><span class="line">				delq.pop();</span><br><span class="line">				<span class="keyword">if</span>(x-&gt;left) delq.push(x-&gt;left);</span><br><span class="line">				<span class="keyword">if</span>(x-&gt;right) delq.push(x-&gt;right);</span><br><span class="line">				<span class="keyword">delete</span>( x );</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	Tree&lt;T&gt;&amp; <span class="keyword">operator</span>= (Tree&lt;T&gt;&amp; t)&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>-&gt;root != t.root)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">this</span>-&gt;root = t.root;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getsize</span><span class="params">()</span><span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;size; &#125;</span><br><span class="line">	TreeNode&lt;T&gt;* getroot() <span class="keyword">const</span> &#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;root; &#125;</span><br><span class="line">	TreeNode&lt;T&gt;* insertasleft( TreeNode&lt;T&gt;* x, T data )&#123;</span><br><span class="line">		x-&gt;left = <span class="keyword">new</span> TreeNode&lt;T&gt;(data);</span><br><span class="line">		size++;</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125;</span><br><span class="line">	TreeNode&lt;T&gt;* insertasright( TreeNode&lt;T&gt;* x, T data )&#123;</span><br><span class="line">		x-&gt;right = <span class="keyword">new</span> TreeNode&lt;T&gt;(data);</span><br><span class="line">		size++;</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">preorder</span><span class="params">( TreeNode&lt;T&gt;* root)</span></span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; root-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">		<span class="keyword">if</span>(root-&gt;left) preorder(root-&gt;left);</span><br><span class="line">		<span class="keyword">if</span>(root-&gt;right) preorder(root-&gt;right);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">( TreeNode&lt;T&gt;* root)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(root-&gt;left) inorder(root-&gt;left);</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; root-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">		<span class="keyword">if</span>(root-&gt;right) inorder(root-&gt;right);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">postorder</span><span class="params">( TreeNode&lt;T&gt;* root)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(root-&gt;left) postorder(root-&gt;left);</span><br><span class="line">		<span class="keyword">if</span>(root-&gt;right) postorder(root-&gt;right);</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; root-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">levelorder</span><span class="params">( TreeNode&lt;T&gt;* root)</span></span>&#123;</span><br><span class="line">		<span class="built_in">queue</span>&lt;TreeNode&lt;T&gt;*&gt; Q;</span><br><span class="line">		Q.push(root);</span><br><span class="line">		<span class="keyword">int</span> levelcur = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(!Q.empty())</span><br><span class="line">		&#123;</span><br><span class="line">			levelcur ++;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"level "</span> &lt;&lt; levelcur &lt;&lt; <span class="string">" : "</span>;</span><br><span class="line">			<span class="built_in">queue</span>&lt;TreeNode&lt;T&gt;*&gt; rem;</span><br><span class="line">			<span class="keyword">while</span>(!Q.empty())</span><br><span class="line">			&#123;</span><br><span class="line">				TreeNode&lt;T&gt;* x = Q.front();</span><br><span class="line">				Q.pop();</span><br><span class="line">				<span class="keyword">if</span>(x-&gt;left) rem.push(x-&gt;left);</span><br><span class="line">				<span class="keyword">if</span>(x-&gt;right) rem.push(x-&gt;right);</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; x-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">queue</span>&lt;TreeNode&lt;T&gt;*&gt; temp = Q;</span><br><span class="line">			Q = rem;</span><br><span class="line">			rem = temp;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">find_leaf_size</span><span class="params">( TreeNode&lt;T&gt;* leaf )</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>( !leaf ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>( leaf-&gt;left == <span class="literal">NULL</span> &amp;&amp; leaf-&gt;right == <span class="literal">NULL</span> ) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> find_leaf_size( leaf-&gt;left ) + find_leaf_size( leaf-&gt;right );</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">find_leaf_depth</span><span class="params">( TreeNode&lt;T&gt;* leaf)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!leaf) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> size_left = find_leaf_depth( leaf-&gt;left );</span><br><span class="line">		<span class="keyword">int</span> size_right = find_leaf_depth( leaf-&gt;right );</span><br><span class="line">		<span class="keyword">if</span>( size_left &gt; size_right )</span><br><span class="line">			<span class="keyword">return</span> size_left + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">return</span> size_right + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	TreeNode&lt;T&gt;* find_x_leaf( TreeNode&lt;T&gt;* root, <span class="keyword">const</span> T&amp; x)&#123;</span><br><span class="line">		<span class="keyword">if</span>( !root ) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">		<span class="keyword">if</span>( root-&gt;data == x )  <span class="keyword">return</span> root;</span><br><span class="line">		TreeNode&lt;T&gt;* find_left = find_x_leaf ( root-&gt;left, x );</span><br><span class="line">		<span class="keyword">if</span>( find_left )</span><br><span class="line">			<span class="keyword">return</span> find_left;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">return</span> find_x_leaf ( root-&gt;right, x );</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">find_x_level_size</span><span class="params">( TreeNode&lt;T&gt;* root, <span class="keyword">const</span> T&amp; x)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>( !root ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>( x == <span class="number">1</span> ) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> find_x_level_size( root-&gt;left, x<span class="number">-1</span> ) +  find_x_level_size( root-&gt;right, x<span class="number">-1</span> );</span><br><span class="line">	&#125; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Tree&lt;<span class="keyword">int</span>&gt; test(<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"getsize: "</span> &lt;&lt; test.getsize() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	test.insertasleft( test.getroot(), <span class="number">2</span>);</span><br><span class="line">	test.insertasright( test.getroot(), <span class="number">3</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"getsize: "</span> &lt;&lt; test.getsize() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"preorder: "</span>;</span><br><span class="line">	test.preorder( test.getroot() );</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"inorder: "</span>;</span><br><span class="line">	test.inorder( test.getroot() );</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"postorder: "</span>;</span><br><span class="line">	test.postorder( test.getroot() );</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	Tree&lt;<span class="keyword">int</span>&gt; test1;</span><br><span class="line">	test1 = test;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"test1 after = : test1.root-&gt;data = "</span> &lt;&lt; test.getroot()-&gt;data &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"leveltravel: "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	test.levelorder( test.getroot() );</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"find_leaf_size : "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" test.root : "</span> &lt;&lt; test.find_leaf_size( test.getroot() ) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" test.root-&gt;left : "</span> &lt;&lt; test.find_leaf_size( test.getroot()-&gt;left ) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" test.root-&gt;right : "</span> &lt;&lt; test.find_leaf_size( test.getroot()-&gt;right ) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"find_leaf_depth : "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" test.root : "</span> &lt;&lt; test.find_leaf_depth( test.getroot() ) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" test.root-&gt;left : "</span> &lt;&lt; test.find_leaf_depth( test.getroot()-&gt;left ) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" test.root-&gt;right : "</span> &lt;&lt; test.find_leaf_depth( test.getroot()-&gt;right ) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"find_x_leaf : "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" 1 : "</span> &lt;&lt; test.find_x_leaf( test.getroot(), <span class="number">1</span> )-&gt;data &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"find_x_level_size : "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" level-2 : "</span> &lt;&lt; test.find_x_level_size( test.getroot(), <span class="number">2</span> ) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2715,7 +2615,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">300</span>
+                  <span class="site-state-item-count">303</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2805,7 +2705,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">371k</span>
+    <span title="Site words total count">371.8k</span>
   
 </div>
 
