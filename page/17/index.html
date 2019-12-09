@@ -291,6 +291,227 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/25/candcpp7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/25/candcpp7/" itemprop="url">关于虚函数virtual</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-25T14:57:28+08:00">
+                2019-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/25/candcpp7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/25/candcpp7/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  627
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>只有虚函数才能使你在仅用一个指针进行调用时，确保访问到期望的方法。非虚函数就没有这个特性。</p>
+<p>见代码效果： 区别只在于有没有virtual</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bus</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">    <span class="keyword">int</span> number; </span><br><span class="line"><span class="keyword">protected</span>: </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; </span><br><span class="line">        <span class="keyword">return</span> number; </span><br><span class="line">    &#125; </span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;number = number;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">	Bus()&#123;&#125;</span><br><span class="line">    Bus(<span class="keyword">int</span> number) &#123; </span><br><span class="line">        <span class="keyword">this</span>-&gt;number = number; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"No. "</span> &lt;&lt; number &lt;&lt; <span class="string">" bus."</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YellowBus</span> :</span> <span class="keyword">public</span> Bus </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    YellowBus(<span class="keyword">int</span> number) &#123; </span><br><span class="line">        setNumber(number); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"No."</span> &lt;&lt; getNumber() &lt;&lt; <span class="string">" yellow bus."</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print1</span><span class="params">(<span class="keyword">const</span> Bus &amp; bus)</span> </span>&#123; </span><br><span class="line">    bus.print(); </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print2</span><span class="params">(<span class="keyword">const</span> Bus bus)</span> </span>&#123; </span><br><span class="line">    bus.print(); </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    <span class="keyword">int</span> number; </span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; number; </span><br><span class="line">    <span class="function">YellowBus <span class="title">yellow</span><span class="params">(number)</span></span>; </span><br><span class="line">    print1(yellow); </span><br><span class="line">    print2(yellow); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">100</span><br><span class="line"></span><br><span class="line">No. 100 yellow bus.</span><br><span class="line">No. 100 bus.</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bus</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">    <span class="keyword">int</span> number; </span><br><span class="line"><span class="keyword">protected</span>: </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; </span><br><span class="line">        <span class="keyword">return</span> number; </span><br><span class="line">    &#125; </span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;number = number;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">	Bus()&#123;&#125;</span><br><span class="line">    Bus(<span class="keyword">int</span> number) &#123; </span><br><span class="line">        <span class="keyword">this</span>-&gt;number = number; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"No. "</span> &lt;&lt; number &lt;&lt; <span class="string">" bus."</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YellowBus</span> :</span> <span class="keyword">public</span> Bus </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    YellowBus(<span class="keyword">int</span> number) &#123; </span><br><span class="line">        setNumber(number); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"No."</span> &lt;&lt; getNumber() &lt;&lt; <span class="string">" yellow bus."</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print1</span><span class="params">(<span class="keyword">const</span> Bus &amp; bus)</span> </span>&#123; </span><br><span class="line">    bus.print(); </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print2</span><span class="params">(<span class="keyword">const</span> Bus bus)</span> </span>&#123; </span><br><span class="line">    bus.print(); </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    <span class="keyword">int</span> number; </span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; number; </span><br><span class="line">    <span class="function">YellowBus <span class="title">yellow</span><span class="params">(number)</span></span>; </span><br><span class="line">    print1(yellow); </span><br><span class="line">    print2(yellow); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">100</span><br><span class="line"></span><br><span class="line">No. 100 bus.</span><br><span class="line">No. 100 bus.</span><br></pre></td></tr></table></figure>
+<ol>
+<li>那么virtual函数应该在什么情况下用呢？</li>
+</ol>
+<ul>
+<li>virtual 函数应该在某个类的某个函数需要多态性的情况下使用</li>
+<li>还有一个使用场景是若类存在派生，那么析构函数必须是virtual的，否则可能会导致资源泄露。</li>
+<li>而非 virtual 函数，能够确保你使用基类指针就一定调用基类实现，防止派生类无意中覆盖。</li>
+</ul>
+<ol start="2">
+<li>是不是用virtual的函数都能用非virtual的函数替代？</li>
+</ol>
+<ul>
+<li>正相反，若在开发过程中做了良好约定，所有的非virtual函数都能用virtual函数代替。</li>
+<li>由于调用virtual函数多了一次查vtable的动作，可能导致（微不可查）的性能损失。不过这并非是不可接受的，某些框架例如Qt，大部分类都是采用这种哲学进行设计，并没有什么问题。</li>
+<li>有些语言比如 python 就是这么干的，程序员自己去保障覆盖问题。</li>
+</ul>
+<ol start="3">
+<li>那么是不是virtual没什么用呢？</li>
+</ol>
+<ul>
+<li>若是不考虑效率和强行避免覆写问题，其实非virtual函数才是没什么用的。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/17/qita5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2268,285 +2489,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/06/javajichu22/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/06/javajichu22/" itemprop="url">Java 数据结构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-06T20:00:38+08:00">
-                2019-06-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/基础知识/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/06/javajichu22/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/06/javajichu22/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  2.4k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  11
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java-数据结构"><a href="#Java-数据结构" class="headerlink" title="Java 数据结构"></a>Java 数据结构</h1><p>Java工具包提供了强大的数据结构。在Java中的数据结构主要包括以下几种接口和类：</p>
-<ul>
-<li>枚举（Enumeration）</li>
-<li>位集合（BitSet）</li>
-<li>向量（Vector）</li>
-<li>栈（Stack）</li>
-<li>字典（Dictionary）</li>
-<li>哈希表（Hashtable）</li>
-<li>属性（Properties）</li>
-</ul>
-<h2 id="枚举（Enumeration）"><a href="#枚举（Enumeration）" class="headerlink" title="枚举（Enumeration）"></a>枚举（Enumeration）</h2><blockquote>
-<p>Enumeration接口中定义了一些方法，通过这些方法可以枚举（一次获得一个）对象集合中的元素。这种传统接口已被迭代器取代，虽然Enumeration 还未被遗弃，但在现代代码中已经被很少使用了。尽管如此，它还是使用在诸如Vector和Properties这些传统类所定义的方法中，除此之外，还用在一些API类，并且在应用程序中也广泛被使用。</p>
-</blockquote>
-<p>Enumeration声明的方法：</p>
-<ul>
-<li><p>boolean hasMoreElements( )测试此枚举是否包含更多的元素。</p>
-</li>
-<li><p>Object nextElement( )如果此枚举对象至少还有一个可提供的元素，则返回此枚举的下一个元素。</p>
-</li>
-</ul>
-<p>以下实例演示了Enumeration的使用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Vector;</span><br><span class="line"><span class="keyword">import</span> java.util.Enumeration;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumerationTester</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">      Enumeration&lt;String&gt; days;</span><br><span class="line">      Vector&lt;String&gt; dayNames = <span class="keyword">new</span> Vector&lt;String&gt;();</span><br><span class="line">      dayNames.add(<span class="string">"Sunday"</span>);</span><br><span class="line">      dayNames.add(<span class="string">"Monday"</span>);</span><br><span class="line">      dayNames.add(<span class="string">"Tuesday"</span>);</span><br><span class="line">      dayNames.add(<span class="string">"Wednesday"</span>);</span><br><span class="line">      dayNames.add(<span class="string">"Thursday"</span>);</span><br><span class="line">      dayNames.add(<span class="string">"Friday"</span>);</span><br><span class="line">      dayNames.add(<span class="string">"Saturday"</span>);</span><br><span class="line">      days = dayNames.elements();</span><br><span class="line">      <span class="keyword">while</span> (days.hasMoreElements())&#123;</span><br><span class="line">         System.out.println(days.nextElement()); </span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Sunday</span><br><span class="line">Monday</span><br><span class="line">Tuesday</span><br><span class="line">Wednesday</span><br><span class="line">Thursday</span><br><span class="line">Friday</span><br><span class="line">Saturday</span><br></pre></td></tr></table></figure>
-<h2 id="位集合（BitSet）"><a href="#位集合（BitSet）" class="headerlink" title="位集合（BitSet）"></a>位集合（BitSet）</h2><p>一个Bitset类创建一种特殊类型的数组来保存位值。BitSet中数组大小会随需要增加。这和位向量（vector of bits）比较类似。</p>
-<p>这是一个传统的类，但它在Java 2中被完全重新设计。</p>
-<p>BitSet定义了两个构造方法。</p>
-<p>第一个构造方法创建一个默认的对象：</p>
-<p><code>BitSet()</code><br>第二个方法允许用户指定初始大小。所有位初始化为0。</p>
-<p><code>BitSet(int size)</code></p>
-<p>下面的程序说明这个数据结构支持的几个方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.BitSet;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BitSetDemo</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">     BitSet bits1 = <span class="keyword">new</span> BitSet(<span class="number">16</span>);</span><br><span class="line">     BitSet bits2 = <span class="keyword">new</span> BitSet(<span class="number">16</span>);</span><br><span class="line">      </span><br><span class="line">     <span class="comment">// set some bits</span></span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">16</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>((i%<span class="number">2</span>) == <span class="number">0</span>) bits1.set(i);</span><br><span class="line">        <span class="keyword">if</span>((i%<span class="number">5</span>) != <span class="number">0</span>) bits2.set(i);</span><br><span class="line">     &#125;</span><br><span class="line">     System.out.println(<span class="string">"Initial pattern in bits1: "</span>);</span><br><span class="line">     System.out.println(bits1);</span><br><span class="line">     System.out.println(<span class="string">"\nInitial pattern in bits2: "</span>);</span><br><span class="line">     System.out.println(bits2);</span><br><span class="line"> </span><br><span class="line">     <span class="comment">// AND bits</span></span><br><span class="line">     bits2.and(bits1);</span><br><span class="line">     System.out.println(<span class="string">"\nbits2 AND bits1: "</span>);</span><br><span class="line">     System.out.println(bits2);</span><br><span class="line"> </span><br><span class="line">     <span class="comment">// OR bits</span></span><br><span class="line">     bits2.or(bits1);</span><br><span class="line">     System.out.println(<span class="string">"\nbits2 OR bits1: "</span>);</span><br><span class="line">     System.out.println(bits2);</span><br><span class="line"> </span><br><span class="line">     <span class="comment">// XOR bits</span></span><br><span class="line">     bits2.xor(bits1);</span><br><span class="line">     System.out.println(<span class="string">"\nbits2 XOR bits1: "</span>);</span><br><span class="line">     System.out.println(bits2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Initial pattern in bits1:</span><br><span class="line">&#123;0, 2, 4, 6, 8, 10, 12, 14&#125;</span><br><span class="line"></span><br><span class="line">Initial pattern in bits2:</span><br><span class="line">&#123;1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14&#125;</span><br><span class="line"></span><br><span class="line">bits2 AND bits1:</span><br><span class="line">&#123;2, 4, 6, 8, 12, 14&#125;</span><br><span class="line"></span><br><span class="line">bits2 OR bits1:</span><br><span class="line">&#123;0, 2, 4, 6, 8, 10, 12, 14&#125;</span><br><span class="line"></span><br><span class="line">bits2 XOR bits1:</span><br><span class="line">&#123;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="向量（Vector）"><a href="#向量（Vector）" class="headerlink" title="向量（Vector）"></a>向量（Vector）</h2><p>Vector 类实现了一个动态数组。和 ArrayList 很相似，但是两者是不同的：</p>
-<ul>
-<li>Vector 是同步访问的。</li>
-<li>Vector 包含了许多传统的方法，这些方法不属于集合框架。<br>Vector 主要用在事先不知道数组的大小，或者只是需要一个可以改变大小的数组的情况。</li>
-</ul>
-<p>Vector 类支持 4 种构造方法。</p>
-<p>第一种构造方法创建一个默认的向量，默认大小为 10：</p>
-<p><code>Vector()</code><br>第二种构造方法创建指定大小的向量。</p>
-<p><code>Vector(int size)</code><br>第三种构造方法创建指定大小的向量，并且增量用 incr 指定。增量表示向量每次增加的元素数目。</p>
-<p><code>Vector(int size,int incr)</code><br>第四种构造方法创建一个包含集合 c 元素的向量：</p>
-<p><code>Vector(Collection c)</code></p>
-<p>下面的程序说明这个集合所支持的几种方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VectorDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">      <span class="comment">// initial size is 3, increment is 2</span></span><br><span class="line">      Vector v = <span class="keyword">new</span> Vector(<span class="number">3</span>, <span class="number">2</span>);</span><br><span class="line">      System.out.println(<span class="string">"Initial size: "</span> + v.size());</span><br><span class="line">      System.out.println(<span class="string">"Initial capacity: "</span> +</span><br><span class="line">      v.capacity());</span><br><span class="line">      v.addElement(<span class="keyword">new</span> Integer(<span class="number">1</span>));</span><br><span class="line">      v.addElement(<span class="keyword">new</span> Integer(<span class="number">2</span>));</span><br><span class="line">      v.addElement(<span class="keyword">new</span> Integer(<span class="number">3</span>));</span><br><span class="line">      v.addElement(<span class="keyword">new</span> Integer(<span class="number">4</span>));</span><br><span class="line">      System.out.println(<span class="string">"Capacity after four additions: "</span> +</span><br><span class="line">          v.capacity());</span><br><span class="line"></span><br><span class="line">      v.addElement(<span class="keyword">new</span> Double(<span class="number">5.45</span>));</span><br><span class="line">      System.out.println(<span class="string">"Current capacity: "</span> +</span><br><span class="line">      v.capacity());</span><br><span class="line">      v.addElement(<span class="keyword">new</span> Double(<span class="number">6.08</span>));</span><br><span class="line">      v.addElement(<span class="keyword">new</span> Integer(<span class="number">7</span>));</span><br><span class="line">      System.out.println(<span class="string">"Current capacity: "</span> +</span><br><span class="line">      v.capacity());</span><br><span class="line">      v.addElement(<span class="keyword">new</span> Float(<span class="number">9.4</span>));</span><br><span class="line">      v.addElement(<span class="keyword">new</span> Integer(<span class="number">10</span>));</span><br><span class="line">      System.out.println(<span class="string">"Current capacity: "</span> +</span><br><span class="line">      v.capacity());</span><br><span class="line">      v.addElement(<span class="keyword">new</span> Integer(<span class="number">11</span>));</span><br><span class="line">      v.addElement(<span class="keyword">new</span> Integer(<span class="number">12</span>));</span><br><span class="line">      System.out.println(<span class="string">"First element: "</span> +</span><br><span class="line">         (Integer)v.firstElement());</span><br><span class="line">      System.out.println(<span class="string">"Last element: "</span> +</span><br><span class="line">         (Integer)v.lastElement());</span><br><span class="line">      <span class="keyword">if</span>(v.contains(<span class="keyword">new</span> Integer(<span class="number">3</span>)))</span><br><span class="line">         System.out.println(<span class="string">"Vector contains 3."</span>);</span><br><span class="line">      <span class="comment">// enumerate the elements in the vector.</span></span><br><span class="line">      Enumeration vEnum = v.elements();</span><br><span class="line">      System.out.println(<span class="string">"\nElements in vector:"</span>);</span><br><span class="line">      <span class="keyword">while</span>(vEnum.hasMoreElements())</span><br><span class="line">         System.out.print(vEnum.nextElement() + <span class="string">" "</span>);</span><br><span class="line">      System.out.println();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Initial size: 0</span><br><span class="line">Initial capacity: 3</span><br><span class="line">Capacity after four additions: 5</span><br><span class="line">Current capacity: 5</span><br><span class="line">Current capacity: 7</span><br><span class="line">Current capacity: 9</span><br><span class="line">First element: 1</span><br><span class="line">Last element: 12</span><br><span class="line">Vector contains 3.</span><br><span class="line"></span><br><span class="line">Elements in vector:</span><br><span class="line">1 2 3 4 5.45 6.08 7 9.4 10 11 12</span><br></pre></td></tr></table></figure>
-<h2 id="栈（Stack）"><a href="#栈（Stack）" class="headerlink" title="栈（Stack）"></a>栈（Stack）</h2><p>栈是Vector的一个子类，它实现了一个标准的后进先出的栈。</p>
-<p>堆栈只定义了默认构造函数，用来创建一个空栈。 堆栈除了包括由Vector定义的所有方法，也定义了自己的一些方法。</p>
-<p><code>Stack()</code></p>
-<p><img src="Snipaste_2019-06-11_00-33-55.png" alt="1"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StackDemo</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">showpush</span><span class="params">(Stack&lt;Integer&gt; st, <span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        st.push(<span class="keyword">new</span> Integer(a));</span><br><span class="line">        System.out.println(<span class="string">"push("</span> + a + <span class="string">")"</span>);</span><br><span class="line">        System.out.println(<span class="string">"stack: "</span> + st);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">showpop</span><span class="params">(Stack&lt;Integer&gt; st)</span> </span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"pop -&gt; "</span>);</span><br><span class="line">        Integer a = (Integer) st.pop();</span><br><span class="line">        System.out.println(a);</span><br><span class="line">        System.out.println(<span class="string">"stack: "</span> + st);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">        Stack&lt;Integer&gt; st = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">        System.out.println(<span class="string">"stack: "</span> + st);</span><br><span class="line">        showpush(st, <span class="number">42</span>);</span><br><span class="line">        showpush(st, <span class="number">66</span>);</span><br><span class="line">        showpush(st, <span class="number">99</span>);</span><br><span class="line">        showpop(st);</span><br><span class="line">        showpop(st);</span><br><span class="line">        showpop(st);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            showpop(st);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (EmptyStackException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"empty stack"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">stack: [ ]</span><br><span class="line">push(42)</span><br><span class="line">stack: [42]</span><br><span class="line">push(66)</span><br><span class="line">stack: [42, 66]</span><br><span class="line">push(99)</span><br><span class="line">stack: [42, 66, 99]</span><br><span class="line">pop -&gt; 99</span><br><span class="line">stack: [42, 66]</span><br><span class="line">pop -&gt; 66</span><br><span class="line">stack: [42]</span><br><span class="line">pop -&gt; 42</span><br><span class="line">stack: [ ]</span><br><span class="line">pop -&gt; empty stack</span><br></pre></td></tr></table></figure>
-<h2 id="字典（Dictionary）"><a href="#字典（Dictionary）" class="headerlink" title="字典（Dictionary）"></a>字典（Dictionary）</h2><p>Dictionary 类是一个抽象类，用来存储键/值对，作用和Map类相似。</p>
-<p>给出键和值，你就可以将值存储在Dictionary对象中。一旦该值被存储，就可以通过它的键来获取它。所以和Map一样， Dictionary 也可以作为一个键/值对列表。</p>
-<p>Dictionary类已经过时了。在实际开发中，你可以实现Map接口来获取键/值的存储功能。</p>
-<h2 id="Java-Map-接口"><a href="#Java-Map-接口" class="headerlink" title="Java Map 接口"></a>Java Map 接口</h2><p>Map接口中键和值一一映射. 可以通过键来获取值。</p>
-<ul>
-<li>给定一个键和一个值，你可以将该值存储在一个Map对象. 之后，你可以通过键来访问对应的值。</li>
-<li>当访问的值不存在的时候，方法就会抛出一个NoSuchElementException异常.</li>
-<li>当对象的类型和Map里元素类型不兼容的时候，就会抛出一个 ClassCastException异常。</li>
-<li>当在不允许使用Null对象的Map中使用Null对象，会抛出一个NullPointerException 异常。</li>
-<li>当尝试修改一个只读的Map时，会抛出一个UnsupportedOperationException异常。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CollectionsDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      Map m1 = <span class="keyword">new</span> HashMap(); </span><br><span class="line">      m1.put(<span class="string">"Zara"</span>, <span class="string">"8"</span>);</span><br><span class="line">      m1.put(<span class="string">"Mahnaz"</span>, <span class="string">"31"</span>);</span><br><span class="line">      m1.put(<span class="string">"Ayan"</span>, <span class="string">"12"</span>);</span><br><span class="line">      m1.put(<span class="string">"Daisy"</span>, <span class="string">"14"</span>);</span><br><span class="line">      System.out.println();</span><br><span class="line">      System.out.println(<span class="string">" Map Elements"</span>);</span><br><span class="line">      System.out.print(<span class="string">"\t"</span> + m1);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map Elements</span><br><span class="line">        &#123;Mahnaz=31, Ayan=12, Daisy=14, Zara=8&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="哈希表（Hashtable）"><a href="#哈希表（Hashtable）" class="headerlink" title="哈希表（Hashtable）"></a>哈希表（Hashtable）</h2><p>Hashtable是原始的java.util的一部分， 是一个Dictionary具体的实现 。</p>
-<p>然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中。它和HashMap类很相似，但是它支持同步。</p>
-<p>像HashMap一样，Hashtable在哈希表中存储键/值对。当使用一个哈希表，要指定用作键的对象，以及要链接到该键的值。</p>
-<p>然后，该键经过哈希处理，所得到的散列码被用作存储在该表中值的索引。</p>
-<p>Hashtable定义了四个构造方法。第一个是默认构造方法：</p>
-<p><code>Hashtable()</code><br>第二个构造函数创建指定大小的哈希表：</p>
-<p><code>Hashtable(int size)</code><br>第三个构造方法创建了一个指定大小的哈希表，并且通过fillRatio指定填充比例。</p>
-<p>填充比例必须介于0.0和1.0之间，它决定了哈希表在重新调整大小之前的充满程度：</p>
-<p><code>Hashtable(int size,float fillRatio)</code><br>第四个构造方法创建了一个以M中元素为初始化元素的哈希表。</p>
-<p>哈希表的容量被设置为M的两倍。</p>
-<p><code>Hashtable(Map m)</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashTableDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">      <span class="comment">// Create a hash map</span></span><br><span class="line">      Hashtable balance = <span class="keyword">new</span> Hashtable();</span><br><span class="line">      Enumeration names;</span><br><span class="line">      String str;</span><br><span class="line">      <span class="keyword">double</span> bal;</span><br><span class="line"></span><br><span class="line">      balance.put(<span class="string">"Zara"</span>, <span class="keyword">new</span> Double(<span class="number">3434.34</span>));</span><br><span class="line">      balance.put(<span class="string">"Mahnaz"</span>, <span class="keyword">new</span> Double(<span class="number">123.22</span>));</span><br><span class="line">      balance.put(<span class="string">"Ayan"</span>, <span class="keyword">new</span> Double(<span class="number">1378.00</span>));</span><br><span class="line">      balance.put(<span class="string">"Daisy"</span>, <span class="keyword">new</span> Double(<span class="number">99.22</span>));</span><br><span class="line">      balance.put(<span class="string">"Qadir"</span>, <span class="keyword">new</span> Double(-<span class="number">19.08</span>));</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Show all balances in hash table.</span></span><br><span class="line">      names = balance.keys();</span><br><span class="line">      <span class="keyword">while</span>(names.hasMoreElements()) &#123;</span><br><span class="line">         str = (String) names.nextElement();</span><br><span class="line">         System.out.println(str + <span class="string">": "</span> +</span><br><span class="line">         balance.get(str));</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println();</span><br><span class="line">      <span class="comment">// Deposit 1,000 into Zara's account</span></span><br><span class="line">      bal = ((Double)balance.get(<span class="string">"Zara"</span>)).doubleValue();</span><br><span class="line">      balance.put(<span class="string">"Zara"</span>, <span class="keyword">new</span> Double(bal+<span class="number">1000</span>));</span><br><span class="line">      System.out.println(<span class="string">"Zara's new balance: "</span> +</span><br><span class="line">      balance.get(<span class="string">"Zara"</span>));</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Qadir: -19.08</span><br><span class="line">Zara: 3434.34</span><br><span class="line">Mahnaz: 123.22</span><br><span class="line">Daisy: 99.22</span><br><span class="line">Ayan: 1378.0</span><br><span class="line"></span><br><span class="line">Zara&apos;s new balance: 4434.34</span><br></pre></td></tr></table></figure>
-<h2 id="属性（Properties）"><a href="#属性（Properties）" class="headerlink" title="属性（Properties）"></a>属性（Properties）</h2><p>Properties 继承于 Hashtable.表示一个持久的属性集.属性列表中每个键及其对应值都是一个字符串。</p>
-<p>Properties 类被许多Java类使用。例如，在获取环境变量时它就作为System.getProperties()方法的返回值。</p>
-<p>Properties 定义如下实例变量.这个变量持有一个Properties对象相关的默认属性列表。</p>
-<p><code>Properties defaults;</code><br>Properties类定义了两个构造方法. 第一个构造方法没有默认值。</p>
-<p><code>Properties()</code><br>第二个构造方法使用propDefault 作为默认值。两种情况下，属性列表都为空：</p>
-<p><code>Properties(Properties propDefault)</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PropDemo</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">      Properties capitals = <span class="keyword">new</span> Properties();</span><br><span class="line">      Set states;</span><br><span class="line">      String str;</span><br><span class="line">      </span><br><span class="line">      capitals.put(<span class="string">"Illinois"</span>, <span class="string">"Springfield"</span>);</span><br><span class="line">      capitals.put(<span class="string">"Missouri"</span>, <span class="string">"Jefferson City"</span>);</span><br><span class="line">      capitals.put(<span class="string">"Washington"</span>, <span class="string">"Olympia"</span>);</span><br><span class="line">      capitals.put(<span class="string">"California"</span>, <span class="string">"Sacramento"</span>);</span><br><span class="line">      capitals.put(<span class="string">"Indiana"</span>, <span class="string">"Indianapolis"</span>);</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// Show all states and capitals in hashtable.</span></span><br><span class="line">      states = capitals.keySet(); <span class="comment">// get set-view of keys</span></span><br><span class="line">      Iterator itr = states.iterator();</span><br><span class="line">      <span class="keyword">while</span>(itr.hasNext()) &#123;</span><br><span class="line">         str = (String) itr.next();</span><br><span class="line">         System.out.println(<span class="string">"The capital of "</span> +</span><br><span class="line">            str + <span class="string">" is "</span> + capitals.getProperty(str) + <span class="string">"."</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println();</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// look for state not in list -- specify default</span></span><br><span class="line">      str = capitals.getProperty(<span class="string">"Florida"</span>, <span class="string">"Not Found"</span>);</span><br><span class="line">      System.out.println(<span class="string">"The capital of Florida is "</span></span><br><span class="line">          + str + <span class="string">"."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">The capital of Missouri is Jefferson City.</span><br><span class="line">The capital of Illinois is Springfield.</span><br><span class="line">The capital of Indiana is Indianapolis.</span><br><span class="line">The capital of California is Sacramento.</span><br><span class="line">The capital of Washington is Olympia.</span><br><span class="line"></span><br><span class="line">The capital of Florida is Not Found.</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2599,7 +2541,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">318</span>
+                  <span class="site-state-item-count">319</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2689,7 +2631,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">381.4k</span>
+    <span title="Site words total count">382k</span>
   
 </div>
 
