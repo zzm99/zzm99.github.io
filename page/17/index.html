@@ -291,6 +291,673 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/05/candcpp15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/05/candcpp15/" itemprop="url">C++ 继承</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-05T19:45:46+08:00">
+                2019-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/05/candcpp15/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/05/candcpp15/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="基类-amp-派生类"><a href="#基类-amp-派生类" class="headerlink" title="基类 &amp; 派生类"></a>基类 &amp; 派生类</h1><p>一个类可以派生自多个类，这意味着，它可以从多个基类继承数据和函数。定义一个派生类，我们使用一个类派生列表来指定基类。类派生列表以一个或多个基类命名，形式如下：</p>
+<p>class derived-class: access-specifier base-class<br>其中，访问修饰符 access-specifier 是 public、protected 或 private 其中的一个，base-class 是之前定义过的某个类的名称。<strong>如果未使用访问修饰符 access-specifier，则默认为 private。</strong></p>
+<p>假设有一个基类 Shape，Rectangle 是它的派生类，如下所示：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 基类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Shape</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">setWidth</span><span class="params">(<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">         width = w;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">setHeight</span><span class="params">(<span class="keyword">int</span> h)</span></span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">         height = h;</span><br><span class="line">      &#125;</span><br><span class="line">   <span class="keyword">protected</span>:</span><br><span class="line">      <span class="keyword">int</span> width;</span><br><span class="line">      <span class="keyword">int</span> height;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 派生类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span>:</span> <span class="keyword">public</span> Shape</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">      <span class="function"><span class="keyword">int</span> <span class="title">getArea</span><span class="params">()</span></span></span><br><span class="line"><span class="function">      </span>&#123; </span><br><span class="line">         <span class="keyword">return</span> (width * height); </span><br><span class="line">      &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   Rectangle Rect;</span><br><span class="line"> </span><br><span class="line">   Rect.setWidth(<span class="number">5</span>);</span><br><span class="line">   Rect.setHeight(<span class="number">7</span>);</span><br><span class="line"> </span><br><span class="line">   <span class="comment">// 输出对象的面积</span></span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Total area: "</span> &lt;&lt; Rect.getArea() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">当上面的代码被编译和执行时，它会产生下列结果：</span><br><span class="line"></span><br><span class="line">Total area: 35</span><br></pre></td></tr></table></figure>
+<h1 id="访问控制和继承"><a href="#访问控制和继承" class="headerlink" title="访问控制和继承"></a>访问控制和继承</h1><p>派生类可以访问基类中所有的非私有成员。因此基类成员如果不想被派生类的成员函数访问，则应在基类中声明为 private。</p>
+<p>我们可以根据访问权限总结出不同的访问类型，如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>访问</th>
+<th>public</th>
+<th>protected</th>
+<th>private</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同一个类</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>派生类</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td>外部的类</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p>一个派生类继承了所有的基类方法，但下列情况除外：</p>
+<ul>
+<li>基类的构造函数、析构函数和拷贝构造函数。</li>
+<li>基类的重载运算符。</li>
+<li>基类的友元函数。</li>
+</ul>
+<h1 id="继承类型"><a href="#继承类型" class="headerlink" title="继承类型"></a>继承类型</h1><p>当一个类派生自基类，该基类可以被继承为 public、protected 或 private 几种类型。继承类型是通过上面讲解的访问修饰符 access-specifier 来指定的。</p>
+<p>我们几乎不使用 protected 或 private 继承，通常使用 public 继承。当使用不同类型的继承时，遵循以下几个规则：</p>
+<ul>
+<li>公有继承（public）：当一个类派生自公有基类时，基类的公有成员也是派生类的公有成员，基类的保护成员也是派生类的保护成员，基类的私有成员不能直接被派生类访问，但是可以通过调用基类的公有和保护成员来访问。</li>
+<li>保护继承（protected）： 当一个类派生自保护基类时，基类的公有和保护成员将成为派生类的保护成员。</li>
+<li>私有继承（private）：当一个类派生自私有基类时，基类的公有和保护成员将成为派生类的私有成员。</li>
+</ul>
+<h1 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h1><p>多继承即一个子类可以有多个父类，它继承了多个父类的特性。</p>
+<p>C++ 类可以从多个类继承成员，语法如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> &lt;派生类名&gt;:</span>&lt;继承方式<span class="number">1</span>&gt;&lt;基类名<span class="number">1</span>&gt;,&lt;继承方式<span class="number">2</span>&gt;&lt;基类名<span class="number">2</span>&gt;,…</span><br><span class="line">&#123;</span><br><span class="line">&lt;派生类类体&gt;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>其中，访问修饰符继承方式是 public、protected 或 private 其中的一个，用来修饰每个基类，各个基类之间用逗号分隔，如上所示。现在让我们一起看看下面的实例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 基类 Shape</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Shape</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">setWidth</span><span class="params">(<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">         width = w;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">setHeight</span><span class="params">(<span class="keyword">int</span> h)</span></span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">         height = h;</span><br><span class="line">      &#125;</span><br><span class="line">   <span class="keyword">protected</span>:</span><br><span class="line">      <span class="keyword">int</span> width;</span><br><span class="line">      <span class="keyword">int</span> height;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 基类 PaintCost</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PaintCost</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">      <span class="function"><span class="keyword">int</span> <span class="title">getCost</span><span class="params">(<span class="keyword">int</span> area)</span></span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> area * <span class="number">70</span>;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 派生类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span>:</span> <span class="keyword">public</span> Shape, <span class="keyword">public</span> PaintCost</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">      <span class="function"><span class="keyword">int</span> <span class="title">getArea</span><span class="params">()</span></span></span><br><span class="line"><span class="function">      </span>&#123; </span><br><span class="line">         <span class="keyword">return</span> (width * height); </span><br><span class="line">      &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   Rectangle Rect;</span><br><span class="line">   <span class="keyword">int</span> area;</span><br><span class="line"> </span><br><span class="line">   Rect.setWidth(<span class="number">5</span>);</span><br><span class="line">   Rect.setHeight(<span class="number">7</span>);</span><br><span class="line"> </span><br><span class="line">   area = Rect.getArea();</span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 输出对象的面积</span></span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Total area: "</span> &lt;&lt; Rect.getArea() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">   <span class="comment">// 输出总花费</span></span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Total paint cost: $"</span> &lt;&lt; Rect.getCost(area) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">当上面的代码被编译和执行时，它会产生下列结果：</span><br><span class="line"></span><br><span class="line">Total area: 35</span><br><span class="line">Total paint cost: $2450</span><br></pre></td></tr></table></figure>
+<h1 id="虚继承"><a href="#虚继承" class="headerlink" title="虚继承"></a>虚继承</h1><p>另外多继承(环状继承),A-&gt;D, B-&gt;D, C-&gt;(A，B)，例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>&#123;</span>......&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span> <span class="keyword">public</span> D&#123;......&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span> <span class="keyword">public</span> D&#123;......&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span> <span class="keyword">public</span> B, <span class="keyword">public</span> A&#123;.....&#125;;</span><br></pre></td></tr></table></figure>
+<p>这个继承会使D创建两个对象,要解决上面问题就要用虚拟继承格式</p>
+<p>格式：class 类名: virtual 继承方式 父类名</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>&#123;</span>......&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span> <span class="keyword">virtual</span> <span class="keyword">public</span> D&#123;......&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span> <span class="keyword">virtual</span> <span class="keyword">public</span> D&#123;......&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span> <span class="keyword">public</span> B, <span class="keyword">public</span> A&#123;.....&#125;;</span><br></pre></td></tr></table></figure>
+<p>虚继承–（在创建对象的时候会创建一个虚表）在创建父类对象的时候</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A:<span class="keyword">virtual</span> <span class="keyword">public</span> D</span><br><span class="line">B:<span class="keyword">virtual</span> <span class="keyword">public</span> D</span><br></pre></td></tr></table></figure>
+<p>实例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="comment">//基类</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    D()&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"D()"</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line">    ~D()&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"~D()"</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">int</span> d;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> D</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    B()&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"B()"</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line">    ~B()&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"~B()"</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> D</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A()&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"A()"</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line">    ~A()&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"~A()"</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">public</span> B, <span class="keyword">public</span> A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    C()&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"C()"</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line">    ~C()&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"~C()"</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    C c;   <span class="comment">//D, B, A ,C</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(c)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/candcpp14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/03/candcpp14/" itemprop="url">c++模板</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-03T20:29:21+08:00">
+                2019-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/03/candcpp14/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/03/candcpp14/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  965
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="C-模板"><a href="#C-模板" class="headerlink" title="C++ 模板"></a>C++ 模板</h1><h2 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h2><p>模板函数定义的一般形式如下所示：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt; <span class="title">ret</span>-<span class="title">type</span> <span class="title">func</span>-<span class="title">name</span>(<span class="title">parameter</span> <span class="title">list</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="comment">// 函数的主体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这里，type 是函数所使用的数据类型的占位符名称。这个名称可以在函数定义中使用。</p>
+<p>下面是函数模板的实例，返回两个数中的最大值：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> T <span class="keyword">const</span>&amp; <span class="title">Max</span> <span class="params">(T <span class="keyword">const</span>&amp; a, T <span class="keyword">const</span>&amp; b)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">return</span> a &lt; b ? b:a; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">39</span>;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Max(i, j): "</span> &lt;&lt; Max(i, j) &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"> </span><br><span class="line">    <span class="keyword">double</span> f1 = <span class="number">13.5</span>; </span><br><span class="line">    <span class="keyword">double</span> f2 = <span class="number">20.7</span>; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Max(f1, f2): "</span> &lt;&lt; Max(f1, f2) &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"> </span><br><span class="line">    <span class="built_in">string</span> s1 = <span class="string">"Hello"</span>; </span><br><span class="line">    <span class="built_in">string</span> s2 = <span class="string">"World"</span>; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Max(s1, s2): "</span> &lt;&lt; Max(s1, s2) &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Max(i, j): 39</span><br><span class="line">Max(f1, f2): 20.7</span><br><span class="line">Max(s1, s2): World</span><br></pre></td></tr></table></figure></p>
+<h2 id="类模板"><a href="#类模板" class="headerlink" title="类模板"></a>类模板</h2><p>正如我们定义函数模板一样，我们也可以定义类模板。泛型类声明的一般形式如下所示：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt; <span class="title">class</span> <span class="title">class</span>-<span class="title">name</span> &#123;</span></span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在这里，type 是占位符类型名称，可以在类被实例化的时候进行指定。您可以使用一个逗号分隔的列表来定义多个泛型数据类型。</p>
+<p>下面的实例定义了类 Stack&lt;&gt;，并实现了泛型方法来对元素进行入栈出栈操作：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdexcept&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Stack</span> &#123;</span> </span><br><span class="line">  <span class="keyword">private</span>: </span><br><span class="line">    <span class="built_in">vector</span>&lt;T&gt; elems;     <span class="comment">// 元素 </span></span><br><span class="line"> </span><br><span class="line">  <span class="keyword">public</span>: </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(T <span class="keyword">const</span>&amp;)</span></span>;  <span class="comment">// 入栈</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>;               <span class="comment">// 出栈</span></span><br><span class="line">    <span class="function">T <span class="title">top</span><span class="params">()</span> <span class="keyword">const</span></span>;            <span class="comment">// 返回栈顶元素</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;       <span class="comment">// 如果为空则返回真。</span></span><br><span class="line">        <span class="keyword">return</span> elems.empty(); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">Stack</span>&lt;T&gt;:</span>:push (T <span class="keyword">const</span>&amp; elem) </span><br><span class="line">&#123; </span><br><span class="line">    <span class="comment">// 追加传入元素的副本</span></span><br><span class="line">    elems.push_back(elem);    </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">Stack</span>&lt;T&gt;:</span>:pop () </span><br><span class="line">&#123; </span><br><span class="line">    <span class="keyword">if</span> (elems.empty()) &#123; </span><br><span class="line">        <span class="keyword">throw</span> out_of_range(<span class="string">"Stack&lt;&gt;::pop(): empty stack"</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 删除最后一个元素</span></span><br><span class="line">    elems.pop_back();         </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">T</span> <span class="title">Stack</span>&lt;T&gt;:</span>:top () <span class="keyword">const</span> </span><br><span class="line">&#123; </span><br><span class="line">    <span class="keyword">if</span> (elems.empty()) &#123; </span><br><span class="line">        <span class="keyword">throw</span> out_of_range(<span class="string">"Stack&lt;&gt;::top(): empty stack"</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回最后一个元素的副本 </span></span><br><span class="line">    <span class="keyword">return</span> elems.back();      </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">try</span> &#123; </span><br><span class="line">        Stack&lt;<span class="keyword">int</span>&gt;         intStack;  <span class="comment">// int 类型的栈 </span></span><br><span class="line">        Stack&lt;<span class="built_in">string</span>&gt; stringStack;    <span class="comment">// string 类型的栈 </span></span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 操作 int 类型的栈 </span></span><br><span class="line">        intStack.push(<span class="number">7</span>); </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; intStack.top() &lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 操作 string 类型的栈 </span></span><br><span class="line">        stringStack.push(<span class="string">"hello"</span>); </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; stringStack.top() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; </span><br><span class="line">        stringStack.pop(); </span><br><span class="line">        stringStack.pop(); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">catch</span> (exception <span class="keyword">const</span>&amp; ex) &#123; </span><br><span class="line">        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"Exception: "</span> &lt;&lt; ex.what() &lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">当上面的代码被编译和执行时，它会产生下列结果：</span><br><span class="line"></span><br><span class="line"><span class="number">7</span></span><br><span class="line">hello</span><br><span class="line">Exception: Stack&lt;&gt;::pop(): empty <span class="built_in">stack</span><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdexcept&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Stack</span> &#123;</span> </span><br><span class="line">  <span class="keyword">private</span>: </span><br><span class="line">    <span class="built_in">vector</span>&lt;T&gt; elems;     <span class="comment">// 元素 </span></span><br><span class="line"> </span><br><span class="line">  <span class="keyword">public</span>: </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(T <span class="keyword">const</span>&amp;)</span></span>;  <span class="comment">// 入栈</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>;               <span class="comment">// 出栈</span></span><br><span class="line">    <span class="function">T <span class="title">top</span><span class="params">()</span> <span class="keyword">const</span></span>;            <span class="comment">// 返回栈顶元素</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;       <span class="comment">// 如果为空则返回真。</span></span><br><span class="line">        <span class="keyword">return</span> elems.empty(); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">Stack</span>&lt;T&gt;:</span>:push (T <span class="keyword">const</span>&amp; elem) </span><br><span class="line">&#123; </span><br><span class="line">    <span class="comment">// 追加传入元素的副本</span></span><br><span class="line">    elems.push_back(elem);    </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">Stack</span>&lt;T&gt;:</span>:pop () </span><br><span class="line">&#123; </span><br><span class="line">    <span class="keyword">if</span> (elems.empty()) &#123; </span><br><span class="line">        <span class="keyword">throw</span> out_of_range(<span class="string">"Stack&lt;&gt;::pop(): empty stack"</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 删除最后一个元素</span></span><br><span class="line">    elems.pop_back();         </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">T</span> <span class="title">Stack</span>&lt;T&gt;:</span>:top () <span class="keyword">const</span> </span><br><span class="line">&#123; </span><br><span class="line">    <span class="keyword">if</span> (elems.empty()) &#123; </span><br><span class="line">        <span class="keyword">throw</span> out_of_range(<span class="string">"Stack&lt;&gt;::top(): empty stack"</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回最后一个元素的副本 </span></span><br><span class="line">    <span class="keyword">return</span> elems.back();      </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">try</span> &#123; </span><br><span class="line">        Stack&lt;<span class="keyword">int</span>&gt;         intStack;  <span class="comment">// int 类型的栈 </span></span><br><span class="line">        Stack&lt;<span class="built_in">string</span>&gt; stringStack;    <span class="comment">// string 类型的栈 </span></span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 操作 int 类型的栈 </span></span><br><span class="line">        intStack.push(<span class="number">7</span>); </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; intStack.top() &lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 操作 string 类型的栈 </span></span><br><span class="line">        stringStack.push(<span class="string">"hello"</span>); </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; stringStack.top() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; </span><br><span class="line">        stringStack.pop(); </span><br><span class="line">        stringStack.pop(); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">catch</span> (exception <span class="keyword">const</span>&amp; ex) &#123; </span><br><span class="line">        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"Exception: "</span> &lt;&lt; ex.what() &lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当上面的代码被编译和执行时，它会产生下列结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">7</span><br><span class="line">hello</span><br><span class="line">Exception: Stack&lt;&gt;::pop(): empty stack</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/candcpp13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/03/candcpp13/" itemprop="url">矩阵类的实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-03T19:52:34+08:00">
+                2019-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/03/candcpp13/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/03/candcpp13/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  15
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="矩阵类-正常存储："><a href="#矩阵类-正常存储：" class="headerlink" title="矩阵类 正常存储："></a>矩阵类 正常存储：</h1><p>Design a template class Matrix that has the following private member variables:</p>
+<ol>
+<li>int rows</li>
+<li>int columns</li>
+<li>vector<t> values</t></li>
+</ol>
+<p>where T is the type parameter.<br>Besides, it has the functions such that the main function runs correctly with the following output.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">EXAMPLE OUTPUT</span><br><span class="line">constructor 1</span><br><span class="line">    0    0    0</span><br><span class="line">    0    0    0</span><br><span class="line">    0    0    0</span><br><span class="line">constructor 2</span><br><span class="line">    1    2    3</span><br><span class="line">    4    5    6</span><br><span class="line">    7    8    9</span><br><span class="line">copy constructor</span><br><span class="line">    1    2    3</span><br><span class="line">    4    5    6</span><br><span class="line">    7    8    9</span><br><span class="line">operator =</span><br><span class="line">    1    2    3</span><br><span class="line">    4    5    6</span><br><span class="line">    7    8    9</span><br><span class="line">getColumn</span><br><span class="line">    2</span><br><span class="line">    5</span><br><span class="line">    8</span><br><span class="line">getRow</span><br><span class="line">    4    5    6</span><br><span class="line">concatenateRows</span><br><span class="line">    0    0    0</span><br><span class="line">    0    0    0</span><br><span class="line">    0    0    0</span><br><span class="line">    1    2    3</span><br><span class="line">    4    5    6</span><br><span class="line">    7    8    9</span><br><span class="line">concatenateColumns</span><br><span class="line">    0    0    0    1    2    3</span><br><span class="line">    0    0    0    4    5    6</span><br><span class="line">    0    0    0    7    8    9</span><br><span class="line">reshape</span><br><span class="line">    0    0    2</span><br><span class="line">    0    0    5</span><br><span class="line">    0    0    8</span><br><span class="line">    0    1    3</span><br><span class="line">    0    4    6</span><br><span class="line">    0    7    9</span><br><span class="line">transpose</span><br><span class="line">    1    4    7</span><br><span class="line">    2    5    8</span><br><span class="line">    3    6    9</span><br><span class="line">operator +</span><br><span class="line">    2    4    6</span><br><span class="line">    8    10    12</span><br><span class="line">    14    16    18</span><br><span class="line">operator +</span><br><span class="line">    11    12    13</span><br><span class="line">    14    15    16</span><br><span class="line">    17    18    19</span><br><span class="line">operator -</span><br><span class="line">    0    2    4</span><br><span class="line">    -2    0    2</span><br><span class="line">    -4    -2    0</span><br><span class="line">operator -</span><br><span class="line">    -9    -8    -7</span><br><span class="line">    -6    -5    -4</span><br><span class="line">    -3    -2    -1</span><br><span class="line">operator *</span><br><span class="line">    66    78    90</span><br><span class="line">    78    93    108</span><br><span class="line">    90    108    126</span><br><span class="line">operator *</span><br><span class="line">    2    4    6</span><br><span class="line">    8    10    12</span><br><span class="line">    14    16    18</span><br><span class="line">max</span><br><span class="line">9</span><br><span class="line">min</span><br><span class="line">1</span><br><span class="line">sum</span><br><span class="line">45</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Matrix</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> rows;</span><br><span class="line">	<span class="keyword">int</span> columns;</span><br><span class="line">	<span class="built_in">vector</span>&lt;E&gt; values;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Matrix(<span class="keyword">int</span> r, <span class="keyword">int</span> c):rows(r),columns(c)&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;values.clear();</span><br><span class="line">		<span class="keyword">this</span>-&gt;values.resize(r*c);</span><br><span class="line">	&#125;</span><br><span class="line">	Matrix(<span class="keyword">int</span> r, <span class="keyword">int</span> c, <span class="built_in">vector</span>&lt;E&gt;&amp; v):rows(r),columns(c)&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;values.clear();</span><br><span class="line">		<span class="keyword">this</span>-&gt;values.resize(r*c);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;r*c; i++)</span><br><span class="line">			values[i] = v[i];</span><br><span class="line">	&#125;</span><br><span class="line">	Matrix(<span class="keyword">const</span> Matrix &amp; m)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;columns = m.columns;</span><br><span class="line">		<span class="keyword">this</span>-&gt;rows = m.rows;</span><br><span class="line">		<span class="keyword">this</span>-&gt;values.clear();</span><br><span class="line">		<span class="keyword">this</span>-&gt;values.resize(m.rows*m.columns);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m.rows*m.columns; i++)</span><br><span class="line">			<span class="keyword">this</span>-&gt;values[i] = m.values[i];</span><br><span class="line">	&#125;</span><br><span class="line">	Matrix &amp; <span class="keyword">operator</span> = (<span class="keyword">const</span> Matrix &amp; m)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;rows = m.rows;</span><br><span class="line">		<span class="keyword">this</span>-&gt;columns = m.columns;</span><br><span class="line">		<span class="keyword">this</span>-&gt;values.clear();</span><br><span class="line">		<span class="keyword">this</span>-&gt;values.resize(m.rows*m.columns);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m.rows*m.columns; i++)</span><br><span class="line">			<span class="keyword">this</span>-&gt;values[i] = m.values[i];</span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	~Matrix()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;values.clear();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;rows; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="keyword">this</span>-&gt;columns; j++)</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"    "</span> &lt;&lt; values[i*<span class="keyword">this</span>-&gt;columns+j];</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">Matrix <span class="title">getColumn</span><span class="params">(<span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="keyword">this</span>-&gt;rows, <span class="number">1</span>)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;rows; i++)</span><br><span class="line">			rem.values[i] = <span class="keyword">this</span>-&gt;values[i*<span class="keyword">this</span>-&gt;columns+c<span class="number">-1</span>];</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">Matrix <span class="title">getRow</span><span class="params">(<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="number">1</span>, <span class="keyword">this</span>-&gt;columns)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">			rem.values[i] = <span class="keyword">this</span>-&gt;values[(r<span class="number">-1</span>)*<span class="keyword">this</span>-&gt;columns+i];</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">Matrix <span class="title">concatenateRows</span><span class="params">(<span class="keyword">const</span> Matrix &amp; m)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="keyword">this</span>-&gt;rows+m.rows, <span class="keyword">this</span>-&gt;columns)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;rows*<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">			rem.values[i] = <span class="keyword">this</span>-&gt;values[i];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m.rows*m.columns; i++)</span><br><span class="line">			rem.values[<span class="keyword">this</span>-&gt;rows*<span class="keyword">this</span>-&gt;columns+i] = m.values[i];</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">Matrix <span class="title">concatenateColumns</span><span class="params">(<span class="keyword">const</span> Matrix &amp; m)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="keyword">this</span>-&gt;rows, <span class="keyword">this</span>-&gt;columns+m.columns)</span></span>;</span><br><span class="line">		<span class="keyword">int</span> z = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;rows; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="keyword">this</span>-&gt;columns; j++)</span><br><span class="line">				rem.values[z++] = <span class="keyword">this</span>-&gt;values[i*<span class="keyword">this</span>-&gt;columns+j];</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;m.columns; j++)</span><br><span class="line">				rem.values[z++] = m.values[i*m.columns+j];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">Matrix <span class="title">reshape</span><span class="params">(<span class="keyword">int</span> r, <span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(r, c)</span></span>;</span><br><span class="line">		E arr[r*c];</span><br><span class="line">		<span class="keyword">int</span> z = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="keyword">this</span>-&gt;rows; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				arr[z++] = <span class="keyword">this</span>-&gt;values[j*<span class="keyword">this</span>-&gt;columns+i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		z = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;c; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;r; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				rem.values[j*c+i] = arr[z++];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">Matrix <span class="title">transpose</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="keyword">this</span>-&gt;columns, <span class="keyword">this</span>-&gt;rows)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;rem.rows; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;rem.columns; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				rem.values[i*rem.columns+j] = <span class="keyword">this</span>-&gt;values[j*<span class="keyword">this</span>-&gt;columns+i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	Matrix <span class="keyword">operator</span> + (<span class="keyword">int</span> n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="keyword">this</span>-&gt;rows, <span class="keyword">this</span>-&gt;columns)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;rows*<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			rem.values[i] = <span class="keyword">this</span>-&gt;values[i] + n;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	Matrix <span class="keyword">operator</span> + (Matrix &amp;n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="keyword">this</span>-&gt;rows, <span class="keyword">this</span>-&gt;columns)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;rows*<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			rem.values[i] = <span class="keyword">this</span>-&gt;values[i] + n.values[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	Matrix <span class="keyword">operator</span> - (<span class="keyword">int</span> n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="keyword">this</span>-&gt;rows, <span class="keyword">this</span>-&gt;columns)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;rows*<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			rem.values[i] = <span class="keyword">this</span>-&gt;values[i] - n;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	Matrix <span class="keyword">operator</span> - (Matrix &amp;n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="keyword">this</span>-&gt;rows, <span class="keyword">this</span>-&gt;columns)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;rows*<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			rem.values[i] = <span class="keyword">this</span>-&gt;values[i] - n.values[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	Matrix <span class="keyword">operator</span> * (<span class="keyword">int</span> n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="keyword">this</span>-&gt;rows, <span class="keyword">this</span>-&gt;columns)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;rows*<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			rem.values[i] = <span class="keyword">this</span>-&gt;values[i] * n;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	Matrix <span class="keyword">operator</span> * (<span class="keyword">const</span> Matrix &amp; matrix2) <span class="keyword">const</span>&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="keyword">this</span>-&gt;rows, matrix2.columns)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;rows; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;matrix2.columns; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>; x&lt;<span class="keyword">this</span>-&gt;columns; x++)</span><br><span class="line">				&#123;</span><br><span class="line">				sum += <span class="keyword">this</span>-&gt;values[i*<span class="keyword">this</span>-&gt;columns+x]*matrix2.values[x*matrix2.columns+j];</span><br><span class="line">			</span><br><span class="line">				&#125;</span><br><span class="line">				rem.values[i*matrix2.columns+j] = sum;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">E&amp; <span class="title">get</span><span class="params">(<span class="keyword">int</span> r, <span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> nr = r<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">int</span> nc = c<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>-&gt;values[nr*<span class="keyword">this</span>-&gt;columns+nc];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">Matrix <span class="title">sum</span><span class="params">()</span> <span class="keyword">const</span></span>&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="number">1</span>, <span class="keyword">this</span>-&gt;columns)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>-&gt;rows == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			rem.columns = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				rem.values[<span class="number">0</span>] += <span class="keyword">this</span>-&gt;values[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="keyword">this</span>-&gt;rows; j++)</span><br><span class="line">				&#123;</span><br><span class="line">					rem.values[i] += <span class="keyword">this</span>-&gt;values[j*<span class="keyword">this</span>-&gt;columns+i];	</span><br><span class="line">				&#125;	</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">Matrix <span class="title">max</span><span class="params">()</span><span class="keyword">const</span> </span>&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="number">1</span>, <span class="keyword">this</span>-&gt;columns)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>-&gt;rows == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			rem.columns = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				rem.values[<span class="number">0</span>] = rem.values[<span class="number">0</span>]&gt;<span class="keyword">this</span>-&gt;values[i] ? rem.values[<span class="number">0</span>] : <span class="keyword">this</span>-&gt;values[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="keyword">this</span>-&gt;rows; j++)</span><br><span class="line">				&#123;</span><br><span class="line">					rem.values[i] = rem.values[i] &gt; <span class="keyword">this</span>-&gt;values[j*<span class="keyword">this</span>-&gt;columns+i] ? rem.values[i]: <span class="keyword">this</span>-&gt;values[j*<span class="keyword">this</span>-&gt;columns+i];	</span><br><span class="line">				&#125;	</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">Matrix <span class="title">min</span><span class="params">()</span><span class="keyword">const</span> </span>&#123;</span><br><span class="line">		<span class="function">Matrix <span class="title">rem</span><span class="params">(<span class="number">1</span>, <span class="keyword">this</span>-&gt;columns)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>-&gt;rows == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			rem.columns = <span class="number">1</span>;</span><br><span class="line">			rem.values[<span class="number">0</span>] = <span class="keyword">this</span>-&gt;values[<span class="number">0</span>];</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				rem.values[<span class="number">0</span>] = rem.values[<span class="number">0</span>]&lt;<span class="keyword">this</span>-&gt;values[i] ? rem.values[<span class="number">0</span>] : <span class="keyword">this</span>-&gt;values[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;columns; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				rem.values[i] = <span class="keyword">this</span>-&gt;values[i];</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="keyword">this</span>-&gt;rows; j++)</span><br><span class="line">				&#123;</span><br><span class="line">					rem.values[i] = rem.values[i] &lt; <span class="keyword">this</span>-&gt;values[j*<span class="keyword">this</span>-&gt;columns+i] ? rem.values[i]: <span class="keyword">this</span>-&gt;values[j*<span class="keyword">this</span>-&gt;columns+i];	</span><br><span class="line">				&#125;	</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> rem;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"constructor 1"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    Matrix&lt;<span class="keyword">double</span>&gt; matrix1(<span class="number">3</span>, <span class="number">3</span>); </span><br><span class="line">    matrix1.print(); </span><br><span class="line">     </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> values1[] = &#123; </span><br><span class="line">        <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, </span><br><span class="line">        <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, </span><br><span class="line">        <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, </span><br><span class="line">    &#125;; </span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; values2; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; ++ i) &#123; </span><br><span class="line">        values2.push_back(values1[i]); </span><br><span class="line">    &#125; </span><br><span class="line">     </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"constructor 2"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    Matrix&lt;<span class="keyword">double</span>&gt; matrix2(<span class="number">3</span>, <span class="number">3</span>, values2); </span><br><span class="line">    matrix2.print(); </span><br><span class="line">     </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"copy constructor"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    Matrix&lt;<span class="keyword">double</span>&gt; matrix3 = matrix2; </span><br><span class="line">    matrix3.print(); </span><br><span class="line">     </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"operator ="</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    matrix3.get(<span class="number">1</span>, <span class="number">1</span>) = <span class="number">10.0</span>; </span><br><span class="line">    matrix3 = matrix2; </span><br><span class="line">    matrix3.print(); </span><br><span class="line">     </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"getColumn"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    matrix2.getColumn(<span class="number">2</span>).print(); </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"getRow"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    matrix2.getRow(<span class="number">2</span>).print(); </span><br><span class="line">     </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"concatenateRows"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    matrix1.concatenateRows(matrix2).print(); </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"concatenateColumns"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    matrix1.concatenateColumns(matrix2).print(); </span><br><span class="line">     </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"reshape"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    matrix1.concatenateColumns(matrix2). </span><br><span class="line">        reshape(<span class="number">6</span>, <span class="number">3</span>).print(); </span><br><span class="line">     </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"transpose"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    matrix2.transpose().print(); </span><br><span class="line">     </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"operator +"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    (matrix2 + matrix2).print(); </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"operator +"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    (matrix2 + <span class="number">10</span>).print(); </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"operator -"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    (matrix2.transpose() - matrix2).print(); </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"operator -"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    (matrix2 - <span class="number">10</span>).print(); </span><br><span class="line">     </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"operator *"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    (matrix2.transpose() * matrix2).print(); </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"operator *"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    (matrix2 * <span class="number">2</span>).print(); </span><br><span class="line">     </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"max"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; matrix2.max().max().get(<span class="number">1</span>, <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"min"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; matrix2.min().min().get(<span class="number">1</span>, <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"sum"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; matrix2.sum().sum().get(<span class="number">1</span>, <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;         </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="矩阵类-稀疏矩阵存储："><a href="#矩阵类-稀疏矩阵存储：" class="headerlink" title="矩阵类 稀疏矩阵存储："></a>矩阵类 稀疏矩阵存储：</h1><p>Design a class Sparse that implements interface Matrix: Sparse should has the following public object functions in addition:</p>
+<pre><code>A constructor Sparse(int rows, int column), which initializes all elements in the matrix to 0&apos;s.
+
+A function Sparse Sparse::operator * (Sparse &amp; sparse2), which returns the product of two sparse matrixes.
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">EXAMPLE INPUT</span><br><span class="line">1000000 2000000 3000000</span><br><span class="line"></span><br><span class="line">1 1 10</span><br><span class="line">1 2000000 50</span><br><span class="line">1000000 2000000 20</span><br><span class="line"></span><br><span class="line">1 3000000 30</span><br><span class="line">2000000 1 40</span><br><span class="line">1 1 -10</span><br><span class="line">EXAMPLE OUTPUT</span><br><span class="line">(1,1,1900)</span><br><span class="line">(1,3000000,300)</span><br><span class="line">(1000000,1,800)</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Entry</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    <span class="keyword">int</span> row; </span><br><span class="line">    <span class="keyword">int</span> column; </span><br><span class="line">    <span class="keyword">double</span> value; </span><br><span class="line">&#125;; </span><br><span class="line">     </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Matrix</span> </span></span><br><span class="line"><span class="class">&#123;</span>     </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">(<span class="keyword">int</span> dimension)</span> <span class="keyword">const</span> </span>= <span class="number">0</span>; </span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> column,  </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">double</span> value)</span> </span>= <span class="number">0</span>; </span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">double</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> column)</span>  </span></span><br><span class="line"><span class="function">    <span class="keyword">const</span> </span>= <span class="number">0</span>; </span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>= <span class="number">0</span>; </span><br><span class="line">     </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sparse</span> :</span> <span class="keyword">public</span> Matrix</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="keyword">int</span> rows;</span><br><span class="line">		<span class="keyword">int</span> column;</span><br><span class="line">		<span class="built_in">vector</span>&lt;Entry&gt; mmatrix;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		Sparse(<span class="keyword">int</span> rows, <span class="keyword">int</span> column)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">this</span>-&gt;rows = rows;</span><br><span class="line">			<span class="keyword">this</span>-&gt;column = column;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">(<span class="keyword">int</span> dimension)</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(dimension == <span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">this</span>-&gt;rows;</span><br><span class="line">			<span class="keyword">if</span>(dimension == <span class="number">2</span>) <span class="keyword">return</span> <span class="keyword">this</span>-&gt;column;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> column, <span class="keyword">double</span> value)</span> </span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			<span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;mmatrix.size(); i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(mmatrix[i].row == row &amp;&amp; mmatrix[i].column == column)</span><br><span class="line">				&#123;</span><br><span class="line">					flag = <span class="number">1</span>;</span><br><span class="line">					mmatrix[i].value = value;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(!flag)</span><br><span class="line">			&#123;</span><br><span class="line">				Entry rem;</span><br><span class="line">				rem.row = row;</span><br><span class="line">				rem.column = column;</span><br><span class="line">				rem.value = value;</span><br><span class="line">				mmatrix.push_back(rem);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">double</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> column)</span><span class="keyword">const</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;mmatrix.size(); i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(mmatrix[i].row == row &amp;&amp; mmatrix[i].column == column)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">return</span> mmatrix[i].value;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;mmatrix.size()<span class="number">-1</span>; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;mmatrix.size()<span class="number">-1</span>-i; j++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span>(mmatrix[j].row&gt;mmatrix[j+<span class="number">1</span>].row)</span><br><span class="line">					&#123;</span><br><span class="line">						Entry temp = mmatrix[j];</span><br><span class="line">						mmatrix[j] = mmatrix[j+<span class="number">1</span>];</span><br><span class="line">						mmatrix[j+<span class="number">1</span>] = temp;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">else</span> <span class="keyword">if</span>(mmatrix[j].row==mmatrix[j+<span class="number">1</span>].row)</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">if</span>(mmatrix[j].column&gt;mmatrix[j+<span class="number">1</span>].column)</span><br><span class="line">						&#123;</span><br><span class="line">						Entry temp = mmatrix[j];</span><br><span class="line">						mmatrix[j] = mmatrix[j+<span class="number">1</span>];</span><br><span class="line">						mmatrix[j+<span class="number">1</span>] = temp;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;mmatrix.size(); i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; mmatrix[i].row &lt;&lt; <span class="string">","</span> &lt;&lt; mmatrix[i].column &lt;&lt; <span class="string">","</span> &lt;&lt; mmatrix[i].value &lt;&lt; <span class="string">")"</span> &lt;&lt; <span class="built_in">endl</span>;				</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		Sparse <span class="keyword">operator</span> * (Sparse &amp;sparse2) </span><br><span class="line">		&#123;</span><br><span class="line">			<span class="function">Sparse <span class="title">rem</span><span class="params">(<span class="keyword">this</span>-&gt;rows, sparse2.column)</span></span>;</span><br><span class="line">			<span class="built_in">vector</span>&lt;Entry&gt; ttt;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>-&gt;mmatrix.size(); i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;sparse2.mmatrix.size(); j++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span>(<span class="keyword">this</span>-&gt;mmatrix[i].column == sparse2.mmatrix[j].row)</span><br><span class="line">					&#123;</span><br><span class="line">						Entry rrr;</span><br><span class="line">						rrr.row = <span class="keyword">this</span>-&gt;mmatrix[i].row;</span><br><span class="line">						rrr.column = sparse2.mmatrix[j].column;</span><br><span class="line">						rrr.value = <span class="keyword">this</span>-&gt;mmatrix[i].value * sparse2.mmatrix[j].value;</span><br><span class="line">						ttt.push_back(rrr);</span><br><span class="line">					&#125;</span><br><span class="line">					</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; </span><br><span class="line">			<span class="keyword">int</span> num[ttt.size()] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;ttt.size(); i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(num[i]==<span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">int</span> sum = ttt[i].value;</span><br><span class="line">					num[i] = <span class="number">1</span>;</span><br><span class="line">					<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;ttt.size(); j++)</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">if</span>(ttt[i].row == ttt[j].row &amp;&amp; ttt[i].column == ttt[j].column &amp;&amp; i != j)</span><br><span class="line">						&#123;</span><br><span class="line">							sum += ttt[j].value;</span><br><span class="line">							num[j] = <span class="number">1</span>;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span>(sum != <span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						Entry zzz;</span><br><span class="line">						zzz.row = ttt[i].row;</span><br><span class="line">						zzz.column = ttt[i].column;</span><br><span class="line">						zzz.value = sum;</span><br><span class="line">						rem.mmatrix.push_back(zzz);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> rem;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(Matrix &amp; matrix)</span> </span>&#123; </span><br><span class="line">    matrix.print(); </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readAndSetElement</span><span class="params">(Matrix &amp; matrix)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">int</span> row; </span><br><span class="line">    <span class="keyword">int</span> column; </span><br><span class="line">    <span class="keyword">double</span> value; </span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; row &gt;&gt; column &gt;&gt; value; </span><br><span class="line">    matrix.<span class="built_in">set</span>(row, column, value); </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readAndSetMultipleElements</span><span class="params">(Matrix &amp; matrix, <span class="keyword">int</span> count)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; ++ i) &#123; </span><br><span class="line">        readAndSetElement(matrix); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    <span class="keyword">int</span> rows; </span><br><span class="line">    <span class="keyword">int</span> columns; </span><br><span class="line">    <span class="keyword">int</span> &amp; rows2 = columns; </span><br><span class="line">    <span class="keyword">int</span> columns2; </span><br><span class="line">     </span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; rows &gt;&gt; columns &gt;&gt; columns2; </span><br><span class="line">     </span><br><span class="line">    <span class="function">Sparse <span class="title">sparse1</span><span class="params">(rows, columns)</span></span>; </span><br><span class="line">    readAndSetMultipleElements(sparse1, <span class="number">3</span>); </span><br><span class="line">     </span><br><span class="line">    <span class="function">Sparse <span class="title">sparse2</span><span class="params">(rows2, columns2)</span></span>; </span><br><span class="line">    readAndSetMultipleElements(sparse2, <span class="number">3</span>); </span><br><span class="line"> </span><br><span class="line">    Sparse sparse3 = sparse1 * sparse2; </span><br><span class="line">    print(sparse3); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/candcpp12/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1751,679 +2418,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/17/candcpp6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/17/candcpp6/" itemprop="url">C++ 输入输出</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-17T13:14:52+08:00">
-                2019-06-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/17/candcpp6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/17/candcpp6/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  4k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  14
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>关于c++格式化输入输出相关的，简单的其实可以直接 <code>#include &lt;cstdio&gt;</code></p>
-</blockquote>
-<h1 id="C-输入输出流"><a href="#C-输入输出流" class="headerlink" title="C++ 输入输出流"></a>C++ 输入输出流</h1><p>输入和输出并不是C++语言中的正式组成成分。C和C++本身都没有为输入和输出提供专门的语句结构。输入输出不是由C++本身定义的，而是在编译系统提供的I/O库中定义的。</p>
-<p>C++ 的程序把输入和输出看做字节流。输入时，程序从输入流中抽取字节；输出时，程序将字节插入输出流中，流充当了程序和流源或流目标之间的桥梁。</p>
-<p>C++输入输出中有两个基类，分别为ios_base和ios，而基于这两个基类实现了输入流istream和输出流ostream，然后基于这两个流实现了针对三种不同应用的类（或对象）：</p>
-<ul>
-<li>标准输入输出：为了程序员使用方便，C++直接以对象的形式提供了几个标准输入输出工具，分别为：cin(标准输入)，cout(标准输出)，cerr(不带缓存的标准错误输出)，clog(带缓存的标准错误输出)。</li>
-<li>文件输入输出：C++ 提供了三个类以方便程序员进行文件读写操作，分别为：ifstream（读文件），ofstream（写文件），fstream（读写文件）</li>
-<li>字符串输入输出流：将字符串作为输入输出流进行处理，有三个对应的类，分别为：istringstream（字符串输入流），ostringstream（字符串输出流），stringstream（字符串输入输出流）。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/06/17/candcpp6/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/17/candcpp5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/17/candcpp5/" itemprop="url">C语言标准输入输出、相关函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-17T13:14:44+08:00">
-                2019-06-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/17/candcpp5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/17/candcpp5/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  3.4k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  14
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="C语言标准输入输出、相关函数"><a href="#C语言标准输入输出、相关函数" class="headerlink" title="C语言标准输入输出、相关函数"></a>C语言标准输入输出、相关函数</h1><h2 id="格式化输入输出函数："><a href="#格式化输入输出函数：" class="headerlink" title="格式化输入输出函数："></a>格式化输入输出函数：</h2><h3 id="printf-函数："><a href="#printf-函数：" class="headerlink" title="printf()函数："></a>printf()函数：</h3><h3 id="格式字符串"><a href="#格式字符串" class="headerlink" title="格式字符串"></a>格式字符串</h3><p>在Turbo C中格式字符串的一般形式为：<br><code>[标志][输出最小宽度][.精度][长度]类型。</code><br>其中方括号[]中的项为可选项。</p>
-<p>1) 类型<br>类型字符用以表示输出数据的类型，其格式符和意义如下表所示：</p>
-<p><img src="Snipaste_2019-06-17_13-19-41.png" alt="1"></p>
-<p>2) 标志<br>标志字符为 -、+、# 和空格四种，其意义下表所示：</p>
-<p><img src="Snipaste_2019-06-17_13-20-44.png" alt="1"></p>
-<p>3) 输出最小宽度<br>用十进制整数来表示输出的最少位数。若实际位数多于定义的宽度，则按实际位数输出，若实际位数少于定义的宽度则补以空格或0。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/06/17/candcpp5/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/javajichu28/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/11/javajichu28/" itemprop="url">Java 多线程编程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-11T13:27:04+08:00">
-                2019-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/基础知识/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/11/javajichu28/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/11/javajichu28/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  2.2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  9
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java-多线程编程"><a href="#Java-多线程编程" class="headerlink" title="Java 多线程编程"></a>Java 多线程编程</h1><p>Java 给多线程编程提供了内置的支持。 一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。</p>
-<p>多线程是多任务的一种特别的形式，但多线程使用了更小的资源开销。</p>
-<p>这里定义和线程相关的另一个术语 - 进程：一个进程包括由操作系统分配的内存空间，包含一个或多个线程。一个线程不能独立的存在，它必须是进程的一部分。一个进程一直运行，直到所有的非守护线程都结束运行后才能结束。</p>
-<p>多线程能满足程序员编写高效率的程序来达到充分利用 CPU 的目的。</p>
-<h2 id="一个线程的生命周期"><a href="#一个线程的生命周期" class="headerlink" title="一个线程的生命周期"></a>一个线程的生命周期</h2><p>线程是一个动态执行的过程，它也有一个从产生到死亡的过程。</p>
-<p>下图显示了一个线程完整的生命周期。</p>
-<p><img src="Snipaste_2019-06-12_21-52-01.png" alt="1"></p>
-<ul>
-<li><p>新建状态:<br>使用 new 关键字和 Thread 类或其子类建立一个线程对象后，该线程对象就处于新建状态。它保持这个状态直到程序 start() 这个线程。</p>
-</li>
-<li><p>就绪状态:<br>当线程对象调用了start()方法之后，该线程就进入就绪状态。就绪状态的线程处于就绪队列中，要等待JVM里线程调度器的调度。</p>
-</li>
-<li><p>运行状态:<br>如果就绪状态的线程获取 CPU 资源，就可以执行 run()，此时线程便处于运行状态。处于运行状态的线程最为复杂，它可以变为阻塞状态、就绪状态和死亡状态。</p>
-</li>
-<li><p>阻塞状态:<br>如果一个线程执行了sleep（睡眠）、suspend（挂起）等方法，失去所占用资源之后，该线程就从运行状态进入阻塞状态。在睡眠时间已到或获得设备资源后可以重新进入就绪状态。可以分为三种：</p>
-</li>
-</ul>
-<p>等待阻塞：运行状态中的线程执行 wait() 方法，使线程进入到等待阻塞状态。</p>
-<p>同步阻塞：线程在获取 synchronized 同步锁失败(因为同步锁被其他线程占用)。</p>
-<p>其他阻塞：通过调用线程的 sleep() 或 join() 发出了 I/O 请求时，线程就会进入到阻塞状态。当sleep() 状态超时，join() 等待线程终止或超时，或者 I/O 处理完毕，线程重新转入就绪状态。</p>
-<ul>
-<li>死亡状态:<br>一个运行状态的线程完成任务或者其他终止条件发生时，该线程就切换到终止状态。</li>
-</ul>
-<h2 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h2><p>每一个 Java 线程都有一个优先级，这样有助于操作系统确定线程的调度顺序。</p>
-<p>Java 线程的优先级是一个整数，其取值范围是 1 （Thread.MIN_PRIORITY ） - 10 （Thread.MAX_PRIORITY ）。</p>
-<p>默认情况下，每一个线程都会分配一个优先级 NORM_PRIORITY（5）。</p>
-<p>具有较高优先级的线程对程序更重要，并且应该在低优先级的线程之前分配处理器资源。但是，线程优先级不能保证线程执行的顺序，而且非常依赖于平台。</p>
-<h2 id="创建一个线程"><a href="#创建一个线程" class="headerlink" title="创建一个线程"></a>创建一个线程</h2><p>Java 提供了三种创建线程的方法：</p>
-<ul>
-<li>通过实现 Runnable 接口；</li>
-<li>通过继承 Thread 类本身；</li>
-<li>通过 Callable 和 Future 创建线程。</li>
-</ul>
-<h2 id="通过实现-Runnable-接口来创建线程"><a href="#通过实现-Runnable-接口来创建线程" class="headerlink" title="通过实现 Runnable 接口来创建线程"></a>通过实现 Runnable 接口来创建线程</h2><p>创建一个线程，最简单的方法是创建一个实现 Runnable 接口的类。</p>
-<p>为了实现 Runnable，一个类只需要执行一个方法调用 run()，声明如下：</p>
-<p><code>public void run()</code><br>你可以重写该方法，重要的是理解的 run() 可以调用其他方法，使用其他类，并声明变量，就像主线程一样。</p>
-<p>在创建一个实现 Runnable 接口的类之后，你可以在类中实例化一个线程对象。</p>
-<p>Thread 定义了几个构造方法，下面的这个是我们经常使用的：</p>
-<p><code>Thread(Runnable threadOb,String threadName);</code><br>这里，threadOb 是一个实现 Runnable 接口的类的实例，并且 threadName 指定新线程的名字。</p>
-<p>新线程创建之后，你调用它的 start() 方法它才会运行。</p>
-<p><code>void start();</code><br>下面是一个创建线程并开始让它执行的实例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RunnableDemo</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> Thread t;</span><br><span class="line">   <span class="keyword">private</span> String threadName;</span><br><span class="line">   </span><br><span class="line">   RunnableDemo( String name) &#123;</span><br><span class="line">      threadName = name;</span><br><span class="line">      System.out.println(<span class="string">"Creating "</span> +  threadName );</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Running "</span> +  threadName );</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">4</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Thread: "</span> + threadName + <span class="string">", "</span> + i);</span><br><span class="line">            <span class="comment">// 让线程睡眠一会</span></span><br><span class="line">            Thread.sleep(<span class="number">50</span>);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;<span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">         System.out.println(<span class="string">"Thread "</span> +  threadName + <span class="string">" interrupted."</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println(<span class="string">"Thread "</span> +  threadName + <span class="string">" exiting."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Starting "</span> +  threadName );</span><br><span class="line">      <span class="keyword">if</span> (t == <span class="keyword">null</span>) &#123;</span><br><span class="line">         t = <span class="keyword">new</span> Thread (<span class="keyword">this</span>, threadName);</span><br><span class="line">         t.start ();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestThread</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">      RunnableDemo R1 = <span class="keyword">new</span> RunnableDemo( <span class="string">"Thread-1"</span>);</span><br><span class="line">      R1.start();</span><br><span class="line">      </span><br><span class="line">      RunnableDemo R2 = <span class="keyword">new</span> RunnableDemo( <span class="string">"Thread-2"</span>);</span><br><span class="line">      R2.start();</span><br><span class="line">   &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Creating Thread-1</span><br><span class="line">Starting Thread-1</span><br><span class="line">Creating Thread-2</span><br><span class="line">Starting Thread-2</span><br><span class="line">Running Thread-1</span><br><span class="line">Thread: Thread-1, 4</span><br><span class="line">Running Thread-2</span><br><span class="line">Thread: Thread-2, 4</span><br><span class="line">Thread: Thread-1, 3</span><br><span class="line">Thread: Thread-2, 3</span><br><span class="line">Thread: Thread-1, 2</span><br><span class="line">Thread: Thread-2, 2</span><br><span class="line">Thread: Thread-1, 1</span><br><span class="line">Thread: Thread-2, 1</span><br><span class="line">Thread Thread-1 exiting.</span><br><span class="line">Thread Thread-2 exiting.</span><br></pre></td></tr></table></figure>
-<h2 id="通过继承Thread来创建线程"><a href="#通过继承Thread来创建线程" class="headerlink" title="通过继承Thread来创建线程"></a>通过继承Thread来创建线程</h2><p>创建一个线程的第二种方法是创建一个新的类，该类继承 Thread 类，然后创建一个该类的实例。</p>
-<p>继承类必须重写 run() 方法，该方法是新线程的入口点。它也必须调用 start() 方法才能执行。</p>
-<p><strong>该方法尽管被列为一种多线程实现方式，但是本质上也是实现了 Runnable 接口的一个实例。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> Thread t;</span><br><span class="line">   <span class="keyword">private</span> String threadName;</span><br><span class="line">   </span><br><span class="line">   ThreadDemo( String name) &#123;</span><br><span class="line">      threadName = name;</span><br><span class="line">      System.out.println(<span class="string">"Creating "</span> +  threadName );</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Running "</span> +  threadName );</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">4</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Thread: "</span> + threadName + <span class="string">", "</span> + i);</span><br><span class="line">            <span class="comment">// 让线程睡眠一会</span></span><br><span class="line">            Thread.sleep(<span class="number">50</span>);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;<span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">         System.out.println(<span class="string">"Thread "</span> +  threadName + <span class="string">" interrupted."</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println(<span class="string">"Thread "</span> +  threadName + <span class="string">" exiting."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Starting "</span> +  threadName );</span><br><span class="line">      <span class="keyword">if</span> (t == <span class="keyword">null</span>) &#123;</span><br><span class="line">         t = <span class="keyword">new</span> Thread (<span class="keyword">this</span>, threadName);</span><br><span class="line">         t.start ();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestThread</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">      ThreadDemo T1 = <span class="keyword">new</span> ThreadDemo( <span class="string">"Thread-1"</span>);</span><br><span class="line">      T1.start();</span><br><span class="line">      </span><br><span class="line">      ThreadDemo T2 = <span class="keyword">new</span> ThreadDemo( <span class="string">"Thread-2"</span>);</span><br><span class="line">      T2.start();</span><br><span class="line">   &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Creating Thread-1</span><br><span class="line">Starting Thread-1</span><br><span class="line">Creating Thread-2</span><br><span class="line">Starting Thread-2</span><br><span class="line">Running Thread-1</span><br><span class="line">Thread: Thread-1, 4</span><br><span class="line">Running Thread-2</span><br><span class="line">Thread: Thread-2, 4</span><br><span class="line">Thread: Thread-1, 3</span><br><span class="line">Thread: Thread-2, 3</span><br><span class="line">Thread: Thread-1, 2</span><br><span class="line">Thread: Thread-2, 2</span><br><span class="line">Thread: Thread-1, 1</span><br><span class="line">Thread: Thread-2, 1</span><br><span class="line">Thread Thread-1 exiting.</span><br><span class="line">Thread Thread-2 exiting.</span><br></pre></td></tr></table></figure>
-<h2 id="Thread-方法"><a href="#Thread-方法" class="headerlink" title="Thread 方法"></a>Thread 方法</h2><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>如下的ThreadClassDemo 程序演示了Thread类的一些方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件名 : DisplayMessage.java</span></span><br><span class="line"><span class="comment">// 通过实现 Runnable 接口创建线程</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DisplayMessage</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> String message;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">DisplayMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.message = message;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">         System.out.println(message);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件名 : GuessANumber.java</span></span><br><span class="line"><span class="comment">// 通过继承 Thread 类创建线程</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GuessANumber</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> number;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">GuessANumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.number = number;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">int</span> guess = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">do</span> &#123;</span><br><span class="line">         guess = (<span class="keyword">int</span>) (Math.random() * <span class="number">100</span> + <span class="number">1</span>);</span><br><span class="line">         System.out.println(<span class="keyword">this</span>.getName() + <span class="string">" guesses "</span> + guess);</span><br><span class="line">         counter++;</span><br><span class="line">      &#125; <span class="keyword">while</span>(guess != number);</span><br><span class="line">      System.out.println(<span class="string">"** Correct!"</span> + <span class="keyword">this</span>.getName() + <span class="string">"in"</span> + counter + <span class="string">"guesses.**"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件名 : ThreadClassDemo.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadClassDemo</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span> </span>&#123;</span><br><span class="line">      Runnable hello = <span class="keyword">new</span> DisplayMessage(<span class="string">"Hello"</span>);</span><br><span class="line">      Thread thread1 = <span class="keyword">new</span> Thread(hello);</span><br><span class="line">      thread1.setDaemon(<span class="keyword">true</span>);</span><br><span class="line">      thread1.setName(<span class="string">"hello"</span>);</span><br><span class="line">      System.out.println(<span class="string">"Starting hello thread..."</span>);</span><br><span class="line">      thread1.start();</span><br><span class="line">      </span><br><span class="line">      Runnable bye = <span class="keyword">new</span> DisplayMessage(<span class="string">"Goodbye"</span>);</span><br><span class="line">      Thread thread2 = <span class="keyword">new</span> Thread(bye);</span><br><span class="line">      thread2.setPriority(Thread.MIN_PRIORITY);</span><br><span class="line">      thread2.setDaemon(<span class="keyword">true</span>);</span><br><span class="line">      System.out.println(<span class="string">"Starting goodbye thread..."</span>);</span><br><span class="line">      thread2.start();</span><br><span class="line"> </span><br><span class="line">      System.out.println(<span class="string">"Starting thread3..."</span>);</span><br><span class="line">      Thread thread3 = <span class="keyword">new</span> GuessANumber(<span class="number">27</span>);</span><br><span class="line">      thread3.start();</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         thread3.join();</span><br><span class="line">      &#125;<span class="keyword">catch</span>(InterruptedException e) &#123;</span><br><span class="line">         System.out.println(<span class="string">"Thread interrupted."</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println(<span class="string">"Starting thread4..."</span>);</span><br><span class="line">      Thread thread4 = <span class="keyword">new</span> GuessANumber(<span class="number">75</span>);</span><br><span class="line">      </span><br><span class="line">      thread4.start();</span><br><span class="line">      System.out.println(<span class="string">"main() is ending..."</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">运行结果如下，每一次运行的结果都不一样。</span><br><span class="line"></span><br><span class="line">Starting hello thread...</span><br><span class="line">Starting goodbye thread...</span><br><span class="line">Hello</span><br><span class="line">Hello</span><br><span class="line">Hello</span><br><span class="line">Hello</span><br><span class="line">Hello</span><br><span class="line">Hello</span><br><span class="line">Goodbye</span><br><span class="line">Goodbye</span><br><span class="line">Goodbye</span><br><span class="line">Goodbye</span><br><span class="line">Goodbye</span><br><span class="line">.......</span><br></pre></td></tr></table></figure>
-<h2 id="通过-Callable-和-Future-创建线程"><a href="#通过-Callable-和-Future-创建线程" class="headerlink" title="通过 Callable 和 Future 创建线程"></a>通过 Callable 和 Future 创建线程</h2><ol>
-<li><p>创建 Callable 接口的实现类，并实现 call() 方法，该 call() 方法将作为线程执行体，并且有返回值。</p>
-</li>
-<li><p>创建 Callable 实现类的实例，使用 FutureTask 类来包装 Callable 对象，该 FutureTask 对象封装了该 Callable 对象的 call() 方法的返回值。</p>
-</li>
-<li><p>使用 FutureTask 对象作为 Thread 对象的 target 创建并启动新线程。</p>
-</li>
-<li><p>调用 FutureTask 对象的 get() 方法来获得子线程执行结束后的返回值。</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallableThreadTest</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        CallableThreadTest ctt = <span class="keyword">new</span> CallableThreadTest();  </span><br><span class="line">        FutureTask&lt;Integer&gt; ft = <span class="keyword">new</span> FutureTask&lt;&gt;(ctt);  </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">100</span>;i++)  </span><br><span class="line">        &#123;  </span><br><span class="line">            System.out.println(Thread.currentThread().getName()+<span class="string">" 的循环变量i的值"</span>+i);  </span><br><span class="line">            <span class="keyword">if</span>(i==<span class="number">20</span>)  </span><br><span class="line">            &#123;  </span><br><span class="line">                <span class="keyword">new</span> Thread(ft,<span class="string">"有返回值的线程"</span>).start();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">try</span>  </span><br><span class="line">        &#123;  </span><br><span class="line">            System.out.println(<span class="string">"子线程的返回值："</span>+ft.get());  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e)  </span><br><span class="line">        &#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExecutionException e)  </span><br><span class="line">        &#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;  </span><br><span class="line">        <span class="keyword">for</span>(;i&lt;<span class="number">100</span>;i++)  </span><br><span class="line">        &#123;  </span><br><span class="line">            System.out.println(Thread.currentThread().getName()+<span class="string">" "</span>+i);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> i;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="创建线程的三种方式的对比"><a href="#创建线程的三种方式的对比" class="headerlink" title="创建线程的三种方式的对比"></a>创建线程的三种方式的对比</h2><ol>
-<li><p>采用实现 Runnable、Callable 接口的方式创建多线程时，线程类只是实现了 Runnable 接口或 Callable 接口，还可以继承其他类。</p>
-</li>
-<li><p>使用继承 Thread 类的方式创建多线程时，编写简单，如果需要访问当前线程，则无需使用 Thread.currentThread() 方法，直接使用 this 即可获得当前线程。</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2476,7 +2470,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">324</span>
+                  <span class="site-state-item-count">327</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2552,7 +2546,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2566,7 +2560,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">383.9k</span>
+    <span title="Site words total count">386.1k</span>
   
 </div>
 
