@@ -291,6 +291,526 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/shixun6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/shixun6/" itemprop="url">linux gdb</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T15:50:15+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/初级实训/" itemprop="url" rel="index">
+                    <span itemprop="name">初级实训</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/29/shixun6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/shixun6/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  934
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="安装gdb"><a href="#安装gdb" class="headerlink" title="安装gdb"></a>安装gdb</h1><p><code>sudo apt-get install gdb</code></p>
+<h1 id="编译test"><a href="#编译test" class="headerlink" title="编译test"></a>编译test</h1><ol>
+<li>在编译指令里记得加上 -g 参数，这个会使得编译出来的程序可以使用gdb进行调试<br><code>$ g++ -g test.cpp -o test</code></li>
+<li>gdb载入可执行文件，这里有两个方法</li>
+</ol>
+<p>直接运行 gdb test</p>
+<p>或：</p>
+<p>gdb + file test</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ gdb</span><br><span class="line">GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.04) 7.11.1</span><br><span class="line">Copyright (C) 2016 Free Software Foundation, Inc.</span><br><span class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.h</span><br><span class="line">tml&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law. Type <span class="string">"show copyin</span></span><br><span class="line"><span class="string">g"</span></span><br><span class="line">and <span class="string">"show warranty"</span> <span class="keyword">for</span> details.</span><br><span class="line">This GDB was configured as <span class="string">"x86_64-linux-gnu"</span>.</span><br><span class="line">Type <span class="string">"show configuration"</span> <span class="keyword">for</span> configuration details.</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/bugs/&gt;.</span><br><span class="line">Find the GDB manual and other documentation resources online at:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span><br><span class="line">For <span class="built_in">help</span>, <span class="built_in">type</span> <span class="string">"help"</span>.</span><br><span class="line">Type <span class="string">"apropos word"</span> to search <span class="keyword">for</span> commands related to <span class="string">"word"</span>.</span><br><span class="line">(gdb) gdb tes</span><br><span class="line">Undefined <span class="built_in">command</span>: <span class="string">"gdb"</span>. Try <span class="string">"help"</span>.</span><br><span class="line">(gdb) gdb file <span class="built_in">test</span></span><br><span class="line">Undefined <span class="built_in">command</span>: <span class="string">"gdb"</span>. Try <span class="string">"help"</span>.</span><br><span class="line">(gdb) file <span class="built_in">test</span></span><br><span class="line">Reading symbols from test...done.</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+<h1 id="基本命令："><a href="#基本命令：" class="headerlink" title="基本命令："></a>基本命令：</h1><ul>
+<li>l : 输出代码，输出当前上下各10行的代码</li>
+<li>b 行数 : 在那一行上设置断点</li>
+<li>r : 运行整个程序，直至遇到断点</li>
+<li>s : 单步继续执行（进入函数）</li>
+<li>n : 单步继续进行 (不进入函数，直接把子函数一并运行完)</li>
+<li>q : 退出gdb</li>
+<li>d num ： num为断点编号， 删除该断点</li>
+<li>c : continue , 继续运行直至下一个断点</li>
+<li>p exp ： 查看变量exp的内容</li>
+<li>k ：kill掉当前运行的程序（然后再用r来重新调试）</li>
+</ul>
+<h1 id="breakpoint进阶"><a href="#breakpoint进阶" class="headerlink" title="breakpoint进阶"></a>breakpoint进阶</h1><ul>
+<li>b 行数 if i &gt; 9 :增加条件， 当 i &gt; 9的时候，程序运行到num行会停下来。</li>
+<li>info break ： 查看断点信息，包括所有断点号，禁用情况等</li>
+<li>删除breakpoint：</li>
+<li><ul>
+<li>clear 行数 ：删除该行上的所以断点</li>
+</ul>
+</li>
+<li><ul>
+<li>d ：删除所有的断点</li>
+</ul>
+</li>
+<li><ul>
+<li>d 1-6 ：删除编号是1～6的断点</li>
+</ul>
+</li>
+<li>禁用断点相关：</li>
+<li><ul>
+<li>disable num :禁用某个断点</li>
+</ul>
+</li>
+<li><ul>
+<li>disable :全部禁用</li>
+</ul>
+</li>
+<li><ul>
+<li>enable num :启用某个断点</li>
+</ul>
+</li>
+<li><ul>
+<li>enable ：全部启用</li>
+</ul>
+</li>
+<li>在其他文件里面设置断点</li>
+<li><ul>
+<li>b 文件名 ： 函数名/行数 ：for example:<br><code>(gdb) b AgendaService.cpp : AgendaService::startAgenda()</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="设置观察点-（数据断点）："><a href="#设置观察点-（数据断点）：" class="headerlink" title="设置观察点 （数据断点）："></a>设置观察点 （数据断点）：</h1><p>watch 变量/表达式</p>
+<ul>
+<li>当观察点的内容有变化的时候，即立刻停止</li>
+<li>用delete来删除观察点</li>
+<li>info watchpoints 来查看所有观察点的信息</li>
+</ul>
+<h1 id="p-命令"><a href="#p-命令" class="headerlink" title="p 命令"></a>p 命令</h1><ul>
+<li><p>p 后的变量必须是全局变量或者是当前可见的局部变量，如果两者同名，则优先查看局部变<br>量</p>
+</li>
+<li><p>p 还可以显示其他数据结构，比如说，在调试agenda的时候，可以直接 p startdate ，这<br>样就可以直接看startdate这个Date类里面的全部内容了</p>
+</li>
+</ul>
+<h1 id="ptype命令"><a href="#ptype命令" class="headerlink" title="ptype命令"></a>ptype命令</h1><p>通过 ptype var 可以查看var的数据类型</p>
+<h1 id="bt命令"><a href="#bt命令" class="headerlink" title="bt命令"></a>bt命令</h1><p>bt 查看程序crash堆栈信息</p>
+<p>当程序被停住了，你需要做的第一件事就是查看程序是在哪里住的。当你的程序调用了一个函数，函数的地址，函数参数，数内的局部变量都会被压入“栈”（Stack）中。你可以用GDB令来查看当前的栈中的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) bt</span><br><span class="line">#0 func (n=250) at tst.c:6</span><br><span class="line">#1 0x08048524 in</span><br><span class="line">main (argc=1, argv=0xbffff674) at tst.c:30</span><br><span class="line">#2 0x40040Arrayed in __libc_start_main () from /lib/libc.so.6</span><br></pre></td></tr></table></figure>
+<ol>
+<li>程序崩溃的时候，这个时候查看最近的堆栈消息，可以非常快地查看到是在哪里出错的。</li>
+<li>当你确认了一个函数有bug，这个函数被其他很多函数调用，这个时候，程序在这个函数停<br>下来的时候使用bt命令，就可以知道是哪个函数调用了有问题的函数。</li>
+</ol>
+<h1 id="display命令"><a href="#display命令" class="headerlink" title="display命令"></a>display命令</h1><p>display + var 来使用自动显示var的值</p>
+<h1 id="set命令"><a href="#set命令" class="headerlink" title="set命令"></a>set命令</h1><p>set tol=100 这样可以在程序运行时把tol设置为100</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/shixun5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/29/shixun5/" itemprop="url">Makefile</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T15:50:10+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/初级实训/" itemprop="url" rel="index">
+                    <span itemprop="name">初级实训</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/29/shixun5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/shixun5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Makefile简介"><a href="#Makefile简介" class="headerlink" title="Makefile简介"></a>Makefile简介</h1><p>Makefile是一个定义项目的编译规则的文件，以便于整个项目的编译。</p>
+<p>Makefile中就可以定义好各个文件的依赖关系，在之后再需要编译时，只需要执行 make命令就可以自动编译了。</p>
+<p>在一次 make之后，一般 会生成很多 目标文件(*.o) 和一个可执行文件，当这些文件和源代码都没有被修改时，再次执行 make会提示 make: ‘bin/your_program’ is up to date.，而当你只修改了一个源代码文件再执行 make时，它也不会重复编译已经最新的文件，而只编译依赖了你的源代码的文件，这对提高编译效率是非常重要的。</p>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">target ... : prerequisites ...</span><br><span class="line"><span class="built_in">command</span></span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>target 是下面的命令的 目标 ，即下面命令是为了target而生的。这个 目标 可以是*.o文件，也可以是可执行文件</p>
+</li>
+<li><p>prerequisites 则是生成该目标所 依赖 的文件，如果没有依赖的文件，下面的命令就不会执行且会中断 make</p>
+</li>
+<li><p>command 就是生成目标文件的命令，一般就是编译命令了，如 g++ main.cpp等等(注<br>意：命令前面必须有 Tab (‘\t’) 真正 的 Tab，这样make才会认为它是指令)</p>
+</li>
+</ul>
+<p><img src="Snipaste_2019-09-29_16-33-42.png" alt="1"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">main: main.o support1.o</span><br><span class="line">	g++ main.o support1.o -o main</span><br><span class="line"></span><br><span class="line">main.o: main.cpp main.hpp support1.hpp</span><br><span class="line">	g++ main.cpp main.hpp support1.hpp -c</span><br><span class="line"></span><br><span class="line">support1.o: support1.cpp support1.hpp</span><br><span class="line">	g++ support1.cpp support1.hpp -c</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	@rm -f main</span><br><span class="line">	@rm -f *.o</span><br><span class="line">	@rm -f *.gch</span><br></pre></td></tr></table></figure>
+<p><img src="Snipaste_2019-09-29_16-35-08.png" alt="1"></p>
+<hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Makefile version 3</span></span><br><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 -­w</span><br><span class="line"></span><br><span class="line">main: support1.o main.o</span><br><span class="line">    $(CC) $(FLAGS) main.o support1.o ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">support1.o: support1.hpp support1.cpp</span><br><span class="line">    $(CC) $(FLAGS) ­-c support1.cpp</span><br><span class="line"></span><br><span class="line">main.o: main.cpp</span><br><span class="line">    $(CC) $(FLAGS) -­c main.cpp</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­f *.o</span><br><span class="line">    @rm ­f *.gch</span><br><span class="line">    @rm ­f main</span><br></pre></td></tr></table></figure>
+<ul>
+<li>变量</li>
+<li>在Makefile中可以使用”<name> := <content>”声明变量，并在此后使用$(<name>)可以使用，类似C/C++中的宏，它是字符串的直接替换。如 $(CC) $(FLAGS) ­csupport1.cpp会变成 g++ ­std=c++11 ­-w -­c support1.cpp。</name></content></name></li>
+<li>前缀是 $符号，后面带个括号 ()的都是变量，如 $@也是变量，称为 自动化变量，它是目标文件的名字。如目标为 main的这一段的命令会变成 g++ ­std=c++ -­w main.o support1.o ­-o main</li>
+<li>伪目标</li>
+<li>clean一段中，target后面没有依赖文件，这称为 伪目标 ，作用是写了之后就可以使用 make clean来执行它的命令集了</li>
+<li>这里的命令集可以使用许多shell命令，但似乎并不是所有都能用</li>
+<li>命令前面的 @表示 不显示这条命令 ，和Windows下的.bat类似(下面分别是不使<br>用 @和使用 @的对比)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">在Makefile中加入</span><br><span class="line">foo:</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Testing"</span></span><br><span class="line"><span class="comment"># 同样地，这是伪目标，可以使用make foo来执行其命令集</span></span><br><span class="line"></span><br><span class="line">user@computer:~/learnmake$ make foo</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Testing"</span></span><br><span class="line">Testing</span><br><span class="line"></span><br><span class="line">Makefile中改为</span><br><span class="line">foo:</span><br><span class="line">@<span class="built_in">echo</span> <span class="string">"Testing"</span></span><br><span class="line"></span><br><span class="line">user@computer:~/learnmake$ make foo</span><br><span class="line">Testing</span><br></pre></td></tr></table></figure>
+<h2 id="复杂一点的情况"><a href="#复杂一点的情况" class="headerlink" title="复杂一点的情况"></a>复杂一点的情况</h2><p>有时候一个项目的目录并没有如此简单，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">├── build</span><br><span class="line">├── include</span><br><span class="line">├── lib</span><br><span class="line">│ ├── mysql</span><br><span class="line">│ └── mysql++</span><br><span class="line">└── src</span><br></pre></td></tr></table></figure>
+<ul>
+<li>bin是编译生成的可执行文件</li>
+<li>build是编译的中间文件如*.o文件</li>
+<li>include是各种.h或.hpp文件</li>
+<li>lib是一些必要的库文件</li>
+<li>src是.cpp文件</li>
+</ul>
+<p>这个时候，事情并不简单。因为现在的代码“身首异处”，所以要把它们的路径告诉编译器才行，我们使用 相对路径 来达到效果。</p>
+<p>.表示当前目录， ..表示上一级目录，用类似这样的相对路径来找到需要的文件，当然 ./经常可以省略</p>
+<p>以下面的目录结构为目标(假设原本不存在 bin目录和 build目录)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">│ └── main</span><br><span class="line">├── build</span><br><span class="line">│ ├── main.o</span><br><span class="line">│ └── support1.o</span><br><span class="line">├── include</span><br><span class="line">│ └── support1.hpp</span><br><span class="line">├── Makefile</span><br><span class="line">└── src</span><br><span class="line">├── main.cpp</span><br><span class="line">└── support1.cpp</span><br></pre></td></tr></table></figure>
+<p>因为最后的目标 main在 bin目录中，所以target也应该是 bin/main，而其依赖的两个文件也要写清楚目录了 build/main.o build/support1.o。</p>
+<p>而在编译前，应该确认 bin和 build都是存在的目录，因此需要在编译前多一条命令 <code>mkdir ­-p bin</code>。因为要指明文件目录，于是编译命令变成 <code>g++ ­std=c++11 -­w build/main.o build/support1.o ­-o bin/main</code></p>
+<p>由于在support1.cpp中我们写了 #include “support1.hpp”，按以前的经验，这样写是只能找到同一个文件夹下的文件的，所以需要加一个编译器的参数 ­I./include，让它去其他地方找头文件。这样编译命令就完成了，生成.o文件的也类似。那么Makefile就可以写出来了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 -­w</span><br><span class="line"></span><br><span class="line">bin/main: build/support1.o build/main.o</span><br><span class="line">    @mkdir ­-p bin</span><br><span class="line">    $(CC) $(FLAGS) ­I./include build/support1.o build/main.o ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">build/%.o: src/%.cpp</span><br><span class="line">    @mkdir ­-p build</span><br><span class="line">    $(CC) $(FLAGS) ­I./include ­-c ­-o <span class="variable">$@</span> src/support1.cpp</span><br><span class="line"></span><br><span class="line">build/main.o: src/main.cpp</span><br><span class="line">    @mkdir ­-p build</span><br><span class="line">    $(CC) $(FLAGS) ­I./include ­-c ­-o <span class="variable">$@</span> src/main.cpp</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­rf build</span><br><span class="line">    @rm ­rf bin</span><br></pre></td></tr></table></figure>
+<p>这样就好了吗？不，不可以。将来要是文件结构有了偏差，写这个Makefile的人是要负责的。如果目录不同了，那么改各个路径要每个都改，而最好的做法应该是只改一处就影响全局。所以应该下面这样会更好。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 ­-w</span><br><span class="line">INC_DIR := include</span><br><span class="line">SRC_DIR := src</span><br><span class="line">BUILD_DIR := build</span><br><span class="line">BIN_DIR := bin</span><br><span class="line">INCLUDE := ­I./$(INC_DIR)</span><br><span class="line"></span><br><span class="line">$(BIN_DIR)/main: $(BUILD_DIR)/support1.o $(BUILD_DIR)/main.o</span><br><span class="line">    @mkdir ­-p $(BIN_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) $(BUILD_DIR)/support1.o $(BUILD_DIR)/main.o ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp</span><br><span class="line">    @mkdir -­p $(BUILD_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) ­-c -­o <span class="variable">$@</span> $(SRC_DIR)/support1.cpp</span><br><span class="line"></span><br><span class="line">$(BUILD_DIR)/main.o: $(SRC_DIR)/main.cpp</span><br><span class="line">    @mkdir -­p $(BUILD_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) -­c -­o <span class="variable">$@</span> $(SRC_DIR)/main.cpp</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­rf $(BUILD_DIR)</span><br><span class="line">    @rm ­rf $(BIN_DIR)</span><br></pre></td></tr></table></figure>
+<p>然而这个Makefile还可以更加简短并更加完善</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 ­-w</span><br><span class="line">INC_DIR := include</span><br><span class="line">SRC_DIR := src</span><br><span class="line">BUILD_DIR := build</span><br><span class="line">BIN_DIR := bin</span><br><span class="line">INCLUDE := ­I./$(INC_DIR)</span><br><span class="line"></span><br><span class="line">$(BIN_DIR)/main: $(BUILD_DIR)/support1.o $(BUILD_DIR)/main.o</span><br><span class="line">    @mkdir ­-p $(BIN_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) $^ ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp</span><br><span class="line">    @mkdir -­p $(BUILD_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) -­c ­-o <span class="variable">$@</span> $&lt;</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­rf $(BUILD_DIR)</span><br><span class="line">    @rm ­rf $(BIN_DIR)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>两个自动化变量</li>
+<li><ul>
+<li>$^依赖文件的集合，用空格分隔</li>
+</ul>
+</li>
+<li><ul>
+<li>$&lt;第一个依赖文件</li>
+</ul>
+</li>
+<li><ul>
+<li>其实在 %.o部分，也可以换成 $^</li>
+</ul>
+</li>
+<li><ul>
+<li>还有上文已经提过的 $@目标文件</li>
+</ul>
+</li>
+<li>通配符 %</li>
+<li><ul>
+<li>作用是就是 *的作用了通配</li>
+</ul>
+</li>
+</ul>
+<p>这里的好处就是当 src目录下再多cpp文件时，生成%.o文件的这一部分不用更改，生成可执行文件那里只要加一个依赖就好了</p>
+<p>实际上还有方法让生成可执行文件的规则也自动</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/shixun4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2103,459 +2623,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/20/leetcodeweek4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/20/leetcodeweek4/" itemprop="url">Weekly Contest 151</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-20T13:21:07+08:00">
-                2019-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
-                    <span itemprop="name">Weekly-Contest</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/20/leetcodeweek4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/20/leetcodeweek4/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  2.4k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  14
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Invalid-Transactions"><a href="#Invalid-Transactions" class="headerlink" title="Invalid Transactions"></a>Invalid Transactions</h1><p>A transaction is possibly invalid if:</p>
-<p>the amount exceeds $1000, or;</p>
-<p>if it occurs within (and including) 60 minutes of another transaction with the same name in a different city.</p>
-<p>Each transaction string transactions[i] consists of comma separated values representing the name, time (in minutes), amount, and city of the transaction.</p>
-<p>Given a list of transactions, return a list of transactions that are possibly invalid.  You may return the answer in any order.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: transactions = [&quot;alice,20,800,mtv&quot;,&quot;alice,50,100,beijing&quot;]</span><br><span class="line">Output: [&quot;alice,20,800,mtv&quot;,&quot;alice,50,100,beijing&quot;]</span><br><span class="line">Explanation: The first transaction is invalid because the second transaction occurs within a difference of 60 minutes, have the same name and is in a different city. Similarly the second one is invalid too.</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: transactions = [&quot;alice,20,800,mtv&quot;,&quot;alice,50,1200,mtv&quot;]</span><br><span class="line">Output: [&quot;alice,50,1200,mtv&quot;]</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: transactions = [&quot;alice,20,800,mtv&quot;,&quot;bob,50,1200,mtv&quot;]</span><br><span class="line">Output: [&quot;bob,50,1200,mtv&quot;]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>暴力</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; invalidTransactions(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; t) &#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;t.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; v;</span><br><span class="line">            <span class="built_in">string</span> s = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;t[i].size(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(t[i][j] == <span class="string">','</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    v.push_back(s);</span><br><span class="line">                    s = <span class="string">""</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    s += t[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">            v.push_back(s);</span><br><span class="line">            <span class="keyword">bool</span> f = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> it = mp.begin(); it != mp.end(); it++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; c = it-&gt;second;</span><br><span class="line">                <span class="keyword">if</span>(c[<span class="number">0</span>] == v[<span class="number">0</span>] &amp;&amp; c[<span class="number">3</span>] != v[<span class="number">3</span>] &amp;&amp; <span class="built_in">abs</span>(stoi(c[<span class="number">1</span>])-stoi(v[<span class="number">1</span>])) &lt;= <span class="number">60</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>((it-&gt;second).back() != <span class="string">"-1"</span>)</span><br><span class="line">                        (it-&gt;second).push_back(<span class="string">"-1"</span>);</span><br><span class="line">                    f = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(stoi(v[<span class="number">2</span>]) &gt; <span class="number">1000</span> || f)</span><br><span class="line">            &#123;</span><br><span class="line">                v.push_back(<span class="string">"-1"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            mp[t[i]] = v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ret;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = mp.begin(); it != mp.end(); it++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>((it-&gt;second).back() == <span class="string">"-1"</span>)</span><br><span class="line">                ret.push_back(it-&gt;first);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="Compare-Strings-by-Frequency-of-the-Smallest-Character"><a href="#Compare-Strings-by-Frequency-of-the-Smallest-Character" class="headerlink" title="Compare Strings by Frequency of the Smallest Character"></a>Compare Strings by Frequency of the Smallest Character</h1><p>Let’s define a function f(s) over a non-empty string s, which calculates the frequency of the smallest character in s. For example, if s = “dcce” then f(s) = 2 because the smallest character is “c” and its frequency is 2.</p>
-<p>Now, given string arrays queries and words, return an integer array answer, where each answer[i] is the number of words such that f(queries[i]) &lt; f(W), where W is a word in words.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: queries = [&quot;cbd&quot;], words = [&quot;zaaaz&quot;]</span><br><span class="line">Output: [1]</span><br><span class="line">Explanation: On the first query we have f(&quot;cbd&quot;) = 1, f(&quot;zaaaz&quot;) = 3 so f(&quot;cbd&quot;) &lt; f(&quot;zaaaz&quot;).</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: queries = [&quot;bbb&quot;,&quot;cc&quot;], words = [&quot;a&quot;,&quot;aa&quot;,&quot;aaa&quot;,&quot;aaaa&quot;]</span><br><span class="line">Output: [1,2]</span><br><span class="line">Explanation: On the first query only f(&quot;bbb&quot;) &lt; f(&quot;aaaa&quot;). On the second query both f(&quot;aaa&quot;) and f(&quot;aaaa&quot;) are both &gt; f(&quot;cc&quot;).</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; numSmallerByFrequency(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; queries, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words) &#123;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; freq; <span class="comment">// map会自动排序</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;words.size(); i++) freq[f(words[i])]++;</span><br><span class="line">        <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> p = freq.end(); p != freq.begin(); p--)</span><br><span class="line">        &#123;</span><br><span class="line">            p-&gt;second += cur;</span><br><span class="line">            cur = p-&gt;second;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;queries.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> q = f(queries[i]);</span><br><span class="line">            <span class="keyword">auto</span> p = freq.upper_bound(q);</span><br><span class="line">            <span class="keyword">if</span>(p == freq.end()) res.push_back(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">else</span>  res.push_back(p-&gt;second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//lower_bound(起始地址，结束地址，要查找的数值) 返回的是数值 第一个 出现的位置。</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//upper_bound(起始地址，结束地址，要查找的数值) 返回的是数值 最后一个 出现的位置。</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//binary_search(起始地址，结束地址，要查找的数值)  返回的是是否存在这么一个数，是一个bool值。</span></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; freq(<span class="number">26</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;s.size(); i++) freq[s[i]-<span class="string">'a'</span>]++;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">26</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(freq[i] != <span class="number">0</span>) <span class="keyword">return</span> freq[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="Remove-Zero-Sum-Consecutive-Nodes-from-Linked-List"><a href="#Remove-Zero-Sum-Consecutive-Nodes-from-Linked-List" class="headerlink" title="Remove Zero Sum Consecutive Nodes from Linked List"></a>Remove Zero Sum Consecutive Nodes from Linked List</h1><p>Given the head of a linked list, we repeatedly delete consecutive sequences of nodes that sum to 0 until there are no such sequences.</p>
-<p>After doing so, return the head of the final linked list.  You may return any such answer.</p>
-<p>(Note that in the examples below, all sequences are serializations of ListNode objects.)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: head = [1,2,-3,3,1]</span><br><span class="line">Output: [3,1]</span><br><span class="line">Note: The answer [1,2,1] would also be accepted.</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: head = [1,2,3,-3,4]</span><br><span class="line">Output: [1,2,4]</span><br><span class="line">Example 3:</span><br><span class="line"></span><br><span class="line">Input: head = [1,2,3,-3,-2]</span><br><span class="line">Output: [1]</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeZeroSumSublists</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> d = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        d-&gt;next = head;</span><br><span class="line">        <span class="keyword">auto</span> p = d;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(p)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">auto</span> q = p-&gt;next;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">while</span>(q)</span><br><span class="line">            &#123;</span><br><span class="line">                sum += q-&gt;val;</span><br><span class="line">                <span class="keyword">if</span>(sum == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    p-&gt;next = q-&gt;next;</span><br><span class="line">                    flag = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                q = q-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!flag)</span><br><span class="line">                p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> d-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="Dinner-Plate-Stacks"><a href="#Dinner-Plate-Stacks" class="headerlink" title="Dinner Plate Stacks"></a>Dinner Plate Stacks</h1><p>You have an infinite number of stacks arranged in a row and numbered (left to right) from 0, each of the stacks has the same maximum capacity.</p>
-<p>Implement the DinnerPlates class:</p>
-<ul>
-<li>DinnerPlates(int capacity) Initializes the object with the maximum capacity of the stacks.</li>
-<li>void push(int val) pushes the given positive integer val into the leftmost stack with size less than capacity.</li>
-<li>int pop() returns the value at the top of the rightmost non-empty stack and removes it from that stack, and returns -1 if all stacks are empty.</li>
-<li>int popAtStack(int index) returns the value at the top of the stack with the given index and removes it from that stack, and returns -1 if the stack with that given index is empty.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">[&quot;DinnerPlates&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;popAtStack&quot;,&quot;push&quot;,&quot;push&quot;,&quot;popAtStack&quot;,&quot;popAtStack&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;]</span><br><span class="line">[[2],[1],[2],[3],[4],[5],[0],[20],[21],[0],[2],[],[],[],[],[]]</span><br><span class="line">Output: </span><br><span class="line">[null,null,null,null,null,null,2,null,null,20,21,5,4,3,1,-1]</span><br><span class="line"></span><br><span class="line">Explanation: </span><br><span class="line">DinnerPlates D = DinnerPlates(2);  // Initialize with capacity = 2</span><br><span class="line">D.push(1);</span><br><span class="line">D.push(2);</span><br><span class="line">D.push(3);</span><br><span class="line">D.push(4);</span><br><span class="line">D.push(5);         // The stacks are now:  2  4</span><br><span class="line">                                           1  3  5</span><br><span class="line">                                           ﹈ ﹈ ﹈</span><br><span class="line">D.popAtStack(0);   // Returns 2.  The stacks are now:     4</span><br><span class="line">                                                       1  3  5</span><br><span class="line">                                                       ﹈ ﹈ ﹈</span><br><span class="line">D.push(20);        // The stacks are now: 20  4</span><br><span class="line">                                           1  3  5</span><br><span class="line">                                           ﹈ ﹈ ﹈</span><br><span class="line">D.push(21);        // The stacks are now: 20  4 21</span><br><span class="line">                                           1  3  5</span><br><span class="line">                                           ﹈ ﹈ ﹈</span><br><span class="line">D.popAtStack(0);   // Returns 20.  The stacks are now:     4 21</span><br><span class="line">                                                        1  3  5</span><br><span class="line">                                                        ﹈ ﹈ ﹈</span><br><span class="line">D.popAtStack(2);   // Returns 21.  The stacks are now:     4</span><br><span class="line">                                                        1  3  5</span><br><span class="line">                                                        ﹈ ﹈ ﹈ </span><br><span class="line">D.pop()            // Returns 5.  The stacks are now:      4</span><br><span class="line">                                                        1  3 </span><br><span class="line">                                                        ﹈ ﹈  </span><br><span class="line">D.pop()            // Returns 4.  The stacks are now:   1  3 </span><br><span class="line">                                                        ﹈ ﹈   </span><br><span class="line">D.pop()            // Returns 3.  The stacks are now:   1 </span><br><span class="line">                                                        ﹈   </span><br><span class="line">D.pop()            // Returns 1.  There are no stacks.</span><br><span class="line">D.pop()            // Returns -1.  There are still no stacks.</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DinnerPlates</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; s_aval;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;&gt; vs;</span><br><span class="line">    <span class="keyword">int</span> cap = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    DinnerPlates(<span class="keyword">int</span> capacity) &#123; cap = capacity; &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (s_aval.empty()) &#123;</span><br><span class="line">        vs.push_back(<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">        s_aval.insert(vs.size() - <span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">auto</span> idx = *s_aval.begin();</span><br><span class="line">      vs[idx].push(val);</span><br><span class="line">      <span class="keyword">if</span> (vs[idx].size() == cap) s_aval.erase(s_aval.begin());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (vs.empty()) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">      <span class="keyword">auto</span> res = vs.back().top(); vs.back().pop();</span><br><span class="line">      <span class="keyword">while</span> (!vs.empty() &amp;&amp; vs.back().empty()) &#123;</span><br><span class="line">        s_aval.erase(vs.size() - <span class="number">1</span>);</span><br><span class="line">        vs.pop_back();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!vs.empty() &amp;&amp; vs.back().size() &lt; cap) s_aval.insert(vs.size() - <span class="number">1</span>);</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">popAtStack</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (vs.size() &lt;= index || vs[index].empty()) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">      <span class="keyword">if</span> (vs.size() - <span class="number">1</span> == index) <span class="keyword">return</span> pop();</span><br><span class="line">      <span class="keyword">auto</span> res = vs[index].top(); vs[index].pop();</span><br><span class="line">      s_aval.insert(index);</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your DinnerPlates object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * DinnerPlates* obj = new DinnerPlates(capacity);</span></span><br><span class="line"><span class="comment"> * obj-&gt;push_back(val);</span></span><br><span class="line"><span class="comment"> * int param_2 = obj-&gt;pop_back();</span></span><br><span class="line"><span class="comment"> * int param_3 = obj-&gt;pop_backAtStack(index);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-<h1 id="Maximum-Level-Sum-of-a-Binary-Tree"><a href="#Maximum-Level-Sum-of-a-Binary-Tree" class="headerlink" title="Maximum Level Sum of a Binary Tree"></a>Maximum Level Sum of a Binary Tree</h1><p>Given the root of a binary tree, the level of its root is 1, the level of its children is 2, and so on.</p>
-<p>Return the smallest level X such that the sum of all the values of nodes at level X is maximal.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,7,0,7,-8,null,null]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: </span><br><span class="line">Level 1 sum = 1.</span><br><span class="line">Level 2 sum = 7 + 0 = 7.</span><br><span class="line">Level 3 sum = 7 + -8 = -1.</span><br><span class="line">So we return the level with the maximum sum which is level 2.</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxLevelSum</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> cur_level = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;TreeNode* &gt; q;</span><br><span class="line">        q.push(root);</span><br><span class="line">        <span class="keyword">int</span> mx_sum = INT_MIN;</span><br><span class="line">        <span class="keyword">int</span> level = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(!q.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            cur_level++;</span><br><span class="line">            <span class="keyword">int</span> sz = q.size();</span><br><span class="line">            <span class="keyword">int</span> local_sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;sz; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode *tmp = q.front();</span><br><span class="line">                q.pop();</span><br><span class="line">                local_sum += tmp-&gt;val;</span><br><span class="line">                <span class="keyword">if</span>(tmp-&gt;left)&#123;</span><br><span class="line">                    q.push(tmp-&gt;left);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(tmp-&gt;right)</span><br><span class="line">                &#123;</span><br><span class="line">                    q.push(tmp-&gt;right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(local_sum &gt; mx_sum)&#123;</span><br><span class="line">                mx_sum = local_sum;</span><br><span class="line">                level = cur_level;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> level;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="Find-Words-That-Can-Be-Formed-by-Characters"><a href="#Find-Words-That-Can-Be-Formed-by-Characters" class="headerlink" title="Find Words That Can Be Formed by Characters"></a>Find Words That Can Be Formed by Characters</h1><p>You are given an array of strings words and a string chars.</p>
-<p>A string is good if it can be formed by characters from chars (each character can only be used once).</p>
-<p>Return the sum of lengths of all good strings in words.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: words = [&quot;cat&quot;,&quot;bt&quot;,&quot;hat&quot;,&quot;tree&quot;], chars = &quot;atach&quot;</span><br><span class="line">Output: 6</span><br><span class="line">Explanation: </span><br><span class="line">The strings that can be formed are &quot;cat&quot; and &quot;hat&quot; so the answer is 3 + 3 = 6.</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: words = [&quot;hello&quot;,&quot;world&quot;,&quot;leetcode&quot;], chars = &quot;welldonehoneyr&quot;</span><br><span class="line">Output: 10</span><br><span class="line">Explanation: </span><br><span class="line">The strings that can be formed are &quot;hello&quot; and &quot;world&quot; so the answer is 5 + 5 = 10.</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int countCharacters(vector&lt;string&gt;&amp; words, string chars) &#123;</span><br><span class="line">        if(words.size() == 0)</span><br><span class="line">            return 0;</span><br><span class="line">        </span><br><span class="line">        map&lt;char, int&gt; ma;</span><br><span class="line">        map&lt;char, int&gt; co;</span><br><span class="line">        </span><br><span class="line">        for(int i=0; i&lt;chars.size(); i++)</span><br><span class="line">            ma[chars[i]]++;</span><br><span class="line">        </span><br><span class="line">        int count = 0;</span><br><span class="line">        for(int i=0; i&lt;words.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            co = ma;</span><br><span class="line">            int flag = 0;</span><br><span class="line">            for(int j=0; j&lt;words[i].size(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if(co[words[i][j]]!=0)</span><br><span class="line">                &#123;</span><br><span class="line">                    co[words[i][j]]--;</span><br><span class="line">                &#125;</span><br><span class="line">                else</span><br><span class="line">                &#123;</span><br><span class="line">                    flag = 1;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(flag == 0)</span><br><span class="line">                count += words[i].size();</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="Last-Substring-in-Lexicographical-Order"><a href="#Last-Substring-in-Lexicographical-Order" class="headerlink" title="Last Substring in Lexicographical Order"></a>Last Substring in Lexicographical Order</h1><p>Given a string s, return the <strong>last</strong> substring of s in lexicographical order.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;leetcode&quot;</span><br><span class="line">Output: &quot;tcode&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">lastSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, N = s.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;N; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == s[start] &amp;&amp; s[i<span class="number">-1</span>] == s[start]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; i+j &lt; N; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(s[start+j] == s[i+j]) <span class="keyword">continue</span>;</span><br><span class="line">                start = s[start+j] &gt; s[i+j] ? start : i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substr(start);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="As-Far-from-Land-as-Possible"><a href="#As-Far-from-Land-as-Possible" class="headerlink" title="As Far from Land as Possible"></a>As Far from Land as Possible</h1><p>Given an N x N grid containing only values 0 and 1, where 0 represents water and 1 represents land, find a water cell such that its distance to the nearest land cell is maximized and return the distance.</p>
-<p>The distance used in this problem is the Manhattan distance: the distance between two cells (x0, y0) and (x1, y1) is |x0 - x1| + |y0 - y1|.</p>
-<p>If no land or water exists in the grid, return -1.</p>
-<blockquote>
-<p>BFS</p>
-</blockquote>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxDistance</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; g)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> steps = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; q, q1;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> i=<span class="number">0</span>; i&lt; g.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> j=<span class="number">0</span>; j &lt; g[i].size(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(g[i][j] == <span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    q.push(&#123;i<span class="number">-1</span>, j&#125;);</span><br><span class="line">                    q.push(&#123;i+<span class="number">1</span>, j&#125;);</span><br><span class="line">                    q.push(&#123;i, j<span class="number">-1</span>&#125;);</span><br><span class="line">                    q.push(&#123;i, j+<span class="number">1</span>&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!q.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            ++steps;</span><br><span class="line">            <span class="keyword">while</span>(!q.empty())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> i=q.front().first, j = q.front().second;</span><br><span class="line">                q.pop();</span><br><span class="line">                <span class="keyword">if</span>(i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span> &amp;&amp; i &lt; g.size() &amp;&amp; j &lt; g[i].size() &amp;&amp; g[i][j] == <span class="number">0</span>)&#123;</span><br><span class="line">                    g[i][j] = steps;</span><br><span class="line">                    q1.push(&#123;i<span class="number">-1</span>, j&#125;);</span><br><span class="line">                    q1.push(&#123;i+<span class="number">1</span>, j&#125;);</span><br><span class="line">                    q1.push(&#123;i, j<span class="number">-1</span>&#125;);</span><br><span class="line">                    q1.push(&#123;i, j+<span class="number">1</span>&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            swap(q1, q);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> steps == <span class="number">1</span> ? <span class="number">-1</span> : steps<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/20/leetcodeweek3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/20/leetcodeweek3/" itemprop="url">Weekly Contest 152</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-20T09:06:15+08:00">
-                2019-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
-                    <span itemprop="name">Weekly-Contest</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/20/leetcodeweek3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/20/leetcodeweek3/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.3k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-求1-n中所有质数对应质数位置的排列的数量"><a href="#1-求1-n中所有质数对应质数位置的排列的数量" class="headerlink" title="1. 求1~n中所有质数对应质数位置的排列的数量"></a>1. 求1~n中所有质数对应质数位置的排列的数量</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> t = n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i*i &lt;= t; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(t % i == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numPrimeArrangements</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> count2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(isPrime(i))</span><br><span class="line">                count1++;</span><br><span class="line">        &#125;</span><br><span class="line">        count2 = n-count1;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> ret = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=count1; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ret = ret * i % <span class="number">1000000007</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=count2; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ret = ret * i % <span class="number">1000000007</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret % (<span class="number">1000000000</span> + <span class="number">7</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="2-Can-Make-Palindrome-from-Substring"><a href="#2-Can-Make-Palindrome-from-Substring" class="headerlink" title="2. Can Make Palindrome from Substring"></a>2. Can Make Palindrome from Substring</h1><p>Given a string s, we make queries on substrings of s.</p>
-<p>For each query queries[i] = [left, right, k], we may rearrange the substring s[left], …, s[right], and then choose up to k of them to replace with any lowercase English letter. </p>
-<p>If the substring is possible to be a palindrome string after the operations above, the result of the query is true. Otherwise, the result is false.</p>
-<p>Return an array answer[], where answer[i] is the result of the i-th query queries[i].</p>
-<p>Note that: Each letter is counted individually for replacement so if for example s[left..right] = “aaa”, and k = 2, we can only replace two of the letters.  (Also, note that the initial string s is never modified by any query.)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot;abcda&quot;, queries = [[3,3,0],[1,2,0],[0,3,1],[0,3,2],[0,4,1]]</span><br><span class="line">Output: [true,false,false,true,true]</span><br><span class="line">Explanation:</span><br><span class="line">queries[0] : substring = &quot;d&quot;, is palidrome.</span><br><span class="line">queries[1] : substring = &quot;bc&quot;, is not palidrome.</span><br><span class="line">queries[2] : substring = &quot;abcd&quot;, is not palidrome after replacing only 1 character.</span><br><span class="line">queries[3] : substring = &quot;abcd&quot;, could be changed to &quot;abba&quot; which is palidrome. Also this can be changed to &quot;baab&quot; first rearrange it &quot;bacd&quot; then replace &quot;cd&quot; with &quot;ab&quot;.</span><br><span class="line">queries[4] : substring = &quot;abcda&quot;, could be changed to &quot;abcba&quot; which is palidrome.</span><br></pre></td></tr></table></figure>
-<p><a href="https://leetcode.com/problems/can-make-palindrome-from-substring/discuss/372010/C%2B%2B-Solution-with-complete-explanation" target="_blank" rel="noopener">1</a></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// int helper(string s, vector&lt;int&gt; h)   // timeout!!</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">//     int l = h[0];</span></span><br><span class="line">    <span class="comment">//     int r = h[1];</span></span><br><span class="line">    <span class="comment">//     int k = h[2];</span></span><br><span class="line">    <span class="comment">//     int ch[26] = &#123;0&#125;;</span></span><br><span class="line">    <span class="comment">//     for(int i=l; i&lt;=r; i++)</span></span><br><span class="line">    <span class="comment">//         ch[s[i]-'a']++;</span></span><br><span class="line">    <span class="comment">//     int count = 0;</span></span><br><span class="line">    <span class="comment">//     for(int i=0; i&lt;26; i++)</span></span><br><span class="line">    <span class="comment">//     &#123;</span></span><br><span class="line">    <span class="comment">//         if(ch[i] % 2 != 0)</span></span><br><span class="line">    <span class="comment">//             count++;</span></span><br><span class="line">    <span class="comment">//     &#125;</span></span><br><span class="line">    <span class="comment">//     int ret = (count / 2 &lt;= k);</span></span><br><span class="line">    <span class="comment">//     return ret;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// vector&lt;bool&gt; canMakePaliQueries(string s, vector&lt;vector&lt;int&gt;&gt;&amp; queries) &#123;</span></span><br><span class="line">    <span class="comment">//     vector&lt;bool&gt; ret;</span></span><br><span class="line">    <span class="comment">//     for(int i=0; i&lt;queries.size(); i++)</span></span><br><span class="line">    <span class="comment">//     &#123;</span></span><br><span class="line">    <span class="comment">//         int cur = helper(s, queries[i]);</span></span><br><span class="line">    <span class="comment">//         if(cur)</span></span><br><span class="line">    <span class="comment">//         &#123;</span></span><br><span class="line">    <span class="comment">//             bool rem = true;</span></span><br><span class="line">    <span class="comment">//             ret.push_back(rem);</span></span><br><span class="line">    <span class="comment">//         &#125;</span></span><br><span class="line">    <span class="comment">//         else</span></span><br><span class="line">    <span class="comment">//         &#123;</span></span><br><span class="line">    <span class="comment">//             bool rem = false;</span></span><br><span class="line">    <span class="comment">//             ret.push_back(rem);</span></span><br><span class="line">    <span class="comment">//         &#125;</span></span><br><span class="line">    <span class="comment">//     &#125;</span></span><br><span class="line">    <span class="comment">//     return ret;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; canMakePaliQueries(<span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; queries) &#123;</span><br><span class="line">        <span class="keyword">int</span> n=s.length();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> freq[n][<span class="number">26</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">memset</span>(freq,<span class="number">0</span>,<span class="keyword">sizeof</span>(freq));</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> i,j;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            freq[i][s[i]-<span class="string">'a'</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">26</span>;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                freq[i][j]+=freq[i<span class="number">-1</span>][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; answer;</span><br><span class="line">        <span class="keyword">int</span> u;</span><br><span class="line">        <span class="keyword">bool</span> ok=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;queries.size();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> l,r,k;</span><br><span class="line">            l=queries[i][<span class="number">0</span>];</span><br><span class="line">            r=queries[i][<span class="number">1</span>];</span><br><span class="line">            k=queries[i][<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">26</span>;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(l==<span class="number">0</span>)</span><br><span class="line">                    u=freq[r][j];</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    u=freq[r][j]-freq[l<span class="number">-1</span>][j];</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(u%<span class="number">2</span>==<span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    cnt++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>((cnt/<span class="number">2</span>)&lt;=k)</span><br><span class="line">            &#123;</span><br><span class="line">                answer.push_back(ok);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                answer.push_back(!ok);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> answer;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="3-Number-of-Valid-Words-for-Each-Puzzle"><a href="#3-Number-of-Valid-Words-for-Each-Puzzle" class="headerlink" title="3. Number of Valid Words for Each Puzzle"></a>3. Number of Valid Words for Each Puzzle</h1><p>With respect to a given puzzle string, a word is valid if both the following conditions are satisfied:</p>
-<p>word contains the first letter of puzzle.</p>
-<p>For each letter in word, that letter is in puzzle.</p>
-<p>For example, if the puzzle is “abcdefg”, then valid words are “faced”, “cabbage”, and “baggage”; while invalid words are “beefed” </p>
-<p>(doesn’t include “a”) and “based” (includes “s” which isn’t in the puzzle).</p>
-<p>Return an array answer, where answer[i] is the number of words in the given word list words that are valid with respect to the puzzle puzzles[i].</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">words = [&quot;aaaa&quot;,&quot;asas&quot;,&quot;able&quot;,&quot;ability&quot;,&quot;actt&quot;,&quot;actor&quot;,&quot;access&quot;], </span><br><span class="line">puzzles = [&quot;aboveyz&quot;,&quot;abrodyz&quot;,&quot;abslute&quot;,&quot;absoryz&quot;,&quot;actresz&quot;,&quot;gaswxyz&quot;]</span><br><span class="line">Output: [1,1,3,2,4,0]</span><br><span class="line">Explanation:</span><br><span class="line">1 valid word for &quot;aboveyz&quot; : &quot;aaaa&quot; </span><br><span class="line">1 valid word for &quot;abrodyz&quot; : &quot;aaaa&quot;</span><br><span class="line">3 valid words for &quot;abslute&quot; : &quot;aaaa&quot;, &quot;asas&quot;, &quot;able&quot;</span><br><span class="line">2 valid words for &quot;absoryz&quot; : &quot;aaaa&quot;, &quot;asas&quot;</span><br><span class="line">4 valid words for &quot;actresz&quot; : &quot;aaaa&quot;, &quot;asas&quot;, &quot;actt&quot;, &quot;access&quot;</span><br><span class="line">There&apos;re no valid words for &quot;gaswxyz&quot; cause none of the words in the list contains letter &apos;g&apos;.</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bb;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">bbit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; w)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> s : w)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> bit = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">set</span>&lt;<span class="keyword">char</span>&gt; tmp;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> t: s)</span><br><span class="line">            &#123;</span><br><span class="line">                tmp.insert(t);</span><br><span class="line">                bit = bit | (<span class="number">1</span> &lt;&lt; (t-<span class="string">'a'</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(tmp.size() &gt; <span class="number">7</span>) <span class="keyword">continue</span>;</span><br><span class="line">            bb.push_back(bit);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findNumOfValidWords(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; puzzles) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ret;</span><br><span class="line">        bbit(words);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; s: puzzles)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> first = <span class="number">1</span> &lt;&lt; (s[<span class="number">0</span>] - <span class="string">'a'</span>);</span><br><span class="line">            <span class="keyword">int</span> bit = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> aa : s)</span><br><span class="line">            &#123;</span><br><span class="line">                bit = bit | (<span class="number">1</span> &lt;&lt; (aa-<span class="string">'a'</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> v: bb)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>((v &amp; bit) == v &amp;&amp; ((first &amp; v) == first))</span><br><span class="line">                    num++;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            ret.push_back(num);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findNumOfValidWords(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; puzzles) &#123;</span><br><span class="line">        <span class="comment">// Lengths</span></span><br><span class="line">        <span class="keyword">int</span> P = puzzles.size();</span><br><span class="line">        <span class="keyword">int</span> W = words.size();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Letter masks</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; letterMask(<span class="number">26</span>, <span class="number">0</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, mask = <span class="number">1</span>; i &lt; <span class="number">26</span>; ++i, mask &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">            letterMask[i] = mask;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Word masks with count info</span></span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; wordsMask;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// For each word</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; W; ++i) &#123;</span><br><span class="line">            <span class="comment">// Compute word mask</span></span><br><span class="line">            <span class="keyword">int</span> mask = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">char</span> c: words[i]) &#123;</span><br><span class="line">                mask = mask | letterMask[c - <span class="string">'a'</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            ++wordsMask[mask];</span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">         <span class="comment">// Result : result[i] =&gt; number of words covered by puzzles[i]</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result(P, <span class="number">0</span>); </span><br><span class="line">        </span><br><span class="line">        <span class="comment">// For each puzzle</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; P; ++i) &#123;</span><br><span class="line">            <span class="comment">// Compute puzzle mask</span></span><br><span class="line">            <span class="keyword">int</span> mask = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">char</span> c: puzzles[i]) &#123;</span><br><span class="line">                mask = mask | letterMask[c - <span class="string">'a'</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Iterate through all valid subset of mask i.e. subset of puzzle chars = 2^7 = 64 in count</span></span><br><span class="line">            <span class="comment">// This makes the complexity O(P*64)</span></span><br><span class="line">            <span class="keyword">int</span> subMask = mask;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">while</span> (subMask) &#123;</span><br><span class="line">                <span class="keyword">if</span> ((subMask &amp; letterMask[puzzles[i][<span class="number">0</span>] - <span class="string">'a'</span>]) &amp;&amp; wordsMask.count(subMask)) &#123;</span><br><span class="line">                    result[i] += wordsMask[subMask];</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// Only select valid bits i.e. bits corresponding to chars in puzzle</span></span><br><span class="line">                subMask = (subMask - <span class="number">1</span>) &amp; mask;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2608,7 +2675,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">336</span>
+                  <span class="site-state-item-count">338</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2698,7 +2765,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">390.8k</span>
+    <span title="Site words total count">391.8k</span>
   
 </div>
 

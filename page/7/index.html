@@ -291,6 +291,459 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/20/leetcodeweek4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/20/leetcodeweek4/" itemprop="url">Weekly Contest 151</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-20T13:21:07+08:00">
+                2019-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
+                    <span itemprop="name">Weekly-Contest</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/20/leetcodeweek4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/20/leetcodeweek4/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  14
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Invalid-Transactions"><a href="#Invalid-Transactions" class="headerlink" title="Invalid Transactions"></a>Invalid Transactions</h1><p>A transaction is possibly invalid if:</p>
+<p>the amount exceeds $1000, or;</p>
+<p>if it occurs within (and including) 60 minutes of another transaction with the same name in a different city.</p>
+<p>Each transaction string transactions[i] consists of comma separated values representing the name, time (in minutes), amount, and city of the transaction.</p>
+<p>Given a list of transactions, return a list of transactions that are possibly invalid.  You may return the answer in any order.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: transactions = [&quot;alice,20,800,mtv&quot;,&quot;alice,50,100,beijing&quot;]</span><br><span class="line">Output: [&quot;alice,20,800,mtv&quot;,&quot;alice,50,100,beijing&quot;]</span><br><span class="line">Explanation: The first transaction is invalid because the second transaction occurs within a difference of 60 minutes, have the same name and is in a different city. Similarly the second one is invalid too.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: transactions = [&quot;alice,20,800,mtv&quot;,&quot;alice,50,1200,mtv&quot;]</span><br><span class="line">Output: [&quot;alice,50,1200,mtv&quot;]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: transactions = [&quot;alice,20,800,mtv&quot;,&quot;bob,50,1200,mtv&quot;]</span><br><span class="line">Output: [&quot;bob,50,1200,mtv&quot;]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>暴力</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; invalidTransactions(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; t) &#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;t.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; v;</span><br><span class="line">            <span class="built_in">string</span> s = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;t[i].size(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(t[i][j] == <span class="string">','</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    v.push_back(s);</span><br><span class="line">                    s = <span class="string">""</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    s += t[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">            v.push_back(s);</span><br><span class="line">            <span class="keyword">bool</span> f = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> it = mp.begin(); it != mp.end(); it++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; c = it-&gt;second;</span><br><span class="line">                <span class="keyword">if</span>(c[<span class="number">0</span>] == v[<span class="number">0</span>] &amp;&amp; c[<span class="number">3</span>] != v[<span class="number">3</span>] &amp;&amp; <span class="built_in">abs</span>(stoi(c[<span class="number">1</span>])-stoi(v[<span class="number">1</span>])) &lt;= <span class="number">60</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>((it-&gt;second).back() != <span class="string">"-1"</span>)</span><br><span class="line">                        (it-&gt;second).push_back(<span class="string">"-1"</span>);</span><br><span class="line">                    f = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(stoi(v[<span class="number">2</span>]) &gt; <span class="number">1000</span> || f)</span><br><span class="line">            &#123;</span><br><span class="line">                v.push_back(<span class="string">"-1"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            mp[t[i]] = v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ret;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = mp.begin(); it != mp.end(); it++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>((it-&gt;second).back() == <span class="string">"-1"</span>)</span><br><span class="line">                ret.push_back(it-&gt;first);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Compare-Strings-by-Frequency-of-the-Smallest-Character"><a href="#Compare-Strings-by-Frequency-of-the-Smallest-Character" class="headerlink" title="Compare Strings by Frequency of the Smallest Character"></a>Compare Strings by Frequency of the Smallest Character</h1><p>Let’s define a function f(s) over a non-empty string s, which calculates the frequency of the smallest character in s. For example, if s = “dcce” then f(s) = 2 because the smallest character is “c” and its frequency is 2.</p>
+<p>Now, given string arrays queries and words, return an integer array answer, where each answer[i] is the number of words such that f(queries[i]) &lt; f(W), where W is a word in words.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: queries = [&quot;cbd&quot;], words = [&quot;zaaaz&quot;]</span><br><span class="line">Output: [1]</span><br><span class="line">Explanation: On the first query we have f(&quot;cbd&quot;) = 1, f(&quot;zaaaz&quot;) = 3 so f(&quot;cbd&quot;) &lt; f(&quot;zaaaz&quot;).</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: queries = [&quot;bbb&quot;,&quot;cc&quot;], words = [&quot;a&quot;,&quot;aa&quot;,&quot;aaa&quot;,&quot;aaaa&quot;]</span><br><span class="line">Output: [1,2]</span><br><span class="line">Explanation: On the first query only f(&quot;bbb&quot;) &lt; f(&quot;aaaa&quot;). On the second query both f(&quot;aaa&quot;) and f(&quot;aaaa&quot;) are both &gt; f(&quot;cc&quot;).</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; numSmallerByFrequency(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; queries, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words) &#123;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; freq; <span class="comment">// map会自动排序</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;words.size(); i++) freq[f(words[i])]++;</span><br><span class="line">        <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> p = freq.end(); p != freq.begin(); p--)</span><br><span class="line">        &#123;</span><br><span class="line">            p-&gt;second += cur;</span><br><span class="line">            cur = p-&gt;second;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;queries.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> q = f(queries[i]);</span><br><span class="line">            <span class="keyword">auto</span> p = freq.upper_bound(q);</span><br><span class="line">            <span class="keyword">if</span>(p == freq.end()) res.push_back(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">else</span>  res.push_back(p-&gt;second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//lower_bound(起始地址，结束地址，要查找的数值) 返回的是数值 第一个 出现的位置。</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//upper_bound(起始地址，结束地址，要查找的数值) 返回的是数值 最后一个 出现的位置。</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//binary_search(起始地址，结束地址，要查找的数值)  返回的是是否存在这么一个数，是一个bool值。</span></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; freq(<span class="number">26</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;s.size(); i++) freq[s[i]-<span class="string">'a'</span>]++;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">26</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(freq[i] != <span class="number">0</span>) <span class="keyword">return</span> freq[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Remove-Zero-Sum-Consecutive-Nodes-from-Linked-List"><a href="#Remove-Zero-Sum-Consecutive-Nodes-from-Linked-List" class="headerlink" title="Remove Zero Sum Consecutive Nodes from Linked List"></a>Remove Zero Sum Consecutive Nodes from Linked List</h1><p>Given the head of a linked list, we repeatedly delete consecutive sequences of nodes that sum to 0 until there are no such sequences.</p>
+<p>After doing so, return the head of the final linked list.  You may return any such answer.</p>
+<p>(Note that in the examples below, all sequences are serializations of ListNode objects.)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: head = [1,2,-3,3,1]</span><br><span class="line">Output: [3,1]</span><br><span class="line">Note: The answer [1,2,1] would also be accepted.</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: head = [1,2,3,-3,4]</span><br><span class="line">Output: [1,2,4]</span><br><span class="line">Example 3:</span><br><span class="line"></span><br><span class="line">Input: head = [1,2,3,-3,-2]</span><br><span class="line">Output: [1]</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeZeroSumSublists</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> d = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        d-&gt;next = head;</span><br><span class="line">        <span class="keyword">auto</span> p = d;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(p)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">auto</span> q = p-&gt;next;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">while</span>(q)</span><br><span class="line">            &#123;</span><br><span class="line">                sum += q-&gt;val;</span><br><span class="line">                <span class="keyword">if</span>(sum == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    p-&gt;next = q-&gt;next;</span><br><span class="line">                    flag = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                q = q-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!flag)</span><br><span class="line">                p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> d-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Dinner-Plate-Stacks"><a href="#Dinner-Plate-Stacks" class="headerlink" title="Dinner Plate Stacks"></a>Dinner Plate Stacks</h1><p>You have an infinite number of stacks arranged in a row and numbered (left to right) from 0, each of the stacks has the same maximum capacity.</p>
+<p>Implement the DinnerPlates class:</p>
+<ul>
+<li>DinnerPlates(int capacity) Initializes the object with the maximum capacity of the stacks.</li>
+<li>void push(int val) pushes the given positive integer val into the leftmost stack with size less than capacity.</li>
+<li>int pop() returns the value at the top of the rightmost non-empty stack and removes it from that stack, and returns -1 if all stacks are empty.</li>
+<li>int popAtStack(int index) returns the value at the top of the stack with the given index and removes it from that stack, and returns -1 if the stack with that given index is empty.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">[&quot;DinnerPlates&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;popAtStack&quot;,&quot;push&quot;,&quot;push&quot;,&quot;popAtStack&quot;,&quot;popAtStack&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;]</span><br><span class="line">[[2],[1],[2],[3],[4],[5],[0],[20],[21],[0],[2],[],[],[],[],[]]</span><br><span class="line">Output: </span><br><span class="line">[null,null,null,null,null,null,2,null,null,20,21,5,4,3,1,-1]</span><br><span class="line"></span><br><span class="line">Explanation: </span><br><span class="line">DinnerPlates D = DinnerPlates(2);  // Initialize with capacity = 2</span><br><span class="line">D.push(1);</span><br><span class="line">D.push(2);</span><br><span class="line">D.push(3);</span><br><span class="line">D.push(4);</span><br><span class="line">D.push(5);         // The stacks are now:  2  4</span><br><span class="line">                                           1  3  5</span><br><span class="line">                                           ﹈ ﹈ ﹈</span><br><span class="line">D.popAtStack(0);   // Returns 2.  The stacks are now:     4</span><br><span class="line">                                                       1  3  5</span><br><span class="line">                                                       ﹈ ﹈ ﹈</span><br><span class="line">D.push(20);        // The stacks are now: 20  4</span><br><span class="line">                                           1  3  5</span><br><span class="line">                                           ﹈ ﹈ ﹈</span><br><span class="line">D.push(21);        // The stacks are now: 20  4 21</span><br><span class="line">                                           1  3  5</span><br><span class="line">                                           ﹈ ﹈ ﹈</span><br><span class="line">D.popAtStack(0);   // Returns 20.  The stacks are now:     4 21</span><br><span class="line">                                                        1  3  5</span><br><span class="line">                                                        ﹈ ﹈ ﹈</span><br><span class="line">D.popAtStack(2);   // Returns 21.  The stacks are now:     4</span><br><span class="line">                                                        1  3  5</span><br><span class="line">                                                        ﹈ ﹈ ﹈ </span><br><span class="line">D.pop()            // Returns 5.  The stacks are now:      4</span><br><span class="line">                                                        1  3 </span><br><span class="line">                                                        ﹈ ﹈  </span><br><span class="line">D.pop()            // Returns 4.  The stacks are now:   1  3 </span><br><span class="line">                                                        ﹈ ﹈   </span><br><span class="line">D.pop()            // Returns 3.  The stacks are now:   1 </span><br><span class="line">                                                        ﹈   </span><br><span class="line">D.pop()            // Returns 1.  There are no stacks.</span><br><span class="line">D.pop()            // Returns -1.  There are still no stacks.</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DinnerPlates</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; s_aval;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;&gt; vs;</span><br><span class="line">    <span class="keyword">int</span> cap = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    DinnerPlates(<span class="keyword">int</span> capacity) &#123; cap = capacity; &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (s_aval.empty()) &#123;</span><br><span class="line">        vs.push_back(<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">        s_aval.insert(vs.size() - <span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">auto</span> idx = *s_aval.begin();</span><br><span class="line">      vs[idx].push(val);</span><br><span class="line">      <span class="keyword">if</span> (vs[idx].size() == cap) s_aval.erase(s_aval.begin());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (vs.empty()) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">      <span class="keyword">auto</span> res = vs.back().top(); vs.back().pop();</span><br><span class="line">      <span class="keyword">while</span> (!vs.empty() &amp;&amp; vs.back().empty()) &#123;</span><br><span class="line">        s_aval.erase(vs.size() - <span class="number">1</span>);</span><br><span class="line">        vs.pop_back();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!vs.empty() &amp;&amp; vs.back().size() &lt; cap) s_aval.insert(vs.size() - <span class="number">1</span>);</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">popAtStack</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (vs.size() &lt;= index || vs[index].empty()) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">      <span class="keyword">if</span> (vs.size() - <span class="number">1</span> == index) <span class="keyword">return</span> pop();</span><br><span class="line">      <span class="keyword">auto</span> res = vs[index].top(); vs[index].pop();</span><br><span class="line">      s_aval.insert(index);</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your DinnerPlates object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * DinnerPlates* obj = new DinnerPlates(capacity);</span></span><br><span class="line"><span class="comment"> * obj-&gt;push_back(val);</span></span><br><span class="line"><span class="comment"> * int param_2 = obj-&gt;pop_back();</span></span><br><span class="line"><span class="comment"> * int param_3 = obj-&gt;pop_backAtStack(index);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h1 id="Maximum-Level-Sum-of-a-Binary-Tree"><a href="#Maximum-Level-Sum-of-a-Binary-Tree" class="headerlink" title="Maximum Level Sum of a Binary Tree"></a>Maximum Level Sum of a Binary Tree</h1><p>Given the root of a binary tree, the level of its root is 1, the level of its children is 2, and so on.</p>
+<p>Return the smallest level X such that the sum of all the values of nodes at level X is maximal.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,7,0,7,-8,null,null]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: </span><br><span class="line">Level 1 sum = 1.</span><br><span class="line">Level 2 sum = 7 + 0 = 7.</span><br><span class="line">Level 3 sum = 7 + -8 = -1.</span><br><span class="line">So we return the level with the maximum sum which is level 2.</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxLevelSum</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> cur_level = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;TreeNode* &gt; q;</span><br><span class="line">        q.push(root);</span><br><span class="line">        <span class="keyword">int</span> mx_sum = INT_MIN;</span><br><span class="line">        <span class="keyword">int</span> level = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(!q.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            cur_level++;</span><br><span class="line">            <span class="keyword">int</span> sz = q.size();</span><br><span class="line">            <span class="keyword">int</span> local_sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;sz; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode *tmp = q.front();</span><br><span class="line">                q.pop();</span><br><span class="line">                local_sum += tmp-&gt;val;</span><br><span class="line">                <span class="keyword">if</span>(tmp-&gt;left)&#123;</span><br><span class="line">                    q.push(tmp-&gt;left);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(tmp-&gt;right)</span><br><span class="line">                &#123;</span><br><span class="line">                    q.push(tmp-&gt;right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(local_sum &gt; mx_sum)&#123;</span><br><span class="line">                mx_sum = local_sum;</span><br><span class="line">                level = cur_level;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> level;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Find-Words-That-Can-Be-Formed-by-Characters"><a href="#Find-Words-That-Can-Be-Formed-by-Characters" class="headerlink" title="Find Words That Can Be Formed by Characters"></a>Find Words That Can Be Formed by Characters</h1><p>You are given an array of strings words and a string chars.</p>
+<p>A string is good if it can be formed by characters from chars (each character can only be used once).</p>
+<p>Return the sum of lengths of all good strings in words.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: words = [&quot;cat&quot;,&quot;bt&quot;,&quot;hat&quot;,&quot;tree&quot;], chars = &quot;atach&quot;</span><br><span class="line">Output: 6</span><br><span class="line">Explanation: </span><br><span class="line">The strings that can be formed are &quot;cat&quot; and &quot;hat&quot; so the answer is 3 + 3 = 6.</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: words = [&quot;hello&quot;,&quot;world&quot;,&quot;leetcode&quot;], chars = &quot;welldonehoneyr&quot;</span><br><span class="line">Output: 10</span><br><span class="line">Explanation: </span><br><span class="line">The strings that can be formed are &quot;hello&quot; and &quot;world&quot; so the answer is 5 + 5 = 10.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int countCharacters(vector&lt;string&gt;&amp; words, string chars) &#123;</span><br><span class="line">        if(words.size() == 0)</span><br><span class="line">            return 0;</span><br><span class="line">        </span><br><span class="line">        map&lt;char, int&gt; ma;</span><br><span class="line">        map&lt;char, int&gt; co;</span><br><span class="line">        </span><br><span class="line">        for(int i=0; i&lt;chars.size(); i++)</span><br><span class="line">            ma[chars[i]]++;</span><br><span class="line">        </span><br><span class="line">        int count = 0;</span><br><span class="line">        for(int i=0; i&lt;words.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            co = ma;</span><br><span class="line">            int flag = 0;</span><br><span class="line">            for(int j=0; j&lt;words[i].size(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if(co[words[i][j]]!=0)</span><br><span class="line">                &#123;</span><br><span class="line">                    co[words[i][j]]--;</span><br><span class="line">                &#125;</span><br><span class="line">                else</span><br><span class="line">                &#123;</span><br><span class="line">                    flag = 1;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(flag == 0)</span><br><span class="line">                count += words[i].size();</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Last-Substring-in-Lexicographical-Order"><a href="#Last-Substring-in-Lexicographical-Order" class="headerlink" title="Last Substring in Lexicographical Order"></a>Last Substring in Lexicographical Order</h1><p>Given a string s, return the <strong>last</strong> substring of s in lexicographical order.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;leetcode&quot;</span><br><span class="line">Output: &quot;tcode&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">lastSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, N = s.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;N; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == s[start] &amp;&amp; s[i<span class="number">-1</span>] == s[start]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; i+j &lt; N; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(s[start+j] == s[i+j]) <span class="keyword">continue</span>;</span><br><span class="line">                start = s[start+j] &gt; s[i+j] ? start : i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substr(start);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="As-Far-from-Land-as-Possible"><a href="#As-Far-from-Land-as-Possible" class="headerlink" title="As Far from Land as Possible"></a>As Far from Land as Possible</h1><p>Given an N x N grid containing only values 0 and 1, where 0 represents water and 1 represents land, find a water cell such that its distance to the nearest land cell is maximized and return the distance.</p>
+<p>The distance used in this problem is the Manhattan distance: the distance between two cells (x0, y0) and (x1, y1) is |x0 - x1| + |y0 - y1|.</p>
+<p>If no land or water exists in the grid, return -1.</p>
+<blockquote>
+<p>BFS</p>
+</blockquote>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxDistance</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; g)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> steps = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; q, q1;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> i=<span class="number">0</span>; i&lt; g.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> j=<span class="number">0</span>; j &lt; g[i].size(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(g[i][j] == <span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    q.push(&#123;i<span class="number">-1</span>, j&#125;);</span><br><span class="line">                    q.push(&#123;i+<span class="number">1</span>, j&#125;);</span><br><span class="line">                    q.push(&#123;i, j<span class="number">-1</span>&#125;);</span><br><span class="line">                    q.push(&#123;i, j+<span class="number">1</span>&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!q.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            ++steps;</span><br><span class="line">            <span class="keyword">while</span>(!q.empty())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> i=q.front().first, j = q.front().second;</span><br><span class="line">                q.pop();</span><br><span class="line">                <span class="keyword">if</span>(i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span> &amp;&amp; i &lt; g.size() &amp;&amp; j &lt; g[i].size() &amp;&amp; g[i][j] == <span class="number">0</span>)&#123;</span><br><span class="line">                    g[i][j] = steps;</span><br><span class="line">                    q1.push(&#123;i<span class="number">-1</span>, j&#125;);</span><br><span class="line">                    q1.push(&#123;i+<span class="number">1</span>, j&#125;);</span><br><span class="line">                    q1.push(&#123;i, j<span class="number">-1</span>&#125;);</span><br><span class="line">                    q1.push(&#123;i, j+<span class="number">1</span>&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            swap(q1, q);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> steps == <span class="number">1</span> ? <span class="number">-1</span> : steps<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/20/leetcodeweek3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/20/leetcodeweek3/" itemprop="url">Weekly Contest 152</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-20T09:06:15+08:00">
+                2019-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
+                    <span itemprop="name">Weekly-Contest</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/20/leetcodeweek3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/20/leetcodeweek3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-求1-n中所有质数对应质数位置的排列的数量"><a href="#1-求1-n中所有质数对应质数位置的排列的数量" class="headerlink" title="1. 求1~n中所有质数对应质数位置的排列的数量"></a>1. 求1~n中所有质数对应质数位置的排列的数量</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> t = n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i*i &lt;= t; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(t % i == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numPrimeArrangements</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> count2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(isPrime(i))</span><br><span class="line">                count1++;</span><br><span class="line">        &#125;</span><br><span class="line">        count2 = n-count1;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> ret = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=count1; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ret = ret * i % <span class="number">1000000007</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=count2; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ret = ret * i % <span class="number">1000000007</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret % (<span class="number">1000000000</span> + <span class="number">7</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="2-Can-Make-Palindrome-from-Substring"><a href="#2-Can-Make-Palindrome-from-Substring" class="headerlink" title="2. Can Make Palindrome from Substring"></a>2. Can Make Palindrome from Substring</h1><p>Given a string s, we make queries on substrings of s.</p>
+<p>For each query queries[i] = [left, right, k], we may rearrange the substring s[left], …, s[right], and then choose up to k of them to replace with any lowercase English letter. </p>
+<p>If the substring is possible to be a palindrome string after the operations above, the result of the query is true. Otherwise, the result is false.</p>
+<p>Return an array answer[], where answer[i] is the result of the i-th query queries[i].</p>
+<p>Note that: Each letter is counted individually for replacement so if for example s[left..right] = “aaa”, and k = 2, we can only replace two of the letters.  (Also, note that the initial string s is never modified by any query.)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot;abcda&quot;, queries = [[3,3,0],[1,2,0],[0,3,1],[0,3,2],[0,4,1]]</span><br><span class="line">Output: [true,false,false,true,true]</span><br><span class="line">Explanation:</span><br><span class="line">queries[0] : substring = &quot;d&quot;, is palidrome.</span><br><span class="line">queries[1] : substring = &quot;bc&quot;, is not palidrome.</span><br><span class="line">queries[2] : substring = &quot;abcd&quot;, is not palidrome after replacing only 1 character.</span><br><span class="line">queries[3] : substring = &quot;abcd&quot;, could be changed to &quot;abba&quot; which is palidrome. Also this can be changed to &quot;baab&quot; first rearrange it &quot;bacd&quot; then replace &quot;cd&quot; with &quot;ab&quot;.</span><br><span class="line">queries[4] : substring = &quot;abcda&quot;, could be changed to &quot;abcba&quot; which is palidrome.</span><br></pre></td></tr></table></figure>
+<p><a href="https://leetcode.com/problems/can-make-palindrome-from-substring/discuss/372010/C%2B%2B-Solution-with-complete-explanation" target="_blank" rel="noopener">1</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// int helper(string s, vector&lt;int&gt; h)   // timeout!!</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">//     int l = h[0];</span></span><br><span class="line">    <span class="comment">//     int r = h[1];</span></span><br><span class="line">    <span class="comment">//     int k = h[2];</span></span><br><span class="line">    <span class="comment">//     int ch[26] = &#123;0&#125;;</span></span><br><span class="line">    <span class="comment">//     for(int i=l; i&lt;=r; i++)</span></span><br><span class="line">    <span class="comment">//         ch[s[i]-'a']++;</span></span><br><span class="line">    <span class="comment">//     int count = 0;</span></span><br><span class="line">    <span class="comment">//     for(int i=0; i&lt;26; i++)</span></span><br><span class="line">    <span class="comment">//     &#123;</span></span><br><span class="line">    <span class="comment">//         if(ch[i] % 2 != 0)</span></span><br><span class="line">    <span class="comment">//             count++;</span></span><br><span class="line">    <span class="comment">//     &#125;</span></span><br><span class="line">    <span class="comment">//     int ret = (count / 2 &lt;= k);</span></span><br><span class="line">    <span class="comment">//     return ret;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// vector&lt;bool&gt; canMakePaliQueries(string s, vector&lt;vector&lt;int&gt;&gt;&amp; queries) &#123;</span></span><br><span class="line">    <span class="comment">//     vector&lt;bool&gt; ret;</span></span><br><span class="line">    <span class="comment">//     for(int i=0; i&lt;queries.size(); i++)</span></span><br><span class="line">    <span class="comment">//     &#123;</span></span><br><span class="line">    <span class="comment">//         int cur = helper(s, queries[i]);</span></span><br><span class="line">    <span class="comment">//         if(cur)</span></span><br><span class="line">    <span class="comment">//         &#123;</span></span><br><span class="line">    <span class="comment">//             bool rem = true;</span></span><br><span class="line">    <span class="comment">//             ret.push_back(rem);</span></span><br><span class="line">    <span class="comment">//         &#125;</span></span><br><span class="line">    <span class="comment">//         else</span></span><br><span class="line">    <span class="comment">//         &#123;</span></span><br><span class="line">    <span class="comment">//             bool rem = false;</span></span><br><span class="line">    <span class="comment">//             ret.push_back(rem);</span></span><br><span class="line">    <span class="comment">//         &#125;</span></span><br><span class="line">    <span class="comment">//     &#125;</span></span><br><span class="line">    <span class="comment">//     return ret;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; canMakePaliQueries(<span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; queries) &#123;</span><br><span class="line">        <span class="keyword">int</span> n=s.length();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> freq[n][<span class="number">26</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">memset</span>(freq,<span class="number">0</span>,<span class="keyword">sizeof</span>(freq));</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> i,j;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            freq[i][s[i]-<span class="string">'a'</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">26</span>;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                freq[i][j]+=freq[i<span class="number">-1</span>][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; answer;</span><br><span class="line">        <span class="keyword">int</span> u;</span><br><span class="line">        <span class="keyword">bool</span> ok=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;queries.size();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> l,r,k;</span><br><span class="line">            l=queries[i][<span class="number">0</span>];</span><br><span class="line">            r=queries[i][<span class="number">1</span>];</span><br><span class="line">            k=queries[i][<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">26</span>;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(l==<span class="number">0</span>)</span><br><span class="line">                    u=freq[r][j];</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    u=freq[r][j]-freq[l<span class="number">-1</span>][j];</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(u%<span class="number">2</span>==<span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    cnt++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>((cnt/<span class="number">2</span>)&lt;=k)</span><br><span class="line">            &#123;</span><br><span class="line">                answer.push_back(ok);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                answer.push_back(!ok);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> answer;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="3-Number-of-Valid-Words-for-Each-Puzzle"><a href="#3-Number-of-Valid-Words-for-Each-Puzzle" class="headerlink" title="3. Number of Valid Words for Each Puzzle"></a>3. Number of Valid Words for Each Puzzle</h1><p>With respect to a given puzzle string, a word is valid if both the following conditions are satisfied:</p>
+<p>word contains the first letter of puzzle.</p>
+<p>For each letter in word, that letter is in puzzle.</p>
+<p>For example, if the puzzle is “abcdefg”, then valid words are “faced”, “cabbage”, and “baggage”; while invalid words are “beefed” </p>
+<p>(doesn’t include “a”) and “based” (includes “s” which isn’t in the puzzle).</p>
+<p>Return an array answer, where answer[i] is the number of words in the given word list words that are valid with respect to the puzzle puzzles[i].</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">words = [&quot;aaaa&quot;,&quot;asas&quot;,&quot;able&quot;,&quot;ability&quot;,&quot;actt&quot;,&quot;actor&quot;,&quot;access&quot;], </span><br><span class="line">puzzles = [&quot;aboveyz&quot;,&quot;abrodyz&quot;,&quot;abslute&quot;,&quot;absoryz&quot;,&quot;actresz&quot;,&quot;gaswxyz&quot;]</span><br><span class="line">Output: [1,1,3,2,4,0]</span><br><span class="line">Explanation:</span><br><span class="line">1 valid word for &quot;aboveyz&quot; : &quot;aaaa&quot; </span><br><span class="line">1 valid word for &quot;abrodyz&quot; : &quot;aaaa&quot;</span><br><span class="line">3 valid words for &quot;abslute&quot; : &quot;aaaa&quot;, &quot;asas&quot;, &quot;able&quot;</span><br><span class="line">2 valid words for &quot;absoryz&quot; : &quot;aaaa&quot;, &quot;asas&quot;</span><br><span class="line">4 valid words for &quot;actresz&quot; : &quot;aaaa&quot;, &quot;asas&quot;, &quot;actt&quot;, &quot;access&quot;</span><br><span class="line">There&apos;re no valid words for &quot;gaswxyz&quot; cause none of the words in the list contains letter &apos;g&apos;.</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; bb;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">bbit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; w)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> s : w)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> bit = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">set</span>&lt;<span class="keyword">char</span>&gt; tmp;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> t: s)</span><br><span class="line">            &#123;</span><br><span class="line">                tmp.insert(t);</span><br><span class="line">                bit = bit | (<span class="number">1</span> &lt;&lt; (t-<span class="string">'a'</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(tmp.size() &gt; <span class="number">7</span>) <span class="keyword">continue</span>;</span><br><span class="line">            bb.push_back(bit);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findNumOfValidWords(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; puzzles) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ret;</span><br><span class="line">        bbit(words);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; s: puzzles)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> first = <span class="number">1</span> &lt;&lt; (s[<span class="number">0</span>] - <span class="string">'a'</span>);</span><br><span class="line">            <span class="keyword">int</span> bit = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> aa : s)</span><br><span class="line">            &#123;</span><br><span class="line">                bit = bit | (<span class="number">1</span> &lt;&lt; (aa-<span class="string">'a'</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> v: bb)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>((v &amp; bit) == v &amp;&amp; ((first &amp; v) == first))</span><br><span class="line">                    num++;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            ret.push_back(num);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findNumOfValidWords(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; puzzles) &#123;</span><br><span class="line">        <span class="comment">// Lengths</span></span><br><span class="line">        <span class="keyword">int</span> P = puzzles.size();</span><br><span class="line">        <span class="keyword">int</span> W = words.size();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Letter masks</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; letterMask(<span class="number">26</span>, <span class="number">0</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, mask = <span class="number">1</span>; i &lt; <span class="number">26</span>; ++i, mask &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">            letterMask[i] = mask;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Word masks with count info</span></span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; wordsMask;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// For each word</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; W; ++i) &#123;</span><br><span class="line">            <span class="comment">// Compute word mask</span></span><br><span class="line">            <span class="keyword">int</span> mask = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">char</span> c: words[i]) &#123;</span><br><span class="line">                mask = mask | letterMask[c - <span class="string">'a'</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            ++wordsMask[mask];</span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">         <span class="comment">// Result : result[i] =&gt; number of words covered by puzzles[i]</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result(P, <span class="number">0</span>); </span><br><span class="line">        </span><br><span class="line">        <span class="comment">// For each puzzle</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; P; ++i) &#123;</span><br><span class="line">            <span class="comment">// Compute puzzle mask</span></span><br><span class="line">            <span class="keyword">int</span> mask = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">char</span> c: puzzles[i]) &#123;</span><br><span class="line">                mask = mask | letterMask[c - <span class="string">'a'</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Iterate through all valid subset of mask i.e. subset of puzzle chars = 2^7 = 64 in count</span></span><br><span class="line">            <span class="comment">// This makes the complexity O(P*64)</span></span><br><span class="line">            <span class="keyword">int</span> subMask = mask;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">while</span> (subMask) &#123;</span><br><span class="line">                <span class="keyword">if</span> ((subMask &amp; letterMask[puzzles[i][<span class="number">0</span>] - <span class="string">'a'</span>]) &amp;&amp; wordsMask.count(subMask)) &#123;</span><br><span class="line">                    result[i] += wordsMask[subMask];</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// Only select valid bits i.e. bits corresponding to chars in puzzle</span></span><br><span class="line">                subMask = (subMask - <span class="number">1</span>) &amp; mask;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/19/javamianx3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1928,400 +2381,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/16/leetcode-101/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/16/leetcode-101/" itemprop="url">leetcode-101-Symmetric Tree</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-16T13:05:31+08:00">
-                2019-09-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
-                    <span itemprop="name">top-100-liked-questions</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/16/leetcode-101/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/16/leetcode-101/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  151
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">For example, this binary tree [1,2,2,3,4,4,3] is symmetric:</span><br><span class="line"></span><br><span class="line">    1</span><br><span class="line">   / \</span><br><span class="line">  2   2</span><br><span class="line"> / \ / \</span><br><span class="line">3  4 4  3</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">But the following [1,2,2,null,3,null,3] is not:</span><br><span class="line"></span><br><span class="line">    1</span><br><span class="line">   / \</span><br><span class="line">  2   2</span><br><span class="line">   \   \</span><br><span class="line">   3    3</span><br></pre></td></tr></table></figure>
-<p>Note:<br>Bonus points if you could solve it both recursively and iteratively.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> helper(root, root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">helper</span><span class="params">(TreeNode t1, TreeNode t2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(t1 == <span class="keyword">null</span> &amp;&amp; t2 == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(t1 == <span class="keyword">null</span> || t2 == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> (t1.val == t2.val) &amp;&amp; helper(t1.left, t2.right) &amp;&amp; helper(t1.right, t2.left);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/15/leetcode-11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/15/leetcode-11/" itemprop="url">leetcode-11-Container With Most Water</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-15T23:20:47+08:00">
-                2019-09-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
-                    <span itemprop="name">top-100-liked-questions</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/15/leetcode-11/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/15/leetcode-11/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  146
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Given n non-negative integers a1, a2, …, an , where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
-<p>Note: You may not slant the container and n is at least 2.</p>
-<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,8,6,2,5,4,8,3,7]</span><br><span class="line">Output: 49</span><br></pre></td></tr></table></figure></p>
-<p><img src="Snipaste_2019-09-15_23-21-36.png" alt="1"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (height == <span class="keyword">null</span> || height.length == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> len = height.length;</span><br><span class="line">        <span class="keyword">int</span> low = <span class="number">0</span>, high = len - <span class="number">1</span>, maxArea = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (low &lt; high) &#123;</span><br><span class="line">            <span class="keyword">int</span> currentArea = (high - low) * (Integer.min(height[low], height[high]));</span><br><span class="line">            maxArea = Integer.max(maxArea, currentArea);</span><br><span class="line">            <span class="keyword">if</span> (height[low] &lt;= height[high])</span><br><span class="line">                low++;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                high--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxArea;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2374,7 +2433,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">336</span>
+                  <span class="site-state-item-count">338</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2464,7 +2523,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">390.8k</span>
+    <span title="Site words total count">391.8k</span>
   
 </div>
 
