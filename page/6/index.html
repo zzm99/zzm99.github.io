@@ -291,6 +291,606 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/leetcode-211/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/11/leetcode-211/" itemprop="url">leetcode-211 Add and Search Word - Data structure design</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-11T19:19:12+08:00">
+                2019-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/11/leetcode-211/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/11/leetcode-211/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  305
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Design a data structure that supports the following two operations:</p>
+<ul>
+<li>void addWord(word)</li>
+<li>bool search(word)</li>
+</ul>
+<p>search(word) can search a literal word or a regular expression string containing only letters a-z or .. A . means it can represent any one letter.</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">addWord(&quot;bad&quot;)</span><br><span class="line">addWord(&quot;dad&quot;)</span><br><span class="line">addWord(&quot;mad&quot;)</span><br><span class="line">search(&quot;pad&quot;) -&gt; false</span><br><span class="line">search(&quot;bad&quot;) -&gt; true</span><br><span class="line">search(&quot;.ad&quot;) -&gt; true</span><br><span class="line">search(&quot;b..&quot;) -&gt; true</span><br></pre></td></tr></table></figure>
+<p>Note:</p>
+<ul>
+<li>You may assume that all words are consist of lowercase letters a-z.</li>
+</ul>
+<p>字典树</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">bool</span> word;</span><br><span class="line">    TrieNode* children[<span class="number">26</span>];</span><br><span class="line">    TrieNode()&#123;</span><br><span class="line">        word = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">memset</span>(children, <span class="literal">NULL</span>, <span class="keyword">sizeof</span>(children));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WordDictionary</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    WordDictionary() &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Adds a word into the data structure. */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addWord</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">        TrieNode* node = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> c: word)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!node-&gt;children[c-<span class="string">'a'</span>])&#123;</span><br><span class="line">                node-&gt;children[c-<span class="string">'a'</span>] = <span class="keyword">new</span> TrieNode();</span><br><span class="line">            &#125;</span><br><span class="line">            node = node-&gt;children[c-<span class="string">'a'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        node-&gt;word = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> search(word.c_str(), root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    TrieNode* root = <span class="keyword">new</span> TrieNode();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* word, TrieNode* node)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; word[i] &amp;&amp; node; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(word[i] != <span class="string">'.'</span>)&#123;</span><br><span class="line">                node = node-&gt;children[word[i]-<span class="string">'a'</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                TrieNode* tmp = node;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="number">26</span>; j++)&#123;</span><br><span class="line">                    node = tmp-&gt;children[j];</span><br><span class="line">                    <span class="keyword">if</span>(search(word+i+<span class="number">1</span>, node))&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node &amp;&amp; node-&gt;word;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your WordDictionary object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * WordDictionary* obj = new WordDictionary();</span></span><br><span class="line"><span class="comment"> * obj-&gt;addWord(word);</span></span><br><span class="line"><span class="comment"> * bool param_2 = obj-&gt;search(word);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/leetcode-1029/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/11/leetcode-1029/" itemprop="url">leetcode-1029 Two City Scheduling</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-11T09:35:46+08:00">
+                2019-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/11/leetcode-1029/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/11/leetcode-1029/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  215
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>There are 2N people a company is planning to interview. The cost of flying the i-th person to city A is costs[i][0], and the cost of flying the i-th person to city B is costs[i][1].</p>
+<p>Return the minimum cost to fly every person to a city such that exactly N people arrive in each city.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: [[10,20],[30,200],[400,50],[30,20]]</span><br><span class="line">Output: 110</span><br><span class="line">Explanation: </span><br><span class="line">The first person goes to city A for a cost of 10.</span><br><span class="line">The second person goes to city A for a cost of 30.</span><br><span class="line">The third person goes to city B for a cost of 50.</span><br><span class="line">The fourth person goes to city B for a cost of 20.</span><br><span class="line"></span><br><span class="line">The total minimum cost is 10 + 30 + 50 + 20 = 110 to have half the people interviewing in each city.</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">twoCitySchedCost</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; cs, <span class="keyword">int</span> res = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">      sort(begin(cs), end(cs), [](<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;v1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;v2) &#123;</span><br><span class="line">        <span class="keyword">return</span> (v1[<span class="number">0</span>] - v1[<span class="number">1</span>] &lt; v2[<span class="number">0</span>] - v2[<span class="number">1</span>]);</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; cs.size() / <span class="number">2</span>; ++i) &#123;</span><br><span class="line">        res += cs[i][<span class="number">0</span>] + cs[i + cs.size() / <span class="number">2</span>][<span class="number">1</span>];</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/leetcode-834/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/09/leetcode-834/" itemprop="url">leetcode-834 Sum of Distances in Tree</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-09T22:35:42+08:00">
+                2019-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/09/leetcode-834/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/09/leetcode-834/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  370
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>An undirected, connected tree with N nodes labelled 0…N-1 and N-1 edges are given.</p>
+<p>The ith edge connects nodes edges[i][0] and edges[i][1] together.</p>
+<p>Return a list ans, where ans[i] is the sum of the distances between node i and all other nodes.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: N = 6, edges = [[0,1],[0,2],[2,3],[2,4],[2,5]]</span><br><span class="line">Output: [8,12,6,10,10,10]</span><br><span class="line">Explanation: </span><br><span class="line">Here is a diagram of the given tree:</span><br><span class="line">  0</span><br><span class="line"> / \</span><br><span class="line">1   2</span><br><span class="line">   /|\</span><br><span class="line">  3 4 5</span><br><span class="line">We can see that dist(0,1) + dist(0,2) + dist(0,3) + dist(0,4) + dist(0,5)</span><br><span class="line">equals 1 + 1 + 2 + 2 + 2 = 8.  Hence, answer[0] = 8, and so on.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; gh;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dist; <span class="comment">//i点的所有子结点到i的距离之和</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; size; <span class="comment">//以i点为根的树的结点数量和(包括i结点本身)</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sumOfDistancesInTree(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; edges) &#123;</span><br><span class="line">        gh.resize(n); dist.resize(n); size.resize(n); res.resize(n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; v : edges) &#123;</span><br><span class="line">            gh[v[<span class="number">0</span>]].emplace_back(v[<span class="number">1</span>]);</span><br><span class="line">            gh[v[<span class="number">1</span>]].emplace_back(v[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        dfs1(<span class="number">0</span>, <span class="number">-1</span>);</span><br><span class="line">        res[<span class="number">0</span>] = dist[<span class="number">0</span>];</span><br><span class="line">        dfs2(n, <span class="number">0</span>, <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//求出以0为根的距离之和且求出了分别以i为根的子树结点数量和</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> cur, <span class="keyword">int</span> par)</span> </span>&#123;</span><br><span class="line">        dist[cur] = <span class="number">0</span>;</span><br><span class="line">        size[cur] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : gh[cur]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == par) <span class="keyword">continue</span>;</span><br><span class="line">            dfs1(i, cur);</span><br><span class="line">            dist[cur] += dist[i] + size[i];</span><br><span class="line">            size[cur] += size[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//从0开始往下递归推出子树。再子树推算出子子树直到所有。</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> cur, <span class="keyword">int</span> par)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : gh[cur]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == par) <span class="keyword">continue</span>;</span><br><span class="line">            res[i] = res[cur] + (n - size[i]) - size[i];</span><br><span class="line">            dfs2(n, i, cur);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/06/leetcodeweek10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1847,730 +2447,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/shixun5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/shixun5/" itemprop="url">Makefile</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T15:50:10+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/初级实训/" itemprop="url" rel="index">
-                    <span itemprop="name">初级实训</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/29/shixun5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/shixun5/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.5k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Makefile简介"><a href="#Makefile简介" class="headerlink" title="Makefile简介"></a>Makefile简介</h1><p>Makefile是一个定义项目的编译规则的文件，以便于整个项目的编译。</p>
-<p>Makefile中就可以定义好各个文件的依赖关系，在之后再需要编译时，只需要执行 make命令就可以自动编译了。</p>
-<p>在一次 make之后，一般 会生成很多 目标文件(*.o) 和一个可执行文件，当这些文件和源代码都没有被修改时，再次执行 make会提示 make: ‘bin/your_program’ is up to date.，而当你只修改了一个源代码文件再执行 make时，它也不会重复编译已经最新的文件，而只编译依赖了你的源代码的文件，这对提高编译效率是非常重要的。</p>
-<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">target ... : prerequisites ...</span><br><span class="line"><span class="built_in">command</span></span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>target 是下面的命令的 目标 ，即下面命令是为了target而生的。这个 目标 可以是*.o文件，也可以是可执行文件</p>
-</li>
-<li><p>prerequisites 则是生成该目标所 依赖 的文件，如果没有依赖的文件，下面的命令就不会执行且会中断 make</p>
-</li>
-<li><p>command 就是生成目标文件的命令，一般就是编译命令了，如 g++ main.cpp等等(注<br>意：命令前面必须有 Tab (‘\t’) 真正 的 Tab，这样make才会认为它是指令)</p>
-</li>
-</ul>
-<p><img src="Snipaste_2019-09-29_16-33-42.png" alt="1"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">main: main.o support1.o</span><br><span class="line">	g++ main.o support1.o -o main</span><br><span class="line"></span><br><span class="line">main.o: main.cpp main.hpp support1.hpp</span><br><span class="line">	g++ main.cpp main.hpp support1.hpp -c</span><br><span class="line"></span><br><span class="line">support1.o: support1.cpp support1.hpp</span><br><span class="line">	g++ support1.cpp support1.hpp -c</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	@rm -f main</span><br><span class="line">	@rm -f *.o</span><br><span class="line">	@rm -f *.gch</span><br></pre></td></tr></table></figure>
-<p><img src="Snipaste_2019-09-29_16-35-08.png" alt="1"></p>
-<hr>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Makefile version 3</span></span><br><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 -­w</span><br><span class="line"></span><br><span class="line">main: support1.o main.o</span><br><span class="line">    $(CC) $(FLAGS) main.o support1.o ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">support1.o: support1.hpp support1.cpp</span><br><span class="line">    $(CC) $(FLAGS) ­-c support1.cpp</span><br><span class="line"></span><br><span class="line">main.o: main.cpp</span><br><span class="line">    $(CC) $(FLAGS) -­c main.cpp</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­f *.o</span><br><span class="line">    @rm ­f *.gch</span><br><span class="line">    @rm ­f main</span><br></pre></td></tr></table></figure>
-<ul>
-<li>变量</li>
-<li>在Makefile中可以使用”<name> := <content>”声明变量，并在此后使用$(<name>)可以使用，类似C/C++中的宏，它是字符串的直接替换。如 $(CC) $(FLAGS) ­csupport1.cpp会变成 g++ ­std=c++11 ­-w -­c support1.cpp。</name></content></name></li>
-<li>前缀是 $符号，后面带个括号 ()的都是变量，如 $@也是变量，称为 自动化变量，它是目标文件的名字。如目标为 main的这一段的命令会变成 g++ ­std=c++ -­w main.o support1.o ­-o main</li>
-<li>伪目标</li>
-<li>clean一段中，target后面没有依赖文件，这称为 伪目标 ，作用是写了之后就可以使用 make clean来执行它的命令集了</li>
-<li>这里的命令集可以使用许多shell命令，但似乎并不是所有都能用</li>
-<li>命令前面的 @表示 不显示这条命令 ，和Windows下的.bat类似(下面分别是不使<br>用 @和使用 @的对比)</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">在Makefile中加入</span><br><span class="line">foo:</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Testing"</span></span><br><span class="line"><span class="comment"># 同样地，这是伪目标，可以使用make foo来执行其命令集</span></span><br><span class="line"></span><br><span class="line">user@computer:~/learnmake$ make foo</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Testing"</span></span><br><span class="line">Testing</span><br><span class="line"></span><br><span class="line">Makefile中改为</span><br><span class="line">foo:</span><br><span class="line">@<span class="built_in">echo</span> <span class="string">"Testing"</span></span><br><span class="line"></span><br><span class="line">user@computer:~/learnmake$ make foo</span><br><span class="line">Testing</span><br></pre></td></tr></table></figure>
-<h2 id="复杂一点的情况"><a href="#复杂一点的情况" class="headerlink" title="复杂一点的情况"></a>复杂一点的情况</h2><p>有时候一个项目的目录并没有如此简单，例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">├── build</span><br><span class="line">├── include</span><br><span class="line">├── lib</span><br><span class="line">│ ├── mysql</span><br><span class="line">│ └── mysql++</span><br><span class="line">└── src</span><br></pre></td></tr></table></figure>
-<ul>
-<li>bin是编译生成的可执行文件</li>
-<li>build是编译的中间文件如*.o文件</li>
-<li>include是各种.h或.hpp文件</li>
-<li>lib是一些必要的库文件</li>
-<li>src是.cpp文件</li>
-</ul>
-<p>这个时候，事情并不简单。因为现在的代码“身首异处”，所以要把它们的路径告诉编译器才行，我们使用 相对路径 来达到效果。</p>
-<p>.表示当前目录， ..表示上一级目录，用类似这样的相对路径来找到需要的文件，当然 ./经常可以省略</p>
-<p>以下面的目录结构为目标(假设原本不存在 bin目录和 build目录)：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">│ └── main</span><br><span class="line">├── build</span><br><span class="line">│ ├── main.o</span><br><span class="line">│ └── support1.o</span><br><span class="line">├── include</span><br><span class="line">│ └── support1.hpp</span><br><span class="line">├── Makefile</span><br><span class="line">└── src</span><br><span class="line">├── main.cpp</span><br><span class="line">└── support1.cpp</span><br></pre></td></tr></table></figure>
-<p>因为最后的目标 main在 bin目录中，所以target也应该是 bin/main，而其依赖的两个文件也要写清楚目录了 build/main.o build/support1.o。</p>
-<p>而在编译前，应该确认 bin和 build都是存在的目录，因此需要在编译前多一条命令 <code>mkdir ­-p bin</code>。因为要指明文件目录，于是编译命令变成 <code>g++ ­std=c++11 -­w build/main.o build/support1.o ­-o bin/main</code></p>
-<p>由于在support1.cpp中我们写了 #include “support1.hpp”，按以前的经验，这样写是只能找到同一个文件夹下的文件的，所以需要加一个编译器的参数 ­I./include，让它去其他地方找头文件。这样编译命令就完成了，生成.o文件的也类似。那么Makefile就可以写出来了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 -­w</span><br><span class="line"></span><br><span class="line">bin/main: build/support1.o build/main.o</span><br><span class="line">    @mkdir ­-p bin</span><br><span class="line">    $(CC) $(FLAGS) ­I./include build/support1.o build/main.o ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">build/%.o: src/%.cpp</span><br><span class="line">    @mkdir ­-p build</span><br><span class="line">    $(CC) $(FLAGS) ­I./include ­-c ­-o <span class="variable">$@</span> src/support1.cpp</span><br><span class="line"></span><br><span class="line">build/main.o: src/main.cpp</span><br><span class="line">    @mkdir ­-p build</span><br><span class="line">    $(CC) $(FLAGS) ­I./include ­-c ­-o <span class="variable">$@</span> src/main.cpp</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­rf build</span><br><span class="line">    @rm ­rf bin</span><br></pre></td></tr></table></figure>
-<p>这样就好了吗？不，不可以。将来要是文件结构有了偏差，写这个Makefile的人是要负责的。如果目录不同了，那么改各个路径要每个都改，而最好的做法应该是只改一处就影响全局。所以应该下面这样会更好。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 ­-w</span><br><span class="line">INC_DIR := include</span><br><span class="line">SRC_DIR := src</span><br><span class="line">BUILD_DIR := build</span><br><span class="line">BIN_DIR := bin</span><br><span class="line">INCLUDE := ­I./$(INC_DIR)</span><br><span class="line"></span><br><span class="line">$(BIN_DIR)/main: $(BUILD_DIR)/support1.o $(BUILD_DIR)/main.o</span><br><span class="line">    @mkdir ­-p $(BIN_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) $(BUILD_DIR)/support1.o $(BUILD_DIR)/main.o ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp</span><br><span class="line">    @mkdir -­p $(BUILD_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) ­-c -­o <span class="variable">$@</span> $(SRC_DIR)/support1.cpp</span><br><span class="line"></span><br><span class="line">$(BUILD_DIR)/main.o: $(SRC_DIR)/main.cpp</span><br><span class="line">    @mkdir -­p $(BUILD_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) -­c -­o <span class="variable">$@</span> $(SRC_DIR)/main.cpp</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­rf $(BUILD_DIR)</span><br><span class="line">    @rm ­rf $(BIN_DIR)</span><br></pre></td></tr></table></figure>
-<p>然而这个Makefile还可以更加简短并更加完善</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">CC := g++</span><br><span class="line">FLAGS := ­std=c++11 ­-w</span><br><span class="line">INC_DIR := include</span><br><span class="line">SRC_DIR := src</span><br><span class="line">BUILD_DIR := build</span><br><span class="line">BIN_DIR := bin</span><br><span class="line">INCLUDE := ­I./$(INC_DIR)</span><br><span class="line"></span><br><span class="line">$(BIN_DIR)/main: $(BUILD_DIR)/support1.o $(BUILD_DIR)/main.o</span><br><span class="line">    @mkdir ­-p $(BIN_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) $^ ­-o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp</span><br><span class="line">    @mkdir -­p $(BUILD_DIR)</span><br><span class="line">    $(CC) $(FLAGS) $(INCLUDE) -­c ­-o <span class="variable">$@</span> $&lt;</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    @rm ­rf $(BUILD_DIR)</span><br><span class="line">    @rm ­rf $(BIN_DIR)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>两个自动化变量</li>
-<li><ul>
-<li>$^依赖文件的集合，用空格分隔</li>
-</ul>
-</li>
-<li><ul>
-<li>$&lt;第一个依赖文件</li>
-</ul>
-</li>
-<li><ul>
-<li>其实在 %.o部分，也可以换成 $^</li>
-</ul>
-</li>
-<li><ul>
-<li>还有上文已经提过的 $@目标文件</li>
-</ul>
-</li>
-<li>通配符 %</li>
-<li><ul>
-<li>作用是就是 *的作用了通配</li>
-</ul>
-</li>
-</ul>
-<p>这里的好处就是当 src目录下再多cpp文件时，生成%.o文件的这一部分不用更改，生成可执行文件那里只要加一个依赖就好了</p>
-<p>实际上还有方法让生成可执行文件的规则也自动</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/shixun4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/shixun4/" itemprop="url">c++ 11特性</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T15:45:08+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/初级实训/" itemprop="url" rel="index">
-                    <span itemprop="name">初级实训</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/29/shixun4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/shixun4/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.6k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="c-11特性："><a href="#c-11特性：" class="headerlink" title="c++ 11特性："></a>c++ 11特性：</h1><h2 id="Type-Inference-类型推导"><a href="#Type-Inference-类型推导" class="headerlink" title="Type Inference 类型推导"></a>Type Inference 类型推导</h2><ol>
-<li>auto</li>
-<li>decltype：</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> b;</span><br><span class="line"><span class="keyword">decltype</span>(a) i;</span><br><span class="line"><span class="keyword">decltype</span>(b) s;</span><br></pre></td></tr></table></figure>
-<p>这个语法可以应用于复用匿名的struct或union</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span> <span class="comment">// 匿名</span></span><br><span class="line"> <span class="keyword">int</span> x, y;</span><br><span class="line">&#125; temp_position;</span><br><span class="line"></span><br><span class="line"><span class="keyword">union</span> &#123; <span class="comment">// 匿名</span></span><br><span class="line"> <span class="keyword">int</span> *foo;</span><br><span class="line">&#125; temp_union;</span><br><span class="line"></span><br><span class="line"><span class="keyword">decltype</span>(temp_position) pos;</span><br><span class="line"><span class="keyword">decltype</span>(temp_union) uni;</span><br></pre></td></tr></table></figure>
-<p>需要注意，auto和decltype都是编译时推导变量的类型，而不能在运行时推导变量类型，而且其推导有一定的限制。例如</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> i; <span class="comment">// Compile error</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">auto</span> a, <span class="keyword">auto</span> b)</span></span>; <span class="comment">// Compile error, but it is valid in C++14</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bar</span><span class="params">(<span class="keyword">auto</span> a = <span class="number">1</span>, <span class="keyword">auto</span> b = <span class="number">1</span>)</span></span>; <span class="comment">// 虽然我们可能觉得编译器可以推导</span></span><br><span class="line"> <span class="comment">// 但这也是不合法的表达</span></span><br></pre></td></tr></table></figure>
-<h3 id="Return-Value-Tracking-追踪返回类型"><a href="#Return-Value-Tracking-追踪返回类型" class="headerlink" title="Return Value Tracking(追踪返回类型)"></a>Return Value Tracking(追踪返回类型)</h3><p>追踪返回类型的函数和普通函数的声明最大区别在于返回类型的后置。如</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">char</span>* a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line">auto func(char* a, int b) -&gt; int;</span><br></pre></td></tr></table></figure>
-<p>而追踪返回类型还可以让我们在写返回类型时，不写明作用域</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &#123;</span></span><br><span class="line"> <span class="class"><span class="keyword">struct</span> <span class="title">InnerType</span> &#123;</span> <span class="keyword">int</span> i; &#125;</span><br><span class="line"> <span class="function">InnerType <span class="title">GetInner</span><span class="params">()</span></span>;</span><br><span class="line"> InnerType it;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">auto</span> OuterType::GetInner() -&gt; InnerType &#123; <span class="keyword">return</span> it; &#125;</span><br></pre></td></tr></table></figure>
-<p>上面体现的效果并不是特别的明显，那么下面的例子呢？</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 有的时候，你会发现这是面试题</span></span><br><span class="line"><span class="comment">// ——《Understanding C++11 Analysis</span></span><br><span class="line"><span class="comment">// and Application of New Features》</span></span><br><span class="line"><span class="keyword">int</span> (*(*pf()) ()) () &#123; <span class="keyword">return</span> <span class="literal">nullptr</span>; &#125;</span><br><span class="line">auto pf1() -&gt; auto (*) () -&gt; int (*) () &#123; return nullptr; &#125;</span><br></pre></td></tr></table></figure>
-<p>上述两个函数的作用是完全一样的，但是可读性却完全不同<br>这其实是一个返回函数指针的函数，而这个指针指向着返回int*的函数</p>
-<p>auto的使用细则:auto*, auto&amp;, const auto, volatile auto…</p>
-<h2 id="Rvalue-Reference-右值引用"><a href="#Rvalue-Reference-右值引用" class="headerlink" title="Rvalue Reference 右值引用"></a>Rvalue Reference 右值引用</h2><p>通常，在C++中，我们称可以使用取地址运算符(&amp;)的值为左值，而不是左值的值就是右值</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   s <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">3</span>, c = <span class="number">0</span>;</span><br><span class="line">    c = a + b;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; &amp;c &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// Valid, c is an Lvalue</span></span><br><span class="line">    <span class="comment">// std::cout &lt;&lt; &amp;(a + b) &lt;&lt; std::endl; // Invalid, (a + b) is an Rvalue</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; &amp;a &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;b &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// Valid, a and b are Lvalue</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>右值引用，就是使右值也拥有一个名字，如果它是一个临时变量（如函数的返回值），右值引用还能给它“续命”。</p>
-<p>基本语法 value_type &amp;&amp; val = temp_val;</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> &amp;&amp; a = foo(); <span class="comment">// foo()的返回值不会立即销毁</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>所谓移动语义，就是从将要销毁的临时变量那里把资源移动过来。这样就节省了分配空间和复制值的开销。这就是移动语义的核心。</p>
-<h2 id="Lambda-匿名函数"><a href="#Lambda-匿名函数" class="headerlink" title="Lambda 匿名函数"></a>Lambda 匿名函数</h2><p>Lambda Functional Programming</p>
-<p>基本语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[capture] (parameters) mutable -&gt; return_type &#123; statement &#125;</span><br><span class="line">[capture]: 捕捉列表。能够捕捉上下文的变量供lambda函数使用。</span><br><span class="line">(parameters): 参数列表。</span><br><span class="line">mutable: 默认情况下，lambda函数总是一个const函数，mutable可以取</span><br><span class="line">消其常量性。</span><br><span class="line">-&gt;return_type: 返回类型。</span><br><span class="line">statement: 函数体。可以使用捕获的变量</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// example</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">2</span> ;</span><br><span class="line">    <span class="comment">// catch a</span></span><br><span class="line">    <span class="keyword">auto</span> <span class="built_in">pow</span> = [ a ] ( <span class="keyword">int</span> times ) - &gt; <span class="keyword">int</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">while</span> ( times -- ) ret * = a ; <span class="comment">// use a</span></span><br><span class="line">        <span class="keyword">return</span> ret ;</span><br><span class="line">    &#125; ;</span><br><span class="line">    <span class="built_in">std</span> :: <span class="built_in">cout</span> &lt;&lt; <span class="built_in">pow</span> ( <span class="number">3</span> ) &lt;&lt; <span class="built_in">std</span> :: <span class="built_in">endl</span> ; <span class="comment">// 8</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; li = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span> &#125;;</span><br><span class="line"><span class="keyword">auto</span> printList = [](<span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;&amp; li) &#123;</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">auto</span> it = li.begin(); it != li.end(); it++) &#123;</span><br><span class="line">       <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;;</span><br><span class="line">printList(li);</span><br><span class="line"><span class="comment">// remove all even numbers from the list</span></span><br><span class="line">li.remove_if([&amp;](<span class="keyword">int</span> x) -&gt; <span class="keyword">bool</span> &#123;</span><br><span class="line">   <span class="keyword">if</span>(x % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;);</span><br><span class="line">printList(li);</span><br></pre></td></tr></table></figure>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">std</span> :: <span class="built_in">array</span> &lt; <span class="keyword">int</span> , 10 &gt; s = &#123; <span class="number">5</span> , <span class="number">7</span> , <span class="number">4</span> , <span class="number">2</span> , <span class="number">8</span> , <span class="number">6</span> , <span class="number">1</span> , <span class="number">9</span> , <span class="number">0</span> , <span class="number">3</span> &#125; ;</span><br><span class="line"><span class="comment">// sort using a lambda expression</span></span><br><span class="line"><span class="built_in">std</span> :: sort ( s. begin ( ) , s. end ( ) , [ ] ( <span class="keyword">int</span> a, <span class="keyword">int</span> b ) &#123;</span><br><span class="line">    <span class="keyword">return</span> b &lt; a ;</span><br><span class="line">&#125; ) ;</span><br></pre></td></tr></table></figure>
-<h2 id="Closure-函数闭包"><a href="#Closure-函数闭包" class="headerlink" title="Closure 函数闭包"></a>Closure 函数闭包</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fromto = [ ] ( <span class="keyword">auto</span> start, <span class="keyword">auto</span> finish ) &#123;</span><br><span class="line">    <span class="keyword">return</span> [ = ] ( ) <span class="keyword">mutable</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> ( start &lt; finish )</span><br><span class="line">            <span class="keyword">return</span> start ++ ;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="built_in">std</span> :: runtime_error ( <span class="string">"Complete"</span> ) ;</span><br><span class="line">    &#125; ;</span><br><span class="line"> &#125; ;</span><br><span class="line"> <span class="keyword">auto</span> range = fromto ( <span class="number">0</span> , <span class="number">10</span> ) ;</span><br><span class="line"></span><br><span class="line"> <span class="built_in">std</span> :: <span class="built_in">cout</span> &lt;&lt; range ( ) &lt;&lt; <span class="built_in">std</span> :: <span class="built_in">endl</span> ;</span><br><span class="line"> <span class="built_in">std</span> :: <span class="built_in">cout</span> &lt;&lt; range ( ) &lt;&lt; <span class="built_in">std</span> :: <span class="built_in">endl</span> ;</span><br><span class="line"> <span class="built_in">std</span> :: <span class="built_in">cout</span> &lt;&lt; range ( ) &lt;&lt; <span class="built_in">std</span> :: <span class="built_in">endl</span> ;</span><br><span class="line"> <span class="built_in">std</span> :: <span class="built_in">cout</span> &lt;&lt; range ( ) &lt;&lt; <span class="built_in">std</span> :: <span class="built_in">endl</span> ;</span><br></pre></td></tr></table></figure>
-<h2 id="Initializer-List"><a href="#Initializer-List" class="headerlink" title="Initializer List"></a>Initializer List</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> <span class="built_in">std</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">s <span class="title">func</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="number">1</span>, <span class="string">"abcde"</span>, &#123;<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>&#125;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">s s1&#123;<span class="number">1</span>, <span class="string">"abcde"</span>, &#123;<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>&#125;&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="Smart-Pointer-智能指针"><a href="#Smart-Pointer-智能指针" class="headerlink" title="Smart Pointer 智能指针"></a>Smart Pointer 智能指针</h2><h3 id="auto-ptr-C-98"><a href="#auto-ptr-C-98" class="headerlink" title="auto_ptr(C++98):"></a>auto_ptr(C++98):</h3><p>auto_ptr以对象的方式管理堆分配的内存，并在适当的时间(比如auto_ptr析构时)，释放获得的堆内存。这种管理方式只要程序员将new返回的指针作为auto_ptr的初始值即可，不需要显式调用delete。比如：</p>
-<p>auto_ptr(new int);</p>
-<p>不过auto_ptr有一些缺点，如拷贝时返回一个左值，不能调用delete[]等，在C++11中被废弃。</p>
-<h3 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h3><p>unique_ptr如其命名，表示它管理一个只属于它的内存，它不能被复制，可以被移动。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">unique_ptr</span>&lt;<span class="keyword">int</span>&gt; up1(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">11</span>));</span><br><span class="line"><span class="built_in">unique_ptr</span>&lt;<span class="keyword">int</span>&gt; up2 = up1; <span class="comment">// 编译错误，复制</span></span><br><span class="line"><span class="built_in">unique_ptr</span>&lt;<span class="keyword">int</span>&gt; up3 = move(up1) <span class="comment">// std::move会使up1清空，</span></span><br><span class="line"> <span class="comment">// 这句的语义是将up1移动给up3</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *up1 &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 错误，up1已经不拥有该内存</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *up3 &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 11</span></span><br><span class="line">up3.reset(); <span class="comment">// reset使指针置空并释放内存</span></span><br><span class="line">up1.reset(); <span class="comment">// 不会导致内存错误</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *up3 &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 错误，内存已释放</span></span><br><span class="line"><span class="comment">// 即使不调用reset，unique_ptr对象在析构时也会释放拥有的内存</span></span><br></pre></td></tr></table></figure>
-<h3 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h3><p>shared_ptr也如其命名，表示多个智能指针可以拥有同一个堆内存。在实现上使用了引用计数，当一个shared_ptr失效，内存也不会被释放，而是引用计数减小。当引用计数归零的时候，shared_ptr才会真正释放堆内存的空间。</p>
-<h3 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a>weak_ptr</h3><p>weak_ptr用于指向一个shared_ptr，但它实际上不拥有这个内存。其lock()方法可返回一个shared_ptr，而当所指对象已经失效时，可以返回nullptr。用这个可以验证shared_ptr的有效性。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; sp1(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">22</span>));</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; sp2 = sp1; <span class="comment">// 和sp1共享一个堆内存</span></span><br><span class="line">weak_ptr&lt;<span class="keyword">int</span>&gt; wp = sp1; <span class="comment">// 指向sp1所指对象</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *sp1 &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 22</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *sp2 &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 22</span></span><br><span class="line">sp1.reset(); <span class="comment">// 引用计数-1，但不释放内存</span></span><br><span class="line"><span class="keyword">if</span> (wp.lock() != <span class="literal">nullptr</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"valid"</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//valid</span></span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; sp3 = wp.lock(); <span class="comment">// sp3指向与sp1相同的对象</span></span><br><span class="line">sp2.reset();</span><br><span class="line">sp3.reset(); <span class="comment">// 所指对象被释放</span></span><br><span class="line"><span class="keyword">if</span> (wp.lock() == <span class="literal">nullptr</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"invalid"</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// invalid</span></span><br></pre></td></tr></table></figure>
-<h3 id="Range-Base-Loop"><a href="#Range-Base-Loop" class="headerlink" title="Range Base Loop"></a>Range Base Loop</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> i : a) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/shixun3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/shixun3/" itemprop="url">linux 指令入门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T15:45:01+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/初级实训/" itemprop="url" rel="index">
-                    <span itemprop="name">初级实训</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/29/shixun3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/shixun3/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.9k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="linux-指令入门"><a href="#linux-指令入门" class="headerlink" title="linux 指令入门"></a>linux 指令入门</h1><h2 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h2><p>打开terminal，进入的是你的主目录路径，通过cd命令，可以进入其他目录。格式为 cd[dir] ，dir是目录的路径，可以是绝对路径也可以是相对路径，其中 ./ 代表当前文件夹， ../ 代表上一目录，也就是父文件夹。如果没有参数，回到主目录（也就是 ~/ ）。</p>
-<h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><p>键入 ls [option] [dir] ，你会得到整个dir目录下的未隐藏文件（夹）</p>
-<p>option是参数选项，如使用 ls -a ./ 显示当前目录所有文件， -a 显示所有文件， -l 以详细列表显示，-R 以递归的方式列出指定目录下的所有文件</p>
-<h2 id="man"><a href="#man" class="headerlink" title="man"></a>man</h2><p>如果想知道一个命令更多的信息怎么办，一般又三种方法：</p>
-<ol>
-<li><p>首先是试一下命令有没有自带的help参数，一般是 –help 、 -h ；</p>
-</li>
-<li><p>其次就是 man ，使用命令 man [command] 来打开一个命令的文档（如果有），通过回<br>车或者方向上下就可以读到整个文档了，退出的话按 q ；</p>
-</li>
-</ol>
-<p><img src="Snipaste_2019-09-27_22-26-19.png" alt="1"></p>
-<h2 id="mkdir、touch和cat"><a href="#mkdir、touch和cat" class="headerlink" title="mkdir、touch和cat"></a>mkdir、touch和cat</h2><p>mkdir dir 用来生成一个文件夹，文件夹所在的路径应当存在。</p>
-<p>touch 命令一般用来生成一个文件， touch path 会生成一个路径为path的空白文件。</p>
-<p>cat 命令会以文本方式读取一个文件，然后把文件中的内容输出到标准输出中，使用cat可以快捷的查看一个文件的内容。</p>
-<p><img src="Snipaste_2019-09-27_22-28-35.png" alt="1"></p>
-<h2 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h2><p>Linux下有些命令或者执行某些动作是需要权限的，这个有点类似于Windows下的管理员权限。如果你得到一个Permission denied，那么试试 sudo 命令。</p>
-<p>sudo [command] 会让你输入用户密码，然后以超级用户的权限执行command命令（superuser do）。</p>
-<p>注意： 这里输入密码时，是不会有任何回显的，不要认为没有成功输入</p>
-<h2 id="mv-cp-rm-rmdir-mv"><a href="#mv-cp-rm-rmdir-mv" class="headerlink" title="mv cp rm rmdir mv"></a>mv cp rm rmdir mv</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp hello.cpp ../</span><br><span class="line">cd ../</span><br><span class="line">rm hello.cpp</span><br></pre></td></tr></table></figure>
-<p><img src="Snipaste_2019-09-27_23-14-42.png" alt="1"></p>
-<p>mv 移动文件与目录或重命名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv hello.cpp helloworld.cpp</span><br><span class="line">mv helloworld.cpp ../</span><br></pre></td></tr></table></figure></p>
-<p><img src="Snipaste_2019-09-27_23-23-45.png" alt="1"></p>
-<p>Linux rmdir命令删除空的目录。<br><code>rmdir [-p] dirName</code></p>
-<blockquote>
-<p>-p 是当子目录被删除后使它也成为空目录的话，则顺便一并删除。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">将工作目录下，名为 AAA 的子目录删除 :</span><br><span class="line">rmdir AAA</span><br><span class="line">在工作目录下的 BBB 目录中，删除名为 Test 的子目录。若 Test 删除后，BBB 目录成为空目录，则 BBB 亦予删除。</span><br><span class="line">rmdir -p BBB/Test</span><br></pre></td></tr></table></figure>
-<h2 id="执行可执行文件"><a href="#执行可执行文件" class="headerlink" title="执行可执行文件"></a>执行可执行文件</h2><p>当前目录下的可执行文件前面加上./</p>
-<h2 id="gcc、g-、gdb"><a href="#gcc、g-、gdb" class="headerlink" title="gcc、g++、gdb"></a>gcc、g++、gdb</h2><h3 id="gcc"><a href="#gcc" class="headerlink" title="gcc:"></a>gcc:</h3><ol>
-<li>-c 只做编译，不做链接</li>
-<li>-o 生成目标，后面的路径会生成目标文件</li>
-<li><code>-std=c[++]**|gnu**</code> 规定ISO标准，如-std=c99就是使用c99标准编译文件，默认的话C语言是c89，C++是c++98/03</li>
-<li>-g 插入调试信息，请配合gdb食用</li>
-<li>-W** 警告某种规则，常见是-Wall，打开所有警告，可用值可以使用可以百度或者查看官方文档</li>
-<li>-Werror 把警告视为错误</li>
-<li>-Wno-** 关闭某种警告，可用值与上面相同</li>
-<li>-I 将路径添加到预处理默认路径</li>
-<li>-L 将路径添加到链接库默认路径</li>
-<li>-l 链接的时候链接库默认路径下的库文件，如-lgtest会链接/usr/lib或者/usr/local/lib下的libgtest.a文件或许libgtest.so文件（静态库或者动态库）</li>
-<li>-pthread 多线程代码使用</li>
-</ol>
-<h3 id="gdb"><a href="#gdb" class="headerlink" title="gdb:"></a>gdb:</h3><p>如果你编译代码的时候有加-g参数，那么你就可以使用gdb调试你的代码了</p>
-<p>使用<code>gdb &lt;program&gt;</code>可以对可执行文件进行调试。</p>
-<p><a href="https://blog.csdn.net/lyjtynet/article/details/4057723" target="_blank" rel="noopener">linux c++ gdb教程</a></p>
-<h2 id="grep、locate、find-查找"><a href="#grep、locate、find-查找" class="headerlink" title="grep、locate、find 查找"></a>grep、locate、find 查找</h2><ul>
-<li><p>如果想查找文档中的某些信息，使用grep绝对是个好选择<code>grep -i regex file</code> 会将file中匹配了正则表达式的行输出，请注意这里是行为单位的</p>
-</li>
-<li><p>find可以在特定文件夹中搜索匹配规则的文件，规则比较复杂，常用的是 -name 参数，可以查找名字匹配正则表达式的文件（包括文件夹，毕竟Unix一切皆文件嘛，文件夹也不例外）</p>
-</li>
-<li><p>locate命令可能需要通过 <code>sudo apt install locate</code> 安装，通过 locate name 可以定位文件位置，也就是查找文件啦</p>
-</li>
-</ul>
-<h2 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h2><p>Linux下的文件是有权限控制的，使用 <code>ls -l</code> 可以看到每行最前面有-rwxrwxr-x之类的，这是描述用于文件的属性与权限。第一个字符代表文件是否为目录，如果是则为d，否为-；接下来九个字符每三个为一组，分别代表用户，组，和其他人的权限，三个字符分别代表读写执行的权限，即r、w和x。一个二进制文件必须要有可执行权限才能运行。为了改变文件的属性，可以使用命令 <code>chmod [option] mode ... file ...</code> 来更改文件权限。mode是指文件的权限更改模式，主要有以下两种类型：</p>
-<ol>
-<li><p>一个三位的八进制数。这个八进制数从高位到低位分别代表用户、组和其他人的权限模式。每个位是1、2、4或者它们的和，1代表执行，2代表写，4代表读。如7 = 1 + 2 + 4，所以7代表有读写执行的权限，而5= 1 + 4，所以5代表有读和执行，但是没有写的权限。如果将这个三位八进制数写成二进制，每一位0正好对应前文说道的后九位的-，而每一位1对应字符。如数字0775写成二进制是111111 101，对应的就是rwx rwx r-x。正所谓一言不合777， <code>chmod 777 path</code> 将文件的所有权限给了所有人，是很不安全的行为。</p>
-</li>
-<li><p><code>[a|u|g|o][+|=|-][rwx]</code> 的格式。其中a代表全部，u代表用户，g代表用户组，o代表其他，+是加上权限，=是权限改为，-是除去权限。如 <code>chmod u+x a+r a.out</code> 是使得用户可执行，全部可读文件a.out</p>
-</li>
-</ol>
-<h2 id="Linux管道与（真）grep"><a href="#Linux管道与（真）grep" class="headerlink" title="Linux管道与（真）grep"></a>Linux管道与（真）grep</h2><p>一个由标准输入输出链接起来的进程集合，所以每一个进程的输出（stdout）被直接作为下一个进程的输入（stdin）</p>
-<p><img src="Snipaste_2019-09-29_14-11-31.png" alt="1"></p>
-<p>使用管道操作符 | 将多个命令连接起来，将前一个命令的输出作为当前命令的输入，就像管子一样字符串在命令之间流动。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt list | grep $&#123;package&#125;\ \\[installed\\] #快速查找软件包是否安装</span><br><span class="line">cat file | grep regx #查找文件中匹配正则表达式的行，快，但是缺点是只能匹配一行，其实可以使用sed</span><br><span class="line">ll -R dir | grep regx #确定目录下（包括所有子目录）是否含有匹配正则表达式的文件，个人觉得比find稍快，但是不能定位路径</span><br></pre></td></tr></table></figure>
-<p>使用管道+grep，可以极大减少无用信息的输出，极大地提高你的工作效率<br>当然，还有 less 命令可以使得长长的输出逐页输出，翻页随心所欲。</p>
-<h2 id="bash的初始化脚本"><a href="#bash的初始化脚本" class="headerlink" title="bash的初始化脚本"></a>bash的初始化脚本</h2><p>严格意义上说这是题外话，但是我觉得跟大家分享一下还是有必要的一般来说有两个文件是在bash启动的过程中比较重要的，一个是/etc/bash.bashrc，另一个是~/.bashrc，主要都是bash的配置命令。文件/etc/bash.bashrc会在系统启动时执行，而~/.bashrc会在用户打开bash的时候执行。如果你在linux或者Windows中装过JVM或者JDK，一定忘不了要设置环境变量，而在Linux下，一般是在写在/etc/bash.bashrc中，这样开机的时候就会把<br>JDK或者JVM的目录添加到$PATH中.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2623,7 +2499,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">344</span>
+                  <span class="site-state-item-count">347</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2713,7 +2589,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">394.4k</span>
+    <span title="Site words total count">396.6k</span>
   
 </div>
 

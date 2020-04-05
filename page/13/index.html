@@ -291,6 +291,631 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/bianchengzhimei7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/27/bianchengzhimei7/" itemprop="url">阶乘问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T17:18:21+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程之美/" itemprop="url" rel="index">
+                    <span itemprop="name">编程之美</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/27/bianchengzhimei7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/bianchengzhimei7/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  654
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="阶乘相关问题："><a href="#阶乘相关问题：" class="headerlink" title="阶乘相关问题："></a>阶乘相关问题：</h1><ol>
+<li>给定一个整数N，那么N的阶乘N！末尾有多少个0呢？例如：N=10，N！=3628800，N！的末尾有两个0。</li>
+<li>N！的二进制表示中最低位1的位置。</li>
+</ol>
+<h2 id="引理："><a href="#引理：" class="headerlink" title="引理："></a>引理：</h2><p><strong>N！中含有质因数2的个数，等于[N/2]+[N/4]+[N/8]+[N/16]+···</strong></p>
+<h1 id="对于问题一："><a href="#对于问题一：" class="headerlink" title="对于问题一："></a>对于问题一：</h1><h2 id="角度一：从“哪些数相乘能得到10”考虑"><a href="#角度一：从“哪些数相乘能得到10”考虑" class="headerlink" title="角度一：从“哪些数相乘能得到10”考虑"></a>角度一：从“哪些数相乘能得到10”考虑</h2><p>如果N！=K*10^M, 且K不能被10整除， 那么N!末尾有M个0。</p>
+<p>再考虑对N！进行质因数分解，N！=（2^x）*（3^y）*（5*z）···</p>
+<p>由于10 = 2*5，所以M只跟X和Z有关，每一对2和5相乘能得到一个10，所以M = min（X，Z）</p>
+<p>因为能被2整除的数出现的频率比能被5整除的数高得多，所以X大于等于Z，所以把公式简化为M = Z。</p>
+<p>所以只要计算出Z的值，就可以得到N！末尾0的个数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span>; i&lt;=N; i++)</span><br><span class="line">&#123;</span><br><span class="line">    j = i;</span><br><span class="line">    <span class="keyword">while</span>(j % <span class="number">5</span> == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ret++;</span><br><span class="line">        j/=<span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="角度二：思路类似角度一，找“5”的数"><a href="#角度二：思路类似角度一，找“5”的数" class="headerlink" title="角度二：思路类似角度一，找“5”的数"></a>角度二：思路类似角度一，找“5”的数</h2><p>公式： Z=[N/5]+[N/5^2]+[N/5^3]+···（不用担心这会是一个无穷的运算，因为总存在一个K，使得5^k &gt; N, [N/5^k]=0）</p>
+<p>公式中，[N/5]表示不大于N的数中5的倍数贡献一个5，[N/5^2]表示不大于N的数中5*5的倍数再贡献一个5···</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(N)</span><br><span class="line">&#123;</span><br><span class="line">    ret += N/<span class="number">5</span>;</span><br><span class="line">    N /= <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="对于问题二："><a href="#对于问题二：" class="headerlink" title="对于问题二："></a>对于问题二：</h1><p>判断最后一个二进制位是否为0，若为0，则将此二进制右移一位，即为商值；反之，若为1，则说明这个二进制数是奇数，无法被2整除</p>
+<p>所以，这个问题实际上等同于求N！含有质因数2的个数。即答案等于N！含有质因数2的个数加1。</p>
+<h2 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h2><p><strong>N！中含有质因数2的个数，等于[N/2]+[N/4]+[N/8]+[N/16]+···</strong></p>
+<blockquote>
+<p>[N/k]等于1，2，3，···，N中能被k整除的数的个数</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowestOne</span><span class="params">(<span class="keyword">int</span> N)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> Ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(N)</span><br><span class="line">    &#123;</span><br><span class="line">        N &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        Ret += N;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h2><p>N！含有质因数2的个数，还等于N减去N的二进制表示中1的数目。</p>
+<p>证明：</p>
+<p>N！中含有质因数2的个数为：[N/2]+[N/4]+[N/8]+[N/16]+···</p>
+<p>假设N = 11011</p>
+<p>即<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1101 + 110 + 11 + 1</span><br><span class="line">= (1000 + 100 + 1) + (100 + 10) + (10 + 1) + 1</span><br><span class="line">= (1000 + 100 + 10 + 1) + (100 + 10 + 1) + 1</span><br><span class="line">= 1111 + 111 + 1</span><br><span class="line">= (10000 - 1) + (1000 - 1) + (10-1) + (1-1)</span><br><span class="line">= 11011-(N二进制数表示中1的个数)</span><br></pre></td></tr></table></figure></p>
+<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>给定整数n，判断它是否为2的方幂。</p>
+<p><strong>(n&gt;0 &amp;&amp; ((n&amp;(n-1)) == 0))</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/bianchengzhimei6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/27/bianchengzhimei6/" itemprop="url">求二进制数中1的个数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T17:18:10+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程之美/" itemprop="url" rel="index">
+                    <span itemprop="name">编程之美</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/27/bianchengzhimei6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/bianchengzhimei6/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  591
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="求二进制数中1的个数"><a href="#求二进制数中1的个数" class="headerlink" title="求二进制数中1的个数"></a>求二进制数中1的个数</h1><p>对于一个字节（8bit）的无符号整型变量，求其二进制表示中‘1’的个数，要求算法执行的<strong>效率尽可能高</strong></p>
+<h2 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h2><p>利用整型数据除法的特点，通过相除和判断余数的值来分析</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(v%<span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">        v /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法二：使用位操作"><a href="#解法二：使用位操作" class="headerlink" title="解法二：使用位操作"></a>解法二：使用位操作</h2><p>向右移位操作同样可以达到相除的目的，唯一的不同之处在于，移位之后如何来判断是否有1存在。</p>
+<p>需要判断最后一位是否为1，“与”操作可以达到目的，可以把该数与00000001进行与操作，如果结果为1，则表示当前八位数的最后一位为1，否则为0.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        num += v &amp; <span class="number">0x01</span>;</span><br><span class="line">        v &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法三："><a href="#解法三：" class="headerlink" title="解法三："></a>解法三：</h2><p>位操作比除、余操作的效率高了很多，但是，即使使用位操作，时间复杂度仍然为O(log2v)</p>
+<p>能否将复杂度进一步降低？</p>
+<p>为了简化这个问题，我们考虑只有一个1的情况，例如：01000000</p>
+<p>如何判断给定的二进制数只有一个1呢？可以通过判断这个数是否为2的整数次幂来实现。另外，如果只和这个1进行判断，如果希望操作后的结果为0，01000000可以和00111111来进行与操作。</p>
+<p>这样，要进行的操作就是0100000 &amp; （01000000 - 00000001） = 01000000 &amp; 00111111 = 0</p>
+<p>将这种判断只有一个1的做法推广到有不确定1的情况即有如下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Count</span><span class="params">(BYTE v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v)</span><br><span class="line">    &#123;</span><br><span class="line">        v &amp;= (v<span class="number">-1</span>);</span><br><span class="line">        num++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解法四："><a href="#解法四：" class="headerlink" title="解法四："></a>解法四：</h2><p>解法三的复杂度已经降低到O(M)，M为v中1的个数</p>
+<p>若想继续降低时间复杂度，还可以利用空间换时间，提前制好8bit二进制数（255个）各自对应的num的一个数组（表），然后进行查表操作，无需进行任何比较。</p>
+<h1 id="相关问题："><a href="#相关问题：" class="headerlink" title="相关问题："></a>相关问题：</h1><p>给定两个正整数（二进制形式表示）A和B，问把A变为B需要改变多少位（bit）？也就是说，整数A和B的二进制表示中有多少位是不同的？</p>
+<p>与非 -&gt; 求有多少个1</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/bianchengzhimei5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/27/bianchengzhimei5/" itemprop="url">快速找出故障机器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T17:18:03+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程之美/" itemprop="url" rel="index">
+                    <span itemprop="name">编程之美</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/27/bianchengzhimei5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/27/bianchengzhimei5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="快速找出故障机器"><a href="#快速找出故障机器" class="headerlink" title="快速找出故障机器"></a>快速找出故障机器</h1><p>我们假设一个机器仅存储一个标号为ID的记录（假设ID是小于10亿的整数），假设每份数据保存两个备份，这样就有两个机器存储了同样的数据。</p>
+<ol>
+<li>在某个时间，如果得到一个数据文件ID的列表，是否能够快速地找出这个表中仅出现一次的ID？</li>
+<li>如果已经知道只有一台机器死机（也就是说只有一个备份丢失）呢？如果有两台机器死机呢（假设同一个数据的两个备份不会同时消失）？</li>
+</ol>
+<h1 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h1><p>这个问题可以转化为，有很多ID，其中只有一个ID出现的次数小于2，其余正常ID出现的次数都等于2，问如何找到这个次数为1的ID。</p>
+<p>为了达到这个目的，最简单的方法就是直接遍历列表，利用一个数组记下每个ID出现的次数，遍历完毕之后，出现次数小于2的ID就是我们想要的结果。</p>
+<p>假设有N个ID，且ID的取值在0~（N-1）之间，这个解法占用的时间复杂度为O（N），空间复杂度为O（N）。</p>
+<p>空间复杂度并不理想，如果ID的数量多达几十GB，这样的空间复杂度在实际运算中会带来效率问题，<strong>考虑进一步减少空间复杂度</strong>。</p>
+<h1 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h1><p>哪些数据是不必存储的？大部分的机器ID出现次数都等于2，这些机器肯定不是故障的机器，可以不予考虑，可以把解法1数组中等于2的元素清空，然后用来存储下一个机器ID的出现次数，这样就可以减少需要的空间。</p>
+<p>具体方法如下：遍历列表，利用哈希表记下每个ID出现的次数，每次遇到一个ID，就向哈希表中增加一个元素，如果这个ID出现的次数为2，那么就从哈希表中删除这个ID，最后剩下的ID就是我们想要的结果。这个算法空间复杂度在最好情况下，可以达到O（1），在最坏情况下仍然为O（N）</p>
+<h1 id="解法三："><a href="#解法三：" class="headerlink" title="解法三："></a>解法三：</h1><p>如何进一步降低空间复杂度？</p>
+<p>如果想<strong>继续降低空间复杂度</strong>，就要<strong>摒弃遍历列表计数</strong>这种方法了。</p>
+<p>是否可以降到常数级别（甚至O（1））呢？</p>
+<p>如果这样，我们可以把这个变量写成：<strong>x(i) = f(list[0],list[1],…,list[i])</strong>，也就是说这个变量是已经遍历过的列表元素的函数。</p>
+<p>这个函数需要满足的条件是：<strong>x(N) = ID_Lost</strong>。</p>
+<p>也就说遍历完整个列表后，这个变量的值应该等于丢失备份的ID。</p>
+<p>我们需要找到整个f</p>
+<p>可以考虑使用异或关系来帮忙找到结果。</p>
+<p>因为正确的机器都会有两个ID，不正确的机器只有一个ID。所以所有ID的异或值就等于这个仅出现一次的ID（因为异或运算满足交换律和结合律，其他出现两次的ID异或完都为0）。这样我们只使用一次遍历运算就得到了只有一台故障机器情况下故障机器的ID。</p>
+<p>因此，就可以使用 <strong>x(i) = list[0]⊕list[1]⊕…⊕list[i]</strong></p>
+<p>这种情况下，时间复杂度为O（N）， 空间复杂度为O（1）。</p>
+<hr>
+<p>对于第二问：由于有两个ID仅出现一次，设它们为A和B，那么所有ID的异或值为A⊕B。无法确定A和B的值</p>
+<p>如果A=B，则A⊕B为0，也就是说丢失的是同一份数据的两个拷贝，我们可以通过求和的方法得到A和B（A=B=（所有ID之和-所有正常工作机器ID之和）/2）</p>
+<p>如果A⊕B不等于0，那么这个异或值的二进制中某一位为1，显然，A和B中有且仅有一个数的相同位上也为1。</p>
+<p>我们就把所有ID分成两类，一类在这位上为1，另一类这位上为0，那么对于这两类ID，每一类分别含有A和B中的一个。那么我们使用两个变量，在遍历列表时，分别计算这两类ID的异或和，即可得到A和B的值。</p>
+<h1 id="解法四："><a href="#解法四：" class="headerlink" title="解法四："></a>解法四：</h1><p>如果需要考虑死机的两台机器ID相同的情况，还有没有办法解决？</p>
+<p>这个问题可以抽象为：在一个事先预定的整数（ID）集合当中，怎么样找出其中丢失的一个数（ID）或两个数（ID）？</p>
+<p>对于一个数，预先存好所有ID的和，然后减去后来的，就得到少了的那一个</p>
+<p>对于两个数，预先存好所有ID的和以及积（为降低数据大小，还可以改为存平方和），然后两个方程求两个未知数</p>
+<h1 id="扩展问题"><a href="#扩展问题" class="headerlink" title="扩展问题"></a>扩展问题</h1><p>如果是N个备份？</p>
+<p>N小的时候列几个方程？</p>
+<p>N多的时候还是用遍历数组？</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/matlab7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1647,622 +2272,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/bianchengzhimei1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/26/bianchengzhimei1/" itemprop="url">有关了解当前线程、进程、系统效能的API</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-26T22:39:27+08:00">
-                2019-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程之美/" itemprop="url" rel="index">
-                    <span itemprop="name">编程之美</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/26/bianchengzhimei1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/26/bianchengzhimei1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  545
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Sleep-—让当前线程停下来"><a href="#Sleep-—让当前线程停下来" class="headerlink" title="Sleep()—让当前线程停下来"></a>Sleep()—让当前线程停下来</h1><p>Sleep函数可以使计算机程序（进程，任务或线程）进入休眠，使其在一段时间内处于非活动状态。当函数设定的计时器到期，或者接收到信号、程序发生中断都会导致程序继续执行。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在Windows系统中：</span><br><span class="line">Sleep(<span class="number">2</span>*<span class="number">1000</span>); <span class="comment">//sleep for 2 seconds</span></span><br><span class="line">在Unix系统中：</span><br><span class="line">sleep(<span class="number">2</span>);   <span class="comment">//sleep for 2 seconds</span></span><br></pre></td></tr></table></figure>
-<h1 id="WaitForSingleObject-—自己停下来，等待某个事件发生"><a href="#WaitForSingleObject-—自己停下来，等待某个事件发生" class="headerlink" title="WaitForSingleObject()—自己停下来，等待某个事件发生"></a>WaitForSingleObject()—自己停下来，等待某个事件发生</h1><h1 id="GetTickCount"><a href="#GetTickCount" class="headerlink" title="GetTickCount()"></a>GetTickCount()</h1><p>GetTickCount是一种函数。GetTickCount返回（retrieve）从操作系统启动所经过（elapsed）的毫秒数，它的返回值是DWORD。</p>
-<p><strong>常常用来判断某个方法执行的时间</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代替time函数来初始化随机数生成器</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinBase.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, k, r;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        srand (GetTickCount());</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; <span class="number">5</span>; k++)</span><br><span class="line">        &#123;</span><br><span class="line">            r = rand ();</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;r&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="QueryPerformanceFrequency-、QueryPerformanceCounter-—访问到精度更高的CPU数据"><a href="#QueryPerformanceFrequency-、QueryPerformanceCounter-—访问到精度更高的CPU数据" class="headerlink" title="QueryPerformanceFrequency()、QueryPerformanceCounter()—访问到精度更高的CPU数据"></a>QueryPerformanceFrequency()、QueryPerformanceCounter()—访问到精度更高的CPU数据</h1><p>QueryPerformanceFrequency是操作系统的性能统计分辨率，也就是每秒钟统计多少次的意思。 性能统计频率和应用程序性能没有关系。 </p>
-<p>QueryPerformanceCounter 是系统性能统计计数器，表示统计了多少次，除以QueryPerformanceFrequency，得到系统运行时间（秒数）。 </p>
-<p>QueryPerformanceCounter2-QueryPerformanceCounter1，得到高精度（微秒级，=1/QueryPerformanceFrequency秒）的时间差，常用于winddows高精度计时。</p>
-<h1 id="timeGetSystemTime-—另一个得到高精度时间的方法"><a href="#timeGetSystemTime-—另一个得到高精度时间的方法" class="headerlink" title="timeGetSystemTime()—另一个得到高精度时间的方法"></a>timeGetSystemTime()—另一个得到高精度时间的方法</h1><p>timeGetSystemTime，函数返回系统时间，（毫秒）。这里的系统时间是指自从系统启动时到调用该函数时的时间间隔。</p>
-<h1 id="PerformanceCounter-—效能计数器"><a href="#PerformanceCounter-—效能计数器" class="headerlink" title="PerformanceCounter()—效能计数器"></a>PerformanceCounter()—效能计数器</h1><h1 id="GetProcessorInfo-SetThreadAffinityMask-—遇到多核的问题时候更好地控制CPU"><a href="#GetProcessorInfo-SetThreadAffinityMask-—遇到多核的问题时候更好地控制CPU" class="headerlink" title="GetProcessorInfo()/SetThreadAffinityMask()—遇到多核的问题时候更好地控制CPU"></a>GetProcessorInfo()/SetThreadAffinityMask()—遇到多核的问题时候更好地控制CPU</h1><h1 id="GetCPUTickCount-—得到CPU核心运行周期数"><a href="#GetCPUTickCount-—得到CPU核心运行周期数" class="headerlink" title="GetCPUTickCount()—得到CPU核心运行周期数"></a>GetCPUTickCount()—得到CPU核心运行周期数</h1><h1 id="让CPU占用率曲线听你指挥"><a href="#让CPU占用率曲线听你指挥" class="headerlink" title="让CPU占用率曲线听你指挥"></a>让CPU占用率曲线听你指挥</h1><ol>
-<li><p>CPU占用率固定在50%，为一条直线</p>
-</li>
-<li><p>CPU占用率为一条直线，具体占用率由命令行参数决定（参数范围1-100）</p>
-</li>
-<li><p>CPU占用率状态是一个正弦曲线</p>
-</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> DWORD busyTime = <span class="number">10</span>; <span class="comment">//10ms</span></span><br><span class="line"><span class="keyword">const</span> DWORD <span class="keyword">int</span> idleTime = busyTime; <span class="comment">//same ratio will lead to 50% cpu usage</span></span><br><span class="line"></span><br><span class="line">Int64 startTime = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">&#123;</span><br><span class="line">    DWORD startTime = GetTickCount();</span><br><span class="line">    <span class="comment">//busy loop</span></span><br><span class="line">    <span class="keyword">while</span>((GetTickCount() - startTime) &lt;= busyTime)</span><br><span class="line">        ;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//idle loop</span></span><br><span class="line">    Sleep(idleTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/shuzhijisuan1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/26/shuzhijisuan1/" itemprop="url">数值计算部分概念</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-26T22:22:06+08:00">
-                2019-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数值计算/" itemprop="url" rel="index">
-                    <span itemprop="name">数值计算</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/26/shuzhijisuan1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/26/shuzhijisuan1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  476
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="解误差"><a href="#解误差" class="headerlink" title="解误差"></a>解误差</h1><p>中文名称:解误差</p>
-<p>外文名称:error of solution</p>
-<p>正文内容:又称总离散误差。是真解与数值解之间的误差。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X为数值解</span><br><span class="line">Xn为真解</span><br><span class="line">解误差：|X-Xn|</span><br></pre></td></tr></table></figure>
-<h1 id="残差"><a href="#残差" class="headerlink" title="残差"></a>残差</h1><p>残差在数理统计中是指实际观察值与估计值（拟合值）之间的差。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">例如对于：Ax = b</span><br><span class="line">残差为： |AX1-b|</span><br></pre></td></tr></table></figure>
-<h1 id="舍入误差"><a href="#舍入误差" class="headerlink" title="舍入误差"></a>舍入误差</h1><p>舍入误差（英语：round-off error)，是指运算得到的近似值和精确值之间的差异。 比如当用有限位数的浮点数来表示实数的时候(理论上存在无限位数的浮点数)就会产生舍入误差。</p>
-<h1 id="截断误差"><a href="#截断误差" class="headerlink" title="截断误差"></a>截断误差</h1><p>由实际问题建立起来的数学模型，在很多情况下要得到准确解是困难的，通常要用数值方法求它的近似解，例如常把无限的计算过程用有限的计算过程代替，这种模型的准确解和由数值方法求出的近似解之间的误差称为截断误差。 因为截断误差是数值计算方法固有的，因此又称方法误差。</p>
-<h1 id="超定方程组"><a href="#超定方程组" class="headerlink" title="超定方程组"></a>超定方程组</h1><p>超定方程组是指方程个数大于未知量个数的方程组。</p>
-<h1 id="欠定方程组"><a href="#欠定方程组" class="headerlink" title="欠定方程组"></a>欠定方程组</h1><p>方程个数小于未知量个数的方程组。</p>
-<h1 id="恰定方程组"><a href="#恰定方程组" class="headerlink" title="恰定方程组"></a>恰定方程组</h1><p>方程数等于未知数个数</p>
-<h1 id="LU分解"><a href="#LU分解" class="headerlink" title="LU分解"></a>LU分解</h1><p>在线性代数与数值分析中，LU分解是矩阵分解的一种，将一个矩阵分解为一个下三角矩阵和一个上三角矩阵的乘积，有时需要再乘上一个置换矩阵。 LU分解可以被视为高斯消去法的矩阵形式。在数值计算上，LU分解经常被用来 <strong>解线性方程组、且在求反矩阵和计算行列式</strong> 中都是一个关键的步骤。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/31/matlab4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/31/matlab4/" itemprop="url">基础绘图</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-31T09:33:25+08:00">
-                2019-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/matlab/" itemprop="url" rel="index">
-                    <span itemprop="name">matlab</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/31/matlab4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/31/matlab4/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  245
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p> plot from  “Data”</p>
-</blockquote>
-<h1 id="plot"><a href="#plot" class="headerlink" title="plot()"></a>plot()</h1><ul>
-<li>plot(x,y) 画每一个对应的点x、y</li>
-<li>plot(y) 画每一个点(x, y) 其中x=[1,2,3…, n], n = length(y)</li>
-<li>例： plot(cos(0:pi/20:2*pi)); 画的是y为一连串cos值，x为0、1、2、…</li>
-</ul>
-<h1 id="hold-on-off"><a href="#hold-on-off" class="headerlink" title="hold on/off"></a>hold on/off</h1><p>plot画图会有服盖效果，先画cos 再画sin 那么看到的是sin 而不是sin和cos的重叠</p>
-<p>如果不想matlab每次画图都刷新画板，使用hold on</p>
-<p>结束画图后使用hold off</p>
-<p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hold on</span><br><span class="line">plot(cos(0:pi/20:2*pi));</span><br><span class="line">plot(sin(0:pi/20:2*pi));</span><br><span class="line">hold off</span><br></pre></td></tr></table></figure>
-<h1 id="plot-style"><a href="#plot-style" class="headerlink" title="plot style"></a>plot style</h1><ul>
-<li>plot(x, y, ‘str’); xy后面的参数指定画出来图形的风格</li>
-</ul>
-<p><img src="Snipaste_2019-08-13_09-23-57.png" alt="1"></p>
-<p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hold on</span><br><span class="line">plot(cos(0:pi/20:2*pi),&apos;or&apos;);</span><br><span class="line">plot(sin(0:pi/20:2*pi),&apos;xg&apos;);</span><br><span class="line">hold off</span><br></pre></td></tr></table></figure>
-<ul>
-<li>cos画的是红色圈圈</li>
-<li>sin画的是绿色叉叉</li>
-</ul>
-<h1 id="legend"><a href="#legend" class="headerlink" title="legend()"></a>legend()</h1><ul>
-<li>用于给图添加注解</li>
-<li>legend(‘L1’,’L2’…) L1对应为画的第一条线</li>
-</ul>
-<p><img src="Snipaste_2019-08-13_09-31-44.png" alt="1"></p>
-<p><img src="Snipaste_2019-08-13_09-32-09.png" alt="1"></p>
-<h1 id="title-and-label"><a href="#title-and-label" class="headerlink" title="title and ?label()"></a>title and ?label()</h1><ul>
-<li>title(‘…’)</li>
-<li>xlabel(‘…’)</li>
-<li>ylabel(‘…’)</li>
-<li>zlabel(‘…’)</li>
-</ul>
-<h1 id="text-and-annotation"><a href="#text-and-annotation" class="headerlink" title="text() and annotation()"></a>text() and annotation()</h1><ul>
-<li>Text里面要表示数学公式要使用LaTex标准</li>
-</ul>
-<p><img src="Snipaste_2019-08-13_09-43-56.png" alt="1"></p>
-<p><img src="Snipaste_2019-08-13_09-44-10.png" alt="1"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2315,7 +2324,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">344</span>
+                  <span class="site-state-item-count">347</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2405,7 +2414,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">394.4k</span>
+    <span title="Site words total count">396.6k</span>
   
 </div>
 
