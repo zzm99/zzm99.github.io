@@ -291,6 +291,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/12/leetcode-232/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/12/leetcode-232/" itemprop="url">leetcode-232 Implement Queue using Stacks</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-12T00:29:09+08:00">
+                2019-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/12/leetcode-232/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/12/leetcode-232/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  294
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Implement-Queue-using-Stacks"><a href="#Implement-Queue-using-Stacks" class="headerlink" title="Implement Queue using Stacks"></a>Implement Queue using Stacks</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyQueue</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s1;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s2;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MyQueue()&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Push element x to the back of queue.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(s1.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            s2.push(s1.top());</span><br><span class="line">            s1.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        s1.push(x);</span><br><span class="line">        <span class="keyword">while</span>(s2.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            s1.push(s2.top());</span><br><span class="line">            s2.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Removes the element from in front of queue.</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> rem = s1.top();</span><br><span class="line">        s1.pop();</span><br><span class="line">        <span class="keyword">return</span> rem;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get the front element.</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">peek</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s1.top();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Return whether the queue is empty.</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (s1.size()==<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your MyQueue object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * MyQueue* obj = new MyQueue();</span></span><br><span class="line"><span class="comment"> * obj-&gt;push(x);</span></span><br><span class="line"><span class="comment"> * int param_2 = obj-&gt;pop();</span></span><br><span class="line"><span class="comment"> * int param_3 = obj-&gt;peek();</span></span><br><span class="line"><span class="comment"> * bool param_4 = obj-&gt;empty();</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h1 id="Implement-Stack-using-Queues"><a href="#Implement-Stack-using-Queues" class="headerlink" title="Implement Stack using Queues"></a>Implement Stack using Queues</h1> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyStack</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q1;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q2;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    MyStack() &#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Push element x onto stack. */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        q2.push(x);</span><br><span class="line">        <span class="keyword">while</span>(q1.size() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            q2.push(q1.front());</span><br><span class="line">            q1.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(q2.size() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            q1.push(q2.front());</span><br><span class="line">            q2.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Removes the element on top of the stack and returns that element. */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ret = q1.front();</span><br><span class="line">        q1.pop();</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Get the top element. */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> q1.front();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns whether the stack is empty. */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> q1.empty();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your MyStack object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * MyStack* obj = new MyStack();</span></span><br><span class="line"><span class="comment"> * obj-&gt;push(x);</span></span><br><span class="line"><span class="comment"> * int param_2 = obj-&gt;pop();</span></span><br><span class="line"><span class="comment"> * int param_3 = obj-&gt;top();</span></span><br><span class="line"><span class="comment"> * bool param_4 = obj-&gt;empty();</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/leetcode-211/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2183,270 +2345,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/shixun6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/shixun6/" itemprop="url">linux gdb</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T15:50:15+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/初级实训/" itemprop="url" rel="index">
-                    <span itemprop="name">初级实训</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/29/shixun6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/shixun6/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  934
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="安装gdb"><a href="#安装gdb" class="headerlink" title="安装gdb"></a>安装gdb</h1><p><code>sudo apt-get install gdb</code></p>
-<h1 id="编译test"><a href="#编译test" class="headerlink" title="编译test"></a>编译test</h1><ol>
-<li>在编译指令里记得加上 -g 参数，这个会使得编译出来的程序可以使用gdb进行调试<br><code>$ g++ -g test.cpp -o test</code></li>
-<li>gdb载入可执行文件，这里有两个方法</li>
-</ol>
-<p>直接运行 gdb test</p>
-<p>或：</p>
-<p>gdb + file test</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ gdb</span><br><span class="line">GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.04) 7.11.1</span><br><span class="line">Copyright (C) 2016 Free Software Foundation, Inc.</span><br><span class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.h</span><br><span class="line">tml&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law. Type <span class="string">"show copyin</span></span><br><span class="line"><span class="string">g"</span></span><br><span class="line">and <span class="string">"show warranty"</span> <span class="keyword">for</span> details.</span><br><span class="line">This GDB was configured as <span class="string">"x86_64-linux-gnu"</span>.</span><br><span class="line">Type <span class="string">"show configuration"</span> <span class="keyword">for</span> configuration details.</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/bugs/&gt;.</span><br><span class="line">Find the GDB manual and other documentation resources online at:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span><br><span class="line">For <span class="built_in">help</span>, <span class="built_in">type</span> <span class="string">"help"</span>.</span><br><span class="line">Type <span class="string">"apropos word"</span> to search <span class="keyword">for</span> commands related to <span class="string">"word"</span>.</span><br><span class="line">(gdb) gdb tes</span><br><span class="line">Undefined <span class="built_in">command</span>: <span class="string">"gdb"</span>. Try <span class="string">"help"</span>.</span><br><span class="line">(gdb) gdb file <span class="built_in">test</span></span><br><span class="line">Undefined <span class="built_in">command</span>: <span class="string">"gdb"</span>. Try <span class="string">"help"</span>.</span><br><span class="line">(gdb) file <span class="built_in">test</span></span><br><span class="line">Reading symbols from test...done.</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
-<h1 id="基本命令："><a href="#基本命令：" class="headerlink" title="基本命令："></a>基本命令：</h1><ul>
-<li>l : 输出代码，输出当前上下各10行的代码</li>
-<li>b 行数 : 在那一行上设置断点</li>
-<li>r : 运行整个程序，直至遇到断点</li>
-<li>s : 单步继续执行（进入函数）</li>
-<li>n : 单步继续进行 (不进入函数，直接把子函数一并运行完)</li>
-<li>q : 退出gdb</li>
-<li>d num ： num为断点编号， 删除该断点</li>
-<li>c : continue , 继续运行直至下一个断点</li>
-<li>p exp ： 查看变量exp的内容</li>
-<li>k ：kill掉当前运行的程序（然后再用r来重新调试）</li>
-</ul>
-<h1 id="breakpoint进阶"><a href="#breakpoint进阶" class="headerlink" title="breakpoint进阶"></a>breakpoint进阶</h1><ul>
-<li>b 行数 if i &gt; 9 :增加条件， 当 i &gt; 9的时候，程序运行到num行会停下来。</li>
-<li>info break ： 查看断点信息，包括所有断点号，禁用情况等</li>
-<li>删除breakpoint：</li>
-<li><ul>
-<li>clear 行数 ：删除该行上的所以断点</li>
-</ul>
-</li>
-<li><ul>
-<li>d ：删除所有的断点</li>
-</ul>
-</li>
-<li><ul>
-<li>d 1-6 ：删除编号是1～6的断点</li>
-</ul>
-</li>
-<li>禁用断点相关：</li>
-<li><ul>
-<li>disable num :禁用某个断点</li>
-</ul>
-</li>
-<li><ul>
-<li>disable :全部禁用</li>
-</ul>
-</li>
-<li><ul>
-<li>enable num :启用某个断点</li>
-</ul>
-</li>
-<li><ul>
-<li>enable ：全部启用</li>
-</ul>
-</li>
-<li>在其他文件里面设置断点</li>
-<li><ul>
-<li>b 文件名 ： 函数名/行数 ：for example:<br><code>(gdb) b AgendaService.cpp : AgendaService::startAgenda()</code></li>
-</ul>
-</li>
-</ul>
-<h1 id="设置观察点-（数据断点）："><a href="#设置观察点-（数据断点）：" class="headerlink" title="设置观察点 （数据断点）："></a>设置观察点 （数据断点）：</h1><p>watch 变量/表达式</p>
-<ul>
-<li>当观察点的内容有变化的时候，即立刻停止</li>
-<li>用delete来删除观察点</li>
-<li>info watchpoints 来查看所有观察点的信息</li>
-</ul>
-<h1 id="p-命令"><a href="#p-命令" class="headerlink" title="p 命令"></a>p 命令</h1><ul>
-<li><p>p 后的变量必须是全局变量或者是当前可见的局部变量，如果两者同名，则优先查看局部变<br>量</p>
-</li>
-<li><p>p 还可以显示其他数据结构，比如说，在调试agenda的时候，可以直接 p startdate ，这<br>样就可以直接看startdate这个Date类里面的全部内容了</p>
-</li>
-</ul>
-<h1 id="ptype命令"><a href="#ptype命令" class="headerlink" title="ptype命令"></a>ptype命令</h1><p>通过 ptype var 可以查看var的数据类型</p>
-<h1 id="bt命令"><a href="#bt命令" class="headerlink" title="bt命令"></a>bt命令</h1><p>bt 查看程序crash堆栈信息</p>
-<p>当程序被停住了，你需要做的第一件事就是查看程序是在哪里住的。当你的程序调用了一个函数，函数的地址，函数参数，数内的局部变量都会被压入“栈”（Stack）中。你可以用GDB令来查看当前的栈中的信息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) bt</span><br><span class="line">#0 func (n=250) at tst.c:6</span><br><span class="line">#1 0x08048524 in</span><br><span class="line">main (argc=1, argv=0xbffff674) at tst.c:30</span><br><span class="line">#2 0x40040Arrayed in __libc_start_main () from /lib/libc.so.6</span><br></pre></td></tr></table></figure>
-<ol>
-<li>程序崩溃的时候，这个时候查看最近的堆栈消息，可以非常快地查看到是在哪里出错的。</li>
-<li>当你确认了一个函数有bug，这个函数被其他很多函数调用，这个时候，程序在这个函数停<br>下来的时候使用bt命令，就可以知道是哪个函数调用了有问题的函数。</li>
-</ol>
-<h1 id="display命令"><a href="#display命令" class="headerlink" title="display命令"></a>display命令</h1><p>display + var 来使用自动显示var的值</p>
-<h1 id="set命令"><a href="#set命令" class="headerlink" title="set命令"></a>set命令</h1><p>set tol=100 这样可以在程序运行时把tol设置为100</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2499,7 +2397,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">347</span>
+                  <span class="site-state-item-count">348</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2589,7 +2487,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">396.6k</span>
+    <span title="Site words total count">397k</span>
   
 </div>
 
