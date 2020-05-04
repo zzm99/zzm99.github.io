@@ -291,6 +291,398 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/10/leetcode-22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/10/leetcode-22/" itemprop="url">leetcode-22-Generate Parentheses</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-10T09:19:08+08:00">
+                2019-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/10/leetcode-22/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/10/leetcode-22/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  164
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p>
+<p>For example, given n = 3, a solution set is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &quot;((()))&quot;,</span><br><span class="line">  &quot;(()())&quot;,</span><br><span class="line">  &quot;(())()&quot;,</span><br><span class="line">  &quot;()(())&quot;,</span><br><span class="line">  &quot;()()()&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>DFS 回溯的味道<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">generateParenthesis</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; result = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        Stack&lt;String&gt; stack = <span class="keyword">new</span> Stack&lt;String&gt;();</span><br><span class="line">        Stack&lt;<span class="keyword">int</span>[]&gt; gen = <span class="keyword">new</span> Stack&lt;<span class="keyword">int</span>[]&gt;();</span><br><span class="line">        stack.push(<span class="string">""</span>);</span><br><span class="line">        gen.push(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;n, <span class="number">0</span>&#125;);</span><br><span class="line">        <span class="keyword">while</span>(!stack.isEmpty())</span><br><span class="line">        &#123;</span><br><span class="line">            String s = stack.pop();</span><br><span class="line">            <span class="keyword">int</span> open = gen.peek()[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> close = gen.pop()[<span class="number">1</span>];</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(open == <span class="number">0</span> &amp;&amp; close == <span class="number">0</span>)</span><br><span class="line">                result.add(s);</span><br><span class="line">            <span class="keyword">if</span>(open &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                stack.push(s + <span class="string">"("</span>);</span><br><span class="line">                gen.push(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;open - <span class="number">1</span>, close + <span class="number">1</span>&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(close &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                stack.push(s + <span class="string">")"</span>);</span><br><span class="line">                gen.push(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;open,close - <span class="number">1</span>&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/09/leetcode-647/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/09/leetcode-647/" itemprop="url">leetcode-647-Palindromic Substrings</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-09T19:59:28+08:00">
+                2019-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/09/leetcode-647/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/09/leetcode-647/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  215
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Given a string, your task is to count how many palindromic substrings in this string.</p>
+<p>The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: &quot;abc&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: Three palindromic strings: &quot;a&quot;, &quot;b&quot;, &quot;c&quot;.</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: &quot;aaa&quot;</span><br><span class="line">Output: 6</span><br><span class="line">Explanation: Six palindromic strings: &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;aa&quot;, &quot;aa&quot;, &quot;aaa&quot;.</span><br></pre></td></tr></table></figure></p>
+<p>DP<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countSubstrings</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.length();</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">boolean</span>[][] isP = <span class="keyword">new</span> <span class="keyword">boolean</span>[n][n];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">            isP[i][i] = <span class="keyword">true</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n-<span class="number">1</span>; i++)</span><br><span class="line">            isP[i][i+<span class="number">1</span>] = s.charAt(i) == s.charAt(i+<span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">while</span>(len &lt;= n)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=n-len; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                isP[i][i+len-<span class="number">1</span>] = isP[i+<span class="number">1</span>][i+len-<span class="number">2</span>] &amp;&amp; s.charAt(i) == s.charAt(i+len-<span class="number">1</span>);</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            len++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;n; j++)</span><br><span class="line">                <span class="keyword">if</span>(isP[i][j]) count++;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/09/leetcode-46/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1835,481 +2227,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/shuzhijisuan2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/03/shuzhijisuan2/" itemprop="url">有效数字</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-03T09:21:00+08:00">
-                2019-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数值计算/" itemprop="url" rel="index">
-                    <span itemprop="name">数值计算</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/03/shuzhijisuan2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/03/shuzhijisuan2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p><a href="https://baike.baidu.com/item/%E6%9C%89%E6%95%88%E6%95%B0%E5%AD%97/406066?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E6%9C%89%E6%95%88%E6%95%B0%E5%AD%97/406066?fr=aladdin</a></p>
-</blockquote>
-<h1 id="舍入规则"><a href="#舍入规则" class="headerlink" title="舍入规则"></a>舍入规则</h1><p>1．当保留n位有效数字，若第n+1位数字≤4就舍掉。</p>
-<p>2．当保留n位有效数字，若第n+1位数字≥6时，则第n位数字进1。</p>
-<p>3．当保留n位有效数字，若第n+1位数字=5且后面数字为0时 ，则第n位数字若为偶数时就舍掉后面的数字，若第n位数字为奇数时加1；若第n+1位数字=5且后面还有不为0的任何数字时，无论第n位数字是奇或是偶都加1。</p>
-<p>以上称为“四舍六入五留双”</p>
-<p>如将下组数据保留一位小数：</p>
-<p>45.77≈45.8；43.03≈43.0；0.26647≈0.3；10.3500≈10.4；</p>
-<p>38.25≈38.2；47.15≈47.2；25.6500≈25.6；20.6512≈20.7</p>
-<h1 id="有效数字"><a href="#有效数字" class="headerlink" title="有效数字"></a>有效数字</h1><p>从一个数的左边第一个非0数字起，到末位数字止，所有的数字都是这个数的有效数字。</p>
-<p>就是一个数从左边第一个不为0的数字数起到末尾数字为止，所有的数字（包括0，科学计数法不计10的N次方），称为有效数字。简单的说，把一个数字前面的0都去掉，从第一个正整数到精确的数位止所有的都是有效数字了。</p>
-<p>如：0.0109，前面两个0不是有效数字，后面的109均为有效数字（注意，中间的0也算）。</p>
-<p>3.109*10^5（3.109乘以10的5次方）中，3 1 0 9均为有效数字，后面的10的5次方不是有效数字。</p>
-<p>5.2*10^6，只有5和2是有效数字。</p>
-<p>0.0230，前面的两个0不是有效数字，后面的230均为有效数字（后面的0也算）。</p>
-<p>1.20 有3个有效数字。</p>
-<p>1100.120 有7位有效数字。</p>
-<p>2.998*10^4（2.998乘以10的4次方）中，保留3个有效数字为3.00*10^4。</p>
-<p>对数的有效数字为小数点后的全部数字，如log x=1.23有效数字为2.3，log a=2.045有效数字为0、4.5，pH=2.35有效数字为3.5。</p>
-<p>整体遵循“四舍五入”的方法</p>
-<h1 id="计算规则"><a href="#计算规则" class="headerlink" title="计算规则"></a>计算规则</h1><p>加减法</p>
-<p>以小数点后位数最少的数据为基准，其他数据修约至与其相同，再进行加减计算，最终计算结果保留最少的位数。</p>
-<p>例：计算50.1+1.45+0.5812=</p>
-<p>修约为：50.1+1.5+0.6=52.1</p>
-<p>乘除法</p>
-<p>以有效数字最少的数据为基准，其他有效数修约至相同，再进行乘除运算，计算结果仍保留最少的有效数字。</p>
-<p>例：计算0.0121×25.64×1.05728=</p>
-<p>修约为：0.0121×25.6×1.06=</p>
-<p>计算后结果为：0.3283456，结果仍保留为三位有效数字。</p>
-<p>记录为：0.0121×25.6×1.06=0.328</p>
-<p>例：计算2.5046×2.005×1.52=</p>
-<p>修约为：2.50×2.00×1.52=</p>
-<p>当把1.13532×10⒑保留3个有效数字时，结果为1.14×10⒑</p>
-<p>运算中若有π、e等常数，以及√2.1/2等系数，其有效数字可视为无限，不影响结果有效数字的确定。</p>
-<p>一般来讲，有效数字的运算过程中，有很多规则.为了应用方便，本着实用的原则，加以选择后，将其归纳整理为如下两类。</p>
-<p>一般性入手规则</p>
-<p>⑴可靠数字之间运算的结果为可靠数字。</p>
-<p>⑵可靠数字与存疑数字，存疑数字与存疑数字之间运算的结果为存疑数字。</p>
-<p>⑶测量数据一般只保留一位存疑数字。</p>
-<p>⑷运算结果的有效数字位数不由数学或物理常数来确定，数学与物理常数的有效数字位数可任意选取，一般选取的位数应比测量数据中位数最少者多取一位.例如：π可取=3.14或3.142或3.1416……；在公式中计算结果不能由于”2”的存在而只取一位存疑数字，而要根据其他数据来决定。</p>
-<p>⑸运算结果将多余的存疑数字舍去时应按照”四舍五入”的法则进行处理.即小于等于四则舍；大于五则入；等于五时，根据其前一位按奇入偶舍处理（等几率原则）。例如，3.625化为3.62，4.235则化为4.24。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/31/matlab12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/31/matlab12/" itemprop="url">回归与内插</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-31T16:22:49+08:00">
-                2019-08-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/matlab/" itemprop="url" rel="index">
-                    <span itemprop="name">matlab</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/31/matlab12/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/31/matlab12/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  680
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Simple-Linear-Regression"><a href="#Simple-Linear-Regression" class="headerlink" title="Simple Linear Regression"></a>Simple Linear Regression</h1><ul>
-<li>A bunch of data points (xi, yi) are collected</li>
-<li>Assume x and y are linearly correlated</li>
-</ul>
-<p><img src="Snipaste_2019-09-01_10-07-05.png" alt="1"></p>
-<h1 id="Linear-Regression-Formulation"><a href="#Linear-Regression-Formulation" class="headerlink" title="Linear Regression Formulation"></a>Linear Regression Formulation</h1><p><img src="Snipaste_2019-09-01_10-23-15.png" alt="1"></p>
-<p>想要求解得β0和β1使SSE最小，就要做微分</p>
-<h1 id="Solving-Least-squares-Problem"><a href="#Solving-Least-squares-Problem" class="headerlink" title="Solving Least-squares Problem"></a>Solving Least-squares Problem</h1><ul>
-<li>SSE is minimized when its gradient with respect to each parameter is equal to zero:</li>
-</ul>
-<p><img src="Snipaste_2019-09-01_10-26-06.png" alt="1"></p>
-<h1 id="Least-squares-Solution"><a href="#Least-squares-Solution" class="headerlink" title="Least-squares Solution"></a>Least-squares Solution</h1><ul>
-<li>Suppose there exists N data points:</li>
-</ul>
-<p><img src="Snipaste_2019-09-01_10-28-42.png" alt="1"></p>
-<h1 id="Polynomial-Curve-Fitting-polyfit"><a href="#Polynomial-Curve-Fitting-polyfit" class="headerlink" title="Polynomial Curve Fitting: polyfit()"></a>Polynomial Curve Fitting: polyfit()</h1><ul>
-<li>Curve fitting for polynomials of different orders</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = [-1.2 -0.5 0.3 0.9 1.8 2.6 3.0 3.5];</span><br><span class="line">y = [-15.6 -8.5 2.2 4.5 6.6 8.2 8.9 10.0];</span><br><span class="line">fit = polyfit(x,y,1);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>1 代表一次方得polynomial， 即f(x) = ax + b<br>上例中 fit(1) -&gt; a, fit(2) -&gt; b </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xfit = [x(1):0.1:x(end)];</span><br><span class="line">yfit = fit(1)*xfit + fit(2);</span><br><span class="line">plot(x, y, &apos;ro&apos;, xfit, yfit);</span><br><span class="line">set(gca, &apos;FontSize&apos;, 14);</span><br><span class="line">legend(&apos;data points&apos;, &apos;best-fit&apos;);</span><br></pre></td></tr></table></figure>
-<h1 id="Are-x-and-y-Linearly-Correlated"><a href="#Are-x-and-y-Linearly-Correlated" class="headerlink" title="Are x and y Linearly Correlated?"></a>Are x and y Linearly Correlated?</h1><ul>
-<li>if not, the line may not well describe their relationship</li>
-<li>Check the linearity by using:</li>
-<li>scatter(): scatterplot 画散点图</li>
-<li>corrcoef(): correlaition coefficient, -1&lt;= r &lt;= 1 相关系数 很强正相关 趋近1 ，很强负相关 趋近-1</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = [-1.2 -0.5 0.3 0.9 1.8 2.6 3.0 3.5];</span><br><span class="line">y = [-15.6 -8.5 2.2 4.5 6.6 8.2 8.9 10.0];</span><br><span class="line">scatter(x, y); box on; axis square;</span><br><span class="line">corrcoef(x, y)</span><br></pre></td></tr></table></figure>
-<p>corrcoef(x, y) 得到一个矩阵，对应x跟x、x跟y、y跟x、y跟y的相关系数</p>
-<h1 id="Higher-Order-Polynomials"><a href="#Higher-Order-Polynomials" class="headerlink" title="Higher Order Polynomials"></a>Higher Order Polynomials</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = [-1.2 -0.5 0.3 0.9 1.8 2.6 3.0 3.5];</span><br><span class="line">y = [-15.6 -8.5 2.2 4.5 6.6 8.2 8.9 10.0];</span><br><span class="line">figure(&apos;Position&apos;, [50 50 1500 400]);</span><br><span class="line">for i=1:3</span><br><span class="line">    subplot(1,3,i); p = polyfit(x, y, i);</span><br><span class="line">    xfit = x(1):0.1:x(end); yfit = polyval(p, xfit);</span><br><span class="line">    poly(x, y, &apos;ro&apos;, xfit, yfit); set(gca, &apos;FontSize&apos;, 14);</span><br><span class="line">    ylim([-17, 11]); legend(&apos;Location&apos;, &apos;SouthEast&apos;,&apos;Data points&apos;, &apos;Fitted curve&apos;);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<h2 id="is-it-better-to-use-higher-order-polynomials"><a href="#is-it-better-to-use-higher-order-polynomials" class="headerlink" title="is it better to use higher order polynomials?"></a>is it better to use higher order polynomials?</h2><p>no ,过拟合</p>
-<h1 id="What-if-There-Exists-More-Variables"><a href="#What-if-There-Exists-More-Variables" class="headerlink" title="What if There Exists More Variables?"></a>What if There Exists More Variables?</h1><ul>
-<li>Equations associated with more than one explanatory variables:</li>
-</ul>
-<p>y = β0 + β1x1 + β2x2</p>
-<ul>
-<li>Multiple linear regression: regress()</li>
-<li>Note: the function gives you more statistics of the regression model</li>
-</ul>
-<h1 id="Multiple-Linear-Regression-regress"><a href="#Multiple-Linear-Regression-regress" class="headerlink" title="Multiple Linear Regression: regress()"></a>Multiple Linear Regression: regress()</h1><p><img src="Snipaste_2019-09-01_11-03-47.png" alt="1"></p>
-<h1 id="What-if-the-Equations-Are-Not-Linear"><a href="#What-if-the-Equations-Are-Not-Linear" class="headerlink" title="What if the Equations Are Not Linear?"></a>What if the Equations Are Not Linear?</h1><ul>
-<li>How do we do curve fitting using nonlinear equations?</li>
-</ul>
-<p>使用cftool工具</p>
-<h1 id="Interpolation内插-vs-Regression回归"><a href="#Interpolation内插-vs-Regression回归" class="headerlink" title="Interpolation内插 vs Regression回归"></a>Interpolation内插 vs Regression回归</h1><ul>
-<li>Interpolation:</li>
-<li><ul>
-<li>The process of finding an approximation of a function</li>
-</ul>
-</li>
-<li><ul>
-<li>The fit does traverse all known points</li>
-</ul>
-</li>
-<li><p>Regression:</p>
-</li>
-<li><ul>
-<li>The process of finding a curve of best fit</li>
-</ul>
-</li>
-<li><ul>
-<li>The fit generally does not pass through the data points</li>
-</ul>
-</li>
-</ul>
-<h1 id="Linear-Interpolation-interpl"><a href="#Linear-Interpolation-interpl" class="headerlink" title="Linear Interpolation: interpl()"></a>Linear Interpolation: interpl()</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">x = linspace(0, 2*pi, 40); x_m = x;</span><br><span class="line">x_m([11:13, 28:30]) = NaN; y_m = sin(x_m);</span><br><span class="line">plot(x_m, y_m, &apos;ro&apos;, &apos;MarkerFaceColor&apos;, &apos;r&apos;);</span><br><span class="line">xlim([0, 2*pi]); ylim([-1.2, 1.2]); box on;</span><br><span class="line">set(gca, &apos;FontName&apos;, &apos;symbol&apos;, &apos;FontSize&apos;, 16);</span><br><span class="line">set(gca, &apos;XTick&apos;, 0:pi/2:2*pi);</span><br><span class="line">set(gca, &apos;XTickLabel&apos;, &#123;&apos;0&apos;,&apos;p/2&apos;,&apos;p&apos;,&apos;3p/2&apos;,&apos;2p&apos;&#125;);</span><br><span class="line"></span><br><span class="line">m_i = ~isnan(x_m);</span><br><span class="line">y_i = interpl(x_m(m_i), y_m(m_i), x);</span><br><span class="line">hold on;</span><br><span class="line">plot(x, y_i, &apos;-b&apos;, &apos;LineWidth&apos;, 2);</span><br><span class="line">hold off;</span><br></pre></td></tr></table></figure>
-<h1 id="Spline-Interpolation-spline"><a href="#Spline-Interpolation-spline" class="headerlink" title="Spline Interpolation: spline()"></a>Spline Interpolation: spline()</h1><p>更圆滑的内插<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">m_i = ~isnan(x_m);</span><br><span class="line">y_i = spline(x_m(m_i), y_m(m_i), x);</span><br><span class="line">hold on; plot(x, y_i, &apos;-g&apos;, &apos;LineWidth&apos;, 2); hold off;</span><br><span class="line">h = legend(&apos;Original&apos;, &apos;Linear&apos;, &apos;Spline&apos;);</span><br><span class="line">set(h, &apos;FontName&apos;, &apos;Times New Roman&apos;);</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2362,7 +2279,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">351</span>
+                  <span class="site-state-item-count">353</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2452,7 +2369,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">398.4k</span>
+    <span title="Site words total count">399.4k</span>
   
 </div>
 

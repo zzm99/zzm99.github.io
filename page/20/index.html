@@ -291,6 +291,409 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/candcpp11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/03/candcpp11/" itemprop="url">重载类型转换运算符</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-03T13:36:04+08:00">
+                2019-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/03/candcpp11/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/03/candcpp11/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  151
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>使用方法就是在对应类里面编写operator对应成员函数：<br>例如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">operator</span> <span class="title">string</span><span class="params">()</span> </span>&#123;&#125; </span><br><span class="line"><span class="function"><span class="keyword">operator</span> <span class="title">int</span> <span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">operator</span> <span class="title">double</span><span class="params">()</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以利用重载类型转换运算符，编写一个类来实现可以存储double类型和string类型的输入，并且输出时候仍然输出对应的double或者string</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt; </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">intandstring</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> intnum;</span><br><span class="line">    <span class="built_in">string</span> stringnum;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    intandstring(<span class="keyword">int</span> number):intnum(number)&#123;&#125;</span><br><span class="line">    intandstring(<span class="built_in">string</span> number):stringnum(number)&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">operator</span> <span class="title">string</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> stringnum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">operator</span> <span class="title">int</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> intnum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> aaa;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; aaa;</span><br><span class="line">	<span class="function">intandstring <span class="title">a</span><span class="params">(aaa)</span></span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; (<span class="built_in">string</span>)a;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/candcpp10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/03/candcpp10/" itemprop="url">char[]，char *，string之间转换</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-03T13:35:56+08:00">
+                2019-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/03/candcpp10/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/03/candcpp10/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  743
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="char-与char-之间转换"><a href="#char-与char-之间转换" class="headerlink" title="char []与char *之间转换"></a>char []与char *之间转换</h2><h3 id="char-转char-：直接进行赋值即可"><a href="#char-转char-：直接进行赋值即可" class="headerlink" title="char []转char *：直接进行赋值即可"></a>char []转char *：直接进行赋值即可</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// char[] 转char *</span></span><br><span class="line"><span class="keyword">char</span> str[] = <span class="string">"lala"</span>;</span><br><span class="line"><span class="keyword">char</span> *str1 = str;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; str1 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="char-转char-：字符拷贝实现，不能进行赋值操作"><a href="#char-转char-：字符拷贝实现，不能进行赋值操作" class="headerlink" title="char *转char[]：字符拷贝实现，不能进行赋值操作"></a>char *转char[]：字符拷贝实现，不能进行赋值操作</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// char *转换为char []</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *st = <span class="string">"hehe"</span>;</span><br><span class="line"><span class="keyword">char</span> st1[] = <span class="string">"lalalala"</span>;</span><br><span class="line"><span class="built_in">strncpy</span>(st1, st, <span class="built_in">strlen</span>(st) + <span class="number">1</span>);    <span class="comment">// 注意加1操作 </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st1 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="char-与const-char-之间转换"><a href="#char-与const-char-之间转换" class="headerlink" title="char 与const char 之间转换"></a>char 与const char 之间转换</h2><h3 id="const-char-转char-：拷贝实现，不能进行赋值"><a href="#const-char-转char-：拷贝实现，不能进行赋值" class="headerlink" title="const char 转char ：拷贝实现，不能进行赋值"></a>const char 转char ：拷贝实现，不能进行赋值</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const char *转char *</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *st = <span class="string">"lala"</span>;</span><br><span class="line"><span class="comment">// 直接赋值不可以 </span></span><br><span class="line"><span class="comment">//char *st1 = st;           // （不可以编译器报错） </span></span><br><span class="line"><span class="comment">//cout &lt;&lt; st1 &lt;&lt; endl;</span></span><br><span class="line"><span class="comment">// 另外开辟空间，将字符一个一个复制过去</span></span><br><span class="line"><span class="keyword">char</span> *ncstr = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(st) + <span class="number">1</span>];</span><br><span class="line"><span class="built_in">strcpy</span>(ncstr, st);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; ncstr &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="char-转const-char-：直接进行赋值"><a href="#char-转const-char-：直接进行赋值" class="headerlink" title="char 转const char ：直接进行赋值"></a>char 转const char ：直接进行赋值</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// char *转const char * </span></span><br><span class="line"><span class="keyword">char</span> *st = <span class="string">"hehe"</span>;         <span class="comment">// （编译提示警告）</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *st1 = st;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st1 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="char-与string之间转换"><a href="#char-与string之间转换" class="headerlink" title="char *与string之间转换"></a>char *与string之间转换</h2><h3 id="char-转string：1）直接赋值；2）构造转换实现"><a href="#char-转string：1）直接赋值；2）构造转换实现" class="headerlink" title="char *转string：1）直接赋值；2）构造转换实现"></a>char *转string：1）直接赋值；2）构造转换实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// char*转换为string</span></span><br><span class="line"><span class="comment">// （注意，定义char *变量，并直接赋值，最好定义为const变量，否则编译器警告） </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *st = <span class="string">"hello"</span>;</span><br><span class="line"><span class="comment">// 赋值转换 </span></span><br><span class="line"><span class="built_in">string</span> st1 = st;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">// 构造转换 </span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(st, st + <span class="built_in">strlen</span>(st))</span></span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">// 改变const char *变量值 </span></span><br><span class="line">st = <span class="string">"lalala"</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="string转char-：赋值操作（注意类型转换）"><a href="#string转char-：赋值操作（注意类型转换）" class="headerlink" title="string转char *：赋值操作（注意类型转换）"></a>string转char *：赋值操作（注意类型转换）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// string转char *</span></span><br><span class="line"><span class="built_in">string</span> st = <span class="string">"My test"</span>;</span><br><span class="line"><span class="comment">//char *st1 = st;           // 错误类型不同 </span></span><br><span class="line"><span class="comment">//char *st1 = st.c_str();   // 错误类型不同</span></span><br><span class="line"><span class="keyword">char</span> *st1 = <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span> *&gt;(st.c_str()) ; <span class="comment">//c_str得到的是const char *</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st1 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="char-与string之间转换-1"><a href="#char-与string之间转换-1" class="headerlink" title="char[]与string之间转换"></a>char[]与string之间转换</h2><h3 id="char-转string：1）直接赋值；2）构造转换实现-1"><a href="#char-转string：1）直接赋值；2）构造转换实现-1" class="headerlink" title="char []转string：1）直接赋值；2）构造转换实现"></a>char []转string：1）直接赋值；2）构造转换实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// char[]转换为string </span></span><br><span class="line"><span class="keyword">char</span> st[] = <span class="string">"hello"</span>;   </span><br><span class="line"><span class="comment">// 直接赋值实现 </span></span><br><span class="line"><span class="built_in">string</span> st1 = st;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">// 构造实现 </span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">st2</span><span class="params">(st, st + <span class="built_in">strlen</span>(st))</span></span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st2 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="string转char-：拷贝实现，不能直接赋值"><a href="#string转char-：拷贝实现，不能直接赋值" class="headerlink" title="string转char[]：拷贝实现，不能直接赋值"></a>string转char[]：拷贝实现，不能直接赋值</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// string转char []</span></span><br><span class="line"><span class="built_in">string</span> ts = <span class="string">"My test1"</span>;</span><br><span class="line"><span class="comment">//char ts1[] = ts;          // 错误</span></span><br><span class="line"><span class="comment">//char ts1[] = const_cast&lt;char *&gt;(ts.c_str());   // 错误 </span></span><br><span class="line"><span class="keyword">char</span> ts1[] = <span class="string">"lalallalalaaaa"</span>;</span><br><span class="line"><span class="built_in">strncpy</span>(ts1, ts.c_str(), ts.length() + <span class="number">1</span>);       <span class="comment">// 注意，一定要加1，否则没有赋值'\0' </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; ts1 &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="比较通用的类型转换，利用sstream库"><a href="#比较通用的类型转换，利用sstream库" class="headerlink" title="比较通用的类型转换，利用sstream库"></a>比较通用的类型转换，利用sstream库</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">stringstream</span> turnturn;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *sss = <span class="string">"ssssssss"</span>;</span><br><span class="line">	<span class="keyword">int</span> s = <span class="number">1111</span>;</span><br><span class="line">	turnturn &lt;&lt; s;</span><br><span class="line">	<span class="built_in">string</span> rem;</span><br><span class="line">	turnturn &gt;&gt; rem;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">stringstream</span> stream;</span><br><span class="line">	<span class="comment">// 将string转换为int</span></span><br><span class="line">	<span class="built_in">string</span> text = <span class="string">"123456"</span>;</span><br><span class="line">	stream &lt;&lt; text;</span><br><span class="line">	<span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">	stream &gt;&gt; n;</span><br><span class="line">	n++;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">	text = <span class="string">""</span>;</span><br><span class="line">	<span class="comment">// 注意这句clear必不可少，注释掉之后stream的&lt;&lt;操作无效</span></span><br><span class="line">	stream.clear();	</span><br><span class="line">    stream.str(<span class="string">""</span>);     </span><br><span class="line">	<span class="comment">// 将int转换为string</span></span><br><span class="line">	stream &lt;&lt; n;</span><br><span class="line">	stream &gt;&gt; text;</span><br><span class="line">	<span class="comment">// 加一句hello方便区分</span></span><br><span class="line">	text += <span class="string">"hello"</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; text &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果你想要转换多个int/double等类型的变量，而又始终用一个stringstream对象（避免总是创建stringstream的开销），那么你就需要在再一次用stringstream之前将stringstream的内容清空。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stream.clear();	<span class="comment">//重置状态</span></span><br><span class="line">   stream.str(<span class="string">""</span>); <span class="comment">//清空数据</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/30/candcpp9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2017,455 +2420,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/javajichu26/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/11/javajichu26/" itemprop="url">Java 网络编程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-11T13:26:49+08:00">
-                2019-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/基础知识/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/11/javajichu26/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/11/javajichu26/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.3k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java-网络编程"><a href="#Java-网络编程" class="headerlink" title="Java 网络编程"></a>Java 网络编程</h1><p>网络编程是指编写运行在多个设备（计算机）的程序，这些设备都通过网络连接起来。</p>
-<p>java.net 包中 J2SE 的 API 包含有类和接口，它们提供低层次的通信细节。你可以直接使用这些类和接口，来专注于解决问题，而不用关注通信细节。</p>
-<p>java.net 包中提供了两种常见的网络协议的支持：</p>
-<ul>
-<li><p><strong>TCP</strong>：TCP 是传输控制协议的缩写，它保障了两个应用程序之间的可靠通信。通常用于互联网协议，被称 TCP / IP。</p>
-</li>
-<li><p><strong>UDP</strong>：UDP 是用户数据报协议的缩写，一个无连接的协议。提供了应用程序之间要发送的数据的数据包。</p>
-</li>
-<li><p><strong>Socket</strong> 编程：这是使用最广泛的网络概念。</p>
-</li>
-<li><p><strong>URL</strong> 处理：这部分会在另外的篇幅里讲</p>
-</li>
-</ul>
-<h2 id="Socket-编程"><a href="#Socket-编程" class="headerlink" title="Socket 编程"></a>Socket 编程</h2><blockquote>
-<p>TCP用主机的IP地址加上主机上的端口号作为TCP连接的端点，这种端点就叫做套接字（socket）或插口。</p>
-</blockquote>
-<p>套接字使用TCP提供了两台计算机之间的通信机制。 客户端程序创建一个套接字，并尝试连接服务器的套接字。</p>
-<p>当连接建立时，服务器会创建一个 Socket 对象。客户端和服务器现在可以通过对 Socket 对象的写入和读取来进行通信。</p>
-<p>java.net.Socket 类代表一个套接字，并且 java.net.ServerSocket 类为服务器程序提供了一种来监听客户端，并与他们建立连接的机制。</p>
-<p>以下步骤在两台计算机之间使用套接字建立TCP连接时会出现：</p>
-<ul>
-<li><p>服务器实例化一个 ServerSocket 对象，表示通过服务器上的端口通信。</p>
-</li>
-<li><p>服务器调用 ServerSocket 类的 accept() 方法，该方法将一直等待，直到客户端连接到服务器上给定的端口。</p>
-</li>
-<li><p>服务器正在等待时，一个客户端实例化一个 Socket 对象，指定服务器名称和端口号来请求连接。</p>
-</li>
-<li><p>Socket 类的构造函数试图将客户端连接到指定的服务器和端口号。如果通信被建立，则在客户端创建一个 Socket 对象能够与服务器进行通信。</p>
-</li>
-<li><p>在服务器端，accept() 方法返回服务器上一个新的 socket 引用，该 socket 连接到客户端的 socket。</p>
-</li>
-</ul>
-<p>连接建立后，通过使用 I/O 流在进行通信，每一个socket都有一个输出流和一个输入流，客户端的输出流连接到服务器端的输入流，而客户端的输入流连接到服务器端的输出流。</p>
-<p>TCP 是一个双向的通信协议，因此数据可以通过两个数据流在同一时间发送.</p>
-<h2 id="Socket-客户端实例"><a href="#Socket-客户端实例" class="headerlink" title="Socket 客户端实例"></a>Socket 客户端实例</h2><p>如下的 GreetingClient 是一个客户端程序，该程序<strong>通过 socket 连接到服务器并发送一个请求，然后等待一个响应</strong>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件名 GreetingClient.java</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.net.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreetingClient</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      String serverName = args[<span class="number">0</span>];</span><br><span class="line">      <span class="keyword">int</span> port = Integer.parseInt(args[<span class="number">1</span>]);</span><br><span class="line">      <span class="keyword">try</span></span><br><span class="line">      &#123;</span><br><span class="line">         System.out.println(<span class="string">"连接到主机："</span> + serverName + <span class="string">" ，端口号："</span> + port);</span><br><span class="line">         Socket client = <span class="keyword">new</span> Socket(serverName, port);</span><br><span class="line">         System.out.println(<span class="string">"远程主机地址："</span> + client.getRemoteSocketAddress());</span><br><span class="line">         OutputStream outToServer = client.getOutputStream();</span><br><span class="line">         DataOutputStream out = <span class="keyword">new</span> DataOutputStream(outToServer);</span><br><span class="line"> </span><br><span class="line">         out.writeUTF(<span class="string">"Hello from "</span> + client.getLocalSocketAddress());</span><br><span class="line">         InputStream inFromServer = client.getInputStream();</span><br><span class="line">         DataInputStream in = <span class="keyword">new</span> DataInputStream(inFromServer);</span><br><span class="line">         System.out.println(<span class="string">"服务器响应： "</span> + in.readUTF());</span><br><span class="line">         client.close();</span><br><span class="line">      &#125;<span class="keyword">catch</span>(IOException e)</span><br><span class="line">      &#123;</span><br><span class="line">         e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Socket-服务端实例"><a href="#Socket-服务端实例" class="headerlink" title="Socket 服务端实例"></a>Socket 服务端实例</h2><p>如下的GreetingServer 程序是一个服务器端应用程序，<strong>使用 Socket 来监听一个指定的端口</strong>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件名 GreetingServer.java</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.net.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreetingServer</span> <span class="keyword">extends</span> <span class="title">Thread</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="keyword">private</span> ServerSocket serverSocket;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">GreetingServer</span><span class="params">(<span class="keyword">int</span> port)</span> <span class="keyword">throws</span> IOException</span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      serverSocket = <span class="keyword">new</span> ServerSocket(port);</span><br><span class="line">      serverSocket.setSoTimeout(<span class="number">10000</span>);</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      <span class="keyword">while</span>(<span class="keyword">true</span>)</span><br><span class="line">      &#123;</span><br><span class="line">         <span class="keyword">try</span></span><br><span class="line">         &#123;</span><br><span class="line">            System.out.println(<span class="string">"等待远程连接，端口号为："</span> + serverSocket.getLocalPort() + <span class="string">"..."</span>);</span><br><span class="line">            Socket server = serverSocket.accept();</span><br><span class="line">            System.out.println(<span class="string">"远程主机地址："</span> + server.getRemoteSocketAddress());</span><br><span class="line">            DataInputStream in = <span class="keyword">new</span> DataInputStream(server.getInputStream());</span><br><span class="line">            System.out.println(in.readUTF());</span><br><span class="line">            DataOutputStream out = <span class="keyword">new</span> DataOutputStream(server.getOutputStream());</span><br><span class="line">            out.writeUTF(<span class="string">"谢谢连接我："</span> + server.getLocalSocketAddress() + <span class="string">"\nGoodbye!"</span>);</span><br><span class="line">            server.close();</span><br><span class="line">         &#125;<span class="keyword">catch</span>(SocketTimeoutException s)</span><br><span class="line">         &#123;</span><br><span class="line">            System.out.println(<span class="string">"Socket timed out!"</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">         &#125;<span class="keyword">catch</span>(IOException e)</span><br><span class="line">         &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      <span class="keyword">int</span> port = Integer.parseInt(args[<span class="number">0</span>]);</span><br><span class="line">      <span class="keyword">try</span></span><br><span class="line">      &#123;</span><br><span class="line">         Thread t = <span class="keyword">new</span> GreetingServer(port);</span><br><span class="line">         t.run();</span><br><span class="line">      &#125;<span class="keyword">catch</span>(IOException e)</span><br><span class="line">      &#123;</span><br><span class="line">         e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">编译以上两个 java 文件代码，并执行以下命令来启动服务，使用端口号为 6066：</span><br><span class="line"></span><br><span class="line">$ javac GreetingServer.java </span><br><span class="line">$ java GreetingServer 6066</span><br><span class="line">等待远程连接，端口号为：6066...</span><br><span class="line">新开一个命令窗口，执行以上命令来开启客户端：</span><br><span class="line"></span><br><span class="line">$ javac GreetingClient.java </span><br><span class="line">$ java GreetingClient localhost 6066</span><br><span class="line">连接到主机：localhost ，端口号：6066</span><br><span class="line">远程主机地址：localhost/127.0.0.1:6066</span><br><span class="line">服务器响应： 谢谢连接我：/127.0.0.1:6066</span><br><span class="line">Goodbye!</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>setSoTimeout<br>public void setSoTimeout(int timeout)<br>   throws SocketException启用/禁用带有指定超时值的 SO_TIMEOUT，以毫秒为单位。将此选项设为非零的超时值时，在与此 Socket 关联的 InputStream 上调用 read() 将只阻塞此时间长度。<br>   如果超过超时值，将引发 java.net.SocketTimeoutException，虽然 Socket 仍旧有效。选项必须在进入阻塞操作前被启用才能生效。<br>   超时值必须是 &gt; 0 的数。超时值为 0 被解释为无穷大超时值。   </p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/javajichu25/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/11/javajichu25/" itemprop="url">Java 序列化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-11T10:27:54+08:00">
-                2019-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/基础知识/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/11/javajichu25/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/11/javajichu25/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  902
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java-序列化"><a href="#Java-序列化" class="headerlink" title="Java 序列化"></a>Java 序列化</h1><p>Java 提供了一种对象序列化的机制，该机制中，<strong>一个对象可以被表示为一个字节序列</strong>，该字节序列包括该对象的数据、有关对象的类型的信息和存储在对象中数据的类型。</p>
-<p><strong>将序列化对象写入文件之后，可以从文件中读取出来，并且对它进行反序列化</strong>，也就是说，对象的类型信息、对象的数据，还有对象中的数据类型可以用来在内存中新建对象。</p>
-<p>整个过程都是 Java 虚拟机（JVM）独立的，也就是说，在一个平台上序列化的对象可以在另一个完全不同的平台上反序列化该对象。</p>
-<p>类 <strong>ObjectInputStream</strong> 和 <strong>ObjectOutputStream</strong> 是高层次的数据流，它们包含反序列化和序列化对象的方法。</p>
-<p>假设我们定义了如下的Employee类，该类实现了Serializable 接口。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="keyword">public</span> String name;</span><br><span class="line">   <span class="keyword">public</span> String address;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">transient</span> <span class="keyword">int</span> SSN;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">int</span> number;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mailCheck</span><span class="params">()</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Mailing a check to "</span> + name</span><br><span class="line">                           + <span class="string">" "</span> + address);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>请注意，一个类的对象要想序列化成功，必须满足两个条件：</p>
-<p>该类必须实现 java.io.Serializable 对象。</p>
-<p>该类的所有属性必须是可序列化的。如果有一个属性不是可序列化的，<strong>则该属性必须注明是短暂的</strong>（<strong>transient</strong>）。</p>
-<p>如果你想知道一个 Java 标准类是否是可序列化的，请查看该类的文档。检验一个类的实例是否能序列化十分简单， 只需要查看该类有没有实现 java.io.Serializable接口。</p>
-<h2 id="序列化对象"><a href="#序列化对象" class="headerlink" title="序列化对象"></a>序列化对象</h2><p>ObjectOutputStream 类用来序列化一个对象，如下的 SerializeDemo 例子实例化了一个 Employee 对象，并将该对象序列化到一个文件中。</p>
-<p>该程序执行后，就创建了一个名为 employee.ser 文件。该程序没有任何输出，但是你可以通过代码研读来理解程序的作用。</p>
-<p>注意： 当序列化一个对象到文件时， 按照 Java 的标准约定是给文件一个 .ser 扩展名。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SerializeDemo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      Employee e = <span class="keyword">new</span> Employee();</span><br><span class="line">      e.name = <span class="string">"Reyan Ali"</span>;</span><br><span class="line">      e.address = <span class="string">"Phokka Kuan, Ambehta Peer"</span>;</span><br><span class="line">      e.SSN = <span class="number">111222333</span>;</span><br><span class="line">      e.number = <span class="number">101</span>;</span><br><span class="line">      <span class="keyword">try</span></span><br><span class="line">      &#123;</span><br><span class="line">         FileOutputStream fileOut =</span><br><span class="line">         <span class="keyword">new</span> FileOutputStream(<span class="string">"/tmp/employee.ser"</span>);</span><br><span class="line">         ObjectOutputStream out = <span class="keyword">new</span> ObjectOutputStream(fileOut);</span><br><span class="line">         out.writeObject(e);</span><br><span class="line">         out.close();</span><br><span class="line">         fileOut.close();</span><br><span class="line">         System.out.printf(<span class="string">"Serialized data is saved in /tmp/employee.ser"</span>);</span><br><span class="line">      &#125;<span class="keyword">catch</span>(IOException i)</span><br><span class="line">      &#123;</span><br><span class="line">          i.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="反序列化对象"><a href="#反序列化对象" class="headerlink" title="反序列化对象"></a>反序列化对象</h2><p>下面的 DeserializeDemo 程序实例了反序列化，/tmp/employee.ser 存储了 Employee 对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeserializeDemo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      Employee e = <span class="keyword">null</span>;</span><br><span class="line">      <span class="keyword">try</span></span><br><span class="line">      &#123;</span><br><span class="line">         FileInputStream fileIn = <span class="keyword">new</span> FileInputStream(<span class="string">"/tmp/employee.ser"</span>);</span><br><span class="line">         ObjectInputStream in = <span class="keyword">new</span> ObjectInputStream(fileIn);</span><br><span class="line">         e = (Employee) in.readObject();</span><br><span class="line">         in.close();</span><br><span class="line">         fileIn.close();</span><br><span class="line">      &#125;<span class="keyword">catch</span>(IOException i)</span><br><span class="line">      &#123;</span><br><span class="line">         i.printStackTrace();</span><br><span class="line">         <span class="keyword">return</span>;</span><br><span class="line">      &#125;<span class="keyword">catch</span>(ClassNotFoundException c)</span><br><span class="line">      &#123;</span><br><span class="line">         System.out.println(<span class="string">"Employee class not found"</span>);</span><br><span class="line">         c.printStackTrace();</span><br><span class="line">         <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println(<span class="string">"Deserialized Employee..."</span>);</span><br><span class="line">      System.out.println(<span class="string">"Name: "</span> + e.name);</span><br><span class="line">      System.out.println(<span class="string">"Address: "</span> + e.address);</span><br><span class="line">      System.out.println(<span class="string">"SSN: "</span> + e.SSN);</span><br><span class="line">      System.out.println(<span class="string">"Number: "</span> + e.number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Deserialized Employee...</span><br><span class="line">Name: Reyan Ali</span><br><span class="line">Address:Phokka Kuan, Ambehta Peer</span><br><span class="line">SSN: 0</span><br><span class="line">Number:101</span><br></pre></td></tr></table></figure>
-<p>这里要注意以下要点：</p>
-<p>readObject() 方法中的 try/catch代码块尝试捕获 ClassNotFoundException 异常。对于 JVM 可以反序列化对象，它必须是能够找到字节码的类。如果JVM在反序列化对象的过程中找不到该类，则抛出一个 ClassNotFoundException 异常。</p>
-<p>注意，readObject() 方法的返回值被转化成 Employee 引用。</p>
-<p>当对象被序列化时，属性 SSN 的值为 111222333，但是因为该属性是短暂的，该值没有被发送到输出流。所以反序列化后 Employee 对象的 SSN 属性为 0。 （声明时带transient）</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2518,7 +2472,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">351</span>
+                  <span class="site-state-item-count">353</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2608,7 +2562,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">398.4k</span>
+    <span title="Site words total count">399.4k</span>
   
 </div>
 
