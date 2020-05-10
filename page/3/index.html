@@ -291,6 +291,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/08/leetcodeweek36/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/08/leetcodeweek36/" itemprop="url">第 18 场双周赛</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-08T21:55:19+08:00">
+                2020-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
+                    <span itemprop="name">Weekly-Contest</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/02/08/leetcodeweek36/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/08/leetcodeweek36/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  578
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1331-数组序号转换"><a href="#1331-数组序号转换" class="headerlink" title="1331. 数组序号转换"></a>1331. 数组序号转换</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; arrayRankTransform(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr) &#123;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; arr2 = arr;</span><br><span class="line">        sort(arr2.begin(), arr2.end());</span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;arr2.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(mp[arr2[i]]) <span class="keyword">continue</span>;</span><br><span class="line">            mp[arr2[i]] = k++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;arr.size(); i++)&#123;</span><br><span class="line">            res.push_back(mp[arr[i]]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="1328-破坏回文串"><a href="#1328-破坏回文串" class="headerlink" title="1328. 破坏回文串"></a>1328. 破坏回文串</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">breakPalindrome</span><span class="params">(<span class="built_in">string</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(p == <span class="string">""</span> || p.size() &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;p.size()/<span class="number">2</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(p[i] != <span class="string">'a'</span>)&#123;</span><br><span class="line">                p[i] = <span class="string">'a'</span>;</span><br><span class="line">                <span class="keyword">return</span> p;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        p[p.size()<span class="number">-1</span>] = <span class="string">'b'</span>;</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="1329-将矩阵按对角线排序"><a href="#1329-将矩阵按对角线排序" class="headerlink" title="1329. 将矩阵按对角线排序"></a>1329. 将矩阵按对角线排序</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; diagonalSort(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; mat) &#123;</span><br><span class="line">        <span class="keyword">int</span> Col = mat[<span class="number">0</span>].size();</span><br><span class="line">        <span class="keyword">int</span> Row = mat.size();</span><br><span class="line">        <span class="keyword">if</span>(Row==<span class="number">1</span> || Row==<span class="number">0</span> || Col==<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> mat;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = Row<span class="number">-2</span>;i &gt;= <span class="number">0</span>;i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> col = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i;j &lt; Row &amp;&amp; col &lt; Col;++j,col++)</span><br><span class="line">                temp.push_back(mat[j][col]);</span><br><span class="line">            sort(temp.begin(),temp.end());</span><br><span class="line">            col = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i;j &lt; Row &amp;&amp; col &lt; Col;++j,col++)</span><br><span class="line">                mat[j][col] = temp[col];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;Col<span class="number">-1</span>;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> row = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i;j &lt; Col &amp;&amp; row &lt; Row;++j,row++)</span><br><span class="line">                temp.push_back(mat[row][j]);</span><br><span class="line">            sort(temp.begin(),temp.end());</span><br><span class="line">            row = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i;j &lt; Col &amp;&amp; row &lt;Row;++j,row++)</span><br><span class="line">                mat[row][j] = temp[row];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> mat;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="1330-翻转子数组得到最大的数组值"><a href="#1330-翻转子数组得到最大的数组值" class="headerlink" title="1330. 翻转子数组得到最大的数组值"></a>1330. 翻转子数组得到最大的数组值</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxValueAfterReverse</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n = nums.size();</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">            ans += <span class="built_in">abs</span>(nums[i] - nums[i + <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> raw = ans;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">2</span>; ++i) &#123;</span><br><span class="line">            ans = max(ans,raw+<span class="built_in">abs</span>(nums[n<span class="number">-1</span>]-nums[i<span class="number">-1</span>])-<span class="built_in">abs</span>(nums[i]-nums[i<span class="number">-1</span>]));</span><br><span class="line">            ans = max(ans,raw+<span class="built_in">abs</span>(nums[i+<span class="number">1</span>]-nums[<span class="number">0</span>])-<span class="built_in">abs</span>(nums[i+<span class="number">1</span>]-nums[i]));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mx1 = INT_MIN;</span><br><span class="line">        <span class="keyword">int</span> mx2 = INT_MIN;</span><br><span class="line">        <span class="keyword">int</span> mx3 = INT_MIN;</span><br><span class="line">        <span class="keyword">int</span> mx4 = INT_MIN;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)&#123;</span><br><span class="line">            ans = max(ans,raw + mx1 + nums[i] + nums[i<span class="number">-1</span>] - <span class="built_in">abs</span>(nums[i]-nums[i<span class="number">-1</span>]));</span><br><span class="line">            ans = max(ans,raw + mx2 - nums[i] + nums[i<span class="number">-1</span>] - <span class="built_in">abs</span>(nums[i]-nums[i<span class="number">-1</span>]));</span><br><span class="line">            ans = max(ans,raw + mx3 + nums[i] - nums[i<span class="number">-1</span>] - <span class="built_in">abs</span>(nums[i]-nums[i<span class="number">-1</span>]));</span><br><span class="line">            ans = max(ans,raw + mx4 - nums[i] - nums[i<span class="number">-1</span>] - <span class="built_in">abs</span>(nums[i]-nums[i<span class="number">-1</span>]));</span><br><span class="line">            mx1 = max(mx1,-(nums[i]+nums[i<span class="number">-1</span>])-<span class="built_in">abs</span>(nums[i]-nums[i<span class="number">-1</span>]));</span><br><span class="line">            mx2 = max(mx2,-(-nums[i]+nums[i<span class="number">-1</span>])-<span class="built_in">abs</span>(nums[i]-nums[i<span class="number">-1</span>]));</span><br><span class="line">            mx3 = max(mx3,-(nums[i]-nums[i<span class="number">-1</span>])-<span class="built_in">abs</span>(nums[i]-nums[i<span class="number">-1</span>]));</span><br><span class="line">            mx4 = max(mx4,-(-nums[i]-nums[i<span class="number">-1</span>])-<span class="built_in">abs</span>(nums[i]-nums[i<span class="number">-1</span>]));</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/08/leetcodeweek35/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2046,202 +2242,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/22/leetcodeweek26/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/22/leetcodeweek26/" itemprop="url">Weekly Contest 168</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-22T13:07:12+08:00">
-                2019-12-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
-                    <span itemprop="name">Weekly-Contest</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/12/22/leetcodeweek26/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/22/leetcodeweek26/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  466
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="5291-Find-Numbers-with-Even-Number-of-Digits"><a href="#5291-Find-Numbers-with-Even-Number-of-Digits" class="headerlink" title="5291. Find Numbers with Even Number of Digits"></a>5291. Find Numbers with Even Number of Digits</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findNumbers</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num: nums)&#123;</span><br><span class="line">            <span class="keyword">int</span> t = num;</span><br><span class="line">            <span class="keyword">int</span> rem = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(t == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">while</span>(t)&#123;</span><br><span class="line">                t /= <span class="number">10</span>;</span><br><span class="line">                rem++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(rem % <span class="number">2</span> == <span class="number">0</span>) count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="5292-Divide-Array-in-Sets-of-K-Consecutive-Numbers"><a href="#5292-Divide-Array-in-Sets-of-K-Consecutive-Numbers" class="headerlink" title="5292. Divide Array in Sets of K Consecutive Numbers"></a>5292. Divide Array in Sets of K Consecutive Numbers</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPossibleDivide</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> i: nums) mp[i]++;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> cur = nums[i];</span><br><span class="line">            <span class="keyword">if</span>(mp.find(cur) == mp.end()) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=cur; j&lt;cur+k; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(mp.find(j) == mp.end() || mp[j] == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                mp[j]--;</span><br><span class="line">                <span class="keyword">if</span>(mp[j] == <span class="number">0</span>) mp.erase(j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> mp.size() == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="5293-Maximum-Number-of-Occurrences-of-a-Substring"><a href="#5293-Maximum-Number-of-Occurrences-of-a-Substring" class="headerlink" title="5293. Maximum Number of Occurrences of a Substring"></a>5293. Maximum Number of Occurrences of a Substring</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxFreq</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> maxLetters, <span class="keyword">int</span> minSize, <span class="keyword">int</span> maxSize)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; subs&#123;&#125;;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=s.size()-minSize; i++)&#123;</span><br><span class="line">            <span class="built_in">string</span> sub = s.substr(i, minSize);</span><br><span class="line">            <span class="built_in">set</span>&lt;<span class="keyword">char</span>&gt; chars&#123;&#125;;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> c: sub) chars.insert(c);</span><br><span class="line">            <span class="keyword">if</span>(chars.size() &lt;= maxLetters) result = max(result, ++subs[sub]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="5294-Maximum-Candies-You-Can-Get-from-Boxes"><a href="#5294-Maximum-Candies-You-Can-Get-from-Boxes" class="headerlink" title="5294. Maximum Candies You Can Get from Boxes"></a>5294. Maximum Candies You Can Get from Boxes</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxCandies</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; status, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; candies, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; keys, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; containedBoxes, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; initialBoxes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result=<span class="number">0</span>; <span class="comment">//total number of candies</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; boxes(initialBoxes.begin(),initialBoxes.end()); <span class="comment">//the boxes we have (including both open or not open)</span></span><br><span class="line">        <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; v; <span class="comment">//the boxes that we have already visited</span></span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> flag=<span class="number">0</span>; <span class="comment">//check if the process ends</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=(<span class="keyword">int</span>)boxes.size()<span class="number">-1</span>;i&gt;<span class="number">-1</span>;i--)</span><br><span class="line">            &#123;</span><br><span class="line">                 <span class="keyword">if</span>(status[boxes[i]]==<span class="number">1</span>&amp;&amp;v.find(boxes[i])==v.end())<span class="comment">//is open and not visited yet</span></span><br><span class="line">                 &#123;</span><br><span class="line">                     flag=<span class="number">1</span>; <span class="comment">//the process doesn't end</span></span><br><span class="line">                     <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;keys[boxes[i]].size();j++) status[keys[boxes[i]][j]]=<span class="number">1</span>; <span class="comment">//we use the key to open the boxes</span></span><br><span class="line">                     <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;containedBoxes[boxes[i]].size();j++) boxes.push_back(containedBoxes[boxes[i]][j]); <span class="comment">//we get more boxes</span></span><br><span class="line">                     v.insert(boxes[i]); <span class="comment">//the box has been visited</span></span><br><span class="line">                     result+=candies[boxes[i]]; <span class="comment">//we get the candies</span></span><br><span class="line">                     boxes.erase(boxes.begin()+i); <span class="comment">//the box has been visited, we removed it from the BFS process</span></span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="keyword">if</span>(flag==<span class="number">0</span>) <span class="keyword">break</span>; <span class="comment">//if the process ends</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2294,7 +2294,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">353</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2384,7 +2384,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">399.4k</span>
+    <span title="Site words total count">399.7k</span>
   
 </div>
 
