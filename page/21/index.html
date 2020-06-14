@@ -291,6 +291,426 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/candcpp10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/03/candcpp10/" itemprop="url">char[]，char *，string之间转换</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-03T13:35:56+08:00">
+                2019-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/03/candcpp10/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/03/candcpp10/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  743
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="char-与char-之间转换"><a href="#char-与char-之间转换" class="headerlink" title="char []与char *之间转换"></a>char []与char *之间转换</h2><h3 id="char-转char-：直接进行赋值即可"><a href="#char-转char-：直接进行赋值即可" class="headerlink" title="char []转char *：直接进行赋值即可"></a>char []转char *：直接进行赋值即可</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// char[] 转char *</span></span><br><span class="line"><span class="keyword">char</span> str[] = <span class="string">"lala"</span>;</span><br><span class="line"><span class="keyword">char</span> *str1 = str;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; str1 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="char-转char-：字符拷贝实现，不能进行赋值操作"><a href="#char-转char-：字符拷贝实现，不能进行赋值操作" class="headerlink" title="char *转char[]：字符拷贝实现，不能进行赋值操作"></a>char *转char[]：字符拷贝实现，不能进行赋值操作</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// char *转换为char []</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *st = <span class="string">"hehe"</span>;</span><br><span class="line"><span class="keyword">char</span> st1[] = <span class="string">"lalalala"</span>;</span><br><span class="line"><span class="built_in">strncpy</span>(st1, st, <span class="built_in">strlen</span>(st) + <span class="number">1</span>);    <span class="comment">// 注意加1操作 </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st1 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="char-与const-char-之间转换"><a href="#char-与const-char-之间转换" class="headerlink" title="char 与const char 之间转换"></a>char 与const char 之间转换</h2><h3 id="const-char-转char-：拷贝实现，不能进行赋值"><a href="#const-char-转char-：拷贝实现，不能进行赋值" class="headerlink" title="const char 转char ：拷贝实现，不能进行赋值"></a>const char 转char ：拷贝实现，不能进行赋值</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const char *转char *</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *st = <span class="string">"lala"</span>;</span><br><span class="line"><span class="comment">// 直接赋值不可以 </span></span><br><span class="line"><span class="comment">//char *st1 = st;           // （不可以编译器报错） </span></span><br><span class="line"><span class="comment">//cout &lt;&lt; st1 &lt;&lt; endl;</span></span><br><span class="line"><span class="comment">// 另外开辟空间，将字符一个一个复制过去</span></span><br><span class="line"><span class="keyword">char</span> *ncstr = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(st) + <span class="number">1</span>];</span><br><span class="line"><span class="built_in">strcpy</span>(ncstr, st);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; ncstr &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="char-转const-char-：直接进行赋值"><a href="#char-转const-char-：直接进行赋值" class="headerlink" title="char 转const char ：直接进行赋值"></a>char 转const char ：直接进行赋值</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// char *转const char * </span></span><br><span class="line"><span class="keyword">char</span> *st = <span class="string">"hehe"</span>;         <span class="comment">// （编译提示警告）</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *st1 = st;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st1 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="char-与string之间转换"><a href="#char-与string之间转换" class="headerlink" title="char *与string之间转换"></a>char *与string之间转换</h2><h3 id="char-转string：1）直接赋值；2）构造转换实现"><a href="#char-转string：1）直接赋值；2）构造转换实现" class="headerlink" title="char *转string：1）直接赋值；2）构造转换实现"></a>char *转string：1）直接赋值；2）构造转换实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// char*转换为string</span></span><br><span class="line"><span class="comment">// （注意，定义char *变量，并直接赋值，最好定义为const变量，否则编译器警告） </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *st = <span class="string">"hello"</span>;</span><br><span class="line"><span class="comment">// 赋值转换 </span></span><br><span class="line"><span class="built_in">string</span> st1 = st;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">// 构造转换 </span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(st, st + <span class="built_in">strlen</span>(st))</span></span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">// 改变const char *变量值 </span></span><br><span class="line">st = <span class="string">"lalala"</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="string转char-：赋值操作（注意类型转换）"><a href="#string转char-：赋值操作（注意类型转换）" class="headerlink" title="string转char *：赋值操作（注意类型转换）"></a>string转char *：赋值操作（注意类型转换）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// string转char *</span></span><br><span class="line"><span class="built_in">string</span> st = <span class="string">"My test"</span>;</span><br><span class="line"><span class="comment">//char *st1 = st;           // 错误类型不同 </span></span><br><span class="line"><span class="comment">//char *st1 = st.c_str();   // 错误类型不同</span></span><br><span class="line"><span class="keyword">char</span> *st1 = <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span> *&gt;(st.c_str()) ; <span class="comment">//c_str得到的是const char *</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st1 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="char-与string之间转换-1"><a href="#char-与string之间转换-1" class="headerlink" title="char[]与string之间转换"></a>char[]与string之间转换</h2><h3 id="char-转string：1）直接赋值；2）构造转换实现-1"><a href="#char-转string：1）直接赋值；2）构造转换实现-1" class="headerlink" title="char []转string：1）直接赋值；2）构造转换实现"></a>char []转string：1）直接赋值；2）构造转换实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// char[]转换为string </span></span><br><span class="line"><span class="keyword">char</span> st[] = <span class="string">"hello"</span>;   </span><br><span class="line"><span class="comment">// 直接赋值实现 </span></span><br><span class="line"><span class="built_in">string</span> st1 = st;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">// 构造实现 </span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">st2</span><span class="params">(st, st + <span class="built_in">strlen</span>(st))</span></span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; st2 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="string转char-：拷贝实现，不能直接赋值"><a href="#string转char-：拷贝实现，不能直接赋值" class="headerlink" title="string转char[]：拷贝实现，不能直接赋值"></a>string转char[]：拷贝实现，不能直接赋值</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// string转char []</span></span><br><span class="line"><span class="built_in">string</span> ts = <span class="string">"My test1"</span>;</span><br><span class="line"><span class="comment">//char ts1[] = ts;          // 错误</span></span><br><span class="line"><span class="comment">//char ts1[] = const_cast&lt;char *&gt;(ts.c_str());   // 错误 </span></span><br><span class="line"><span class="keyword">char</span> ts1[] = <span class="string">"lalallalalaaaa"</span>;</span><br><span class="line"><span class="built_in">strncpy</span>(ts1, ts.c_str(), ts.length() + <span class="number">1</span>);       <span class="comment">// 注意，一定要加1，否则没有赋值'\0' </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; ts1 &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="比较通用的类型转换，利用sstream库"><a href="#比较通用的类型转换，利用sstream库" class="headerlink" title="比较通用的类型转换，利用sstream库"></a>比较通用的类型转换，利用sstream库</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">stringstream</span> turnturn;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> *sss = <span class="string">"ssssssss"</span>;</span><br><span class="line">	<span class="keyword">int</span> s = <span class="number">1111</span>;</span><br><span class="line">	turnturn &lt;&lt; s;</span><br><span class="line">	<span class="built_in">string</span> rem;</span><br><span class="line">	turnturn &gt;&gt; rem;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">stringstream</span> stream;</span><br><span class="line">	<span class="comment">// 将string转换为int</span></span><br><span class="line">	<span class="built_in">string</span> text = <span class="string">"123456"</span>;</span><br><span class="line">	stream &lt;&lt; text;</span><br><span class="line">	<span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">	stream &gt;&gt; n;</span><br><span class="line">	n++;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">	text = <span class="string">""</span>;</span><br><span class="line">	<span class="comment">// 注意这句clear必不可少，注释掉之后stream的&lt;&lt;操作无效</span></span><br><span class="line">	stream.clear();	</span><br><span class="line">    stream.str(<span class="string">""</span>);     </span><br><span class="line">	<span class="comment">// 将int转换为string</span></span><br><span class="line">	stream &lt;&lt; n;</span><br><span class="line">	stream &gt;&gt; text;</span><br><span class="line">	<span class="comment">// 加一句hello方便区分</span></span><br><span class="line">	text += <span class="string">"hello"</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; text &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果你想要转换多个int/double等类型的变量，而又始终用一个stringstream对象（避免总是创建stringstream的开销），那么你就需要在再一次用stringstream之前将stringstream的内容清空。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stream.clear();	<span class="comment">//重置状态</span></span><br><span class="line">   stream.str(<span class="string">""</span>); <span class="comment">//清空数据</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/30/candcpp9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/30/candcpp9/" itemprop="url">c++函数不定长参数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-30T10:28:10+08:00">
+                2019-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/30/candcpp9/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/30/candcpp9/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  523
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="知道数据的具体类型时："><a href="#知道数据的具体类型时：" class="headerlink" title="知道数据的具体类型时："></a>知道数据的具体类型时：</h1><p>比如已经知道数据是int型：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> a, ...)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *temp = &amp;a;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    temp++;</span><br><span class="line">    temp++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;a; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum += *temp;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *temp &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        temp++;</span><br><span class="line">        temp++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; sum(<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试结果显示指针要前进两位才正确。。。</p>
+<h1 id="C-标准库-lt-stdarg-h-gt"><a href="#C-标准库-lt-stdarg-h-gt" class="headerlink" title="C 标准库 - &lt;stdarg.h&gt;"></a>C 标准库 - &lt;stdarg.h&gt;</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>stdarg.h 头文件定义了一个变量类型 va_list 和三个宏，这三个宏可用于在参数个数未知（即参数个数可变）时获取函数中的参数。</p>
+<p>可变参数的函数通在参数列表的末尾是使用省略号(,…)定义的。</p>
+<h2 id="库变量"><a href="#库变量" class="headerlink" title="库变量"></a>库变量</h2><p>下面是头文件 stdarg.h 中定义的变量类型：</p>
+<p><code>va_list</code> 这是一个适用于 va_start()、va_arg() 和 va_end() 这三个宏存储信息的类型。</p>
+<h2 id="库宏"><a href="#库宏" class="headerlink" title="库宏"></a>库宏</h2><p>下面是头文件 stdarg.h 中定义的宏：</p>
+<p><code>void va_start(va_list ap, last_arg)</code></p>
+<blockquote>
+<p>这个宏初始化 ap 变量，它与 va_arg 和 va_end 宏是一起使用的。last_arg 是最后一个传递给函数的已知的固定参数，即省略号之前的参数。</p>
+</blockquote>
+<p><code>type va_arg(va_list ap, type)</code></p>
+<blockquote>
+<p>这个宏检索函数参数列表中类型为 type 的下一个参数。</p>
+</blockquote>
+<p><code>void va_end(va_list ap)</code></p>
+<blockquote>
+<p>这个宏允许使用了 va_start 宏的带有可变参数的函数返回。如果在从函数返回之前没有调用 va_end，则结果为未定义。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tLog</span><span class="params">(<span class="keyword">char</span> *sInfo, ...)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">4</span>+<span class="number">1</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="built_in">strcpy</span>(str,<span class="string">"INFO"</span>);</span><br><span class="line">    tLog(str,argv[<span class="number">1</span>],argv[<span class="number">2</span>],argv[<span class="number">3</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tLog</span><span class="params">(<span class="keyword">char</span> *sInfo, ...)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *str   = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">char</span> *str1 = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">char</span> *str2 = <span class="literal">NULL</span>;</span><br><span class="line">    va_list sArgv;          <span class="comment">// 申请参数列表变量</span></span><br><span class="line">    va_start(sArgv, sInfo); <span class="comment">// 申明最后一个传递给函数的已知的固定参数</span></span><br><span class="line">    <span class="comment">/* 依次读取固定参数 sInfo 后的 参数 不包括sInfo*/</span> </span><br><span class="line">    str   = va_arg(sArgv, <span class="keyword">char</span>*);</span><br><span class="line">    str1 = va_arg(sArgv, <span class="keyword">char</span>*);</span><br><span class="line">    str2 = va_arg(sArgv, <span class="keyword">char</span>*);</span><br><span class="line">    va_end(sArgv);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"运行输出：[%s,%s%s%s]\n"</span>,sInfo,str,str1,str2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ./a.out  Runoob Google Facebook</span><br><span class="line">运行输出：[INFO,RunoobGoogleFacebook]</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/27/candcpp8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2039,452 +2459,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/javajichu25/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/11/javajichu25/" itemprop="url">Java 序列化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-11T10:27:54+08:00">
-                2019-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/基础知识/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/11/javajichu25/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/11/javajichu25/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  902
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java-序列化"><a href="#Java-序列化" class="headerlink" title="Java 序列化"></a>Java 序列化</h1><p>Java 提供了一种对象序列化的机制，该机制中，<strong>一个对象可以被表示为一个字节序列</strong>，该字节序列包括该对象的数据、有关对象的类型的信息和存储在对象中数据的类型。</p>
-<p><strong>将序列化对象写入文件之后，可以从文件中读取出来，并且对它进行反序列化</strong>，也就是说，对象的类型信息、对象的数据，还有对象中的数据类型可以用来在内存中新建对象。</p>
-<p>整个过程都是 Java 虚拟机（JVM）独立的，也就是说，在一个平台上序列化的对象可以在另一个完全不同的平台上反序列化该对象。</p>
-<p>类 <strong>ObjectInputStream</strong> 和 <strong>ObjectOutputStream</strong> 是高层次的数据流，它们包含反序列化和序列化对象的方法。</p>
-<p>假设我们定义了如下的Employee类，该类实现了Serializable 接口。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="keyword">public</span> String name;</span><br><span class="line">   <span class="keyword">public</span> String address;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">transient</span> <span class="keyword">int</span> SSN;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">int</span> number;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mailCheck</span><span class="params">()</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Mailing a check to "</span> + name</span><br><span class="line">                           + <span class="string">" "</span> + address);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>请注意，一个类的对象要想序列化成功，必须满足两个条件：</p>
-<p>该类必须实现 java.io.Serializable 对象。</p>
-<p>该类的所有属性必须是可序列化的。如果有一个属性不是可序列化的，<strong>则该属性必须注明是短暂的</strong>（<strong>transient</strong>）。</p>
-<p>如果你想知道一个 Java 标准类是否是可序列化的，请查看该类的文档。检验一个类的实例是否能序列化十分简单， 只需要查看该类有没有实现 java.io.Serializable接口。</p>
-<h2 id="序列化对象"><a href="#序列化对象" class="headerlink" title="序列化对象"></a>序列化对象</h2><p>ObjectOutputStream 类用来序列化一个对象，如下的 SerializeDemo 例子实例化了一个 Employee 对象，并将该对象序列化到一个文件中。</p>
-<p>该程序执行后，就创建了一个名为 employee.ser 文件。该程序没有任何输出，但是你可以通过代码研读来理解程序的作用。</p>
-<p>注意： 当序列化一个对象到文件时， 按照 Java 的标准约定是给文件一个 .ser 扩展名。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SerializeDemo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      Employee e = <span class="keyword">new</span> Employee();</span><br><span class="line">      e.name = <span class="string">"Reyan Ali"</span>;</span><br><span class="line">      e.address = <span class="string">"Phokka Kuan, Ambehta Peer"</span>;</span><br><span class="line">      e.SSN = <span class="number">111222333</span>;</span><br><span class="line">      e.number = <span class="number">101</span>;</span><br><span class="line">      <span class="keyword">try</span></span><br><span class="line">      &#123;</span><br><span class="line">         FileOutputStream fileOut =</span><br><span class="line">         <span class="keyword">new</span> FileOutputStream(<span class="string">"/tmp/employee.ser"</span>);</span><br><span class="line">         ObjectOutputStream out = <span class="keyword">new</span> ObjectOutputStream(fileOut);</span><br><span class="line">         out.writeObject(e);</span><br><span class="line">         out.close();</span><br><span class="line">         fileOut.close();</span><br><span class="line">         System.out.printf(<span class="string">"Serialized data is saved in /tmp/employee.ser"</span>);</span><br><span class="line">      &#125;<span class="keyword">catch</span>(IOException i)</span><br><span class="line">      &#123;</span><br><span class="line">          i.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="反序列化对象"><a href="#反序列化对象" class="headerlink" title="反序列化对象"></a>反序列化对象</h2><p>下面的 DeserializeDemo 程序实例了反序列化，/tmp/employee.ser 存储了 Employee 对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeserializeDemo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      Employee e = <span class="keyword">null</span>;</span><br><span class="line">      <span class="keyword">try</span></span><br><span class="line">      &#123;</span><br><span class="line">         FileInputStream fileIn = <span class="keyword">new</span> FileInputStream(<span class="string">"/tmp/employee.ser"</span>);</span><br><span class="line">         ObjectInputStream in = <span class="keyword">new</span> ObjectInputStream(fileIn);</span><br><span class="line">         e = (Employee) in.readObject();</span><br><span class="line">         in.close();</span><br><span class="line">         fileIn.close();</span><br><span class="line">      &#125;<span class="keyword">catch</span>(IOException i)</span><br><span class="line">      &#123;</span><br><span class="line">         i.printStackTrace();</span><br><span class="line">         <span class="keyword">return</span>;</span><br><span class="line">      &#125;<span class="keyword">catch</span>(ClassNotFoundException c)</span><br><span class="line">      &#123;</span><br><span class="line">         System.out.println(<span class="string">"Employee class not found"</span>);</span><br><span class="line">         c.printStackTrace();</span><br><span class="line">         <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println(<span class="string">"Deserialized Employee..."</span>);</span><br><span class="line">      System.out.println(<span class="string">"Name: "</span> + e.name);</span><br><span class="line">      System.out.println(<span class="string">"Address: "</span> + e.address);</span><br><span class="line">      System.out.println(<span class="string">"SSN: "</span> + e.SSN);</span><br><span class="line">      System.out.println(<span class="string">"Number: "</span> + e.number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Deserialized Employee...</span><br><span class="line">Name: Reyan Ali</span><br><span class="line">Address:Phokka Kuan, Ambehta Peer</span><br><span class="line">SSN: 0</span><br><span class="line">Number:101</span><br></pre></td></tr></table></figure>
-<p>这里要注意以下要点：</p>
-<p>readObject() 方法中的 try/catch代码块尝试捕获 ClassNotFoundException 异常。对于 JVM 可以反序列化对象，它必须是能够找到字节码的类。如果JVM在反序列化对象的过程中找不到该类，则抛出一个 ClassNotFoundException 异常。</p>
-<p>注意，readObject() 方法的返回值被转化成 Employee 引用。</p>
-<p>当对象被序列化时，属性 SSN 的值为 111222333，但是因为该属性是短暂的，该值没有被发送到输出流。所以反序列化后 Employee 对象的 SSN 属性为 0。 （声明时带transient）</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/javajichu24/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/11/javajichu24/" itemprop="url">Java 泛型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-11T10:27:45+08:00">
-                2019-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/基础知识/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/11/javajichu24/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/11/javajichu24/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.6k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Java-泛型"><a href="#Java-泛型" class="headerlink" title="Java 泛型"></a>Java 泛型</h1><p>泛型提供了编译时类型安全检测机制，该机制允许程序员在编译时检测到非法的类型。</p>
-<p>泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。</p>
-<blockquote>
-<p>假定我们有这样一个需求：写一个排序方法，能够对整型数组、字符串数组甚至其他任何类型的数组进行排序，该如何实现？<br>答案是可以使用 Java 泛型。<br>使用 Java 泛型的概念，我们可以写一个泛型方法来对一个对象数组排序。然后，调用该泛型方法来对整型数组、浮点数数组、字符串数组等进行排序。</p>
-</blockquote>
-<h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><p>你可以写一个泛型方法，该方法在调用时可以接收不同类型的参数。根据传递给泛型方法的参数类型，编译器适当地处理每一个方法调用。</p>
-<p>下面是定义泛型方法的规则：</p>
-<ul>
-<li>所有泛型方法声明都有一个类型参数声明部分（由<strong>尖括号分隔</strong>），该类型参数声明部分在方法返回类型之前。</li>
-<li>每一个类型参数声明部分包含一个或多个类型参数，参数间用<strong>逗号隔开</strong>。一个泛型参数，也被称为一个类型变量，是用于指定一个泛型类型名称的标识符。</li>
-<li>类型参数<strong>能被用来声明返回值类型</strong>，并且能作为泛型方法得到的实际参数类型的占位符。</li>
-<li>泛型方法体的声明和其他方法一样。注意类型参数只能代表引用型类型，<strong>不能是原始类型</strong>（像int,double,char的等）。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericMethodTest</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="comment">// 泛型方法 printArray                         </span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> &lt; E &gt; <span class="function"><span class="keyword">void</span> <span class="title">printArray</span><span class="params">( E[] inputArray )</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      <span class="comment">// 输出数组元素            </span></span><br><span class="line">         <span class="keyword">for</span> ( E element : inputArray )&#123;        </span><br><span class="line">            System.out.printf( <span class="string">"%s "</span>, element );</span><br><span class="line">         &#125;</span><br><span class="line">         System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 创建不同类型数组： Integer, Double 和 Character</span></span><br><span class="line">        Integer[] intArray = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;</span><br><span class="line">        Double[] doubleArray = &#123; <span class="number">1.1</span>, <span class="number">2.2</span>, <span class="number">3.3</span>, <span class="number">4.4</span> &#125;;</span><br><span class="line">        Character[] charArray = &#123; <span class="string">'H'</span>, <span class="string">'E'</span>, <span class="string">'L'</span>, <span class="string">'L'</span>, <span class="string">'O'</span> &#125;;</span><br><span class="line"> </span><br><span class="line">        System.out.println( <span class="string">"整型数组元素为:"</span> );</span><br><span class="line">        printArray( intArray  ); <span class="comment">// 传递一个整型数组</span></span><br><span class="line"> </span><br><span class="line">        System.out.println( <span class="string">"\n双精度型数组元素为:"</span> );</span><br><span class="line">        printArray( doubleArray ); <span class="comment">// 传递一个双精度型数组</span></span><br><span class="line"> </span><br><span class="line">        System.out.println( <span class="string">"\n字符型数组元素为:"</span> );</span><br><span class="line">        printArray( charArray ); <span class="comment">// 传递一个字符型数组</span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">整型数组元素为:</span><br><span class="line">1 2 3 4 5 </span><br><span class="line"></span><br><span class="line">双精度型数组元素为:</span><br><span class="line">1.1 2.2 3.3 4.4 </span><br><span class="line"></span><br><span class="line">字符型数组元素为:</span><br><span class="line">H E L L O</span><br></pre></td></tr></table></figure>
-<p>有界的类型参数:</p>
-<p>可能有时候，你会想限制那些被允许传递到一个类型参数的类型种类范围。例如，一个操作数字的方法可能只希望接受Number或者Number子类的实例。这就是有界类型参数的目的。</p>
-<p>要声明一个有界的类型参数，首先列出类型参数的名称，后跟extends关键字，最后紧跟它的上界。</p>
-<p>实例<br>下面的例子演示了”extends”如何使用在一般意义上的意思”extends”（类）或者”implements”（接口）。该例子中的泛型方法返回三个可比较对象的最大值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaximumTest</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="comment">// 比较三个值并返回最大值</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="function">T <span class="title">maximum</span><span class="params">(T x, T y, T z)</span></span></span><br><span class="line"><span class="function">   </span>&#123;                     </span><br><span class="line">      T max = x; <span class="comment">// 假设x是初始最大值</span></span><br><span class="line">      <span class="keyword">if</span> ( y.compareTo( max ) &gt; <span class="number">0</span> )&#123;</span><br><span class="line">         max = y; <span class="comment">//y 更大</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> ( z.compareTo( max ) &gt; <span class="number">0</span> )&#123;</span><br><span class="line">         max = z; <span class="comment">// 现在 z 更大           </span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> max; <span class="comment">// 返回最大对象</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      System.out.printf( <span class="string">"%d, %d 和 %d 中最大的数为 %d\n\n"</span>,</span><br><span class="line">                   <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, maximum( <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> ) );</span><br><span class="line"> </span><br><span class="line">      System.out.printf( <span class="string">"%.1f, %.1f 和 %.1f 中最大的数为 %.1f\n\n"</span>,</span><br><span class="line">                   <span class="number">6.6</span>, <span class="number">8.8</span>, <span class="number">7.7</span>, maximum( <span class="number">6.6</span>, <span class="number">8.8</span>, <span class="number">7.7</span> ) );</span><br><span class="line"> </span><br><span class="line">      System.out.printf( <span class="string">"%s, %s 和 %s 中最大的数为 %s\n"</span>,<span class="string">"pear"</span>,</span><br><span class="line">         <span class="string">"apple"</span>, <span class="string">"orange"</span>, maximum( <span class="string">"pear"</span>, <span class="string">"apple"</span>, <span class="string">"orange"</span> ) );</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3, 4 和 5 中最大的数为 5</span><br><span class="line"></span><br><span class="line">6.6, 8.8 和 7.7 中最大的数为 8.8</span><br><span class="line"></span><br><span class="line">pear, apple 和 orange 中最大的数为 pear</span><br></pre></td></tr></table></figure>
-<h2 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h2><p>泛型类的声明和非泛型类的声明类似，除了在类名后面添加了类型参数声明部分。</p>
-<p>和泛型方法一样，泛型类的类型参数声明部分也包含一个或多个类型参数，参数间用逗号隔开。一个泛型参数，也被称为一个类型变量，是用于指定一个泛型类型名称的标识符。因为他们接受一个或多个参数，这些类被称为参数化的类或参数化的类型。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">   </span><br><span class="line">  <span class="keyword">private</span> T t;</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.t = t;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Box&lt;Integer&gt; integerBox = <span class="keyword">new</span> Box&lt;Integer&gt;();</span><br><span class="line">    Box&lt;String&gt; stringBox = <span class="keyword">new</span> Box&lt;String&gt;();</span><br><span class="line"> </span><br><span class="line">    integerBox.add(<span class="keyword">new</span> Integer(<span class="number">10</span>));</span><br><span class="line">    stringBox.add(<span class="keyword">new</span> String(<span class="string">"菜鸟教程"</span>));</span><br><span class="line"> </span><br><span class="line">    System.out.printf(<span class="string">"整型值为 :%d\n\n"</span>, integerBox.get());</span><br><span class="line">    System.out.printf(<span class="string">"字符串为 :%s\n"</span>, stringBox.get());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="类型通配符"><a href="#类型通配符" class="headerlink" title="类型通配符"></a>类型通配符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. 类型通配符一般是使用?代替具体的类型参数。例如 List&lt;?&gt; 在逻辑上是List&lt;String&gt;,List&lt;Integer&gt; 等所有List&lt;具体类型实参&gt;的父类。</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        List&lt;Integer&gt; age = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        List&lt;Number&gt; number = <span class="keyword">new</span> ArrayList&lt;Number&gt;();</span><br><span class="line">        </span><br><span class="line">        name.add(<span class="string">"icon"</span>);</span><br><span class="line">        age.add(<span class="number">18</span>);</span><br><span class="line">        number.add(<span class="number">314</span>);</span><br><span class="line"> </span><br><span class="line">        getData(name);</span><br><span class="line">        getData(age);</span><br><span class="line">        getData(number);</span><br><span class="line">       </span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getData</span><span class="params">(List&lt;?&gt; data)</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"data :"</span> + data.get(<span class="number">0</span>));</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>类型通配符上限通过形如List来定义，如此定义就是通配符泛型值接受Number及其下层子类类型。</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; name = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        List&lt;Integer&gt; age = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        List&lt;Number&gt; number = <span class="keyword">new</span> ArrayList&lt;Number&gt;();</span><br><span class="line">        </span><br><span class="line">        name.add(<span class="string">"icon"</span>);</span><br><span class="line">        age.add(<span class="number">18</span>);</span><br><span class="line">        number.add(<span class="number">314</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//getUperNumber(name);//1</span></span><br><span class="line">        getUperNumber(age);<span class="comment">//2</span></span><br><span class="line">        getUperNumber(number);<span class="comment">//3</span></span><br><span class="line">       </span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getData</span><span class="params">(List&lt;?&gt; data)</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"data :"</span> + data.get(<span class="number">0</span>));</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getUperNumber</span><span class="params">(List&lt;? extends Number&gt; data)</span> </span>&#123;</span><br><span class="line">          System.out.println(<span class="string">"data :"</span> + data.get(<span class="number">0</span>));</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>解析： 在(//1)处会出现错误，因为getUperNumber()方法中的参数已经限定了参数泛型上限为Number，所以泛型为String是不在这个范围之内，所以会报错</p>
-<ol start="3">
-<li>类型通配符下限通过形如 List&lt;? super Number&gt;来定义，表示类型只能接受Number及其三层父类类型，如 Object 类型的实例。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2532,7 +2511,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">360</span>
+                  <span class="site-state-item-count">362</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2622,7 +2601,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">403.3k</span>
+    <span title="Site words total count">404.2k</span>
   
 </div>
 
