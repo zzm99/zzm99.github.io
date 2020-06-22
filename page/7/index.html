@@ -291,6 +291,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/16/leetcode-341/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/16/leetcode-341/" itemprop="url">leetcode-341 Flatten Nested List Iterator</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-16T21:14:40+08:00">
+                2019-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/16/leetcode-341/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/16/leetcode-341/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  330
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Given a nested list of integers, implement an iterator to flatten it.</p>
+<p>Each element is either an integer, or a list – whose elements may also be integers or other lists.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: [[1,1],2,[1,1]]</span><br><span class="line">Output: [1,1,2,1,1]</span><br><span class="line">Explanation: By calling next repeatedly until hasNext returns false, </span><br><span class="line">             the order of elements returned by next should be: [1,1,2,1,1].</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: [1,[4,[6]]]</span><br><span class="line">Output: [1,4,6]</span><br><span class="line">Explanation: By calling next repeatedly until hasNext returns false, </span><br><span class="line">             the order of elements returned by next should be: [1,4,6].</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * // This is the interface that allows for creating nested lists.</span></span><br><span class="line"><span class="comment"> * // You should not implement it, or speculate about its implementation</span></span><br><span class="line"><span class="comment"> * class NestedInteger &#123;</span></span><br><span class="line"><span class="comment"> *   public:</span></span><br><span class="line"><span class="comment"> *     // Return true if this NestedInteger holds a single integer, rather than a nested list.</span></span><br><span class="line"><span class="comment"> *     bool isInteger() const;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *     // Return the single integer that this NestedInteger holds, if it holds a single integer</span></span><br><span class="line"><span class="comment"> *     // The result is undefined if this NestedInteger holds a nested list</span></span><br><span class="line"><span class="comment"> *     int getInteger() const;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *     // Return the nested list that this NestedInteger holds, if it holds a nested list</span></span><br><span class="line"><span class="comment"> *     // The result is undefined if this NestedInteger holds a single integer</span></span><br><span class="line"><span class="comment"> *     const vector&lt;NestedInteger&gt; &amp;getList() const;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NestedIterator</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">stack</span>&lt;NestedInteger&gt; s;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    NestedIterator(<span class="built_in">vector</span>&lt;NestedInteger&gt; &amp;nestedList) &#123;</span><br><span class="line">        <span class="keyword">int</span> len = nestedList.size();</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(i = len<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">            s.push(nestedList[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        NestedInteger temp = s.top();</span><br><span class="line">        s.pop();</span><br><span class="line">        <span class="keyword">return</span> temp.getInteger();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(!s.empty())&#123;</span><br><span class="line">            NestedInteger temp = s.top();</span><br><span class="line">            <span class="keyword">if</span>(temp.isInteger())</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                s.pop();</span><br><span class="line">                <span class="built_in">vector</span>&lt;NestedInteger&gt; List = temp.getList();</span><br><span class="line">                <span class="keyword">int</span> len = List.size();</span><br><span class="line">                <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">for</span>(i = len<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">                    s.push(List[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your NestedIterator object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * NestedIterator i(nestedList);</span></span><br><span class="line"><span class="comment"> * while (i.hasNext()) cout &lt;&lt; i.next();</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/16/leetcode-43/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2038,231 +2235,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/06/leetcodeweek9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/06/leetcodeweek9/" itemprop="url">Weekly Contest 157</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-06T23:51:38+08:00">
-                2019-10-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
-                    <span itemprop="name">Weekly-Contest</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/10/06/leetcodeweek9/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/06/leetcodeweek9/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  685
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1217-Play-with-Chips"><a href="#1217-Play-with-Chips" class="headerlink" title="1217. Play with Chips"></a>1217. Play with Chips</h1><p><strong>There are some chips, and the i-th chip is at position chips[i].</strong></p>
-<p>You can perform any of the two following types of moves any number of times (possibly zero) on any chip:</p>
-<ul>
-<li>Move the i-th chip by 2 units to the left or to the right with a cost of 0.</li>
-<li>Move the i-th chip by 1 unit to the left or to the right with a cost of 1.</li>
-</ul>
-<p>There can be two or more chips at the same position initially.</p>
-<p>Return the minimum cost needed to move all the chips to the same position (any position).</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minCostToMoveChips</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; chips)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> cnt[<span class="number">2</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> p: chips)</span><br><span class="line">            cnt[p % <span class="number">2</span>]++;</span><br><span class="line">        <span class="keyword">return</span> cnt[<span class="number">0</span>] &lt; cnt[<span class="number">1</span>] ? cnt[<span class="number">0</span>] : cnt[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="1218-Longest-Arithmetic-Subsequence-of-Given-Difference"><a href="#1218-Longest-Arithmetic-Subsequence-of-Given-Difference" class="headerlink" title="1218. Longest Arithmetic Subsequence of Given Difference"></a>1218. Longest Arithmetic Subsequence of Given Difference</h1><p>Given an integer array arr and an integer difference, return the length of the longest subsequence in arr which is an arithmetic sequence such that the difference between adjacent elements in the subsequence equals difference.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestSubsequence</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="keyword">int</span> difference)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=arr.size()<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            m[arr[i]] = <span class="number">1</span> + m[arr[i] + difference];</span><br><span class="line">            ret = max(ret, m[arr[i]]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="1219-Path-with-Maximum-Gold"><a href="#1219-Path-with-Maximum-Gold" class="headerlink" title="1219. Path with Maximum Gold"></a>1219. Path with Maximum Gold</h1><p>In a gold mine grid of size m * n, each cell in this mine has an integer representing the amount of gold in that cell, 0 if it is empty.</p>
-<p>Return the maximum amount of gold you can collect under the conditions:</p>
-<ul>
-<li>Every time you are located in a cell you will collect all the gold in that cell.</li>
-<li>From your position you can walk one step to the left, right, up or down.</li>
-<li>You can’t visit the same cell more than once.</li>
-<li>Never visit a cell with 0 gold.</li>
-<li>You can start and stop collecting gold from any position in the grid that has some gold.</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; g, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (i &lt; <span class="number">0</span> || j &lt; <span class="number">0</span> || i &gt;= g.size() || j &gt;= g[i].size() || g[i][j] &lt;= <span class="number">0</span>)  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      g[i][j] = -g[i][j];</span><br><span class="line">      <span class="keyword">auto</span> res = max(&#123; dfs(g, i + <span class="number">1</span>, j), dfs(g, i, j + <span class="number">1</span>), dfs(g, i - <span class="number">1</span>, j), dfs(g, i, j - <span class="number">1</span>) &#125;);</span><br><span class="line">      g[i][j] = -g[i][j];</span><br><span class="line">      <span class="keyword">return</span> g[i][j] + res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getMaximumGold</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid, <span class="keyword">int</span> res = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; grid.size(); ++i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> j = <span class="number">0</span>; j &lt; grid[i].size(); ++j)</span><br><span class="line">          res = max(res, dfs(grid, i, j));</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="1220-Count-Vowels-Permutation"><a href="#1220-Count-Vowels-Permutation" class="headerlink" title="1220. Count Vowels Permutation"></a>1220. Count Vowels Permutation</h1><p>Given an integer n, your task is to count how many strings of length n can be formed under the following rules:</p>
-<ul>
-<li>Each character is a lower case vowel (‘a’, ‘e’, ‘i’, ‘o’, ‘u’)</li>
-<li>Each vowel ‘a’ may only be followed by an ‘e’.</li>
-<li>Each vowel ‘e’ may only be followed by an ‘a’ or an ‘i’.</li>
-<li>Each vowel ‘i’ may not be followed by another ‘i’.</li>
-<li>Each vowel ‘o’ may only be followed by an ‘i’ or a ‘u’.</li>
-<li>Each vowel ‘u’ may only be followed by an ‘a’.</li>
-</ul>
-<p>Since the answer may be too large, return it modulo 10^9 + 7.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countVowelPermutation</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span>[][] moves = &#123; &#123;<span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">2</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>&#125;, &#123;<span class="number">2</span>, <span class="number">4</span>&#125;, &#123; <span class="number">0</span> &#125; &#125;;</span><br><span class="line">      <span class="keyword">int</span>[] v = &#123; <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span> &#125;;</span><br><span class="line">      <span class="keyword">while</span> (--n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] v1 = &#123; <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> &#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> j : moves[i])</span><br><span class="line">            v1[j] = (v1[j] + v[i]) % <span class="number">1000000007</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        v = v1;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> (<span class="keyword">int</span>)(((<span class="keyword">long</span>)v[<span class="number">0</span>] + v[<span class="number">1</span>] + v[<span class="number">2</span>] + v[<span class="number">3</span>] + v[<span class="number">4</span>]) % <span class="number">1000000007</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2315,7 +2287,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">362</span>
+                  <span class="site-state-item-count">363</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2405,7 +2377,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">404.2k</span>
+    <span title="Site words total count">404.9k</span>
   
 </div>
 

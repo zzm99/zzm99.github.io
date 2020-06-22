@@ -291,6 +291,229 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/17/leetcodeweek2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/17/leetcodeweek2/" itemprop="url">Weekly Contest 153</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-17T16:45:40+08:00">
+                2019-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
+                    <span itemprop="name">Weekly-Contest</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/17/leetcodeweek2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/17/leetcodeweek2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  941
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1184-Distance-Between-Bus-Stops"><a href="#1184-Distance-Between-Bus-Stops" class="headerlink" title="1184. Distance Between Bus Stops"></a>1184. Distance Between Bus Stops</h1><p>A bus has n stops numbered from 0 to n - 1 that form a circle. We know the distance between all pairs of neighboring stops where distance[i] is the distance between the stops number i and (i + 1) % n.</p>
+<p>The bus goes along both directions i.e. clockwise and counterclockwise.</p>
+<p>Return the shortest distance between the given start and destination stops.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: distance = [1,2,3,4], start = 0, destination = 1</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: Distance between 0 and 1 is 1 or 9, minimum is 1.</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">distanceBetweenBusStops</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; distance, <span class="keyword">int</span> start, <span class="keyword">int</span> destination)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sum2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(start &gt; destination)&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = start;</span><br><span class="line">            start = destination;</span><br><span class="line">            destination = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=start; i&lt;destination; i++)</span><br><span class="line">        &#123;</span><br><span class="line">             sum1 += distance[i];</span><br><span class="line">        &#125;    </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=destination; i&lt;start+distance.size(); i++)</span><br><span class="line">            sum2 += distance[i%distance.size()];</span><br><span class="line">        <span class="keyword">if</span>(sum1 &lt; sum2) <span class="keyword">return</span> sum1;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> sum2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="1185-Day-of-the-Week"><a href="#1185-Day-of-the-Week" class="headerlink" title="1185. Day of the Week"></a>1185. Day of the Week</h1><p>Given a date, return the corresponding day of the week for that date.</p>
+<p>The input is given as three integers representing the day, month and year respectively.</p>
+<p>Return the answer as one of the following values {“Sunday”, “Monday”, “Tuesday”, “Wednesday”, “Thursday”, “Friday”, “Saturday”}.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: day = 31, month = 8, year = 2019</span><br><span class="line">Output: &quot;Saturday&quot;</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: day = 18, month = 7, year = 1999</span><br><span class="line">Output: &quot;Sunday&quot;</span><br><span class="line">Example 3:</span><br><span class="line"></span><br><span class="line">Input: day = 15, month = 8, year = 1993</span><br><span class="line">Output: &quot;Sunday&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="built_in">string</span> <span class="title">dayOfTheWeek</span><span class="params">(<span class="keyword">int</span> day, <span class="keyword">int</span> month, <span class="keyword">int</span> year)</span> </span>&#123;</span><br><span class="line">            <span class="built_in">string</span> daysInWeek[<span class="number">7</span>] = &#123;<span class="string">"Sunday"</span>, <span class="string">"Monday"</span>, <span class="string">"Tuesday"</span>, <span class="string">"Wednesday"</span>, <span class="string">"Thursday"</span>, <span class="string">"Friday"</span>, <span class="string">"Saturday"</span>&#125;;</span><br><span class="line">            <span class="keyword">int</span> DaysByMonthMod7[<span class="number">12</span>] = &#123;<span class="number">0</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line">            <span class="keyword">if</span>(month &lt; <span class="number">3</span>) year -= <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> daysInWeek[(year + (year/<span class="number">4</span> -year/<span class="number">100</span> + year/<span class="number">400</span>) + DaysByMonthMod7[month<span class="number">-1</span>] + day) % <span class="number">7</span>];</span><br><span class="line">        &#125;      </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Constraints:</p>
+<p>The given dates are valid dates between the years 1971 and 2100.</p>
+<h1 id="1186-Maximum-Subarray-Sum-with-One-Deletion"><a href="#1186-Maximum-Subarray-Sum-with-One-Deletion" class="headerlink" title="1186. Maximum Subarray Sum with One Deletion"></a>1186. Maximum Subarray Sum with One Deletion</h1><p>Given an array of integers, return the maximum sum for a non-empty subarray (contiguous elements) with at most one element deletion. In other words, you want to choose a subarray and optionally delete one element from it so that there is still at least one element left and the sum of the remaining elements is maximum possible.</p>
+<p>Note that the subarray needs to be non-empty after deleting one element.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: arr = [1,-2,0,3]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation: Because we can choose [1, -2, 0, 3] and drop -2, thus the subarray [1, 0, 3] becomes the maximum value.</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: arr = [1,-2,-2,3]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: We just choose [3] and it&apos;s the maximum sum.</span><br><span class="line">Example 3:</span><br><span class="line"></span><br><span class="line">Input: arr = [-1,-1,-1,-1]</span><br><span class="line">Output: -1</span><br><span class="line">Explanation: The final subarray needs to be non-empty. You can&apos;t choose [-1] and delete -1 from it, then get an empty subarray to make the sum equals to 0.</span><br></pre></td></tr></table></figure>
+<p>Constraints:</p>
+<ul>
+<li>1 &lt;= arr.length &lt;= 10^5</li>
+<li>-10^4 &lt;= arr[i] &lt;= 10^4</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximumSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>, n = v.size();</span><br><span class="line">        <span class="keyword">int</span> cur_max = v[<span class="number">0</span>], overall_max = v[<span class="number">0</span>];</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f(n);</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; b(n);</span><br><span class="line">        f[<span class="number">0</span>] = v[<span class="number">0</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cur_max = max(v[i], cur_max+v[i]);</span><br><span class="line">            overall_max = max(overall_max, cur_max);</span><br><span class="line">            </span><br><span class="line">            f[i] = cur_max;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        cur_max = overall_max = b[n<span class="number">-1</span>] = v[n<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-2</span>; i&gt;=<span class="number">0</span>; i-- )</span><br><span class="line">        &#123;</span><br><span class="line">            cur_max = max(v[i], cur_max + v[i]);</span><br><span class="line">            overall_max = max(overall_max, cur_max);</span><br><span class="line">            </span><br><span class="line">            b[i] = cur_max;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        res = overall_max;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n<span class="number">-1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            res = max(res, f[i<span class="number">-1</span>] + b[i+<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="1187-Make-Array-Strictly-Increasing"><a href="#1187-Make-Array-Strictly-Increasing" class="headerlink" title="1187. Make Array Strictly Increasing"></a>1187. Make Array Strictly Increasing</h1><p>Given two integer arrays arr1 and arr2, return the minimum number of operations (possibly zero) needed to make arr1 strictly increasing.</p>
+<p>In one operation, you can choose two indices 0 &lt;= i &lt; arr1.length and 0 &lt;= j &lt; arr2.length and do the assignment arr1[i] = arr2[j].</p>
+<p>If there is no way to make arr1 strictly increasing, return -1.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: arr1 = [1,5,3,6,7], arr2 = [1,3,2,4]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: Replace 5 with 2, then arr1 = [1, 2, 3, 6, 7].</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input: arr1 = [1,5,3,6,7], arr2 = [4,3,1]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: Replace 5 with 3 and then replace 3 with 4. arr1 = [1, 3, 4, 6, 7].</span><br><span class="line">Example 3:</span><br><span class="line"></span><br><span class="line">Input: arr1 = [1,5,3,6,7], arr2 = [1,6,3,3]</span><br><span class="line">Output: -1</span><br><span class="line">Explanation: You can&apos;t make arr1 strictly increasing.</span><br></pre></td></tr></table></figure>
+<p>Constraints:</p>
+<ul>
+<li>1 &lt;= arr1.length, arr2.length &lt;= 2000</li>
+<li>0 &lt;= arr1[i], arr2[i] &lt;= 10^9</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> dp[<span class="number">2001</span>][<span class="number">2001</span>] = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp;a2, <span class="keyword">int</span> i1, <span class="keyword">int</span> i2, <span class="keyword">int</span> prev)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i1 &gt;= a1.size()) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        i2 = upper_bound(begin(a2) + i2, end(a2), prev) - begin(a2);</span><br><span class="line">        <span class="keyword">if</span>(dp[i1][i2]) <span class="keyword">return</span> dp[i1][i2];</span><br><span class="line">        <span class="keyword">int</span> r1 = i2 &lt; a2.size() ? <span class="number">1</span> + dfs(a1, a2, i1+<span class="number">1</span>, i2+<span class="number">1</span>, a2[i2]) : a2.size()+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> r2 = prev &lt; a1[i1] ? dfs(a1, a2, i1+<span class="number">1</span>, i2, a1[i1]) : a2.size()+<span class="number">1</span>;</span><br><span class="line">        dp[i1][i2] = min(r1, r2);</span><br><span class="line">        <span class="keyword">return</span> dp[i1][i2];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">makeArrayIncreasing</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr2)</span> </span>&#123;</span><br><span class="line">        sort(arr2.begin(), arr2.end());</span><br><span class="line">        <span class="keyword">int</span> res = dfs(arr1, arr2, <span class="number">0</span>, <span class="number">0</span>, INT_MIN);</span><br><span class="line">        <span class="keyword">return</span> res &gt; arr2.size() ? <span class="number">-1</span> : res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/17/leetcodeweek1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2102,205 +2325,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/11/leetcode-48/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/11/leetcode-48/" itemprop="url">leetcode-48-Rotate Image</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-11T13:18:12+08:00">
-                2019-09-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
-                    <span itemprop="name">top-100-liked-questions</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/11/leetcode-48/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/11/leetcode-48/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  217
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>You are given an n x n 2D matrix representing an image.</p>
-<p>Rotate the image by 90 degrees (clockwise).</p>
-<p>Note:</p>
-<p>You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Given input matrix = </span><br><span class="line">[</span><br><span class="line">  [1,2,3],</span><br><span class="line">  [4,5,6],</span><br><span class="line">  [7,8,9]</span><br><span class="line">],</span><br><span class="line"></span><br><span class="line">rotate the input matrix in-place such that it becomes:</span><br><span class="line">[</span><br><span class="line">  [7,4,1],</span><br><span class="line">  [8,5,2],</span><br><span class="line">  [9,6,3]</span><br><span class="line">]</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Given input matrix =</span><br><span class="line">[</span><br><span class="line">  [ 5, 1, 9,11],</span><br><span class="line">  [ 2, 4, 8,10],</span><br><span class="line">  [13, 3, 6, 7],</span><br><span class="line">  [15,14,12,16]</span><br><span class="line">], </span><br><span class="line"></span><br><span class="line">rotate the input matrix in-place such that it becomes:</span><br><span class="line">[</span><br><span class="line">  [15,13, 2, 5],</span><br><span class="line">  [14, 3, 4, 1],</span><br><span class="line">  [12, 6, 8, 9],</span><br><span class="line">  [16, 7,10,11]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[][] M)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (M.length+<span class="number">1</span>)/<span class="number">2</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; M.length/<span class="number">2</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = M[i][j];</span><br><span class="line">                M[i][j] = M[M.length-j-<span class="number">1</span>][i];</span><br><span class="line">                M[M.length-j-<span class="number">1</span>][i] = M[M.length-i-<span class="number">1</span>][M.length-j-<span class="number">1</span>];</span><br><span class="line">                M[M.length-i-<span class="number">1</span>][M.length-j-<span class="number">1</span>] = M[j][M.length-i-<span class="number">1</span>];</span><br><span class="line">                M[j][M.length-i-<span class="number">1</span>] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2353,7 +2377,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">362</span>
+                  <span class="site-state-item-count">363</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2443,7 +2467,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">404.2k</span>
+    <span title="Site words total count">404.9k</span>
   
 </div>
 
