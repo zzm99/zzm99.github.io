@@ -291,6 +291,411 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/leetcode-834/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/09/leetcode-834/" itemprop="url">leetcode-834 Sum of Distances in Tree</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-09T22:35:42+08:00">
+                2019-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/top-100-liked-questions/" itemprop="url" rel="index">
+                    <span itemprop="name">top-100-liked-questions</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/09/leetcode-834/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/09/leetcode-834/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  370
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>An undirected, connected tree with N nodes labelled 0…N-1 and N-1 edges are given.</p>
+<p>The ith edge connects nodes edges[i][0] and edges[i][1] together.</p>
+<p>Return a list ans, where ans[i] is the sum of the distances between node i and all other nodes.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: N = 6, edges = [[0,1],[0,2],[2,3],[2,4],[2,5]]</span><br><span class="line">Output: [8,12,6,10,10,10]</span><br><span class="line">Explanation: </span><br><span class="line">Here is a diagram of the given tree:</span><br><span class="line">  0</span><br><span class="line"> / \</span><br><span class="line">1   2</span><br><span class="line">   /|\</span><br><span class="line">  3 4 5</span><br><span class="line">We can see that dist(0,1) + dist(0,2) + dist(0,3) + dist(0,4) + dist(0,5)</span><br><span class="line">equals 1 + 1 + 2 + 2 + 2 = 8.  Hence, answer[0] = 8, and so on.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; gh;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dist; <span class="comment">//i点的所有子结点到i的距离之和</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; size; <span class="comment">//以i点为根的树的结点数量和(包括i结点本身)</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sumOfDistancesInTree(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; edges) &#123;</span><br><span class="line">        gh.resize(n); dist.resize(n); size.resize(n); res.resize(n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; v : edges) &#123;</span><br><span class="line">            gh[v[<span class="number">0</span>]].emplace_back(v[<span class="number">1</span>]);</span><br><span class="line">            gh[v[<span class="number">1</span>]].emplace_back(v[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        dfs1(<span class="number">0</span>, <span class="number">-1</span>);</span><br><span class="line">        res[<span class="number">0</span>] = dist[<span class="number">0</span>];</span><br><span class="line">        dfs2(n, <span class="number">0</span>, <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//求出以0为根的距离之和且求出了分别以i为根的子树结点数量和</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> cur, <span class="keyword">int</span> par)</span> </span>&#123;</span><br><span class="line">        dist[cur] = <span class="number">0</span>;</span><br><span class="line">        size[cur] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : gh[cur]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == par) <span class="keyword">continue</span>;</span><br><span class="line">            dfs1(i, cur);</span><br><span class="line">            dist[cur] += dist[i] + size[i];</span><br><span class="line">            size[cur] += size[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//从0开始往下递归推出子树。再子树推算出子子树直到所有。</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> cur, <span class="keyword">int</span> par)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : gh[cur]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == par) <span class="keyword">continue</span>;</span><br><span class="line">            res[i] = res[cur] + (n - size[i]) - size[i];</span><br><span class="line">            dfs2(n, i, cur);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/06/leetcodeweek10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/06/leetcodeweek10/" itemprop="url">Biweekly Contest 10</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-06T23:52:19+08:00">
+                2019-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/Weekly-Contest/" itemprop="url" rel="index">
+                    <span itemprop="name">Weekly-Contest</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/06/leetcodeweek10/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/06/leetcodeweek10/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  593
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1213-Intersection-of-Three-Sorted-Arrays"><a href="#1213-Intersection-of-Three-Sorted-Arrays" class="headerlink" title="1213. Intersection of Three Sorted Arrays"></a>1213. Intersection of Three Sorted Arrays</h1><p>Given three integer arrays arr1, arr2 and arr3 sorted in strictly increasing order, return a sorted array of only the integers that appeared in all three arrays.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; arraysIntersection(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr2, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr3) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ret;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;arr1.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> cur = arr1[i];</span><br><span class="line">            <span class="keyword">if</span>(find(arr2.begin(), arr2.end(), cur) != arr2.end() &amp;&amp; find(arr3.begin(), arr3.end(), cur) != arr3.end())</span><br><span class="line">                ret.push_back(arr1[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="1214-Two-Sum-BSTs"><a href="#1214-Two-Sum-BSTs" class="headerlink" title="1214. Two Sum BSTs"></a>1214. Two Sum BSTs</h1><p>Given two binary search trees, return True if and only if there is a node in the first tree and a node in the second tree whose values sum up to a given integer target.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        dfs(root-&gt;left);</span><br><span class="line">        dfs(root-&gt;right);</span><br><span class="line">        s.insert(root-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">helper</span><span class="params">(TreeNode* root, <span class="keyword">int</span> target)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(find(s.begin(), s.end(), target-root-&gt;val) != s.end())</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> helper(root-&gt;left, target) || helper(root-&gt;right, target);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">twoSumBSTs</span><span class="params">(TreeNode* root1, TreeNode* root2, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        s.clear();</span><br><span class="line">        dfs(root1);</span><br><span class="line">        <span class="keyword">return</span> helper(root2, target);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="1215-Stepping-Numbers"><a href="#1215-Stepping-Numbers" class="headerlink" title="1215. Stepping Numbers"></a>1215. Stepping Numbers</h1><p>A Stepping Number is an integer such that all of its adjacent digits have an absolute difference of exactly 1. For example, 321 is a Stepping Number while 421 is not.</p>
+<p>Given two integers low and high, find and return a sorted list of all the Stepping Numbers in the range [low, high] inclusive.</p>
+<p>Constraints:</p>
+<p>0 &lt;= low &lt;= high &lt;= 2 * 10^9</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countSteppingNumbers(<span class="keyword">int</span> low, <span class="keyword">int</span> high) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">        <span class="keyword">int</span> i, j;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;<span class="number">10</span> &amp;&amp; i&lt;=high; i++)</span><br><span class="line">            q.push(i);</span><br><span class="line">        <span class="keyword">if</span>(!low) ans.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">while</span>(!q.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            i = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            <span class="keyword">if</span>(i &gt;= low) ans.push_back(i);</span><br><span class="line">            j = i % <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">if</span>(j &amp;&amp; i*<span class="number">10L</span>L+j<span class="number">-1</span> &lt;= high) q.push(i*<span class="number">10</span>+j<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">if</span>(j&lt;<span class="number">9</span> &amp;&amp; i*<span class="number">10L</span>L+j+<span class="number">1</span> &lt;= high) q.push(i*<span class="number">10</span>+j+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(ans.begin(), ans.end());</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="1216-Valid-Palindrome-III"><a href="#1216-Valid-Palindrome-III" class="headerlink" title="1216. Valid Palindrome III"></a>1216. Valid Palindrome III</h1><p>Given a string s and an integer k, find out if the given string is a K-Palindrome or not.</p>
+<p>A string is K-Palindrome if it can be transformed into a palindrome by removing at most k characters from it.</p>
+<p>Constraints:</p>
+<p>1 &lt;= s.length &lt;= 1000</p>
+<p>s has only lowercase English letters.</p>
+<p>1 &lt;= k &lt;= s.length</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValidPalindrome</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.size();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(n+<span class="number">2</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n+<span class="number">2</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(s[i<span class="number">-1</span>] == s[n-j+<span class="number">1</span><span class="number">-1</span>])</span><br><span class="line">                    dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>]+<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    dp[i][j] = max(dp[i<span class="number">-1</span>][j], dp[i][j<span class="number">-1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ret = n-dp[n][n];</span><br><span class="line">        <span class="keyword">return</span> ret &lt;= k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/06/leetcodeweek9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2116,453 +2521,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/shixun3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/shixun3/" itemprop="url">linux 指令入门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T15:45:01+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/初级实训/" itemprop="url" rel="index">
-                    <span itemprop="name">初级实训</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/29/shixun3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/shixun3/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.9k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="linux-指令入门"><a href="#linux-指令入门" class="headerlink" title="linux 指令入门"></a>linux 指令入门</h1><h2 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h2><p>打开terminal，进入的是你的主目录路径，通过cd命令，可以进入其他目录。格式为 cd[dir] ，dir是目录的路径，可以是绝对路径也可以是相对路径，其中 ./ 代表当前文件夹， ../ 代表上一目录，也就是父文件夹。如果没有参数，回到主目录（也就是 ~/ ）。</p>
-<h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><p>键入 ls [option] [dir] ，你会得到整个dir目录下的未隐藏文件（夹）</p>
-<p>option是参数选项，如使用 ls -a ./ 显示当前目录所有文件， -a 显示所有文件， -l 以详细列表显示，-R 以递归的方式列出指定目录下的所有文件</p>
-<h2 id="man"><a href="#man" class="headerlink" title="man"></a>man</h2><p>如果想知道一个命令更多的信息怎么办，一般又三种方法：</p>
-<ol>
-<li><p>首先是试一下命令有没有自带的help参数，一般是 –help 、 -h ；</p>
-</li>
-<li><p>其次就是 man ，使用命令 man [command] 来打开一个命令的文档（如果有），通过回<br>车或者方向上下就可以读到整个文档了，退出的话按 q ；</p>
-</li>
-</ol>
-<p><img src="Snipaste_2019-09-27_22-26-19.png" alt="1"></p>
-<h2 id="mkdir、touch和cat"><a href="#mkdir、touch和cat" class="headerlink" title="mkdir、touch和cat"></a>mkdir、touch和cat</h2><p>mkdir dir 用来生成一个文件夹，文件夹所在的路径应当存在。</p>
-<p>touch 命令一般用来生成一个文件， touch path 会生成一个路径为path的空白文件。</p>
-<p>cat 命令会以文本方式读取一个文件，然后把文件中的内容输出到标准输出中，使用cat可以快捷的查看一个文件的内容。</p>
-<p><img src="Snipaste_2019-09-27_22-28-35.png" alt="1"></p>
-<h2 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h2><p>Linux下有些命令或者执行某些动作是需要权限的，这个有点类似于Windows下的管理员权限。如果你得到一个Permission denied，那么试试 sudo 命令。</p>
-<p>sudo [command] 会让你输入用户密码，然后以超级用户的权限执行command命令（superuser do）。</p>
-<p>注意： 这里输入密码时，是不会有任何回显的，不要认为没有成功输入</p>
-<h2 id="mv-cp-rm-rmdir-mv"><a href="#mv-cp-rm-rmdir-mv" class="headerlink" title="mv cp rm rmdir mv"></a>mv cp rm rmdir mv</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp hello.cpp ../</span><br><span class="line">cd ../</span><br><span class="line">rm hello.cpp</span><br></pre></td></tr></table></figure>
-<p><img src="Snipaste_2019-09-27_23-14-42.png" alt="1"></p>
-<p>mv 移动文件与目录或重命名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv hello.cpp helloworld.cpp</span><br><span class="line">mv helloworld.cpp ../</span><br></pre></td></tr></table></figure></p>
-<p><img src="Snipaste_2019-09-27_23-23-45.png" alt="1"></p>
-<p>Linux rmdir命令删除空的目录。<br><code>rmdir [-p] dirName</code></p>
-<blockquote>
-<p>-p 是当子目录被删除后使它也成为空目录的话，则顺便一并删除。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">将工作目录下，名为 AAA 的子目录删除 :</span><br><span class="line">rmdir AAA</span><br><span class="line">在工作目录下的 BBB 目录中，删除名为 Test 的子目录。若 Test 删除后，BBB 目录成为空目录，则 BBB 亦予删除。</span><br><span class="line">rmdir -p BBB/Test</span><br></pre></td></tr></table></figure>
-<h2 id="执行可执行文件"><a href="#执行可执行文件" class="headerlink" title="执行可执行文件"></a>执行可执行文件</h2><p>当前目录下的可执行文件前面加上./</p>
-<h2 id="gcc、g-、gdb"><a href="#gcc、g-、gdb" class="headerlink" title="gcc、g++、gdb"></a>gcc、g++、gdb</h2><h3 id="gcc"><a href="#gcc" class="headerlink" title="gcc:"></a>gcc:</h3><ol>
-<li>-c 只做编译，不做链接</li>
-<li>-o 生成目标，后面的路径会生成目标文件</li>
-<li><code>-std=c[++]**|gnu**</code> 规定ISO标准，如-std=c99就是使用c99标准编译文件，默认的话C语言是c89，C++是c++98/03</li>
-<li>-g 插入调试信息，请配合gdb食用</li>
-<li>-W** 警告某种规则，常见是-Wall，打开所有警告，可用值可以使用可以百度或者查看官方文档</li>
-<li>-Werror 把警告视为错误</li>
-<li>-Wno-** 关闭某种警告，可用值与上面相同</li>
-<li>-I 将路径添加到预处理默认路径</li>
-<li>-L 将路径添加到链接库默认路径</li>
-<li>-l 链接的时候链接库默认路径下的库文件，如-lgtest会链接/usr/lib或者/usr/local/lib下的libgtest.a文件或许libgtest.so文件（静态库或者动态库）</li>
-<li>-pthread 多线程代码使用</li>
-</ol>
-<h3 id="gdb"><a href="#gdb" class="headerlink" title="gdb:"></a>gdb:</h3><p>如果你编译代码的时候有加-g参数，那么你就可以使用gdb调试你的代码了</p>
-<p>使用<code>gdb &lt;program&gt;</code>可以对可执行文件进行调试。</p>
-<p><a href="https://blog.csdn.net/lyjtynet/article/details/4057723" target="_blank" rel="noopener">linux c++ gdb教程</a></p>
-<h2 id="grep、locate、find-查找"><a href="#grep、locate、find-查找" class="headerlink" title="grep、locate、find 查找"></a>grep、locate、find 查找</h2><ul>
-<li><p>如果想查找文档中的某些信息，使用grep绝对是个好选择<code>grep -i regex file</code> 会将file中匹配了正则表达式的行输出，请注意这里是行为单位的</p>
-</li>
-<li><p>find可以在特定文件夹中搜索匹配规则的文件，规则比较复杂，常用的是 -name 参数，可以查找名字匹配正则表达式的文件（包括文件夹，毕竟Unix一切皆文件嘛，文件夹也不例外）</p>
-</li>
-<li><p>locate命令可能需要通过 <code>sudo apt install locate</code> 安装，通过 locate name 可以定位文件位置，也就是查找文件啦</p>
-</li>
-</ul>
-<h2 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h2><p>Linux下的文件是有权限控制的，使用 <code>ls -l</code> 可以看到每行最前面有-rwxrwxr-x之类的，这是描述用于文件的属性与权限。第一个字符代表文件是否为目录，如果是则为d，否为-；接下来九个字符每三个为一组，分别代表用户，组，和其他人的权限，三个字符分别代表读写执行的权限，即r、w和x。一个二进制文件必须要有可执行权限才能运行。为了改变文件的属性，可以使用命令 <code>chmod [option] mode ... file ...</code> 来更改文件权限。mode是指文件的权限更改模式，主要有以下两种类型：</p>
-<ol>
-<li><p>一个三位的八进制数。这个八进制数从高位到低位分别代表用户、组和其他人的权限模式。每个位是1、2、4或者它们的和，1代表执行，2代表写，4代表读。如7 = 1 + 2 + 4，所以7代表有读写执行的权限，而5= 1 + 4，所以5代表有读和执行，但是没有写的权限。如果将这个三位八进制数写成二进制，每一位0正好对应前文说道的后九位的-，而每一位1对应字符。如数字0775写成二进制是111111 101，对应的就是rwx rwx r-x。正所谓一言不合777， <code>chmod 777 path</code> 将文件的所有权限给了所有人，是很不安全的行为。</p>
-</li>
-<li><p><code>[a|u|g|o][+|=|-][rwx]</code> 的格式。其中a代表全部，u代表用户，g代表用户组，o代表其他，+是加上权限，=是权限改为，-是除去权限。如 <code>chmod u+x a+r a.out</code> 是使得用户可执行，全部可读文件a.out</p>
-</li>
-</ol>
-<h2 id="Linux管道与（真）grep"><a href="#Linux管道与（真）grep" class="headerlink" title="Linux管道与（真）grep"></a>Linux管道与（真）grep</h2><p>一个由标准输入输出链接起来的进程集合，所以每一个进程的输出（stdout）被直接作为下一个进程的输入（stdin）</p>
-<p><img src="Snipaste_2019-09-29_14-11-31.png" alt="1"></p>
-<p>使用管道操作符 | 将多个命令连接起来，将前一个命令的输出作为当前命令的输入，就像管子一样字符串在命令之间流动。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt list | grep $&#123;package&#125;\ \\[installed\\] #快速查找软件包是否安装</span><br><span class="line">cat file | grep regx #查找文件中匹配正则表达式的行，快，但是缺点是只能匹配一行，其实可以使用sed</span><br><span class="line">ll -R dir | grep regx #确定目录下（包括所有子目录）是否含有匹配正则表达式的文件，个人觉得比find稍快，但是不能定位路径</span><br></pre></td></tr></table></figure>
-<p>使用管道+grep，可以极大减少无用信息的输出，极大地提高你的工作效率<br>当然，还有 less 命令可以使得长长的输出逐页输出，翻页随心所欲。</p>
-<h2 id="bash的初始化脚本"><a href="#bash的初始化脚本" class="headerlink" title="bash的初始化脚本"></a>bash的初始化脚本</h2><p>严格意义上说这是题外话，但是我觉得跟大家分享一下还是有必要的一般来说有两个文件是在bash启动的过程中比较重要的，一个是/etc/bash.bashrc，另一个是~/.bashrc，主要都是bash的配置命令。文件/etc/bash.bashrc会在系统启动时执行，而~/.bashrc会在用户打开bash的时候执行。如果你在linux或者Windows中装过JVM或者JDK，一定忘不了要设置环境变量，而在Linux下，一般是在写在/etc/bash.bashrc中，这样开机的时候就会把<br>JDK或者JVM的目录添加到$PATH中.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/shixun2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/29/shixun2/" itemprop="url">CSV</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-29T15:44:56+08:00">
-                2019-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/初级实训/" itemprop="url" rel="index">
-                    <span itemprop="name">初级实训</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/09/29/shixun2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/29/shixun2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  305
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="CSV"><a href="#CSV" class="headerlink" title="CSV"></a>CSV</h1><p>csv是用逗号将数据分开存放的一种存储格式。</p>
-<p>在实际操作中，只需要把需要记录的会议信息以csv规定的以下格式写入到csv文件，并在关比Agenda之后还可以从csv文件中读入历史记录即可，不是一定要用csvtool等表格程序打开，用文本文档打开也可以，只是为了方便看数据和格式的正确性。</p>
-<ul>
-<li><p>每个记录放在独立的一行，用换行符隔开；记录中不同的项用逗号隔开，注意每个记录的项的数目都是相同的，比如下面的例子第一二个记录都有三个项；最后一行可以没有换行（也可以有）。</p>
-</li>
-<li><p>可以有首行作为对应每项的名字。</p>
-</li>
-<li><p>记录中的每一项可以被双引号包含或者不包含。</p>
-</li>
-<li><p>如果记录的项中出现了逗号（,）、双引号（”）、和换行，则必须用双引号将记录的项包含起来，而且项之中的双引号要写成两个双引号，即（””）</p>
-</li>
-</ul>
-<p>Linux下可以使用csvtool或者Ubuntu的LibreOffice来查看csv文件</p>
-<p>csvtool：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install csvtool</span><br><span class="line"></span><br><span class="line">csvtool readable filename|view -</span><br></pre></td></tr></table></figure></p>
-<p>Ubuntu：<br>直接点开</p>
-<p><img src="Snipaste_2019-09-27_21-57-08.png" alt="1"></p>
-<p><img src="Snipaste_2019-09-27_21-58-36.png" alt="1"></p>
-<p><img src="Snipaste_2019-09-27_21-59-17.png" alt="1"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2615,7 +2573,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">363</span>
+                  <span class="site-state-item-count">365</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2705,7 +2663,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">404.9k</span>
+    <span title="Site words total count">405.4k</span>
   
 </div>
 
