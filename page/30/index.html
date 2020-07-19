@@ -291,6 +291,204 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/18/python1007/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzm99">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zzm99">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/18/python1007/" itemprop="url">网络应用开发</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-18T14:43:44+08:00">
+                2019-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/python100天计划/" itemprop="url" rel="index">
+                    <span itemprop="name">python100天计划</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/18/python1007/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/18/python1007/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="网络应用开发"><a href="#网络应用开发" class="headerlink" title="网络应用开发"></a>网络应用开发</h1><p>发送电子邮件<br>在即时通信软件如此发达的今天，电子邮件仍然是互联网上使用最为广泛的应用之一，公司向应聘者发出录用通知、网站向用户发送一个激活账号的链接、银行向客户推广它们的理财产品等几乎都是通过电子邮件来完成的，而这些任务应该都是由程序自动完成的。</p>
+<p>就像我们可以用HTTP（超文本传输协议）来访问一个网站一样，发送邮件要使用SMTP（简单邮件传输协议），SMTP也是一个建立在TCP（传输控制协议）提供的可靠数据传输服务的基础上的应用级协议，它规定了邮件的发送者如何跟发送邮件的服务器进行通信的细节，而Python中的smtplib模块将这些操作简化成了几个简单的函数。</p>
+<p>下面的代码演示了如何在Python发送邮件。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> smtplib <span class="keyword">import</span> SMTP</span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 请自行修改下面的邮件发送者和接收者</span></span><br><span class="line">    sender = <span class="string">'abcdefg@126.com'</span></span><br><span class="line">    receivers = [<span class="string">'uvwxyz@qq.com'</span>, <span class="string">'uvwxyz@126.com'</span>]</span><br><span class="line">    message = MIMEText(<span class="string">'用Python发送邮件的示例代码.'</span>, <span class="string">'plain'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">    message[<span class="string">'From'</span>] = Header(<span class="string">'王大锤'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">    message[<span class="string">'To'</span>] = Header(<span class="string">'骆昊'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">    message[<span class="string">'Subject'</span>] = Header(<span class="string">'示例代码实验邮件'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">    smtper = SMTP(<span class="string">'smtp.126.com'</span>)</span><br><span class="line">    <span class="comment"># 请自行修改下面的登录口令</span></span><br><span class="line">    smtper.login(sender, <span class="string">'secretpass'</span>)</span><br><span class="line">    smtper.sendmail(sender, receivers, message.as_string())</span><br><span class="line">    print(<span class="string">'邮件发送完成!'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<p>如果要发送带有附件的邮件，那么可以按照下面的方式进行操作。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> smtplib <span class="keyword">import</span> SMTP</span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.mime.image <span class="keyword">import</span> MIMEImage</span><br><span class="line"><span class="keyword">from</span> email.mime.multipart <span class="keyword">import</span> MIMEMultipart</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 创建一个带附件的邮件消息对象</span></span><br><span class="line">    message = MIMEMultipart()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 创建文本内容</span></span><br><span class="line">    text_content = MIMEText(<span class="string">'附件中有本月数据请查收'</span>, <span class="string">'plain'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">    message[<span class="string">'Subject'</span>] = Header(<span class="string">'本月数据'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="comment"># 将文本内容添加到邮件消息对象中</span></span><br><span class="line">    message.attach(text_content)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取文件并将文件作为附件添加到邮件消息对象中</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'/Users/Hao/Desktop/hello.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        txt = MIMEText(f.read(), <span class="string">'base64'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">        txt[<span class="string">'Content-Type'</span>] = <span class="string">'text/plain'</span></span><br><span class="line">        txt[<span class="string">'Content-Disposition'</span>] = <span class="string">'attachment; filename=hello.txt'</span></span><br><span class="line">        message.attach(txt)</span><br><span class="line">    <span class="comment"># 读取文件并将文件作为附件添加到邮件消息对象中</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'/Users/Hao/Desktop/汇总数据.xlsx'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        xls = MIMEText(f.read(), <span class="string">'base64'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">        xls[<span class="string">'Content-Type'</span>] = <span class="string">'application/vnd.ms-excel'</span></span><br><span class="line">        xls[<span class="string">'Content-Disposition'</span>] = <span class="string">'attachment; filename=month-data.xlsx'</span></span><br><span class="line">        message.attach(xls)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 创建SMTP对象</span></span><br><span class="line">    smtper = SMTP(<span class="string">'smtp.126.com'</span>)</span><br><span class="line">    <span class="comment"># 开启安全连接</span></span><br><span class="line">    <span class="comment"># smtper.starttls()</span></span><br><span class="line">    sender = <span class="string">'abcdefg@126.com'</span></span><br><span class="line">    receivers = [<span class="string">'uvwxyz@qq.com'</span>]</span><br><span class="line">    <span class="comment"># 登录到SMTP服务器</span></span><br><span class="line">    <span class="comment"># 请注意此处不是使用密码而是邮件客户端授权码进行登录</span></span><br><span class="line">    <span class="comment"># 对此有疑问的读者可以联系自己使用的邮件服务器客服</span></span><br><span class="line">    smtper.login(sender, <span class="string">'secretpass'</span>)</span><br><span class="line">    <span class="comment"># 发送邮件</span></span><br><span class="line">    smtper.sendmail(sender, receivers, message.as_string())</span><br><span class="line">    <span class="comment"># 与邮件服务器断开连接</span></span><br><span class="line">    smtper.quit()</span><br><span class="line">    print(<span class="string">'发送完成!'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<h1 id="发送短信"><a href="#发送短信" class="headerlink" title="发送短信"></a>发送短信</h1><p>发送短信也是项目中常见的功能，网站的注册码、验证码、营销信息基本上都是通过短信来发送给用户的。在下面的代码中我们使用了互亿无线短信平台（该平台为注册用户提供了50条免费短信以及常用开发语言发送短信的demo，可以登录该网站并在用户自服务页面中对短信进行配置）提供的API接口实现了发送短信的服务，当然国内的短信平台很多，读者可以根据自己的需要进行选择（通常会考虑费用预算、短信达到率、使用的难易程度等指标），如果需要在商业项目中使用短信服务建议购买短信平台提供的套餐服务。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"><span class="keyword">import</span> http.client</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    host  = <span class="string">"106.ihuyi.com"</span></span><br><span class="line">    sms_send_uri = <span class="string">"/webservice/sms.php?method=Submit"</span></span><br><span class="line">    <span class="comment"># 下面的参数需要填入自己注册的账号和对应的密码</span></span><br><span class="line">    params = urllib.parse.urlencode(&#123;<span class="string">'account'</span>: <span class="string">'你自己的账号'</span>, <span class="string">'password'</span> : <span class="string">'你自己的密码'</span>, <span class="string">'content'</span>: <span class="string">'您的验证码是：147258。请不要把验证码泄露给其他人。'</span>, <span class="string">'mobile'</span>: <span class="string">'接收者的手机号'</span>, <span class="string">'format'</span>:<span class="string">'json'</span> &#125;)</span><br><span class="line">    print(params)</span><br><span class="line">    headers = &#123;<span class="string">'Content-type'</span>: <span class="string">'application/x-www-form-urlencoded'</span>, <span class="string">'Accept'</span>: <span class="string">'text/plain'</span>&#125;</span><br><span class="line">    conn = http.client.HTTPConnection(host, port=<span class="number">80</span>, timeout=<span class="number">30</span>)</span><br><span class="line">    conn.request(<span class="string">'POST'</span>, sms_send_uri, params, headers)</span><br><span class="line">    response = conn.getresponse()</span><br><span class="line">    response_str = response.read()</span><br><span class="line">    jsonstr = response_str.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    print(json.loads(jsonstr))</span><br><span class="line">    conn.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/18/python1006/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2240,213 +2438,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/suanfa6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zzm99">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zzm99">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/16/suanfa6/" itemprop="url">计算几何初步</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-16T09:08:28+08:00">
-                2019-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/16/suanfa6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/16/suanfa6/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  378
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>设三角形三点为A(x1,y1),B(x2,y2),C(x3,y3)，三边长为a,b,c，高为h，面积为s，p=(a+b+c)/2</p>
-<h1 id="计算三角形面积"><a href="#计算三角形面积" class="headerlink" title="计算三角形面积"></a>计算三角形面积</h1><p>公式：<br>①s=(a <em> h)/2=(b </em> h)/2=(c * h)/2;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">area</span><span class="params">(<span class="keyword">double</span> h,<span class="keyword">double</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0.5</span>*x*h;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>②s=(p <em> (p-a) </em> (p-b) * (p-c))^0.5;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">area</span><span class="params">(<span class="keyword">double</span> x1,<span class="keyword">double</span> y1,<span class="keyword">double</span> x2,<span class="keyword">double</span> y2,<span class="keyword">double</span> x3,<span class="keyword">double</span> y3)</span></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> a,b,c,p,s;</span><br><span class="line">	a=<span class="built_in">sqrt</span>((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));</span><br><span class="line">	b=<span class="built_in">sqrt</span>((x1-x3)*(x1-x3)+(y1-y3)*(y1-y3));</span><br><span class="line">	c=aqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3));</span><br><span class="line">	p=(a+b+c)/<span class="number">2</span>;</span><br><span class="line">	s=<span class="built_in">sqrt</span>(p*(p-a)*(p-b)*(p-c));</span><br><span class="line">	<span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="三点顺序"><a href="#三点顺序" class="headerlink" title="三点顺序"></a>三点顺序</h1><p>给三个点A,B,C的坐标，判断能否组成一个三角形；若能，判断A,B,C是顺时针给出的还是逆时针给出的？</p>
-<p>利用矢量叉积判断是逆时针还是顺时针。</p>
-<p>三角形两边的矢量分别是：AB=(x2-x1,y2-y1), AC=(x3-x1,y3-y1)</p>
-<p>则AB <em> AC=(x2-x1) </em> (y3-y1) - (y2-y1) * (x3-x1)</p>
-<p><img src="1.png" alt="1"></p>
-<p>利用右手法则进行判断：</p>
-<ul>
-<li>如果AB * AC&gt;0,则三角形ABC是逆时针的；</li>
-<li>如果AB * AC&lt;0,则三角形ABC是顺时针的；</li>
-<li>如果AB * AC=0，则说明三点共线（不能构成三角形）。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">orderPoints</span><span class="params">(<span class="keyword">double</span> x1,<span class="keyword">double</span> y1,<span class="keyword">double</span> x2,<span class="keyword">double</span> y2,<span class="keyword">double</span> x3,<span class="keyword">double</span> y3)</span></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> abx,aby,acx,acy,k;</span><br><span class="line">	abx=x2-x1;</span><br><span class="line">	aby=y2-y1;</span><br><span class="line">	acx=x3-x1;</span><br><span class="line">	acy=y3-y1;</span><br><span class="line">	k=abx*acy-aby*acx;</span><br><span class="line">	<span class="keyword">if</span>(k&gt;<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//三角形逆时针给出</span></span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(k==<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//不能构成三角形</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;<span class="comment">//三角形顺时针给出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2499,7 +2490,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">368</span>
+                  <span class="site-state-item-count">369</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2589,7 +2580,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">407.2k</span>
+    <span title="Site words total count">407.7k</span>
   
 </div>
 
